@@ -1,0 +1,334 @@
+\documentclass[12pt]{article}
+
+\usepackage[a4paper, top=2cm, bottom=2cm, left=2.5cm, right=2.5cm]{geometry}
+
+\usepackage{amsmath, amssymb}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,fit,calc}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{siunitx}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{fontspec}
+\usetikzlibrary{decorations.pathmorphing}
+\usepackage{pdflscape}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage[table]{xcolor}
+\usepackage{hyperref}
+\usepackage{bookmark}
+\usepackage{pdfpages}
+
+% ---------------- FONTS ----------------
+% Body font
+\setmainfont[
+    UprightFont = Handlee-Regular.ttf,
+    AutoFakeBold = 2.5
+]{Handlee}
+
+% Heading font
+\newfontfamily\headingfont{PT.ttf}
+
+% verbatim font
+\setmonofont{DejaVu Sans Mono} % or Noto Sans Mono
+
+% ---------------- HANDWRITTEN MATH ----------------
+\usepackage{mathastext}
+\Mathastext
+\everymath{\displaystyle}
+
+% Optional spacing tweaks (more natural look)
+% \setlength{\thinmuskip}{2mu}
+% \setlength{\medmuskip}{2mu}
+
+% ---------------- GENERAL ----------------
+\setlength{\parindent}{0pt}
+\pagenumbering{gobble}
+\linespread{1.2}
+
+
+\newcommand{\mychapter}[2]{%
+    \phantomsection
+    \hypertarget{#2}{}%
+    \bookmark[level=0,dest=#2]{#1}%
+    \begin{center}
+        {\headingfont\Huge #1}
+        \par
+        \vspace{4pt}
+        \hrule
+    \end{center}
+}
+
+\newcommand{\mysection}[3]{%
+    \phantomsection
+    \hypertarget{#3}{}%
+    \bookmark[level=1,dest=#3]{#1\space #2}%
+    \noindent{\headingfont\Large #1\space #2\par}
+    \vspace{4pt}
+    \hrule
+    \vspace{15pt}
+}
+
+\newcommand{\mysubsection}[2]{%
+    \noindent{\headingfont\large #1\space #2\par}
+    \vspace{4pt}
+    \hrule
+    \vspace{15pt}
+}
+
+\begin{document}
+\vspace*{\fill}
+
+\begin{figure}[H] % h = here, t = top, b = bottom, p = page of floats
+    \centering
+    \fbox{\includegraphics[width=0.6\textwidth]{../2. Figures/cover.png}}
+    \label{fig:myimage}
+\end{figure}
+
+
+\vspace{1cm}
+
+\mychapter{Chapter 1 : Introduction \& Basic Concepts}{Chapter 1 : Introduction \& Basic Concepts}
+
+This chapter introduces the fundamental concepts and vocabulary of thermodynamics needed for understanding energy and its transformations. It develops the basic ideas of systems, control volumes, properties, equilibrium, processes, and thermodynamic states. The chapter also establishes essential foundations involving dimensions, units, temperature, pressure, density, and specific properties. Together, these concepts provide the framework required for analyzing thermodynamic systems and solving engineering problems systematically.
+
+\vspace*{\fill}
+
+\newpage
+
+\begin{center}
+    {\headingfont\Huge Chapter Tree}
+    \par
+    \vspace{4pt}
+    \hrule
+\end{center}
+\begin{verbatim}
+
+│
+├── 1–1 ■ THERMODYNAMICS AND ENERGY
+│
+├── 1–2 ■ IMPORTANCE OF DIMENSIONS AND UNITS
+│
+├── 1–3 ■ SYSTEMS AND CONTROL VOLUMES
+│
+├── 1–4 ■ PROPERTIES OF A SYSTEM
+│
+├── 1–5 ■ DENSITY AND SPECIFIC GRAVITY
+│
+├── 1–6 ■ STATE AND EQUILIBRIUM
+│
+├── 1–7 ■ PROCESSES AND CYCLES
+│
+├── 1–8 ■ TEMPERATURE AND THE ZEROTH LAW OF THERMODYNAMICS
+│
+├── 1–9 ■ PRESSURE
+│
+├── 1–10 ■ PRESSURE MEASUREMENT DEVICES
+│
+└── 1–11 ■ PROBLEM-SOLVING TECHNIQUE
+
+\end{verbatim}
+
+\newpage
+
+
+\mysection{1.1}{Thermodynamics and Energy}{1.1}
+
+Thermodynamics is the science concerned with energy, energy transformations, and the interaction between energy and matter.
+
+\mysubsection{}{Thermodynamics}
+
+Energy may be viewed as the \textbf{\\ ability to cause changes}.
+
+The word thermodynamics originates from the Greek words \textit{therme} (heat) and \textit{dynamis} (power), reflecting the early development of the subject around converting heat into power.
+
+Today, thermodynamics has a much broader scope and deals with:
+\begin{itemize}
+    \item Energy and its different forms.
+    \item Energy transformations.
+    \item Power generation.
+    \item Refrigeration.
+    \item Relationships among the properties of matter.
+\end{itemize}
+
+\mysubsection{}{Conservation of Energy}
+
+The \textbf{\\ conservation of energy principle} states that during an interaction, energy can change from one form to another, but the total amount of energy remains constant.
+
+\begin{equation*}
+\text{Energy cannot be created or destroyed; it can only change forms.}
+\end{equation*}
+
+For any system, the change in its energy content is equal to the difference between the energy entering and leaving the system.
+
+\begin{equation*}
+\Delta E = E_{\mathrm{in}}-E_{\mathrm{out}}
+\end{equation*}
+
+\textbf{\\ Example}
+
+When a rock falls from a height, its potential energy is converted into kinetic energy. The total energy is conserved even though the form of energy changes.
+
+\mysubsection{}{First and Second Laws of Thermodynamics}
+
+The two fundamental laws of thermodynamics describe important characteristics of energy.
+
+\begin{center}
+    \begin{tabular}{|c|c|}
+        \hline
+        \textbf{Law} & \textbf{Main principle} \\
+        \hline
+        First law & Energy is conserved. \\
+        \hline
+        Second law & Energy has both quantity and quality. \\
+        \hline
+    \end{tabular}
+\end{center}
+
+The \textbf{\\ first law of thermodynamics} is an expression of the conservation of energy principle and establishes energy as a thermodynamic property.
+
+The \textbf{\\ second law of thermodynamics} states that energy has quality as well as quantity. Actual processes occur in the direction of decreasing energy quality.
+
+\textbf{\\ Example}
+
+A hot cup of coffee placed in a cooler environment eventually loses heat and becomes cooler. However, a cool cup of coffee in the same environment does not spontaneously become hot.
+
+Thus, energy naturally tends to be transferred from a region of higher temperature to a region of lower temperature, resulting in degradation of the usefulness or quality of energy.
+
+\mysubsection{}{Historical Development}
+
+Although thermodynamic principles have always existed in nature, thermodynamics emerged as a scientific discipline with the development of atmospheric steam engines.
+
+\begin{itemize}
+    \item Thomas Savery constructed a successful atmospheric steam engine in 1697.
+    \item Thomas Newcomen developed another atmospheric steam engine in 1712.
+    \item These early engines were slow and inefficient, but they initiated the development of thermodynamics as a science.
+    \item The first and second laws emerged during the 1850s, primarily through the work of William Rankine, Rudolph Clausius, and Lord Kelvin.
+    \item The term \textit{thermodynamics} was first used in a publication by Lord Kelvin in 1849.
+    \item The first thermodynamics textbook was written by William Rankine in 1859.
+\end{itemize}
+
+\mysubsection{}{Macroscopic and Microscopic Approaches}
+
+Matter consists of a very large number of particles called molecules. The properties observed at the macroscopic level arise from the behavior of these particles.
+
+For example, the pressure of a gas results from momentum transfer between gas molecules and the walls of its container.
+
+Two approaches can be used to study thermodynamics:
+
+\begin{center}
+    \begin{tabular}{|c|c|c|}
+        \hline
+        \textbf{Approach} & \textbf{Basis} & \textbf{Characteristic} \\
+        \hline
+        Classical thermodynamics &
+        Macroscopic behavior &
+        Direct and relatively simple \\
+        \hline
+        Statistical thermodynamics &
+        Average microscopic behavior &
+        More involved \\
+        \hline
+    \end{tabular}
+\end{center}
+
+\textbf{\\ Classical thermodynamics}
+
+Classical thermodynamics does not require knowledge of the behavior of individual particles. It studies measurable macroscopic quantities and provides a direct and convenient method for solving engineering problems.
+
+\textbf{\\ Statistical thermodynamics}
+
+Statistical thermodynamics is based on the average behavior of large groups of individual particles. It is a microscopic approach and is more involved than classical thermodynamics.
+
+In engineering applications, classical thermodynamics is generally the primary approach, while statistical thermodynamics may be used in a supporting role.
+
+\mysubsection{}{Application Areas of Thermodynamics}
+
+Interactions between energy and matter occur throughout nature. Consequently, thermodynamics is relevant to a wide range of engineering systems and everyday phenomena.
+
+\begin{center}
+    \begin{tabular}{|c|c|}
+        \hline
+        \textbf{Area} & \textbf{Examples} \\
+        \hline
+        Human body & Metabolic energy conversion and heat rejection \\
+        \hline
+        Household systems & Heating, air conditioning, refrigerators, water heaters \\
+        \hline
+        Appliances & Pressure cookers, irons, computers, televisions \\
+        \hline
+        Transportation & Automobile engines, aircraft, rockets, jet engines \\
+        \hline
+        Energy systems & Conventional and nuclear power plants, solar collectors \\
+        \hline
+        Industrial systems & Pumps, piping networks, and other thermal systems \\
+        \hline
+    \end{tabular}
+\end{center}
+
+\textbf{\\ Human Body}
+
+The human body continuously converts energy within its cells and rejects heat to the surroundings.
+
+Human comfort depends strongly on the rate at which metabolic heat is rejected. Clothing can be adjusted according to environmental conditions to help control this heat transfer.
+
+\textbf{\\ Household Applications}
+
+Thermodynamic principles are involved in the design and operation of many household devices and systems, including:
+\begin{itemize}
+    \item Electric and gas ranges.
+    \item Heating and air-conditioning systems.
+    \item Refrigerators.
+    \item Humidifiers.
+    \item Pressure cookers.
+    \item Water heaters.
+    \item Showers.
+    \item Irons.
+    \item Computers and televisions.
+\end{itemize}
+
+\textbf{\\ Engineering Applications}
+
+Thermodynamics plays an important role in the design and analysis of:
+\begin{itemize}
+    \item Automotive engines.
+    \item Rockets and jet engines.
+    \item Conventional and nuclear power plants.
+    \item Solar collectors.
+    \item Cars and aircraft.
+\end{itemize}
+
+For example, an energy-efficient house can be designed by minimizing heat loss during winter and heat gain during summer.
+
+The design of computer cooling systems also involves thermodynamic analysis. The size, location, and power input of a cooling fan can be selected based on such analysis.
+
+\newpage
+
+\mysubsection{}{Key Ideas}
+
+\textbf{\\ Thermodynamics} :
+Thermodynamics is the science of energy, its transformations, and its interaction with matter.
+
+\textbf{\\ Conservation of Energy} :
+Energy cannot be created or destroyed. It can only be transferred or transformed from one form into another.
+
+\textbf{\\ First Law} :
+The first law expresses conservation of energy and establishes energy as a thermodynamic property.
+
+\textbf{\\ Second Law} :
+The second law accounts for the quality of energy and indicates that actual processes proceed toward decreasing energy quality.
+
+\textbf{\\ Classical Thermodynamics} :
+The macroscopic approach does not require knowledge of individual particles and provides a direct method for engineering analysis.
+
+\textbf{\\ Statistical Thermodynamics} :
+The microscopic approach studies the average behavior of large groups of particles and is more involved.
+
+\textbf{\\ Applications} :
+Thermodynamics is fundamental to systems involving energy and matter, including human bodies, household appliances, vehicles, power plants, and industrial systems.
+
+
+\end{document}
