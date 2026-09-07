@@ -1,0 +1,2295 @@
+\documentclass[12pt]{article}
+
+\usepackage[a4paper, top=2cm, bottom=2cm, left=2.5cm, right=2.5cm]{geometry}
+
+\usepackage{amsmath, amssymb}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,fit,calc}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{siunitx}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{fontspec}
+\usetikzlibrary{decorations.pathmorphing}
+\usepackage{pdflscape}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage[table]{xcolor}
+\usepackage{hyperref}
+\usepackage{bookmark}
+\usepackage{pdfpages}
+
+% ---------------- FONTS ----------------
+% Body font
+\setmainfont[
+    UprightFont = Handlee-Regular.ttf,
+    AutoFakeBold = 2.5
+]{Handlee}
+
+% Heading font
+\newfontfamily\headingfont{PT.ttf}
+
+% verbatim font
+\setmonofont{DejaVu Sans Mono} % or Noto Sans Mono
+
+% ---------------- HANDWRITTEN MATH ----------------
+\usepackage{mathastext}
+\Mathastext
+\everymath{\displaystyle}
+
+% Optional spacing tweaks (more natural look)
+% \setlength{\thinmuskip}{2mu}
+% \setlength{\medmuskip}{2mu}
+
+% ---------------- GENERAL ----------------
+\setlength{\parindent}{0pt}
+\pagenumbering{gobble}
+\linespread{1.2}
+
+
+\newcommand{\mychapter}[2]{%
+    \phantomsection
+    \hypertarget{#2}{}%
+    \bookmark[level=0,dest=#2]{#1}%
+    \begin{center}
+        {\headingfont\Huge #1}
+        \par
+        \vspace{4pt}
+        \hrule
+    \end{center}
+}
+
+\newcommand{\mysection}[3]{%
+    \phantomsection
+    \hypertarget{#3}{}%
+    \bookmark[level=1,dest=#3]{#1\space #2}%
+    \newpage
+    \noindent{\headingfont\Large #1\space #2\par}
+    \vspace{4pt}
+    \hrule
+    \vspace{15pt}
+}
+
+\newcommand{\mysubsection}[2]{%
+    \vspace{5px}
+    \noindent{\headingfont\large #1\space #2\par}
+    \vspace{4pt}
+    \hrule
+    \vspace{15pt}
+}
+
+\begin{document}
+\vspace*{\fill}
+
+\begin{figure}[H] % h = here, t = top, b = bottom, p = page of floats
+    \centering
+    \fbox{\includegraphics[width=0.6\textwidth]{../2. Figures/cover.png}}
+    \label{fig:myimage}
+\end{figure}
+
+
+\vspace{1cm}
+
+\mychapter{Chapter 2 : Energy, Energy Transfer \& General Energy Analysis}{534y5fdh}
+
+This chapter introduces the fundamental concept of energy and its various forms, including internal, kinetic, potential, mechanical, chemical, and nuclear energy. It explains how energy is transferred across system boundaries through heat, work, and mass flow. The chapter then develops the first law of thermodynamics as the principle of conservation of energy and applies it to general energy analysis. Finally, it discusses energy conversion efficiencies and the environmental implications of energy conversion processes. 
+
+\vspace*{\fill}
+
+\newpage
+
+\begin{center}
+    {\headingfont\Huge Chapter Tree}
+    \par
+    \vspace{4pt}
+    \hrule
+\end{center}
+
+\begin{verbatim}
+│
+├── 2–1 INTRODUCTION
+│   Introduces conservation of energy through familiar physical examples.
+│
+├── 2–2 FORMS OF ENERGY
+│   Classifies total energy into macroscopic and microscopic forms.
+│
+├── 2–3 ENERGY TRANSFER BY HEAT
+│   Defines heat transfer and explains its direction and measurement.
+│
+├── 2–4 ENERGY TRANSFER BY WORK
+│   Defines work as energy transfer caused by force and displacement.
+│
+├── 2–5 MECHANICAL FORMS OF WORK
+│   Presents common mechanical work modes and their governing relations.
+│
+├── 2–6 THE FIRST LAW OF THERMODYNAMICS
+│   Establishes conservation of energy as the first law.
+│
+├── 2–7 ENERGY CONVERSION EFFICIENCIES
+│   Defines efficiency for energy conversion and transfer processes.
+│
+└── 2–8 ENERGY AND ENVIRONMENT
+    Examines environmental consequences of energy conversion processes.
+
+
+\end{verbatim}
+
+\mysection{2.1}{INTRODUCTION}{2.1}
+
+The conservation of energy principle, which is an expression of the first law of thermodynamics, states that energy cannot be created or destroyed during a process; it can only be converted from one form to another. This principle can be understood by considering the operation of a refrigerator in a well-sealed and well-insulated room. 
+
+\textbf{\\ Refrigerator in a Well-Insulated Room}
+
+Consider a refrigerator with its door open in a room whose door and windows are tightly closed and whose walls are well-insulated. If the refrigerator is operated, the electrical energy supplied to it enters the room. Taking the entire room, including the air and refrigerator, as the system, the system is an adiabatic closed system because there is no significant heat transfer through the insulated walls.
+
+The conservation of energy principle requires the energy content of the room to increase by an amount equal to the electrical energy supplied. Since the refrigerator does not permanently store this energy, the energy ultimately appears as an increase in the internal energy of the room air. Consequently, the average temperature of the room air rises. 
+
+\begin{figure}[H] % h = here, t = top, b = bottom, p = page of floats
+    \centering
+    \fbox{\includegraphics[width=0.4\textwidth]{../2. Figures/Figure : 1.png}}
+    \label{fig:myimage}
+\end{figure}
+
+\textbf{\\ Conservation of Energy and Energy Quality}
+
+Energy is conserved during the operation of the refrigerator: the electrical energy supplied is converted into an equivalent amount of thermal energy stored in the room air. Therefore, the term ``energy conservation'' does not mean reducing the quantity of energy, since the total quantity of energy is conserved.
+
+In thermodynamics, energy conservation in practical applications is concerned with preserving the \textbf{quality of energy}. Electrical energy is a high-quality form of energy and can be converted completely into thermal energy. However, only a small fraction of low-quality thermal energy can be converted back into electrical energy. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\mysection{2.2}{FORMS OF ENERGY}{2.2}
+
+Energy can exist in numerous forms such as thermal, mechanical, kinetic, potential, electric, magnetic, chemical, and nuclear. The sum of all these forms constitutes the total energy of a system. Thermodynamics is primarily concerned with changes in total energy rather than its absolute value.
+
+\mysubsection{}{Total Energy}
+
+The total energy of a system is denoted by $E$. On a unit mass basis, the specific total energy is denoted by $e$ and is given by
+
+\begin{equation*}
+e = \frac{E}{m}
+\end{equation*}
+
+where $m$ is the mass of the system.
+
+The absolute value of total energy is not required in thermodynamic analysis. A convenient reference level may therefore be selected and the total energy assigned any arbitrary value at that reference state. The change in total energy is independent of the selected reference level.
+
+
+\textbf{\\ Macroscopic and Microscopic Forms of Energy}
+
+The various forms of energy can be grouped into two categories:
+
+\begin{itemize}
+    \item \textbf{Macroscopic energy:} Energy associated with the system as a whole relative to an external reference frame.
+    \item \textbf{Microscopic energy:} Energy associated with the molecular structure and molecular activity of the system.
+\end{itemize}
+
+The sum of all microscopic forms of energy is called the \textbf{internal energy} and is denoted by $U$.
+
+\mysubsection{}{Kinetic Energy}
+
+The energy possessed by a system as a result of its motion relative to a reference frame is called kinetic energy.
+
+For a system whose parts move with the same velocity,
+
+\begin{equation*}
+KE = \frac{mV^2}{2}
+\end{equation*}
+
+On a unit mass basis,
+
+\begin{equation*}
+ke = \frac{V^2}{2}
+\end{equation*}
+
+For a rotating solid body, the kinetic energy is
+
+\begin{equation*}
+KE = \frac{1}{2}I\omega^2
+\end{equation*}
+
+where $I$ is the moment of inertia and $\omega$ is the angular velocity.
+
+\mysubsection{}{Potential Energy}
+
+The energy possessed by a system as a result of its elevation in a gravitational field is called potential energy.
+
+\begin{equation*}
+PE = mgz
+\end{equation*}
+
+On a unit mass basis,
+
+\begin{equation*}
+pe = gz
+\end{equation*}
+
+where $g$ is the gravitational acceleration and $z$ is the elevation of the center of gravity relative to a selected reference level.
+
+\mysubsection{}{Total Energy of a Simple Compressible System}
+
+When magnetic, electric, and surface-tension effects are negligible, the total energy consists of internal, kinetic, and potential energies.
+
+\begin{equation*}
+E = U + KE + PE
+\end{equation*}
+
+Therefore,
+
+\begin{equation*}
+E = U + \frac{mV^2}{2} + mgz
+\end{equation*}
+
+On a unit mass basis,
+
+\begin{equation*}
+e = u + ke + pe
+\end{equation*}
+
+or
+
+\begin{equation*}
+e = u + \frac{V^2}{2} + gz
+\end{equation*}
+
+For a stationary system, the velocity and elevation remain constant. Hence,
+
+\begin{equation*}
+\Delta KE = 0
+\end{equation*}
+
+and
+
+\begin{equation*}
+\Delta PE = 0
+\end{equation*}
+
+Therefore,
+
+\begin{equation*}
+\Delta E = \Delta U
+\end{equation*}
+
+\mysubsection{}{Internal Energy}
+
+Internal energy is the sum of all microscopic forms of energy associated with the molecular structure and molecular activity of a system. It includes microscopic kinetic and potential energies.
+
+The major forms of internal energy are:
+
+\begin{itemize}
+    \item \textbf{Sensible energy}
+    \item \textbf{Latent energy}
+    \item \textbf{Chemical energy}
+    \item \textbf{Nuclear energy}
+\end{itemize}
+
+\textbf{\\ Sensible Energy}
+
+Sensible energy is the portion of internal energy associated with the kinetic energies of molecules.
+
+
+
+The average molecular velocity and molecular activity increase with temperature. Therefore, an increase in temperature generally increases the sensible internal energy of a system.
+
+\textbf{\\ Latent Energy}
+
+Latent energy is the internal energy associated with the phase of a substance.
+
+
+\textbf{\\ Chemical Energy}
+
+Chemical energy is the internal energy associated with the atomic bonds within molecules.
+
+
+\textbf{\\ Nuclear Energy}
+
+Nuclear energy is the enormous amount of energy associated with the strong binding forces within the nucleus of an atom.
+
+
+\mysubsection{}{Mechanical Energy}
+
+Mechanical energy is the form of energy that can be converted completely and directly into mechanical work by an ideal mechanical device such as an ideal turbine.
+
+The familiar forms of mechanical energy are:
+
+\begin{itemize}
+    \item Kinetic energy
+    \item Potential energy
+    \item Flow energy
+\end{itemize}
+
+Thermal energy is not considered mechanical energy because it cannot be converted completely and directly into work.
+
+\textbf{\\ Flow Energy}
+
+A flowing fluid possesses mechanical energy associated with pressure. A pressure force acting through a distance produces flow work.
+
+The flow work per unit mass is
+
+\begin{equation*}
+e_{\text{flow}} = \frac{P}{\rho}
+\end{equation*}
+
+where $P$ is pressure and $\rho$ is density.
+
+Therefore, the mechanical energy of a flowing fluid per unit mass is
+
+\begin{equation*}
+e_{\text{mech}}
+=
+\frac{P}{\rho}
++
+\frac{V^2}{2}
++
+gz
+\end{equation*}
+
+where
+
+\begin{itemize}
+    \item $\dfrac{P}{\rho}$ = flow energy,
+    \item $\dfrac{V^2}{2}$ = kinetic energy,
+    \item $gz$ = potential energy.
+\end{itemize}
+
+The corresponding mechanical energy flow rate is
+
+\begin{equation*}
+\dot{E}_{\text{mech}}
+=
+\dot{m}
+\left(
+\frac{P}{\rho}
++
+\frac{V^2}{2}
++
+gz
+\right)
+\end{equation*}
+
+\textbf{\\ Mechanical Energy Change of an Incompressible Fluid}
+
+For an incompressible fluid, $\rho$ is constant. The change in mechanical energy per unit mass is
+
+\begin{equation*}
+\Delta e_{\text{mech}}
+=
+\frac{P_2-P_1}{\rho}
++
+\frac{V_2^2-V_1^2}{2}
++
+g(z_2-z_1)
+\end{equation*}
+
+The corresponding mechanical energy change rate is
+
+\begin{equation*}
+\Delta \dot{E}_{\text{mech}}
+=
+\dot{m}
+\left[
+\frac{P_2-P_1}{\rho}
++
+\frac{V_2^2-V_1^2}{2}
++
+g(z_2-z_1)
+\right]
+\end{equation*}
+
+The mechanical energy remains unchanged when pressure, density, velocity, and elevation remain constant.
+
+In the absence of irreversible losses, a positive $\Delta e_{\text{mech}}$ represents mechanical work supplied to the fluid, while a negative $\Delta e_{\text{mech}}$ represents mechanical work extracted from the fluid.
+
+For an ideal turbine,
+
+\begin{equation*}
+\dot{W}_{\max}
+=
+\dot{m}\Delta e_{\text{mech}}
+\end{equation*}
+
+\textbf{\\ Mass Flow Rate}
+
+For a flowing fluid, the mass flow rate is the amount of mass passing through a cross section per unit time.
+
+\begin{equation*}
+\dot{m}
+=
+\rho\dot{V}
+\end{equation*}
+
+Since
+
+\begin{equation*}
+\dot{V}
+=
+A_cV_{\text{avg}}
+\end{equation*}
+
+the mass flow rate becomes
+
+\begin{equation*}
+\dot{m}
+=
+\rho A_cV_{\text{avg}}
+\end{equation*}
+
+where
+
+\begin{itemize}
+    \item $\rho$ = fluid density,
+    \item $A_c$ = cross-sectional area,
+    \item $V_{\text{avg}}$ = average flow velocity.
+\end{itemize}
+
+\textbf{\\ Energy Flow Rate}
+
+The energy transported by a fluid stream is proportional to its mass flow rate.
+
+\begin{equation*}
+\dot{E}
+=
+\dot{m}e
+\end{equation*}
+
+where $\dot{E}$ is the energy flow rate and $e$ is the specific energy.
+
+Since
+
+\begin{equation*}
+1\ \text{kJ/s} = 1\ \text{kW}
+\end{equation*}
+
+the energy flow rate is commonly expressed in kW.
+
+\textbf{\\ Example : Wind Energy}
+
+A site has steady winds at a speed of $8.5$ m/s. Determine the wind energy (a) per unit mass, (b) for a mass of $10$ kg, and (c) for a mass flow rate of $1154$ kg/s.
+
+The only practically harvestable form of energy in atmospheric air is its kinetic energy.
+
+\textbf{\\ (a) Energy per Unit Mass}
+
+\begin{equation*}
+e
+=
+ke
+=
+\frac{V^2}{2}
+\end{equation*}
+
+\begin{equation*}
+e
+=
+\frac{(8.5\ \text{m/s})^2}{2}
+=
+36.1\ \text{J/kg}
+\end{equation*}
+
+\textbf{\\ (b) Energy for 10 kg of Air}
+
+\begin{equation*}
+E
+=
+me
+\end{equation*}
+
+\begin{equation*}
+E
+=
+(10\ \text{kg})(36.1\ \text{J/kg})
+=
+361\ \text{J}
+\end{equation*}
+
+\textbf{\\ (c) Energy Flow Rate}
+
+\begin{equation*}
+\dot{E}
+=
+\dot{m}e
+\end{equation*}
+
+\begin{equation*}
+\dot{E}
+=
+(1154\ \text{kg/s})(36.1\ \text{J/kg})
+=
+41.7\ \text{kW}
+\end{equation*}
+
+Thus, the wind has a theoretical power generation potential of $41.7$ kW for the specified mass flow rate. Real wind turbines convert only a fraction of this available kinetic-energy potential into electrical power.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\mysection{2.3}{ENERGY TRANSFER BY HEAT}{2.3}
+
+Energy can cross the boundary of a closed system in two distinct forms: heat and work. Heat transfer is an energy interaction caused by a temperature difference between the system and its surroundings. It occurs from the higher-temperature body toward the lower-temperature body until thermal equilibrium is reached. 
+
+\mysubsection{}{Heat Transfer}
+
+Heat is the form of energy transferred between two systems, or between a system and its surroundings, solely because of a temperature difference. Therefore, if two systems are at the same temperature, there can be no heat transfer between them. 
+
+Heat is \textbf{energy in transition}. A system does not contain ``heat'' as a property. Energy is identified as heat only while it is crossing the system boundary. Once transferred, it becomes part of the internal energy of the receiving system. 
+
+The larger the temperature difference between two bodies, the greater the rate of heat transfer. Heat transfer continues until the bodies reach thermal equilibrium, at which point their temperatures are equal and the heat-transfer driving force disappears. 
+
+\mysubsection{}{Adiabatic Process}
+
+A process during which no heat is transferred between a system and its surroundings is called an \textbf{adiabatic process}.
+
+\begin{equation*}
+Q = 0
+\end{equation*}
+
+An adiabatic process can occur in either of the following ways:
+
+\begin{itemize}
+    \item The system is well insulated so that negligible heat can pass through its boundary.
+    \item The system and its surroundings are at the same temperature, so there is no temperature difference to drive heat transfer.
+\end{itemize}
+
+An adiabatic process should not be confused with an isothermal process. In an adiabatic process, there is no heat transfer, but the energy content and temperature of the system can still change because of work or other energy interactions. 
+
+\mysubsection{}{Amount of Heat Transfer}
+
+Heat is a form of energy and therefore has units such as kJ or Btu. The amount of heat transferred during a process between states 1 and 2 is denoted by $Q_{12}$ or simply $Q$.
+
+The heat transfer per unit mass is called the \textbf{specific heat transfer} and is given by
+
+\begin{equation*}
+q = \frac{Q}{m}
+\end{equation*}
+
+where $m$ is the mass of the system. The unit of $q$ is kJ/kg. 
+
+\textbf{\\ Heat Transfer Rate}
+
+The rate of heat transfer is the amount of heat transferred per unit time. It is denoted by $\dot{Q}$.
+
+\begin{equation*}
+\dot{Q} = \frac{dQ}{dt}
+\end{equation*}
+
+The unit of heat transfer rate is kJ/s, which is equivalent to kW. 
+
+When the heat transfer rate varies with time, the total heat transfer is obtained by integration:
+
+\begin{equation*}
+Q = \int_{t_1}^{t_2} \dot{Q}\,dt
+\end{equation*}
+
+If the heat transfer rate remains constant,
+
+\begin{equation*}
+Q = \dot{Q}\Delta t
+\end{equation*}
+
+where
+
+\begin{equation*}
+\Delta t = t_2-t_1
+\end{equation*}
+
+The relationships among $Q$, $q$, and $\dot{Q}$ can therefore be summarized as
+
+\begin{equation*}
+q = \frac{Q}{m}
+\end{equation*}
+
+\begin{equation*}
+\dot{Q} = \frac{Q}{\Delta t}
+\end{equation*}
+
+\mysubsection{}{Mechanisms of Heat Transfer}
+
+Heat transfer occurs through three basic mechanisms:
+
+\begin{itemize}
+    \item \textbf{Conduction:} Transfer of energy between adjacent particles due to molecular interactions.
+    \item \textbf{Convection:} Transfer of energy between a solid surface and an adjacent moving fluid, involving both conduction and fluid motion.
+    \item \textbf{Radiation:} Transfer of energy through electromagnetic waves or photons.
+\end{itemize}
+
+All three mechanisms require a temperature difference, and heat transfer always occurs from a higher-temperature region toward a lower-temperature region. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\mysection{2.4}{ENERGY TRANSFER BY WORK}{2.4}
+
+Work, like heat, is an energy interaction between a system and its surroundings. Energy crossing the boundary of a closed system is classified as heat when it is caused by a temperature difference. Otherwise, the energy transfer is work. More specifically, work is the energy transfer associated with a force acting through a distance. Examples include a rising piston, a rotating shaft, and an electric wire crossing the system boundary. 
+
+\mysubsection{}{Work}
+
+Work is a form of energy transferred during a process and therefore has energy units such as kJ. The work done during a process from state 1 to state 2 is denoted by $W_{12}$ or simply $W$.
+
+The work done per unit mass is called \textbf{specific work}:
+
+\begin{equation*}
+w = \frac{W}{m}
+\end{equation*}
+
+where $m$ is the mass of the system. The unit of specific work is kJ/kg.
+
+The work done per unit time is called \textbf{power} and is denoted by $\dot{W}$:
+
+\begin{equation*}
+\dot{W} = \frac{dW}{dt}
+\end{equation*}
+
+The unit of power is kJ/s or kW. 
+
+\textbf{\\ Sign Convention for Heat and Work}
+
+Heat and work are directional quantities. The generally accepted sign convention is:
+
+\begin{itemize}
+    \item Heat transfer to a system is positive.
+    \item Heat transfer from a system is negative.
+    \item Work done by a system is positive.
+    \item Work done on a system is negative.
+\end{itemize}
+
+Alternatively, the direction can be indicated explicitly using the subscripts ``in'' and ``out''.
+
+\begin{equation*}
+W_{\mathrm{in}} > 0
+\end{equation*}
+
+\begin{equation*}
+W_{\mathrm{out}} > 0
+\end{equation*}
+
+When using the intuitive in/out approach, a positive calculated value confirms the assumed direction, while a negative value indicates that the actual direction is opposite to the assumed direction. 
+
+\mysubsection{}{Heat and Work as Path Functions}
+
+Heat and work have several important characteristics:
+
+\begin{itemize}
+    \item They are recognized only as they cross the system boundary.
+    \item A system possesses energy, but it does not possess heat or work.
+    \item They are associated with a process, not with a state.
+    \item Their magnitudes depend on the path followed during the process.
+\end{itemize}
+
+Therefore, heat and work are \textbf{path functions}, whereas thermodynamic properties are \textbf{point functions}.
+
+For a property such as volume,
+
+\begin{equation*}
+\int_1^2 dV
+=
+V_2-V_1
+=
+\Delta V
+\end{equation*}
+
+The result depends only on the initial and final states.
+
+For work,
+
+\begin{equation*}
+\int_1^2 \delta W
+=
+W_{12}
+\end{equation*}
+
+and this is not equal to $W_2-W_1$, since work is not a property possessed by the system.
+
+The symbol $\delta$ is used for the inexact differential of a path function, while $d$ is used for the exact differential of a property. 
+
+\begin{figure}[H] % h = here, t = top, b = bottom, p = page of floats
+    \centering
+    \fbox{\includegraphics[width=0.5\textwidth]{../2. Figures/Figure : 2.png}}
+    \label{fig:myimage}
+\end{figure}
+
+\textbf{\\ Example : Burning of a Candle in an Insulated Room}
+
+A candle is burning in a well-insulated room. Take the room, including the air and candle, as the system.
+
+Since the room is well insulated, no heat crosses the system boundary. Hence, the process is adiabatic:
+
+\begin{equation*}
+Q=0
+\end{equation*}
+
+During combustion, part of the chemical internal energy is converted into sensible internal energy. However, because the complete room and candle are taken as the system, there is no net change in the total internal energy:
+
+\begin{equation*}
+\Delta U=0
+\end{equation*}
+
+Thus, the example demonstrates that energy can change from one form of internal energy to another without heat crossing the system boundary. 
+
+\textbf{\\ Example : Heating of a Potato in an Oven}
+
+A potato initially at $25^\circ\mathrm{C}$ is placed in an oven maintained at $200^\circ\mathrm{C}$.
+
+If the potato is selected as the system, energy crosses its boundary from the hotter oven toward the colder potato. Since the driving force is the temperature difference, the energy transfer is \textbf{heat transfer}.
+
+Thus, the classification of an energy interaction depends on both the mechanism of transfer and the selected system boundary. 
+
+\textbf{\\ Example : Heating of an Oven by Work Transfer}
+
+Consider a well-insulated electric oven whose heating element is supplied with electrical energy. If the entire oven, including the heating element, is selected as the system, electrons cross the system boundary and transfer electrical energy into the system.
+
+The energy transfer is therefore \textbf{electrical work}, not heat. The increase in the oven's energy is caused by electrons crossing the system boundary rather than by a temperature difference across the boundary. 
+
+\mysubsection{}{Electrical Work}
+
+Electrical work occurs when electrical charge crosses a system boundary through a potential difference.
+
+If $N$ coulombs of charge move through a potential difference $V$, the electrical work is
+
+\begin{equation*}
+W_e=VN
+\end{equation*}
+
+The rate of electrical work, or electrical power, is
+
+\begin{equation*}
+\dot{W}_e=VI
+\end{equation*}
+
+where $I$ is the electric current.
+
+If both voltage and current vary with time, the electrical work over a time interval is
+
+\begin{equation*}
+W_e=\int_1^2 VI\,dt
+\end{equation*}
+
+For constant voltage and current,
+
+\begin{equation*}
+W_e=VI\Delta t
+\end{equation*}
+
+The electrical power can also be written in terms of resistance $R$ as
+
+\begin{equation*}
+\dot{W}_e
+=
+VI
+=
+I^2R
+=
+\frac{V^2}{R}
+\end{equation*}
+
+
+
+\textbf{\\ Example : Heating of an Oven by Heat Transfer}
+
+Now consider the same electric oven, but take only the air inside the oven as the system, excluding the heating element.
+
+The system boundary now surrounds the heating element. Electrons do not cross this boundary. Instead, energy generated inside the heating element is transferred to the surrounding air because the heating element is at a higher temperature than the air.
+
+Therefore, the energy transfer to the air is \textbf{heat transfer}.
+
+The two oven examples demonstrate an important thermodynamic principle: the same physical energy transfer can be classified as heat or work depending on the choice of system boundary. 
+
+\mysubsection{}{Generalized Work}
+
+Work can be viewed generally as an interaction between a generalized force and a generalized displacement.
+
+\begin{equation*}
+\delta W = F\,dx
+\end{equation*}
+
+For mechanical work, $F$ represents a force and $dx$ represents a displacement.
+
+For electrical work, the generalized force is the voltage and the generalized displacement is the electrical charge.
+
+Other examples include:
+
+\begin{itemize}
+    \item \textbf{Magnetic work:} The generalized force is magnetic field strength and the generalized displacement is the total magnetic dipole moment.
+    \item \textbf{Electrical polarization work:} The generalized force is electric field strength and the generalized displacement is the polarization of the medium.
+\end{itemize}
+
+These nonmechanical work modes follow the same general concept of a generalized force acting through a generalized displacement. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\mysection{2.5}{MECHANICAL FORMS OF WORK}{2.5}
+
+There are several different ways of doing work, and each is associated with a force acting through a distance. In thermodynamics, mechanical work may occur through the movement of a system boundary or through the movement of the entire system. Some important forms include shaft work, spring work, work associated with elastic solid bars, surface tension work, and work required to raise or accelerate a body.
+
+\textbf{\\ Mechanical Work}
+
+For a constant force $F$ acting on a body through a displacement $s$ in the direction of the force, the work is
+
+\begin{equation*}
+W = Fs
+\end{equation*}
+
+If the force varies with displacement, the work is obtained by integration:
+
+\begin{equation*}
+W = \int_1^2 F\,ds
+\end{equation*}
+
+The sign of work is determined from physical considerations. Work done on a system by an external force acting in the direction of motion is negative, whereas work done by a system against an external force is positive.
+
+Two requirements must be satisfied for a mechanical work interaction:
+
+\begin{itemize}
+    \item A force must act on the system boundary.
+    \item The system boundary must move.
+\end{itemize}
+
+\textbf{
+Thus, the presence of a force without boundary displacement does not constitute a work interaction. Similarly, movement without an opposing or driving force, such as expansion into an evacuated space, does not constitute work because no energy is transferred.
+}
+
+\begin{center}
+\vspace*{-1cm}
+\hspace*{-2cm}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|p{3.2cm}|p{5.2cm}|p{5.0cm}|p{5.0cm}|}
+\hline
+\textbf{Type of Work} &
+\textbf{Formula} &
+\textbf{Names of Quantities Used} &
+\textbf{Extra Note} \\
+\hline
+
+\textbf{Shaft Work}
+&
+\begin{equation*}
+T=Fr
+\end{equation*}
+
+\begin{equation*}
+s=2\pi rn
+\end{equation*}
+
+\begin{equation*}
+W_{\mathrm{sh}}=2\pi nT
+\end{equation*}
+
+\begin{equation*}
+\dot{W}_{\mathrm{sh}}=2\pi\dot{n}T
+\end{equation*}
+&
+$T$ : Torque
+
+$F$ : Tangential force
+
+$r$ : Moment arm
+
+$n$ : Number of revolutions
+
+$s$ : Distance traveled
+
+$\dot{n}$ : Revolutions per unit time
+
+$W_{\mathrm{sh}}$ : Shaft work
+
+$\dot{W}_{\mathrm{sh}}$ : Shaft power
+&
+Energy transmission through rotating shafts is common in engines, turbines, pumps, and compressors.
+
+For $n$ revolutions, the force travels a distance
+
+\begin{equation*}
+s=2\pi rn
+\end{equation*}
+\\
+\hline
+
+\textbf{Spring Work}
+&
+\begin{equation*}
+\delta W_{\mathrm{spring}}=F\,dx
+\end{equation*}
+
+\begin{equation*}
+F=kx
+\end{equation*}
+
+\begin{equation*}
+\delta W_{\mathrm{spring}}=kx\,dx
+\end{equation*}
+
+\begin{equation*}
+W_{\mathrm{spring}}
+=
+\frac{1}{2}k(x_2^2-x_1^2)
+\end{equation*}
+&
+$F$ : Spring force
+
+$k$ : Spring constant
+
+$x$ : Spring displacement
+
+$dx$ : Differential displacement
+
+$x_1$ : Initial displacement
+
+$x_2$ : Final displacement
+
+$W_{\mathrm{spring}}$ : Spring work
+&
+For a linear elastic spring, force is proportional to displacement:
+
+\begin{equation*}
+F=kx
+\end{equation*}
+
+The displacements $x_1$ and $x_2$ are measured from the undisturbed position of the spring.
+\\
+\hline
+
+\textbf{Work Done on Elastic Solid Bars}
+&
+\begin{equation*}
+W_{\mathrm{elastic}}
+=
+\int_1^2 F\,dx
+\end{equation*}
+
+\begin{equation*}
+\sigma_n=\frac{F}{A}
+\end{equation*}
+
+\begin{equation*}
+W_{\mathrm{elastic}}
+=
+\int_1^2 \sigma_n A\,dx
+\end{equation*}
+&
+$F$ : Applied force
+
+$x$ : Deformation
+
+$\sigma_n$ : Normal stress
+
+$A$ : Cross-sectional area
+
+$W_{\mathrm{elastic}}$ : Elastic work
+&
+A solid bar behaves similarly to a linear spring when the applied force remains within the elastic range and no permanent deformation occurs.
+
+Normal stress has the same units as pressure.
+\\
+\hline
+
+\end{tabular}
+\end{center}
+
+\begin{center}
+\vspace*{-1cm}
+\hspace*{-2cm}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|p{3.2cm}|p{5.2cm}|p{5.0cm}|p{5.0cm}|}
+\hline
+\textbf{Type of Work} &
+\textbf{Formula} &
+\textbf{Names of Quantities Used} &
+\textbf{Extra Note} \\
+\hline
+
+
+\textbf{Work Associated with Stretching of a Liquid Film}
+&
+\begin{equation*}
+W_{\mathrm{surface}}
+=
+\int_1^2 \sigma_s\,dA
+\end{equation*}
+
+\begin{equation*}
+dA=2b\,dx
+\end{equation*}
+
+\begin{equation*}
+F=2b\sigma_s
+\end{equation*}
+&
+$\sigma_s$ : Surface tension
+
+$dA$ : Change in surface area
+
+$b$ : Length of movable wire
+
+$dx$ : Wire displacement
+
+$F$ : Force on movable wire
+
+$W_{\mathrm{surface}}$ : Surface work
+&
+
+The factor $2$ occurs because a liquid film has two surfaces exposed to air.
+\\
+\hline
+
+\textbf{Work Done to Raise a Body}
+&
+\begin{equation*}
+W=\Delta PE
+\end{equation*}
+
+\begin{equation*}
+W=mg(z_2-z_1)
+\end{equation*}
+&
+$m$ : Mass
+
+$g$ : Gravitational acceleration
+
+$z_1$ : Initial elevation
+
+$z_2$ : Final elevation
+
+$PE$ : Potential energy
+&
+The work transferred to the body is equal to the increase in its gravitational potential energy.
+
+\begin{equation*}
+W=\Delta PE
+\end{equation*}
+\\
+\hline
+
+\textbf{Work Done to Accelerate a Body}
+&
+\begin{equation*}
+W=\Delta KE
+\end{equation*}
+
+\begin{equation*}
+W
+=
+\frac{1}{2}m(V_2^2-V_1^2)
+\end{equation*}
+&
+$m$ : Mass
+
+$V_1$ : Initial velocity
+
+$V_2$ : Final velocity
+
+$KE$ : Kinetic energy
+&
+The work required to accelerate a body is equal to the change in its kinetic energy.
+
+These relationships follow directly from the conservation of energy principle.
+\\
+\hline
+
+\end{tabular}
+\end{center}
+
+
+\begin{figure}[H] % h = here, t = top, b = bottom, p = page of floats
+    \centering
+    \fbox{\includegraphics[width=0.4\textwidth]{../2. Figures/Figure : 3.png}}
+    \label{fig:myimage}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\mysection{2.6}{THE FIRST LAW OF THERMODYNAMICS}{2.6}
+
+The first law of thermodynamics, also known as the conservation of energy principle, establishes the relationship among the different forms of energy and energy interactions. It states that energy can neither be created nor destroyed during a process; it can only change from one form to another. Therefore, every amount of energy involved in a process must be accounted for. 
+
+\textbf{\\ First Law of Thermodynamics}
+
+The first law is based on experimental observations. For a closed system undergoing adiabatic processes between two specified states, the net work is the same regardless of the details of the process. This result led to the recognition of total energy as a thermodynamic property.
+
+For an adiabatic process,
+
+\begin{equation*}
+\Delta E = - W_{\mathrm{net, \, out}}
+\end{equation*}
+
+The first law therefore establishes the existence of the property \textbf{total energy}, whose change depends only on the initial and final states of the system. An arbitrary reference value may be assigned to the total energy at a specified state because only changes in total energy are required in thermodynamic analysis. 
+
+\textbf{\\ Change in Energy of a System}
+
+The change in the total energy of a system is the difference between its final and initial energy:
+
+\begin{equation*}
+\Delta E_{\mathrm{system}}
+=
+E_{\mathrm{final}}-E_{\mathrm{initial}}
+=
+E_2-E_1
+\end{equation*}
+
+Energy is a property, so its value changes only when the state of the system changes.
+
+For a simple compressible system, the total energy consists of internal, kinetic, and potential energies. Therefore,
+
+\begin{equation*}
+\Delta E
+=
+\Delta U+\Delta KE+\Delta PE
+\end{equation*}
+
+where
+
+\begin{equation*}
+\Delta U=m(u_2-u_1)
+\end{equation*}
+
+\begin{equation*}
+\Delta KE
+=
+\frac{1}{2}m(V_2^2-V_1^2)
+\end{equation*}
+
+\begin{equation*}
+\Delta PE
+=
+mg(z_2-z_1)
+\end{equation*}
+
+Hence,
+
+\begin{equation*}
+\Delta E
+=
+m(u_2-u_1)
++
+\frac{1}{2}m(V_2^2-V_1^2)
++
+mg(z_2-z_1)
+\end{equation*}
+
+
+
+\textbf{\\ Stationary Systems}
+
+Most systems encountered in practice are stationary. For a stationary system, the velocity and elevation do not change during the process.
+
+Therefore,
+
+\begin{equation*}
+\Delta KE=0
+\end{equation*}
+
+and
+
+\begin{equation*}
+\Delta PE=0
+\end{equation*}
+
+Thus,
+
+\begin{equation*}
+\Delta E=\Delta U
+\end{equation*}
+
+For a stationary system, the internal energy is therefore the only form of the system's energy that can change. 
+
+\textbf{\\ Mechanisms of Energy Transfer}
+
+Energy can cross a system boundary in three forms:
+
+\begin{enumerate}
+    \item \textbf{Heat transfer}
+    \item \textbf{Work transfer}
+    \item \textbf{Mass flow}
+\end{enumerate}
+
+Heat and work are the only possible energy interactions for a fixed mass or closed system. Mass flow provides an additional energy-transfer mechanism for control volumes. 
+
+\textbf{\\ Heat Transfer}
+
+Heat transfer to a system increases its energy because energy is transferred to the molecules of the system.
+
+Heat transfer from a system decreases its energy because energy leaves the system in the form of heat.
+
+For a closed system,
+
+\begin{equation*}
+Q_{\mathrm{net, \, in}}
+=
+Q_{\mathrm{in}}-Q_{\mathrm{out}}
+\end{equation*}
+
+\textbf{\\ Work Transfer}
+
+Work transfer occurs when energy crosses the boundary by a mechanism other than a temperature difference.
+
+Work done on a system increases its energy, while work done by a system decreases its energy.
+
+Examples include:
+
+\begin{itemize}
+    \item Electrical work
+    \item Shaft work
+    \item Boundary work
+\end{itemize}
+
+For a closed system,
+
+\begin{equation*}
+W_{\mathrm{net, \, out}}
+=
+W_{\mathrm{out}}-W_{\mathrm{in}}
+\end{equation*}
+
+\textbf{\\ Mass Flow}
+
+Mass crossing a system boundary carries energy with it. Therefore, mass flow provides an energy-transfer mechanism for control volumes.
+
+When mass enters a system, it brings energy into the system. When mass leaves a system, it carries energy away.
+
+Thus, for a control volume, energy may be transferred by heat, work, and mass flow. 
+
+\textbf{Complete energy balance:}
+\begin{equation*}
+\boxed{
+\Delta E_{\mathrm{system}}
+=
+E_{\mathrm{in}}-E_{\mathrm{out}}
+=
+(Q_{\mathrm{net, \, in}})
+-
+(W_{\mathrm{net, \, out}})
++
+(E_{\mathrm{mass,in}}-E_{\mathrm{mass,out}})
+}
+\end{equation*}
+\begin{equation*}
+\boxed{
+\Delta E_{\mathrm{system}}
+=
+E_{\mathrm{in}}-E_{\mathrm{out}}
+=
+(Q_{\mathrm{in}}-Q_{\mathrm{out}})
+-
+(W_{\mathrm{out}}-W_{\mathrm{in}})
++
+(E_{\mathrm{mass,in}}-E_{\mathrm{mass,out}})
+}
+\end{equation*}
+
+All six quantities on the right-hand side represent positive amounts. Their directions are indicated by the subscripts ``in'' and ``out''. 
+
+For an adiabatic system,
+
+\begin{equation*}
+Q=0
+\end{equation*}
+
+For a system with no work interaction,
+
+\begin{equation*}
+W=0
+\end{equation*}
+
+For a closed system, there is no mass flow across the boundary:
+
+\begin{equation*}
+E_{\mathrm{mass}}=0
+\end{equation*}
+
+Therefore, the appropriate terms can be eliminated from the general energy balance according to the physical characteristics of the system and process. 
+
+\textbf{\\ Compact Energy Balance}
+
+For any system undergoing any process,
+
+\begin{equation*}
+E_{\mathrm{in}}-E_{\mathrm{out}}
+=
+\Delta E_{\mathrm{system}}
+\end{equation*}
+
+The left side represents the net energy transfer by heat, work, and mass, while the right side represents the change in internal, kinetic, potential, and other forms of energy stored in the system.
+
+In rate form,
+
+\begin{equation*}
+\dot{E}_{\mathrm{in}}-\dot{E}_{\mathrm{out}}
+=
+\frac{dE_{\mathrm{system}}}{dt}
+\end{equation*}
+
+For constant rates over a time interval $\Delta t$,
+
+\begin{equation*}
+Q=\dot{Q}\Delta t
+\end{equation*}
+
+\begin{equation*}
+W=\dot{W}\Delta t
+\end{equation*}
+
+\begin{equation*}
+\Delta E
+=
+\frac{dE}{dt}\Delta t
+\end{equation*}
+
+
+
+\textbf{\\ Energy Balance per Unit Mass}
+
+Dividing the energy balance by the system mass gives the energy balance on a specific basis:
+
+\begin{equation*}
+e_{\mathrm{in}}-e_{\mathrm{out}}
+=
+\Delta e_{\mathrm{system}}
+\end{equation*}
+
+where the specific energy is
+
+\begin{equation*}
+e=\frac{E}{m}
+\end{equation*}
+
+The differential form is
+
+\begin{equation*}
+\delta E_{\mathrm{in}}-\delta E_{\mathrm{out}}
+=
+dE_{\mathrm{system}}
+\end{equation*}
+
+or, on a unit-mass basis,
+
+\begin{equation*}
+\delta e_{\mathrm{in}}-\delta e_{\mathrm{out}}
+=
+de_{\mathrm{system}}
+\end{equation*}
+
+
+
+\textbf{\\ Energy Balance for a Cycle}
+
+For a system undergoing a cycle, the final state is identical to the initial state. Therefore,
+
+\begin{equation*}
+\Delta E_{\mathrm{system}}=0
+\end{equation*}
+
+The energy balance becomes
+
+\begin{equation*}
+E_{\mathrm{in}}=E_{\mathrm{out}}
+\end{equation*}
+
+For a closed system, there is no mass flow. Hence, the cycle energy balance can be written as
+
+\begin{equation*}
+W_{\mathrm{net,out}}
+=
+Q_{\mathrm{net,in}}
+\end{equation*}
+
+or in rate form,
+
+\begin{equation*}
+\dot{W}_{\mathrm{net,out}}
+=
+\dot{Q}_{\mathrm{net,in}}
+\end{equation*}
+
+Thus, for a closed-system cycle, the net work output is equal to the net heat input. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\mysection{2.7}{ENERGY CONVERSION EFFICIENCIES}{2.7}
+
+Efficiency is a measure of how effectively an energy conversion or transfer process is accomplished. It is defined as the ratio of the desired output to the required input.
+
+\begin{equation*}
+\eta
+=
+\frac{\text{Desired output}}
+{\text{Required input}}
+\end{equation*}
+
+Efficiency is dimensionless and is commonly expressed as a percentage:
+
+\begin{equation*}
+\eta(\%)
+=
+\eta \times 100
+\end{equation*}
+
+A clear definition of the desired output and required input is essential because the numerical value of an efficiency depends on how the system and the energy conversion process are defined. 
+
+\textbf{\\ Efficiency of Combustion Equipment}
+
+For equipment involving combustion of a fuel, efficiency is generally based on the heating value of the fuel. The heating value is the amount of heat released when a unit amount of fuel is completely burned and the combustion products are cooled to the reference temperature.
+
+The combustion-equipment efficiency is
+
+\begin{equation*}
+\eta_{\mathrm{comb,equip}}
+=
+\frac{Q_{\mathrm{useful}}}
+{HV\,m_{\mathrm{fuel}}}
+\end{equation*}
+
+where $Q_{\mathrm{useful}}$ is the useful heat delivered by the combustion equipment, $HV$ is the heating value of the fuel, and $m_{\mathrm{fuel}}$ is the amount of fuel burned.
+
+Depending on the equipment, this efficiency may be called:
+
+\begin{itemize}
+    \item \textbf{Furnace efficiency}
+    \item \textbf{Boiler efficiency}
+    \item \textbf{Heater efficiency}
+\end{itemize}
+
+For example, a combustion-equipment efficiency of $70\%$ means that $70\%$ of the heating value of the fuel is transferred as useful heat, while the remaining $30\%$ is lost, mainly through hot combustion gases leaving the equipment. 
+
+\textbf{\\ Heating Value of Fuels}
+
+The heating value of a fuel depends on the state of the water contained in the combustion products.
+
+The \textbf{lower heating value (LHV)} applies when the water leaves the combustion products as vapor, so its latent heat is not recovered.
+
+The \textbf{higher heating value (HHV)} applies when the water in the combustion gases is completely condensed and the heat of vaporization is recovered.
+
+Thus,
+
+\begin{equation*}
+HHV > LHV
+\end{equation*}
+
+For gasoline,
+
+\begin{equation*}
+LHV \approx 44{,}000\ \text{kJ/kg}
+\end{equation*}
+
+\begin{equation*}
+HHV \approx 47{,}300\ \text{kJ/kg}
+\end{equation*}
+
+The efficiency definition must specify whether it is based on HHV or LHV. Efficiencies of cars and jet engines are normally based on LHV, while furnace efficiencies are generally based on HHV. 
+
+\textbf{\\ Annual Fuel Utilization Efficiency}
+
+The efficiency of residential and commercial space-heating systems is commonly expressed by the \textbf{annual fuel utilization efficiency (AFUE)}.
+
+AFUE accounts for:
+
+\begin{itemize}
+    \item Combustion-equipment efficiency
+    \item Heat losses to unheated areas
+    \item Start-up losses
+    \item Cool-down losses
+\end{itemize}
+
+Most new heating systems have AFUE values around $85\%$, while some high-efficiency furnaces exceed $96\%$. High efficiencies are achieved by recovering heat from the flue gases and, in some systems, condensing the water vapor in the combustion products. 
+
+\textbf{\\ Thermal and Overall Efficiency of Power Plants}
+
+For a power plant, the work output may refer to the mechanical power produced by the turbine or the electrical power produced by the generator.
+
+The \textbf{thermal efficiency} of a power plant is
+
+\begin{equation*}
+\eta_{\mathrm{thermal}}
+=
+\frac{\dot{W}_{\mathrm{net,out}}}
+{\dot{Q}_{\mathrm{in}}}
+\end{equation*}
+
+A generator converts mechanical energy into electrical energy. Its efficiency is
+
+\begin{equation*}
+\eta_{\mathrm{generator}}
+=
+\frac{\dot{W}_{\mathrm{elect,out}}}
+{\dot{W}_{\mathrm{shaft,in}}}
+\end{equation*}
+
+The overall efficiency of a power plant accounts for combustion, thermal conversion, and generation:
+
+\begin{equation*}
+\eta_{\mathrm{overall}}
+=
+\eta_{\mathrm{comb,equip}}
+\eta_{\mathrm{thermal}}
+\eta_{\mathrm{generator}}
+\end{equation*}
+
+It can also be expressed as
+
+\begin{equation*}
+\eta_{\mathrm{overall}}
+=
+\frac{\dot{W}_{\mathrm{net,electric}}}
+{HHV\,\dot{m}_{\mathrm{fuel}}}
+\end{equation*}
+
+Typical overall efficiencies are approximately $25$--$30\%$ for gasoline automotive engines, $35$--$40\%$ for diesel engines, and up to about $60\%$ for large power plants. 
+
+\textbf{\\ Efficiency of Conversion of Electricity to Light}
+
+Electrical energy can be converted into light by incandescent lamps, fluorescent lamps, and high-intensity discharge lamps.
+
+The conversion efficiency can be defined as
+
+\begin{equation*}
+\eta_{\mathrm{light}}
+=
+\frac{\text{Energy converted to light}}
+{\text{Electrical energy consumed}}
+\end{equation*}
+
+Incandescent lightbulbs convert only about $5\%$ of the electrical energy they consume into light. Most of the remaining energy becomes thermal energy. 
+
+A more common measure for lighting systems is \textbf{lighting efficacy}, defined as the amount of light output per unit electrical power:
+
+\begin{equation*}
+\text{Lighting efficacy}
+=
+\frac{\text{Light output in lumens}}
+{\text{Electrical power input in W}}
+\end{equation*}
+
+Its unit is lumen/W.
+
+Typical lighting efficacies include:
+
+\begin{itemize}
+    \item Incandescent lamps: approximately $6$--$20$ lm/W
+    \item Compact fluorescent lamps: approximately $40$--$87$ lm/W
+    \item Fluorescent tubes: approximately $60$--$120$ lm/W
+    \item High-pressure sodium lamps: approximately $85$--$140$ lm/W
+    \item LEDs: approximately $20$--$160$ lm/W
+\end{itemize}
+
+A compact fluorescent lamp can therefore produce approximately four times as much light per watt as an incandescent lamp. 
+
+\textbf{\\ Efficiency of Cooking Appliances}
+
+Cooking appliances convert electrical or chemical energy into useful thermal energy transferred to food.
+
+The cooking efficiency is
+
+\begin{equation*}
+\eta_{\mathrm{cooking}}
+=
+\frac{\text{Useful energy transferred to food}}
+{\text{Energy consumed by appliance}}
+\end{equation*}
+
+The efficiency of a cooking appliance affects both energy consumption and the heat released into the surrounding space.
+
+Convection and microwave ovens are generally more efficient than conventional ovens. On average, convection ovens can save about one-third of the energy used by conventional ovens, while microwave ovens can save about two-thirds. 
+
+\textbf{\\ Mechanical Efficiency}
+
+Mechanical energy is commonly transferred through rotating shafts.
+
+A pump or fan receives shaft work and transfers mechanical energy to a fluid, while a turbine extracts mechanical energy from a fluid and converts it into shaft work.
+
+The mechanical efficiency of a device or process is
+
+\begin{equation*}
+\eta_{\mathrm{mech}}
+=
+\frac{E_{\mathrm{mech,out}}}
+{E_{\mathrm{mech,in}}}
+\end{equation*}
+
+It can also be written as
+
+\begin{equation*}
+\eta_{\mathrm{mech}}
+=
+1-
+\frac{E_{\mathrm{mech,loss}}}
+{E_{\mathrm{mech,in}}}
+\end{equation*}
+
+A mechanical efficiency below $100\%$ indicates that some mechanical energy is converted into thermal energy, primarily because of friction and other irreversibilities. 
+
+\textbf{\\ Pump Efficiency}
+
+A pump increases the mechanical energy of a fluid by receiving shaft work.
+
+The pump efficiency is
+
+\begin{equation*}
+\eta_{\mathrm{pump}}
+=
+\frac{\Delta\dot{E}_{\mathrm{mech,fluid}}}
+{\dot{W}_{\mathrm{shaft,in}}}
+\end{equation*}
+
+or
+
+\begin{equation*}
+\eta_{\mathrm{pump}}
+=
+\frac{\dot{W}_{\mathrm{pump,u}}}
+{\dot{W}_{\mathrm{pump}}}
+\end{equation*}
+
+where $\dot{W}_{\mathrm{pump,u}}$ is the useful pumping power delivered to the fluid.
+
+\textbf{\\ Turbine Efficiency}
+
+A turbine extracts mechanical energy from a fluid and converts it into shaft work.
+
+The turbine efficiency is
+
+\begin{equation*}
+\eta_{\mathrm{turbine}}
+=
+\frac{\dot{W}_{\mathrm{shaft,out}}}
+{\left|\Delta\dot{E}_{\mathrm{mech,fluid}}\right|}
+\end{equation*}
+
+The absolute value is used because the mechanical energy of the fluid decreases through the turbine.
+
+A turbine or pump efficiency of $100\%$ would represent perfect conversion with no frictional losses. This limit can be approached but cannot be attained in actual devices. 
+
+\textbf{\\ Motor Efficiency}
+
+An electric motor converts electrical energy into rotating mechanical energy.
+
+Its efficiency is
+
+\begin{equation*}
+\eta_{\mathrm{motor}}
+=
+\frac{\dot{W}_{\mathrm{shaft,out}}}
+{\dot{W}_{\mathrm{elect,in}}}
+\end{equation*}
+
+The difference between the electrical power consumed and the mechanical power delivered appears primarily as waste heat.
+
+Full-load motor efficiencies range from about $35\%$ for small motors to more than $97\%$ for large, high-efficiency motors. 
+
+\textbf{\\ Generator Efficiency}
+
+A generator converts mechanical shaft energy into electrical energy.
+
+Its efficiency is
+
+\begin{equation*}
+\eta_{\mathrm{generator}}
+=
+\frac{\dot{W}_{\mathrm{elect,out}}}
+{\dot{W}_{\mathrm{shaft,in}}}
+\end{equation*}
+
+Thus, motor and generator efficiencies describe opposite directions of energy conversion:
+
+\begin{equation*}
+\text{Motor: Electrical energy}
+\longrightarrow
+\text{Mechanical energy}
+\end{equation*}
+
+\begin{equation*}
+\text{Generator: Mechanical energy}
+\longrightarrow
+\text{Electrical energy}
+\end{equation*}
+
+
+
+\textbf{\\ Combined Pump--Motor Efficiency}
+
+A pump is commonly driven by an electric motor. The combined efficiency is
+
+\begin{equation*}
+\eta_{\mathrm{pump-motor}}
+=
+\eta_{\mathrm{pump}}
+\eta_{\mathrm{motor}}
+\end{equation*}
+
+It can also be expressed as
+
+\begin{equation*}
+\eta_{\mathrm{pump-motor}}
+=
+\frac{\dot{W}_{\mathrm{pump,u}}}
+{\dot{W}_{\mathrm{elect,in}}}
+\end{equation*}
+
+or
+
+\begin{equation*}
+\eta_{\mathrm{pump-motor}}
+=
+\frac{\Delta\dot{E}_{\mathrm{mech,fluid}}}
+{\dot{W}_{\mathrm{elect,in}}}
+\end{equation*}
+
+Thus, the combined efficiency represents the fraction of the electrical input that is ultimately transferred as useful mechanical energy to the fluid. 
+
+\textbf{\\ Combined Turbine--Generator Efficiency}
+
+A turbine is commonly coupled to a generator. The combined efficiency is
+
+\begin{equation*}
+\eta_{\mathrm{turbine-gen}}
+=
+\eta_{\mathrm{turbine}}
+\eta_{\mathrm{generator}}
+\end{equation*}
+
+It can also be written as
+
+\begin{equation*}
+\eta_{\mathrm{turbine-gen}}
+=
+\frac{\dot{W}_{\mathrm{elect,out}}}
+{\dot{W}_{\mathrm{turbine,e}}}
+\end{equation*}
+
+or
+
+\begin{equation*}
+\eta_{\mathrm{turbine-gen}}
+=
+\frac{\dot{W}_{\mathrm{elect,out}}}
+{\left|\Delta\dot{E}_{\mathrm{mech,fluid}}\right|}
+\end{equation*}
+
+Thus, the combined efficiency represents the fraction of the mechanical energy decrease of the fluid that ultimately appears as electrical power. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\mysection{2.8}{ENERGY AND ENVIRONMENT}{2.8}
+
+The conversion of energy from one form to another often affects the environment. The combustion of fossil fuels such as coal, oil, and natural gas releases pollutants that contribute to smog, acid rain, global warming, and climate change. Therefore, understanding energy conversion also requires understanding its environmental consequences.
+
+\textbf{\\ Environmental Pollution from Energy Conversion}
+
+Fossil fuels have played a major role in industrial development and modern life, but their combustion produces pollutants that affect air, water, soil, vegetation, wildlife, and human health.
+
+Major environmental effects associated with fossil-fuel combustion include:
+
+\begin{itemize}
+    \item Air pollution
+    \item Smog formation
+    \item Acid rain
+    \item Global warming
+    \item Climate change
+\end{itemize}
+
+Air pollution can cause serious health problems, particularly respiratory and cardiovascular problems. Motor vehicles, power plants, furnaces, and other combustion systems are important sources of pollutants.
+
+\textbf{\\ Major Air Pollutants}
+
+Hundreds of chemical compounds can be released during the combustion of coal, oil, natural gas, and wood.
+
+The major pollutants associated with motor vehicles are:
+
+\begin{itemize}
+    \item Hydrocarbons (HC)
+    \item Nitrogen oxides ($NO_x$)
+    \item Carbon monoxide (CO)
+    \item Particulate matter (PM)
+\end{itemize}
+
+Hydrocarbon emissions constitute a major part of volatile organic compound (VOC) emissions.
+
+Hydrocarbons may be released not only through combustion but also through fuel evaporation, refueling, fuel spills, and leaking fuel tanks.
+
+Motor vehicles are identified as the largest source of air pollution discussed in this section.
+
+\textbf{\\ Control of Air Pollution}
+
+Increasing awareness of the dangers of air pollution has led to the establishment of emission standards and international regulations.
+
+In the United States, the Clean Air Act of 1970 established limits on emissions from large plants and vehicles. Early regulations focused mainly on:
+
+\begin{itemize}
+    \item Hydrocarbons
+    \item Nitrogen oxides
+    \item Carbon monoxide
+\end{itemize}
+
+Catalytic converters were introduced into automobile exhaust systems to reduce HC and CO emissions.
+
+The removal of lead from gasoline was also important because it allowed catalytic converters to operate effectively and reduced toxic lead emissions.
+
+The Clean Air Act of 1990 further tightened requirements concerning ozone, carbon monoxide, nitrogen dioxide, and particulate matter.
+
+\textbf{\\ Ozone and Smog}
+
+Smog is a mixture of pollutants that can accumulate over urban areas, particularly on hot, calm days.
+
+Ground-level ozone ($O_3$) is the primary component of urban smog. It should not be confused with the ozone layer in the stratosphere, which protects the earth from harmful ultraviolet radiation.
+
+Ground-level ozone is formed when hydrocarbons and nitrogen oxides react in the presence of sunlight:
+
+\begin{equation*}
+HC+NO_x
+\xrightarrow{\text{sunlight}}
+O_3+\text{other pollutants}
+\end{equation*}
+
+Smog formation is generally greatest during the late afternoon because temperatures and sunlight intensity are high.
+
+Prevailing winds can transport ozone and other pollutants over large distances, so air pollution is not confined to the region where it originates.
+
+\textbf{\\ Effects of Ground-Level Ozone}
+
+Ground-level ozone can:
+
+\begin{itemize}
+    \item Irritate the eyes
+    \item Damage lung tissue
+    \item Reduce lung capacity
+    \item Cause shortness of breath and wheezing
+    \item Aggravate respiratory diseases
+    \item Produce fatigue, headaches, and nausea
+    \item Damage vegetation
+\end{itemize}
+
+Reformulated gasoline containing oxygenates was introduced in some smog-prone regions to reduce ozone and other pollutant emissions.
+
+\textbf{\\ Carbon Monoxide}
+
+Carbon monoxide (CO) is a colorless, odorless, poisonous gas produced mainly by motor vehicles.
+
+It is dangerous because it reduces the ability of blood to transport oxygen to the body's organs and tissues.
+
+At low concentrations, CO can:
+
+\begin{itemize}
+    \item Reduce oxygen supply to the brain and muscles
+    \item Slow body reactions and reflexes
+    \item Impair judgment
+\end{itemize}
+
+High concentrations can be fatal.
+
+Carbon monoxide is especially dangerous in enclosed or poorly ventilated locations, such as a vehicle operating inside a closed garage.
+
+\textbf{\\ Particulate Matter}
+
+Smog can also contain suspended particulate matter such as dust and soot.
+
+These particles may be emitted by:
+
+\begin{itemize}
+    \item Motor vehicles
+    \item Industrial facilities
+    \item Combustion systems
+\end{itemize}
+
+Particulate matter can irritate the eyes and lungs and may carry harmful substances such as acids and metals.
+
+\textbf{\\ Acid Rain}
+
+Fossil fuels contain small amounts of sulfur. During combustion, sulfur reacts with oxygen to form sulfur dioxide:
+
+\begin{equation*}
+S+O_2\rightarrow SO_2
+\end{equation*}
+
+Sulfur dioxide is an important air pollutant, with high-sulfur coal used in electric power plants being a major source.
+
+Nitrogen oxides and sulfur oxides can react with water vapor and other atmospheric chemicals to form acids:
+
+\begin{equation*}
+SO_x+H_2O
+\rightarrow
+\text{sulfuric acid}
+\end{equation*}
+
+\begin{equation*}
+NO_x+H_2O
+\rightarrow
+\text{nitric acid}
+\end{equation*}
+
+These acids dissolve in atmospheric water droplets and can subsequently reach the earth's surface through rain or snow. This phenomenon is called \textbf{acid rain}.
+
+\textbf{\\ Effects of Acid Rain}
+
+Acid rain can:
+
+\begin{itemize}
+    \item Increase the acidity of lakes and rivers
+    \item Harm aquatic organisms
+    \item Damage forests and vegetation
+    \item Damage soil
+    \item Deteriorate marble and other structures
+\end{itemize}
+
+The problem can be reduced by decreasing sulfur dioxide emissions through measures such as:
+
+\begin{itemize}
+    \item Installing sulfur-dioxide scrubbers in power plants
+    \item Using low-sulfur coal
+    \item Desulfurizing coal before combustion
+\end{itemize}
+
+\textbf{\\ The Greenhouse Effect}
+
+The greenhouse effect is the trapping of thermal radiation by certain gases.
+
+Glass provides a simple example. It allows most visible solar radiation to enter but is relatively opaque to longer-wavelength infrared radiation emitted by objects inside the enclosed space.
+
+A similar process occurs on earth.
+
+The earth absorbs solar radiation during the day and emits infrared radiation. Greenhouse gases absorb some of this outgoing infrared radiation and emit radiation back toward the earth.
+
+Important greenhouse gases include:
+
+\begin{itemize}
+    \item Carbon dioxide ($CO_2$)
+    \item Water vapor
+    \item Methane
+    \item Nitrogen oxides
+\end{itemize}
+
+The greenhouse effect itself is necessary for life because it keeps the earth substantially warmer than it would otherwise be.
+
+However, excessive concentrations of greenhouse gases disturb the natural balance and cause additional energy to be trapped in the atmosphere.
+
+\textbf{\\ Global Warming and Climate Change}
+
+The increase in the concentration of greenhouse gases due to human activities contributes to global warming and climate change.
+
+Major sources include:
+
+\begin{itemize}
+    \item Electric power generation
+    \item Transportation
+    \item Buildings
+    \item Manufacturing
+    \item Combustion of coal, petroleum products, and natural gas
+\end{itemize}
+
+Vegetation naturally consumes carbon dioxide during photosynthesis and releases oxygen:
+
+\begin{equation*}
+CO_2+\text{H}_2O
+\rightarrow
+\text{organic matter}+O_2
+\end{equation*}
+
+Deforestation and increased fossil-fuel consumption disturb this balance by reducing carbon uptake while increasing carbon dioxide emissions.
+
+\textbf{\\ Consequences of Climate Change}
+
+An increase in global temperature can contribute to:
+
+\begin{itemize}
+    \item Changes in weather patterns
+    \item Severe storms
+    \item Heavy rainfall and flooding
+    \item Drought in some regions
+    \item Melting of polar ice
+    \item Rising sea levels
+    \item Loss of wetlands and coastal areas
+    \item Changes in water availability
+    \item Disruption of ecosystems
+    \item Changes in the distribution of diseases
+    \item Adverse effects on human health and socioeconomic conditions
+\end{itemize}
+
+\textbf{\\ International Efforts to Control Greenhouse Gas Emissions}
+
+The seriousness of climate change has led to international efforts to limit greenhouse-gas emissions.
+
+Important developments include:
+
+\begin{itemize}
+    \item The 1992 United Nations climate agreement
+    \item The 1997 Kyoto Protocol
+    \item The 2015 Paris Agreement
+\end{itemize}
+
+The Paris Agreement established a goal of limiting global warming to less than $2^\circ\mathrm{C}$ above preindustrial levels, while pursuing efforts to limit the increase further.
+
+Reducing greenhouse-gas emissions requires both improved energy efficiency and increased use of renewable energy.
+
+\textbf{\\ Carbon Dioxide Emissions from Energy Use}
+
+The amount of $CO_2$ released depends strongly on the energy source and the amount of fossil fuel consumed.
+
+A fossil-fueled power plant can produce approximately
+
+\begin{equation*}
+0.6\text{--}1.0\ \text{kg }CO_2/\text{kWh}
+\end{equation*}
+
+of electricity generated.
+
+Burning gasoline produces approximately
+
+\begin{equation*}
+2.5\ \text{kg }CO_2/\text{L}
+\end{equation*}
+
+or approximately
+
+\begin{equation*}
+20\ \text{lbm }CO_2/\text{gal}
+\end{equation*}
+
+For a vehicle,
+
+\begin{equation*}
+CO_2\text{ emission}
+=
+\text{Fuel consumed}
+\times
+\text{CO}_2\text{ emission per unit fuel}
+\end{equation*}
+
+Therefore, reducing fuel consumption directly reduces carbon dioxide emissions.
+
+\textbf{\\ Energy Efficiency and Environmental Protection}
+
+Improving energy efficiency reduces the amount of primary energy required to provide a given service.
+
+For example, increasing vehicle fuel economy from $20$ to $30$ miles per gallon reduces fuel consumption for the same travel distance.
+
+Thus,
+
+\begin{equation*}
+\text{Higher efficiency}
+\longrightarrow
+\text{Lower fuel consumption}
+\longrightarrow
+\text{Lower emissions}
+\end{equation*}
+
+Energy conservation and efficient energy conversion therefore provide both economic and environmental benefits.
+
+\textbf{\\ Electric Vehicles and Emissions}
+
+Electric vehicles produce no direct tailpipe emissions during operation.
+
+However, they are not automatically zero-emission vehicles because the electricity used to charge them must be generated somewhere.
+
+If electricity is generated using fossil fuels, emissions occur at the power plant.
+
+Therefore,
+
+\begin{equation*}
+\text{Electric vehicle}
+\neq
+\text{necessarily zero total emissions}
+\end{equation*}
+
+Electric vehicles can approach true zero-emission operation when their electricity is generated from emission-free renewable sources such as:
+
+\begin{itemize}
+    \item Hydroelectric power
+    \item Solar energy
+    \item Wind energy
+    \item Geothermal energy
+\end{itemize}
+
+The environmental benefit of electric vehicles therefore depends partly on the energy source used to generate their electricity.
+
+\textbf{\\ Renewable Energy}
+
+Renewable energy sources can reduce dependence on fossil fuels and decrease pollutant and greenhouse-gas emissions.
+
+Important renewable sources include:
+
+\begin{itemize}
+    \item Hydroelectric energy
+    \item Solar energy
+    \item Wind energy
+    \item Geothermal energy
+\end{itemize}
+
+Renewable sources are especially important for meeting new energy demands while limiting environmental damage.
+
+\textbf{\\ Role of Thermodynamics}
+
+Advances in thermodynamics have contributed to improvements in energy-conversion efficiencies.
+
+Higher conversion efficiency means that less fuel is required to produce the same useful output.
+
+Therefore,
+
+\begin{equation*}
+\text{Improved efficiency}
+\longrightarrow
+\text{Less fuel consumption}
+\longrightarrow
+\text{Reduced pollution}
+\end{equation*}
+
+Individuals can also contribute through energy conservation and by giving higher priority to energy-efficient products and technologies.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

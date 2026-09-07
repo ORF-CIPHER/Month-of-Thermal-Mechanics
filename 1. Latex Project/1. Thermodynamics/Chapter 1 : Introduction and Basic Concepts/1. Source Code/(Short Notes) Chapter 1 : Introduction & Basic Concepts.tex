@@ -1,0 +1,1081 @@
+\documentclass[12pt]{article}
+
+\usepackage[a4paper, top=2cm, bottom=2cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{fontspec}
+\usepackage{mathastext}
+\usepackage{enumitem}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage[table]{xcolor}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{bookmark}
+
+% ---------------- FONTS ----------------
+\setmainfont[
+    UprightFont = Handlee-Regular.ttf,
+    AutoFakeBold = 2.5
+]{Handlee}
+\newfontfamily\headingfont{PT.ttf}
+
+% ---------------- HANDWRITTEN MATH ----------------
+\Mathastext
+\everymath{\displaystyle}
+
+% ---------------- GENERAL ----------------
+\setlength{\parindent}{0pt}
+\pagenumbering{gobble}
+\linespread{1.2}
+
+\newcommand{\mychapter}[2]{%
+    \phantomsection
+    \hypertarget{#2}{}%
+    \bookmark[level=0,dest=#2]{#1}%
+    \begin{center}
+        {\headingfont\Huge #1}
+        \par
+        \vspace{4pt}
+        \hrule
+    \end{center}
+}
+
+\newcommand{\mysection}[3]{%
+    \phantomsection
+    \hypertarget{#3}{}%
+    \bookmark[level=1,dest=#3]{#1\space #2}%
+    \newpage
+    \noindent{\headingfont\Large #1\space #2\par}
+    \vspace{4pt}
+    \hrule
+    \vspace{10pt}
+}
+
+\newcommand{\mysubsection}[2]{%
+    \noindent{\headingfont\large #1\space #2\par}
+    \vspace{4pt}
+    \hrule
+    \vspace{8pt}
+}
+
+\begin{document}
+
+\mychapter{Chapter 1 : Introduction \& Basic Concepts}{Chapter 1 : Introduction \& Basic Concepts}
+
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Section} & \textbf{Core Revision Focus} \\
+\hline
+1.1 & Thermodynamics, energy, first/second laws, approaches \\
+\hline
+1.2 & Dimensions, units, dimensional homogeneity, conversions \\
+\hline
+1.3 & Systems, control volumes, mass/energy transfer \\
+\hline
+1.4 & Properties, intensive/extensive, specific properties, continuum \\
+\hline
+1.5 & Density, specific volume, SG, specific weight \\
+\hline
+1.6 & State, equilibrium, state postulate \\
+\hline
+1.7 & Processes, paths, cycles, steady flow \\
+\hline
+1.8 & Temperature, zeroth law, temperature scales \\
+\hline
+1.9 & Pressure, pressure relations, hydrostatics, Pascal's law \\
+\hline
+1.10 & Barometer, manometer, differential pressure \\
+\hline
+1.11 & Systematic engineering problem solving \\
+\hline
+\end{tabular}
+\end{center}
+
+\newpage
+
+%=========================================================
+\mysection{1.1}{Thermodynamics and Energy}{1.1}
+
+\mysubsection{}{Core Concepts}
+
+\begin{itemize}
+    \item \textbf{Thermodynamics}: science of energy, energy transformations, and interactions between energy and matter.
+    \item Energy may be viewed as the \textbf{ability to cause changes}.
+    \item \textbf{Conservation of energy}: energy cannot be created or destroyed; only transformed.
+\end{itemize}
+
+\begin{equation*}
+    \boxed{\Delta E=E_{\mathrm{in}}-E_{\mathrm{out}}}
+\end{equation*}
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Law} & \textbf{Main principle} \\
+\hline
+First law & Energy is conserved; energy is a thermodynamic property. \\
+\hline
+Second law & Energy has both quantity and quality; actual processes proceed toward lower energy quality. \\
+\hline
+\end{tabular}
+\end{center}
+
+\mysubsection{}{Thermodynamic Approaches}
+
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Approach} & \textbf{Basis} & \textbf{Feature} \\
+\hline
+Classical & Macroscopic behavior & Direct, relatively simple \\
+\hline
+Statistical & Average microscopic behavior & More involved \\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{itemize}
+    \item \textbf{Classical thermodynamics}: uses measurable macroscopic quantities; primary engineering approach.
+    \item \textbf{Statistical thermodynamics}: relates macroscopic behavior to microscopic particle behavior.
+\end{itemize}
+
+\textbf{Key second-law idea:} heat naturally transfers from higher temperature to lower temperature, with degradation of energy quality.
+
+%=========================================================
+\mysection{1.2}{Importance of Dimensions and Units}{1.2}
+
+\mysubsection{}{Dimensions and Units}
+
+\begin{itemize}
+    \item \textbf{Dimensions}: characteristics used to describe physical quantities.
+    \item \textbf{Units}: magnitudes assigned to dimensions.
+    \item \textbf{Primary dimensions}: fundamental quantities such as mass, length, time, temperature.
+    \item \textbf{Secondary dimensions}: derived from primary dimensions, e.g. velocity, energy, volume.
+\end{itemize}
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{System} & \textbf{Description} \\
+\hline
+SI & International System of Units; decimal-based \\
+\hline
+English/USCS & United States Customary System \\
+\hline
+\end{tabular}
+\end{center}
+
+\mysubsection{}{SI Fundamental Units}
+
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Dimension} & \textbf{Unit} & \textbf{Symbol} \\
+\hline
+Length & meter & m \\
+\hline
+Mass & kilogram & kg \\
+\hline
+Time & second & s \\
+\hline
+Temperature & kelvin & K \\
+\hline
+Electric current & ampere & A \\
+\hline
+Amount of light & candela & cd \\
+\hline
+Amount of matter & mole & mol \\
+\hline
+\end{tabular}
+\end{center}
+
+\mysubsection{}{SI Prefixes}
+
+\begin{center}
+\begin{tabular}{|c|c|c@{\qquad}c|c|c|}
+\hline
+\textbf{Factor} & \textbf{Prefix} & \textbf{Symbol}
+& \textbf{Factor} & \textbf{Prefix} & \textbf{Symbol} \\
+\hline
+$10^{24}$ & yotta & Y & $10^{-1}$ & deci & d \\
+$10^{21}$ & zetta & Z & $10^{-2}$ & centi & c \\
+$10^{18}$ & exa & E & $10^{-3}$ & milli & m \\
+$10^{15}$ & peta & P & $10^{-6}$ & micro & $\mu$ \\
+$10^{12}$ & tera & T & $10^{-9}$ & nano & n \\
+$10^9$ & giga & G & $10^{-12}$ & pico & p \\
+$10^6$ & mega & M & $10^{-15}$ & femto & f \\
+$10^3$ & kilo & k & $10^{-18}$ & atto & a \\
+$10^2$ & hecto & h & $10^{-21}$ & zepto & z \\
+$10^1$ & deka & da & $10^{-24}$ & yocto & y \\
+\hline
+\end{tabular}
+\end{center}
+
+\mysubsection{}{Unit Conventions}
+
+\begin{itemize}
+    \item Unit names are lowercase: newton, pascal, joule.
+    \item Symbols derived from proper names are capitalized: $N$, $Pa$, $J$.
+    \item Unit symbols are not pluralized and normally have no period.
+\end{itemize}
+
+\mysubsection{}{Dimensional Homogeneity}
+
+Every term in a valid engineering equation must have compatible dimensions/units.
+
+\begin{itemize}
+    \item Different units cannot be added or subtracted.
+    \item Dimensional analysis can detect equation/calculation errors.
+    \item Dimensional homogeneity is \textbf{necessary but not sufficient} for physical correctness.
+\end{itemize}
+
+\mysubsection{}{Unity Conversion Ratios}
+
+A ratio of equivalent quantities is exactly one:
+
+\begin{equation*}
+\frac{1~\mathrm{N}}
+{1~\mathrm{kg\,m/s^2}}=1
+\end{equation*}
+
+\begin{equation*}
+\frac{1~\mathrm{lbf}}
+{32.174~\mathrm{lbm\,ft/s^2}}=1
+\end{equation*}
+
+\begin{itemize}
+    \item Insert unity ratios without changing physical value.
+    \item Arrange ratios so unwanted units cancel.
+    \item The inverse ratio is also equal to $1$.
+    \item Preferred for unit conversion rather than introducing $g_c$ merely to force units to match.
+\end{itemize}
+
+%=========================================================
+\mysection{1.3}{Systems and Control Volumes}{1.3}
+
+\mysubsection{}{Basic Definitions}
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Term} & \textbf{Definition} \\
+\hline
+System & Quantity of matter or region in space selected for study \\
+\hline
+Surroundings & Everything outside the system \\
+\hline
+Boundary & Real/imaginary surface separating system and surroundings \\
+\hline
+\end{tabular}
+\end{center}
+
+Boundary may be \textbf{fixed/movable} and \textbf{real/imaginary}; mathematically it has zero thickness.
+
+\mysubsection{}{System Classification}
+
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{System} & \textbf{Mass Transfer} & \textbf{Energy Transfer} \\
+\hline
+Closed system & No & Yes \\
+\hline
+Isolated system & No & No \\
+\hline
+Open system & Yes & Yes \\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{itemize}
+    \item \textbf{Closed system/control mass}: fixed amount of mass; heat/work may cross boundary.
+    \item \textbf{Isolated system}: special closed system with neither mass nor energy crossing.
+    \item \textbf{Open system/control volume}: selected region in space through which mass and energy may cross.
+\end{itemize}
+
+For a closed system:
+\begin{equation*}
+m=\text{constant}
+\end{equation*}
+
+\mysubsection{}{Control Volume}
+
+\begin{itemize}
+    \item Boundary of a control volume = \textbf{control surface}.
+    \item Control surface may be real/imaginary and fixed/moving.
+    \item Proper control-volume selection can greatly simplify analysis.
+    \item Typical devices: compressors, turbines, nozzles, pumps, boilers.
+\end{itemize}
+
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Feature} & \textbf{Closed System} & \textbf{Control Volume} \\
+\hline
+Matter & Fixed amount & May change \\
+\hline
+Mass crossing boundary & No & Yes \\
+\hline
+Energy crossing boundary & Yes & Yes \\
+\hline
+Boundary & Real/imaginary & Real/imaginary \\
+\hline
+Boundary motion & Fixed/movable & Fixed/movable \\
+\hline
+Typical example & Piston-cylinder & Turbine/nozzle \\
+\hline
+\end{tabular}
+\end{center}
+
+%=========================================================
+\mysection{1.4}{Properties of a System}{1.4}
+
+\mysubsection{}{Intensive and Extensive Properties}
+
+\begin{itemize}
+    \item \textbf{Property}: any characteristic of a system, e.g. $P,T,V,m$.
+    \item \textbf{Intensive}: independent of system size/mass.
+    \item \textbf{Extensive}: depends on system size/mass.
+\end{itemize}
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Type} & \textbf{Examples} \\
+\hline
+Intensive & $T$, $P$, density \\
+\hline
+Extensive & $m$, $V$, total momentum \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Division test:}
+\begin{itemize}
+    \item Intensive $\rightarrow$ value remains unchanged.
+    \item Extensive $\rightarrow$ value changes in proportion to amount of matter.
+\end{itemize}
+
+\mysubsection{}{Specific Properties}
+
+An extensive property per unit mass is a \textbf{specific property}; hence it is intensive.
+
+\begin{equation*}
+\boxed{v=\frac{V}{m}}
+\qquad
+\boxed{e=\frac{E}{m}}
+\end{equation*}
+
+where $v$ = specific volume and $e$ = specific total energy.
+
+\mysubsection{}{Continuum}
+
+\begin{itemize}
+    \item Matter is treated as a continuous, homogeneous substance rather than discrete molecules.
+    \item Allows properties to vary continuously and be treated as point functions.
+    \item Valid when system characteristic dimension $\gg$ molecular mean free path.
+\end{itemize}
+
+For oxygen at $1$ atm and $20^\circ\mathrm{C}$:
+\begin{equation*}
+d_{\mathrm{O_2}}\approx3\times10^{-10}\,\mathrm{m},
+\qquad
+\lambda\approx6.3\times10^{-8}\,\mathrm{m}
+\end{equation*}
+
+At very high vacuum/elevation, $\lambda$ may become comparable to system dimensions $\Rightarrow$ continuum assumption may fail.
+
+%=========================================================
+\mysection{1.5}{Density \& Specific Gravity}{1.5}
+
+\mysubsection{}{Density and Specific Volume}
+
+\begin{equation*}
+\boxed{\rho=\frac{m}{V}}
+\qquad
+\boxed{v=\frac{V}{m}=\frac{1}{\rho}}
+\end{equation*}
+
+\begin{equation*}
+\boxed{\rho v=1}
+\end{equation*}
+
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Quantity} & \textbf{Definition} & \textbf{SI Unit} \\
+\hline
+Density, $\rho$ & $m/V$ & $\mathrm{kg/m^3}$ \\
+\hline
+Specific volume, $v$ & $V/m$ & $\mathrm{m^3/kg}$ \\
+\hline
+\end{tabular}
+\end{center}
+
+For differential elements:
+\begin{equation*}
+\rho=\frac{\delta m}{\delta V}
+\end{equation*}
+
+\begin{itemize}
+    \item Gas density generally $\uparrow$ with pressure and $\downarrow$ with temperature.
+    \item Liquids/solids are essentially incompressible; density is much less pressure-sensitive.
+\end{itemize}
+
+\mysubsection{}{Specific Gravity}
+
+\begin{equation*}
+\boxed{SG=\frac{\rho}{\rho_{\mathrm{H_2O}}}}
+\end{equation*}
+
+For water at $4^\circ\mathrm{C}$:
+\begin{equation*}
+\rho_{\mathrm{H_2O}}=1000~\mathrm{kg/m^3}
+\end{equation*}
+
+$SG$ is \textbf{dimensionless}.
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+$SG<1$ & Less dense than water \\
+\hline
+$SG=1$ & Same density as water \\
+\hline
+$SG>1$ & Denser than water \\
+\hline
+\end{tabular}
+\end{center}
+
+Useful relation:
+\begin{equation*}
+1~\mathrm{g/cm^3}
+=1~\mathrm{kg/L}
+=1000~\mathrm{kg/m^3}
+\end{equation*}
+
+Hence the numerical value of $SG$ equals density in $\mathrm{g/cm^3}$ or $\mathrm{kg/L}$.
+
+Example:
+\begin{equation*}
+SG_{\mathrm{Hg}}=13.6
+\Rightarrow
+\rho_{\mathrm{Hg}}=13600~\mathrm{kg/m^3}
+\end{equation*}
+
+\mysubsection{}{Specific Weight}
+
+\begin{equation*}
+\boxed{\gamma_s=\rho g}
+\end{equation*}
+
+SI unit:
+\begin{equation*}
+[\gamma_s]=\mathrm{N/m^3}
+\end{equation*}
+
+%=========================================================
+\mysection{1.6}{State and Equilibrium}{1.6}
+
+\mysubsection{}{State and Equilibrium}
+
+\begin{itemize}
+    \item \textbf{State}: condition of a system described by its property values.
+    \item Change in any property $\Rightarrow$ different state.
+    \item \textbf{Equilibrium}: state of balance with no unbalanced potentials/driving forces.
+    \item Thermodynamic equilibrium requires all relevant equilibrium conditions simultaneously.
+\end{itemize}
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Equilibrium} & \textbf{Condition} \\
+\hline
+Thermal & No temperature difference \\
+\hline
+Mechanical & No pressure changes with time at any point \\
+\hline
+Phase & Mass of each phase remains at equilibrium level \\
+\hline
+Chemical & Chemical composition does not change with time \\
+\hline
+\end{tabular}
+\end{center}
+
+\mysubsection{}{State Postulate}
+
+For a \textbf{simple compressible system}:
+
+\begin{equation*}
+\boxed{\text{State is completely specified by two independent intensive properties.}}
+\end{equation*}
+
+Simple compressible system: electrical, magnetic, gravitational, motion, and surface-tension effects are absent/negligible.
+
+\begin{itemize}
+    \item $T$ and $v$ can specify the state.
+    \item For single-phase systems, $T$ and $P$ are independent.
+    \item For multiphase systems, $T$ and $P$ can be dependent:
+\end{itemize}
+
+\begin{equation*}
+T=f(P)
+\end{equation*}
+
+Thus, $T$ and $P$ alone are insufficient to specify a two-phase state.
+
+If another significant effect exists, an additional property is required for each important effect.
+
+%=========================================================
+\mysection{1.7}{Processes and Cycles}{1.7}
+
+\mysubsection{}{Process}
+
+\begin{itemize}
+    \item \textbf{Process}: change from one equilibrium state to another.
+    \item \textbf{Path}: series of equilibrium states through which the system passes.
+    \item A process is characterized by initial state, final state, path, and system-surroundings interactions.
+\end{itemize}
+
+\mysubsection{}{Quasi-Equilibrium Process}
+
+\begin{equation*}
+\boxed{\text{System remains infinitesimally close to equilibrium throughout the process.}}
+\end{equation*}
+
+\begin{itemize}
+    \item Approximated by a sufficiently slow process.
+    \item Properties remain nearly uniform.
+    \item Easier to analyze.
+    \item Work-producing devices deliver maximum work under quasi-equilibrium operation.
+\end{itemize}
+
+For quasi-equilibrium processes, every point on the path represents an equilibrium state.
+
+For nonquasi-equilibrium processes, a path for the system as a whole cannot be defined; it may be represented by a dashed line between initial and final states.
+
+\mysubsection{}{Common Processes}
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Process} & \textbf{Constant Property} \\
+\hline
+Isothermal & $T=\mathrm{constant}$ \\
+\hline
+Isobaric & $P=\mathrm{constant}$ \\
+\hline
+Isochoric/isometric & $v=\mathrm{constant}$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\mysubsection{}{Cycle}
+
+\begin{equation*}
+\boxed{\text{Initial state}=\text{Final state}}
+\end{equation*}
+
+A cycle may contain several processes but returns the system to its initial state.
+
+\mysubsection{}{Steady-Flow Process}
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+Steady & No change with time \\
+\hline
+Uniform & No change with location \\
+\hline
+\end{tabular}
+\end{center}
+
+For a steady-flow control volume:
+\begin{equation*}
+\boxed{V=\mathrm{constant}},\qquad
+\boxed{m=\mathrm{constant}},\qquad
+\boxed{E=\mathrm{constant}}
+\end{equation*}
+
+At a fixed point, properties do not change with time, although they may vary from point to point.
+
+Typical applications: turbines, pumps, boilers, and other continuously operating devices.
+
+%=========================================================
+\mysection{1.8}{Temperature and the Zeroth Law of Thermodynamics}{1.8}
+
+\mysubsection{}{Thermal Equilibrium and Zeroth Law}
+
+\begin{itemize}
+    \item Heat transfers from higher temperature to lower temperature until temperatures become equal.
+    \item Thermal equilibrium $\Rightarrow$ equal temperature.
+\end{itemize}
+
+\textbf{Zeroth law:}
+\begin{equation*}
+\boxed{
+A\text{ in thermal equilibrium with }C,\;
+B\text{ in thermal equilibrium with }C
+\Rightarrow
+A\text{ and }B\text{ are in thermal equilibrium.}
+}
+\end{equation*}
+
+This provides the basis for temperature measurement using a thermometer as the third body.
+
+\mysubsection{}{Temperature Scales}
+
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Scale} & \textbf{Ice Point} & \textbf{Steam Point} \\
+\hline
+Celsius & $0^\circ\mathrm{C}$ & $100^\circ\mathrm{C}$ \\
+\hline
+Fahrenheit & $32^\circ\mathrm{F}$ & $212^\circ\mathrm{F}$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\mysubsection{}{Absolute Temperature Scales}
+
+\begin{itemize}
+    \item SI thermodynamic scale: \textbf{Kelvin}, $K$.
+    \item English thermodynamic scale: \textbf{Rankine}, $R$.
+    \item Kelvin is written without degree symbol: $300~K$, not $300^\circ K$.
+\end{itemize}
+
+Absolute zero:
+\begin{equation*}
+\boxed{0~K=-273.15^\circ\mathrm{C}}
+\end{equation*}
+
+\mysubsection{}{Ideal-Gas Temperature Scale}
+
+At sufficiently low pressure and constant volume:
+\begin{equation*}
+T=a+bP
+\end{equation*}
+
+At zero absolute pressure:
+\begin{equation*}
+T=bP
+\end{equation*}
+
+The ideal-gas temperature scale agrees with the thermodynamic scale over its usable range, but fails at extreme temperatures because of effects such as condensation, dissociation, and ionization.
+
+\mysubsection{}{Temperature Conversion}
+
+\begin{equation*}
+\boxed{T(K)=T(^\circ\mathrm{C})+273.15}
+\end{equation*}
+
+\begin{equation*}
+\boxed{T(R)=T(^\circ\mathrm{F})+459.67}
+\end{equation*}
+
+\begin{equation*}
+\boxed{T(R)=1.8T(K)}
+\end{equation*}
+
+\begin{equation*}
+\boxed{T(^\circ\mathrm{F})=1.8T(^\circ\mathrm{C})+32}
+\end{equation*}
+
+For engineering approximations, $273.15\approx273$ and $459.67\approx460$.
+
+\mysubsection{}{Temperature Differences}
+
+\begin{equation*}
+\boxed{\Delta T(K)=\Delta T(^\circ\mathrm{C})}
+\end{equation*}
+
+\begin{equation*}
+\boxed{\Delta T(R)=\Delta T(^\circ\mathrm{F})}
+\end{equation*}
+
+\begin{equation*}
+\boxed{1~K=1^\circ\mathrm{C}=1.8~R=1.8^\circ\mathrm{F}}
+\end{equation*}
+
+\textbf{Critical distinction:}
+\begin{itemize}
+    \item Temperature \textbf{itself} in thermodynamic equations $\rightarrow$ use absolute scale.
+    \item Temperature \textbf{difference} $\rightarrow$ K and $^\circ\mathrm{C}$ have identical magnitude.
+\end{itemize}
+
+%=========================================================
+\mysection{1.9}{Pressure}{1.9}
+
+\mysubsection{}{Definition and Units}
+
+\begin{equation*}
+\boxed{P=\frac{F_n}{A}}
+\end{equation*}
+
+Pressure is the normal force per unit area and is a scalar quantity.
+
+\begin{equation*}
+\boxed{1~\mathrm{Pa}=1~\mathrm{N/m^2}}
+\end{equation*}
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+$1~\mathrm{kPa}$ & $10^3~\mathrm{Pa}$ \\
+\hline
+$1~\mathrm{MPa}$ & $10^6~\mathrm{Pa}$ \\
+\hline
+$1~\mathrm{bar}$ & $10^5~\mathrm{Pa}=100~\mathrm{kPa}$ \\
+\hline
+$1~\mathrm{atm}$ & $101325~\mathrm{Pa}=101.325~\mathrm{kPa}$ \\
+\hline
+$1~\mathrm{kgf/cm^2}$ & $9.807\times10^4~\mathrm{Pa}$ \\
+\hline
+$1~\mathrm{psi}$ & $1~\mathrm{lbf/in^2}$ \\
+\hline
+\end{tabular}
+\end{center}
+
+Useful:
+\begin{equation*}
+1~\mathrm{atm}=1.01325~\mathrm{bar}=14.696~\mathrm{psi}
+\end{equation*}
+
+\begin{equation*}
+1~\mathrm{kgf/cm^2}
+=0.9807~\mathrm{bar}
+=0.9679~\mathrm{atm}
+=14.223~\mathrm{psi}
+\end{equation*}
+
+\mysubsection{}{Absolute, Gage, and Vacuum Pressure}
+
+\begin{equation*}
+\boxed{P_{\mathrm{gage}}=P_{\mathrm{abs}}-P_{\mathrm{atm}}}
+\end{equation*}
+
+\begin{equation*}
+\boxed{P_{\mathrm{vac}}=P_{\mathrm{atm}}-P_{\mathrm{abs}}}
+\end{equation*}
+
+Therefore:
+\begin{equation*}
+\boxed{P_{\mathrm{abs}}=P_{\mathrm{atm}}+P_{\mathrm{gage}}}
+\end{equation*}
+
+\begin{equation*}
+\boxed{P_{\mathrm{abs}}=P_{\mathrm{atm}}-P_{\mathrm{vac}}}
+\end{equation*}
+
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Pressure} & \textbf{Reference} & \textbf{Meaning} \\
+\hline
+Absolute & Vacuum & Actual pressure \\
+\hline
+Gage & Atmosphere & Pressure relative to atmosphere \\
+\hline
+Vacuum & Atmosphere & Amount below atmospheric pressure \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Unless specified otherwise, thermodynamic pressure means absolute pressure.}
+
+\mysubsection{}{Hydrostatic Pressure}
+
+For a fluid at rest:
+\begin{itemize}
+    \item Same horizontal level in the same continuous fluid $\Rightarrow$ same pressure.
+    \item Pressure increases with depth.
+    \item Pressure acts normal to a surface.
+\end{itemize}
+
+For constant density:
+\begin{equation*}
+\boxed{\Delta P=P_2-P_1=-\rho g\Delta z}
+\end{equation*}
+
+Equivalently:
+\begin{equation*}
+\boxed{P_{\mathrm{below}}
+=P_{\mathrm{above}}+\rho g|\Delta z|}
+\end{equation*}
+
+or
+\begin{equation*}
+\boxed{P_{\mathrm{below}}
+=P_{\mathrm{above}}+\gamma_s|\Delta z|}
+\end{equation*}
+
+For variable density:
+\begin{equation*}
+\boxed{\frac{dP}{dz}=-\rho g}
+\end{equation*}
+
+\begin{equation*}
+\boxed{
+P_2-P_1=-\int_1^2\rho g\,dz
+}
+\end{equation*}
+
+For gases, pressure variation with elevation is usually negligible over small/moderate elevation changes.
+
+\mysubsection{}{Pascal's Law}
+
+Pressure applied to a confined fluid increases by the same amount throughout the fluid.
+
+For connected pistons at the same level:
+\begin{equation*}
+P_1=P_2
+\end{equation*}
+
+\begin{equation*}
+\boxed{\frac{F_1}{A_1}=\frac{F_2}{A_2}}
+\end{equation*}
+
+\begin{equation*}
+\boxed{\frac{F_2}{F_1}=\frac{A_2}{A_1}}
+\end{equation*}
+
+\begin{equation*}
+\boxed{\mathrm{IMA}=\frac{A_2}{A_1}}
+\end{equation*}
+
+Larger piston $\Rightarrow$ larger output force.
+
+%=========================================================
+\mysection{1.10}{Pressure Measurement Devices}{1.10}
+
+\mysubsection{}{Barometer}
+
+Measures atmospheric pressure.
+
+\begin{equation*}
+\boxed{P_{\mathrm{atm}}=\rho gh}
+\end{equation*}
+
+where $h$ is mercury-column height.
+
+\begin{itemize}
+    \item Column height is independent of tube length and cross-sectional area when capillary effects are negligible.
+    \item Atmospheric pressure decreases with elevation.
+\end{itemize}
+
+\textbf{Standard atmosphere:}
+\begin{equation*}
+\boxed{1~\mathrm{atm}=760~\mathrm{mmHg}=760~\mathrm{torr}}
+\end{equation*}
+
+\begin{equation*}
+1~\mathrm{torr}\approx133.3~\mathrm{Pa}
+\end{equation*}
+
+A water column of approximately $10.3~\mathrm{m}$ produces standard atmospheric pressure.
+
+\mysubsection{}{Manometer}
+
+A manometer determines pressure differences from liquid-column height.
+
+Basic relation:
+\begin{equation*}
+\boxed{\Delta P=\rho gh}
+\end{equation*}
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Movement} & \textbf{Pressure change} \\
+\hline
+Downward through fluid & $+\rho gh$ \\
+\hline
+Upward through fluid & $-\rho gh$ \\
+\hline
+Horizontal in same continuous fluid & $0$ \\
+\hline
+\end{tabular}
+\end{center}
+
+For a manometer open to atmosphere:
+\begin{equation*}
+\boxed{P_2=P_{\mathrm{atm}}+\rho gh}
+\end{equation*}
+
+\textbf{Inclined manometer:} slanted tube increases liquid displacement for a given pressure difference $\Rightarrow$ higher resolution for small pressure differences.
+
+\mysubsection{}{Multifluid Manometers}
+
+For stacked immiscible fluids:
+\begin{equation*}
+\boxed{
+P_{\mathrm{bottom}}
+=
+P_{\mathrm{top}}
++\rho_1gh_1+\rho_2gh_2+\rho_3gh_3
+}
+\end{equation*}
+
+If all densities are equal:
+\begin{equation*}
+P_{\mathrm{bottom}}
+=
+P_{\mathrm{top}}
++\rho g(h_1+h_2+h_3)
+\end{equation*}
+
+\textbf{Analysis rules:}
+\begin{enumerate}
+    \item Downward $\rightarrow$ add $\rho gh$.
+    \item Upward $\rightarrow$ subtract $\rho gh$.
+    \item Same elevation in same continuous static fluid $\rightarrow$ equal pressure.
+\end{enumerate}
+
+\mysubsection{}{Differential Manometer}
+
+Measures pressure difference between two specified points.
+
+For the arrangement considered:
+\begin{equation*}
+\boxed{
+P_1-P_2=(\rho_2-\rho_1)gh
+}
+\end{equation*}
+
+where $\rho_1$ = flowing-fluid density, $\rho_2$ = manometer-fluid density.
+
+For gases, $\rho_1\ll\rho_2$:
+\begin{equation*}
+\boxed{P_1-P_2\approx\rho_2gh}
+\end{equation*}
+
+%=========================================================
+\mysection{1.11}{Problem-Solving Technique}{1.11}
+
+\mysubsection{}{Seven-Step Procedure}
+
+\begin{center}
+\begin{tabular}{|c|l|}
+\hline
+\textbf{Step} & \textbf{Action} \\
+\hline
+1 & \textbf{Problem statement}: identify given data, unknowns, objective. \\
+\hline
+2 & \textbf{Schematic}: draw system; show dimensions, properties, interactions, unknowns. \\
+\hline
+3 & \textbf{Assumptions}: state and justify approximations. \\
+\hline
+4 & \textbf{Physical laws}: identify system/control volume and apply relevant laws. \\
+\hline
+5 & \textbf{Properties}: obtain required properties from relations/tables. \\
+\hline
+6 & \textbf{Calculations}: substitute, solve, check units and significant digits. \\
+\hline
+7 & \textbf{Verification}: check physical reasonableness, assumptions, validity, limitations. \\
+\hline
+\end{tabular}
+\end{center}
+
+\mysubsection{}{Exam/Problem-Solving Checklist}
+
+\begin{itemize}
+    \item Define the system/control volume before applying a law.
+    \item State assumptions explicitly.
+    \item Keep units throughout calculations.
+    \item Check dimensional consistency.
+    \item Retain sufficient intermediate digits.
+    \item Check whether the final result is physically reasonable.
+    \item Do not apply results outside the assumptions under which they were obtained.
+\end{itemize}
+
+\textbf{Engineering solutions:} neatness, organization, completeness, and clarity help reveal errors. Not every simple problem requires every step to be written explicitly.
+
+%=========================================================
+\newpage
+\begin{center}
+{\headingfont\Huge Significant Digits}
+\par
+\vspace{4pt}
+\hrule
+\end{center}
+
+\mysubsection{}{Core Rules}
+
+\begin{itemize}
+    \item Significant digits represent meaningful precision in measured data.
+    \item Final answer cannot be more precise than the least precise input.
+    \item Keep full calculator precision during intermediate calculations.
+    \item Round only the final answer.
+    \item More digits do \textbf{not} imply greater accuracy.
+    \item Experimental uncertainty limits meaningful precision.
+\end{itemize}
+
+Example:
+\begin{equation*}
+V=3.75~\mathrm{L},
+\qquad
+\rho=0.845~\mathrm{kg/L}
+\end{equation*}
+
+\begin{equation*}
+m=V\rho
+=3.75(0.845)
+=3.16875~\mathrm{kg}
+\end{equation*}
+
+Since both inputs have three significant digits:
+\begin{equation*}
+\boxed{m=3.17~\mathrm{kg}}
+\end{equation*}
+
+\mysubsection{}{Rounding Uncertainty}
+
+For a value rounded to a given decimal place, maximum rounding uncertainty is half the value of the least significant place.
+
+For $3.75$:
+\begin{equation*}
+\text{uncertainty}
+=
+\pm\frac{0.01}{2}
+=
+\pm0.005
+\end{equation*}
+
+Therefore:
+\begin{equation*}
+\boxed{
+3.745\le x<3.755
+}
+\end{equation*}
+
+General rule:
+\begin{equation*}
+\boxed{
+\text{rounding uncertainty}
+=
+\pm\frac{\text{value of least significant digit}}{2}
+}
+\end{equation*}
+
+\mysubsection{}{Engineering Approximations}
+
+Small intentional approximations may be acceptable when their error is negligible relative to other uncertainties.
+
+Example:
+\begin{equation*}
+\rho_{\mathrm{water},75^\circ\mathrm{C}}
+\approx975~\mathrm{kg/m^3}
+\rightarrow
+1000~\mathrm{kg/m^3}
+\end{equation*}
+
+Approximate error:
+\begin{equation*}
+\frac{1000-975}{975}\times100\%\approx2.5\%
+\end{equation*}
+
+Thus, reasonable rounding and approximation are acceptable when justified by the required accuracy.
+
+\end{document}

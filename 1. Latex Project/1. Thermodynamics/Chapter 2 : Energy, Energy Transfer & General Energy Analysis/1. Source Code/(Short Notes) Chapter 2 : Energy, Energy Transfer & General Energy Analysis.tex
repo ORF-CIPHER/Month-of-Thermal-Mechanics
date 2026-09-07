@@ -1,0 +1,1278 @@
+\documentclass[12pt]{article}
+
+\usepackage[a4paper, top=2cm, bottom=2cm, left=2.5cm, right=2.5cm]{geometry}
+
+\usepackage{amsmath, amssymb}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,fit,calc}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{siunitx}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{fontspec}
+\usetikzlibrary{decorations.pathmorphing}
+\usepackage{pdflscape}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage[table]{xcolor}
+\usepackage{hyperref}
+\usepackage{bookmark}
+\usepackage{pdfpages}
+
+% ---------------- FONTS ----------------
+\setmainfont[
+    UprightFont = Handlee-Regular.ttf,
+    AutoFakeBold = 2.5
+]{Handlee}
+
+\newfontfamily\headingfont{PT.ttf}
+
+\setmonofont{DejaVu Sans Mono}
+
+% ---------------- HANDWRITTEN MATH ----------------
+\usepackage{mathastext}
+\Mathastext
+\everymath{\displaystyle}
+
+% ---------------- GENERAL ----------------
+\setlength{\parindent}{0pt}
+\pagenumbering{gobble}
+\linespread{1.2}
+
+\newcommand{\mychapter}[2]{%
+    \phantomsection
+    \hypertarget{#2}{}%
+    \bookmark[level=0,dest=#2]{#1}%
+    \begin{center}
+        {\headingfont\Huge #1}
+        \par
+        \vspace{4pt}
+        \hrule
+    \end{center}
+}
+
+\newcommand{\mysection}[3]{%
+    \phantomsection
+    \hypertarget{#3}{}%
+    \bookmark[level=1,dest=#3]{#1\space #2}%
+    \newpage
+    \noindent{\headingfont\Large #1\space #2\par}
+    \vspace{4pt}
+    \hrule
+    \vspace{15pt}
+}
+
+\newcommand{\mysubsection}[2]{%
+    \vspace{5px}
+    \noindent{\headingfont\large #1\space #2\par}
+    \vspace{4pt}
+    \hrule
+    \vspace{15pt}
+}
+
+\begin{document}
+
+\mychapter{Chapter 2 : Energy, Energy Transfer \& General Energy Analysis}{534y5fdh}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|c|p{14cm}|}
+\hline
+\textbf{Section} & \textbf{Core Revision Focus} \\
+\hline
+2.1 & Conservation of energy, energy quality, refrigerator example \\
+\hline
+2.2 & Forms of energy, total/internal/mechanical energy, KE/PE, flow energy, mass \& energy flow rates \\
+\hline
+2.3 & Heat transfer, adiabatic process, specific heat transfer, heat-transfer rate, conduction/convection/radiation \\
+\hline
+2.4 & Work transfer, sign convention, path functions, electrical work, generalized work \\
+\hline
+2.5 & Mechanical work, shaft/spring/elastic/surface work, raising \& accelerating bodies \\
+\hline
+2.6 & First law, energy balance, closed/control-volume systems, stationary systems, rate/specific forms, cycles \\
+\hline
+2.7 & Efficiency, HHV/LHV, combustion/power-plant/mechanical/pump/turbine/motor/generator efficiencies, combined efficiencies \\
+\hline
+2.8 & Air pollution, smog/ozone, CO, particulate matter, acid rain, greenhouse effect, climate change, $CO_2$ emissions, EVs, renewable energy \\
+\hline
+\end{tabular}
+\end{center}
+
+% ============================================================
+\mysection{2.1}{INTRODUCTION}{2.1}
+
+\begin{itemize}
+    \item \textbf{Energy conservation:} Total energy is conserved during a process.
+    \item \textbf{Energy quality:} High-quality energy (e.g.\ electrical energy) can be completely converted to low-quality thermal energy, but the reverse conversion is limited.
+    \item Refrigerator in an insulated room: electrical energy supplied ultimately increases the internal energy and temperature of the room.
+\end{itemize}
+
+% ============================================================
+\mysection{2.2}{FORMS OF ENERGY}{2.2}
+
+\mysubsection{}{Total Energy}
+
+\begin{equation*}
+e=\frac{E}{m}
+\end{equation*}
+
+\begin{itemize}
+    \item $E$ : Total energy
+    \item $e$ : Specific total energy
+    \item $m$ : Mass
+\end{itemize}
+
+Only changes in energy are required; the reference level for absolute energy may be chosen arbitrarily.
+
+\textbf{Energy classification:}
+\begin{itemize}
+    \item \textbf{Macroscopic energy:} Associated with the system as a whole relative to an external reference frame.
+    \item \textbf{Microscopic energy:} Associated with molecular structure and molecular activity.
+    \item Sum of microscopic energies = \textbf{internal energy} $U$.
+\end{itemize}
+
+\mysubsection{}{Kinetic Energy}
+
+\begin{equation*}
+KE=\frac{mV^2}{2}
+\qquad
+ke=\frac{V^2}{2}
+\end{equation*}
+
+For a rotating solid body:
+\begin{equation*}
+KE=\frac{1}{2}I\omega^2
+\end{equation*}
+
+\mysubsection{}{Potential Energy}
+
+\begin{equation*}
+PE=mgz
+\qquad
+pe=gz
+\end{equation*}
+
+$z$ is measured relative to a selected reference level.
+
+\mysubsection{}{Total Energy of a Simple Compressible System}
+
+When magnetic, electric and surface-tension effects are negligible:
+\begin{equation*}
+E=U+KE+PE
+\end{equation*}
+
+\begin{equation*}
+E=U+\frac{mV^2}{2}+mgz
+\end{equation*}
+
+On a unit-mass basis:
+\begin{equation*}
+e=u+\frac{V^2}{2}+gz
+\end{equation*}
+
+For a stationary system:
+\begin{equation*}
+\Delta KE=0,
+\qquad
+\Delta PE=0,
+\qquad
+\boxed{\Delta E=\Delta U}
+\end{equation*}
+
+\mysubsection{}{Internal Energy}
+
+Internal energy includes microscopic kinetic and potential energies.
+
+\begin{itemize}
+    \item \textbf{Sensible energy:} Associated with molecular kinetic energy; generally increases with temperature.
+    \item \textbf{Latent energy:} Associated with phase of a substance.
+    \item \textbf{Chemical energy:} Associated with atomic bonds.
+    \item \textbf{Nuclear energy:} Associated with strong binding forces within the nucleus.
+\end{itemize}
+
+\mysubsection{}{Mechanical Energy}
+
+Mechanical energy can be completely and directly converted into mechanical work by an ideal mechanical device.
+
+\[
+\boxed{\text{Mechanical energy}=
+\text{flow}+\text{kinetic}+\text{potential}}
+\]
+
+For a flowing fluid:
+\begin{equation*}
+e_{\mathrm{flow}}=\frac{P}{\rho}
+\end{equation*}
+
+\begin{equation*}
+e_{\mathrm{mech}}
+=
+\frac{P}{\rho}
++\frac{V^2}{2}
++gz
+\end{equation*}
+
+\begin{equation*}
+\dot{E}_{\mathrm{mech}}
+=
+\dot{m}
+\left(
+\frac{P}{\rho}
++\frac{V^2}{2}
++gz
+\right)
+\end{equation*}
+
+For an incompressible fluid:
+\begin{equation*}
+\Delta e_{\mathrm{mech}}
+=
+\frac{P_2-P_1}{\rho}
++
+\frac{V_2^2-V_1^2}{2}
++
+g(z_2-z_1)
+\end{equation*}
+
+\begin{equation*}
+\Delta\dot{E}_{\mathrm{mech}}
+=
+\dot{m}
+\left[
+\frac{P_2-P_1}{\rho}
++
+\frac{V_2^2-V_1^2}{2}
++
+g(z_2-z_1)
+\right]
+\end{equation*}
+
+\begin{itemize}
+    \item Constant $P,\rho,V,z$ $\Rightarrow$ $\Delta e_{\mathrm{mech}}=0$.
+    \item Positive $\Delta e_{\mathrm{mech}}$ $\Rightarrow$ mechanical work supplied to fluid.
+    \item Negative $\Delta e_{\mathrm{mech}}$ $\Rightarrow$ mechanical work extracted from fluid.
+\end{itemize}
+
+For an ideal turbine:
+\begin{equation*}
+\dot{W}_{\max}=\dot{m}\Delta e_{\mathrm{mech}}
+\end{equation*}
+
+\textbf{Mass flow rate:}
+\begin{equation*}
+\dot{m}=\rho\dot{V}
+\end{equation*}
+
+\begin{equation*}
+\dot{V}=A_cV_{\mathrm{avg}}
+\end{equation*}
+
+\begin{equation*}
+\boxed{\dot{m}=\rho A_cV_{\mathrm{avg}}}
+\end{equation*}
+
+\textbf{Energy flow rate:}
+\begin{equation*}
+\boxed{\dot{E}=\dot{m}e}
+\end{equation*}
+
+\begin{equation*}
+1\ \mathrm{kJ/s}=1\ \mathrm{kW}
+\end{equation*}
+
+% ============================================================
+\mysection{2.3}{ENERGY TRANSFER BY HEAT}{2.3}
+
+\mysubsection{}{Heat Transfer}
+
+\textbf{Heat} = energy transferred solely because of a temperature difference.
+
+\begin{itemize}
+    \item Heat flows from higher temperature to lower temperature.
+    \item No temperature difference $\Rightarrow$ no heat transfer.
+    \item Heat is \textbf{energy in transition}; a system does not contain heat as a property.
+    \item Heat transfer stops at thermal equilibrium.
+\end{itemize}
+
+\mysubsection{}{Adiabatic Process}
+
+\begin{equation*}
+\boxed{Q=0}
+\end{equation*}
+
+Occurs when:
+\begin{itemize}
+    \item the system is well insulated, or
+    \item system and surroundings are at the same temperature.
+\end{itemize}
+
+\textbf{Important:} Adiabatic $\neq$ isothermal. Temperature may change during an adiabatic process because of work or other energy interactions.
+
+\mysubsection{}{Amount of Heat Transfer}
+
+\begin{equation*}
+q=\frac{Q}{m}
+\end{equation*}
+
+\begin{equation*}
+\dot{Q}=\frac{dQ}{dt}
+\end{equation*}
+
+For variable heat-transfer rate:
+\begin{equation*}
+Q=\int_{t_1}^{t_2}\dot{Q}\,dt
+\end{equation*}
+
+For constant rate:
+\begin{equation*}
+Q=\dot{Q}\Delta t,
+\qquad
+\Delta t=t_2-t_1
+\end{equation*}
+
+\begin{equation*}
+q=\frac{Q}{m},
+\qquad
+\dot{Q}=\frac{Q}{\Delta t}
+\end{equation*}
+
+\mysubsection{}{Mechanisms of Heat Transfer}
+
+\begin{itemize}
+    \item \textbf{Conduction:} Molecular interaction between adjacent particles.
+    \item \textbf{Convection:} Energy transfer between a solid surface and moving fluid; includes conduction and fluid motion.
+    \item \textbf{Radiation:} Electromagnetic-wave/photon transfer.
+\end{itemize}
+
+All require a temperature difference and proceed from higher to lower temperature.
+
+% ============================================================
+\mysection{2.4}{ENERGY TRANSFER BY WORK}{2.4}
+
+\mysubsection{}{Work}
+
+Work is energy transfer associated with a force acting through a distance.
+
+\begin{equation*}
+w=\frac{W}{m}
+\end{equation*}
+
+\begin{equation*}
+\dot{W}=\frac{dW}{dt}
+\end{equation*}
+
+\textbf{Sign convention:}
+\begin{itemize}
+    \item Heat \textbf{to} system: positive.
+    \item Heat \textbf{from} system: negative.
+    \item Work \textbf{by} system: positive.
+    \item Work \textbf{on} system: negative.
+\end{itemize}
+
+Alternatively, use positive in/out quantities explicitly:
+\begin{equation*}
+W_{\mathrm{in}}>0,
+\qquad
+W_{\mathrm{out}}>0
+\end{equation*}
+
+A negative calculated value indicates that the actual direction is opposite to the assumed direction.
+
+\mysubsection{}{Heat and Work as Path Functions}
+
+\begin{itemize}
+    \item Heat and work exist only while crossing the system boundary.
+    \item A system possesses energy, but not heat or work.
+    \item Heat/work are associated with a \textbf{process}, not a state.
+    \item Their magnitude depends on the path.
+    \item Heat and work = \textbf{path functions}.
+    \item Thermodynamic properties = \textbf{point functions}.
+\end{itemize}
+
+For a property:
+\begin{equation*}
+\int_1^2 dV=V_2-V_1=\Delta V
+\end{equation*}
+
+For work:
+\begin{equation*}
+\int_1^2\delta W=W_{12}
+\neq W_2-W_1
+\end{equation*}
+
+$d$ = exact differential of a property; $\delta$ = inexact differential of a path function.
+
+\mysubsection{}{Electrical Work}
+
+\begin{equation*}
+W_e=VN
+\end{equation*}
+
+\begin{equation*}
+\dot{W}_e=VI
+\end{equation*}
+
+For variable $V$ and $I$:
+\begin{equation*}
+W_e=\int_1^2VI\,dt
+\end{equation*}
+
+For constant $V,I$:
+\begin{equation*}
+W_e=VI\Delta t
+\end{equation*}
+
+\begin{equation*}
+\boxed{
+\dot{W}_e=VI=I^2R=\frac{V^2}{R}
+}
+\end{equation*}
+
+\mysubsection{}{Generalized Work}
+
+\begin{equation*}
+\boxed{\delta W=F\,dx}
+\end{equation*}
+
+General concept:
+\[
+\text{Generalized force}\times\text{generalized displacement}
+\]
+
+\begin{itemize}
+    \item Mechanical: force $\times$ displacement.
+    \item Electrical: voltage $\times$ charge.
+    \item Magnetic: magnetic field strength $\times$ total magnetic dipole moment.
+    \item Electrical polarization: electric field strength $\times$ polarization.
+\end{itemize}
+
+% ============================================================
+\mysection{2.5}{MECHANICAL FORMS OF WORK}{2.5}
+
+\textbf{Mechanical work:}
+\begin{equation*}
+W=Fs
+\end{equation*}
+
+For variable force:
+\begin{equation*}
+W=\int_1^2F\,ds
+\end{equation*}
+
+Requirements for mechanical work:
+\begin{enumerate}
+    \item A force must act on the system boundary.
+    \item The system boundary must move.
+\end{enumerate}
+
+No boundary displacement $\Rightarrow$ no mechanical work.
+Expansion into a vacuum $\Rightarrow$ no work because no opposing/driving force exists.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|p{3.0cm}|p{6.0cm}|p{7.0cm}|}
+\hline
+\textbf{Type} & \textbf{Important relations} & \textbf{Key conditions / quantities} \\
+\hline
+
+\textbf{Shaft Work}
+&
+\begin{equation*}
+T=Fr
+\end{equation*}
+\begin{equation*}
+s=2\pi rn
+\end{equation*}
+\begin{equation*}
+W_{\mathrm{sh}}=2\pi nT
+\end{equation*}
+\begin{equation*}
+\dot{W}_{\mathrm{sh}}=2\pi\dot{n}T
+\end{equation*}
+&
+$T$ = torque,\;
+$F$ = tangential force,\;
+$r$ = moment arm,\;
+$n$ = revolutions,\;
+$\dot n$ = revolutions/time.
+
+Used for engines, turbines, pumps, compressors.
+\\
+\hline
+
+\textbf{Spring Work}
+&
+\begin{equation*}
+\delta W_{\mathrm{spring}}=F\,dx
+\end{equation*}
+\begin{equation*}
+F=kx
+\end{equation*}
+\begin{equation*}
+\delta W_{\mathrm{spring}}=kx\,dx
+\end{equation*}
+\begin{equation*}
+W_{\mathrm{spring}}
+=
+\frac12k(x_2^2-x_1^2)
+\end{equation*}
+&
+Linear elastic spring; $k$ = spring constant.
+
+$x_1,x_2$ measured from the undisturbed position.
+\\
+\hline
+
+\textbf{Elastic Solid Bar}
+&
+\begin{equation*}
+W_{\mathrm{elastic}}=\int_1^2F\,dx
+\end{equation*}
+\begin{equation*}
+\sigma_n=\frac{F}{A}
+\end{equation*}
+\begin{equation*}
+W_{\mathrm{elastic}}
+=
+\int_1^2\sigma_nA\,dx
+\end{equation*}
+&
+Within elastic range, a solid bar behaves similarly to a linear spring.
+
+$\sigma_n$ = normal stress.
+\\
+\hline
+
+\textbf{Liquid Film}
+&
+\begin{equation*}
+W_{\mathrm{surface}}=\int_1^2\sigma_s\,dA
+\end{equation*}
+\begin{equation*}
+dA=2b\,dx
+\end{equation*}
+\begin{equation*}
+F=2b\sigma_s
+\end{equation*}
+&
+$\sigma_s$ = surface tension,\;
+$b$ = movable-wire length.
+
+Factor $2$ because a liquid film has two surfaces.
+\\
+\hline
+
+\textbf{Raising a Body}
+&
+\begin{equation*}
+W=\Delta PE
+\end{equation*}
+\begin{equation*}
+W=mg(z_2-z_1)
+\end{equation*}
+&
+Work transferred to the body equals its increase in gravitational potential energy.
+\\
+\hline
+
+\textbf{Accelerating a Body}
+&
+\begin{equation*}
+W=\Delta KE
+\end{equation*}
+\begin{equation*}
+W=\frac12m(V_2^2-V_1^2)
+\end{equation*}
+&
+Work required for acceleration equals change in kinetic energy.
+\\
+\hline
+
+\end{tabular}
+\end{center}
+
+% ============================================================
+\mysection{2.6}{THE FIRST LAW OF THERMODYNAMICS}{2.6}
+
+\textbf{First law:}
+\[
+\boxed{\text{Energy in} - \text{Energy out}
+=
+\text{Change in stored energy}}
+\]
+
+
+Special cases:
+\begin{align*}
+Q=0
+&\Rightarrow
+\Delta E= - W_{\mathrm{net, \, out}}
+\\
+W=0
+&\Rightarrow
+\Delta E=Q_{\mathrm{net, \, in}}
+\end{align*}
+
+\mysubsection{}{General Energy Balance}
+
+\begin{equation*}
+\boxed{
+E_{\mathrm{in}}-E_{\mathrm{out}}
+=
+\Delta E_{\mathrm{system}}
+}
+\end{equation*}
+
+\begin{equation*}
+\Delta E_{\mathrm{system}}
+=
+E_2-E_1
+\end{equation*}
+
+For a simple compressible system:
+\begin{equation*}
+\Delta E
+=
+\Delta U+\Delta KE+\Delta PE
+\end{equation*}
+
+\begin{equation*}
+\Delta U=m(u_2-u_1)
+\end{equation*}
+
+\begin{equation*}
+\Delta KE=
+\frac12m(V_2^2-V_1^2)
+\end{equation*}
+
+\begin{equation*}
+\Delta PE=mg(z_2-z_1)
+\end{equation*}
+
+Therefore:
+\begin{equation*}
+\boxed{
+\Delta E
+=
+m(u_2-u_1)
++
+\frac12m(V_2^2-V_1^2)
++
+mg(z_2-z_1)
+}
+\end{equation*}
+
+\mysubsection{}{Stationary Systems}
+
+\begin{equation*}
+\Delta KE=0,
+\qquad
+\Delta PE=0
+\end{equation*}
+
+Hence:
+\begin{equation*}
+\boxed{\Delta E=\Delta U}
+\end{equation*}
+
+\mysubsection{}{Energy-Transfer Mechanisms}
+
+Across a system boundary, energy can be transferred by:
+
+\begin{enumerate}
+    \item \textbf{Heat}
+    \item \textbf{Work}
+    \item \textbf{Mass flow}
+\end{enumerate}
+
+For a \textbf{closed system}: heat + work only.
+
+For a \textbf{control volume}: heat + work + mass flow.
+
+\textbf{Net heat:}
+\begin{equation*}
+Q_{\mathrm{net, \, in}}=Q_{\mathrm{in}}-Q_{\mathrm{out}}
+\end{equation*}
+
+\textbf{Net work:}
+\begin{equation*}
+W_{\mathrm{net, \, out}}=W_{\mathrm{out}}-W_{\mathrm{in}}
+\end{equation*}
+
+\textbf{Complete energy balance:}
+\begin{equation*}
+\boxed{
+\Delta E_{\mathrm{system}}
+=
+E_{\mathrm{in}}-E_{\mathrm{out}}
+=
+(Q_{\mathrm{net, \, in}})
+-
+(W_{\mathrm{net, \, out}})
++
+(E_{\mathrm{mass,in}}-E_{\mathrm{mass,out}})
+}
+\end{equation*}
+\begin{equation*}
+\boxed{
+\Delta E_{\mathrm{system}}
+=
+E_{\mathrm{in}}-E_{\mathrm{out}}
+=
+(Q_{\mathrm{in}}-Q_{\mathrm{out}})
+-
+(W_{\mathrm{out}}-W_{\mathrm{in}})
++
+(E_{\mathrm{mass,in}}-E_{\mathrm{mass,out}})
+}
+\end{equation*}
+
+Useful eliminations:
+\begin{equation*}
+\text{Adiabatic: }Q=0
+\qquad
+\text{No work: }W=0
+\qquad
+\text{Closed system: }E_{\mathrm{mass}}=0
+\end{equation*}
+
+\mysubsection{}{Rate and Specific Forms}
+
+Rate form:
+\begin{equation*}
+\boxed{
+\dot{E}_{\mathrm{in}}-\dot{E}_{\mathrm{out}}
+=
+\frac{dE_{\mathrm{system}}}{dt}
+}
+\end{equation*}
+
+For constant rates:
+\begin{equation*}
+Q=\dot Q\Delta t,
+\qquad
+W=\dot W\Delta t,
+\qquad
+\Delta E=\frac{dE}{dt}\Delta t
+\end{equation*}
+
+Specific basis:
+\begin{equation*}
+e=\frac{E}{m}
+\end{equation*}
+
+\begin{equation*}
+e_{\mathrm{in}}-e_{\mathrm{out}}
+=
+\Delta e_{\mathrm{system}}
+\end{equation*}
+
+Differential form:
+\begin{equation*}
+\delta e_{\mathrm{in}}-\delta e_{\mathrm{out}}
+=
+de_{\mathrm{system}}
+\end{equation*}
+
+\mysubsection{}{Energy Balance for a Cycle}
+
+For a cycle:
+\begin{equation*}
+\boxed{\Delta E_{\mathrm{system}}=0}
+\end{equation*}
+
+Thus:
+\begin{equation*}
+E_{\mathrm{in}}=E_{\mathrm{out}}
+\end{equation*}
+
+For a closed-system cycle:
+\begin{equation*}
+\boxed{
+W_{\mathrm{net,out}}=Q_{\mathrm{net,in}}
+}
+\end{equation*}
+
+and in rate form:
+\begin{equation*}
+\boxed{
+\dot W_{\mathrm{net,out}}
+=
+\dot Q_{\mathrm{net,in}}
+}
+\end{equation*}
+
+% ============================================================
+\mysection{2.7}{ENERGY CONVERSION EFFICIENCIES}{2.7}
+
+\textbf{General definition:}
+\begin{equation*}
+\boxed{
+\eta=
+\frac{\text{Desired output}}
+{\text{Required input}}
+}
+\end{equation*}
+
+\begin{equation*}
+\eta(\%)=100\eta
+\end{equation*}
+
+\textbf{Always define clearly what constitutes the desired output and required input.}
+
+\mysubsection{}{Combustion Equipment}
+
+\begin{equation*}
+\boxed{
+\eta_{\mathrm{comb,equip}}
+=
+\frac{Q_{\mathrm{useful}}}
+{HV\,m_{\mathrm{fuel}}}
+}
+\end{equation*}
+
+Applies to furnaces, boilers and heaters.
+
+\textbf{Heating values:}
+\begin{itemize}
+    \item \textbf{LHV:} Water leaves as vapor; latent heat not recovered.
+    \item \textbf{HHV:} Water is condensed; latent heat recovered.
+\end{itemize}
+
+\begin{equation*}
+\boxed{HHV>LHV}
+\end{equation*}
+
+For gasoline:
+\begin{equation*}
+LHV\approx44{,}000\ \mathrm{kJ/kg}
+\end{equation*}
+
+\begin{equation*}
+HHV\approx47{,}300\ \mathrm{kJ/kg}
+\end{equation*}
+
+\textbf{AFUE} accounts for combustion efficiency plus heat losses, start-up losses and cool-down losses.
+
+\mysubsection{}{Power-Plant Efficiencies}
+
+Thermal efficiency:
+\begin{equation*}
+\boxed{
+\eta_{\mathrm{thermal}}
+=
+\frac{\dot W_{\mathrm{net,out}}}
+{\dot Q_{\mathrm{in}}}
+}
+\end{equation*}
+
+Generator efficiency:
+\begin{equation*}
+\boxed{
+\eta_{\mathrm{generator}}
+=
+\frac{\dot W_{\mathrm{elect,out}}}
+{\dot W_{\mathrm{shaft,in}}}
+}
+\end{equation*}
+
+Overall:
+\begin{equation*}
+\boxed{
+\eta_{\mathrm{overall}}
+=
+\eta_{\mathrm{comb,equip}}
+\eta_{\mathrm{thermal}}
+\eta_{\mathrm{generator}}
+}
+\end{equation*}
+
+or
+\begin{equation*}
+\eta_{\mathrm{overall}}
+=
+\frac{\dot W_{\mathrm{net,electric}}}
+{HHV\,\dot m_{\mathrm{fuel}}}
+\end{equation*}
+
+\mysubsection{}{Electricity-to-Light Conversion}
+
+\begin{equation*}
+\eta_{\mathrm{light}}
+=
+\frac{\text{Energy converted to light}}
+{\text{Electrical energy consumed}}
+\end{equation*}
+
+Lighting efficacy:
+\begin{equation*}
+\boxed{
+\text{Lighting efficacy}
+=
+\frac{\text{Light output (lumens)}}
+{\text{Electrical power input (W)}}
+}
+\end{equation*}
+
+Unit: $\mathrm{lm/W}$.
+
+\mysubsection{}{Cooking Efficiency}
+
+\begin{equation*}
+\boxed{
+\eta_{\mathrm{cooking}}
+=
+\frac{\text{Useful energy transferred to food}}
+{\text{Energy consumed by appliance}}
+}
+\end{equation*}
+
+Convection and microwave ovens are generally more efficient than conventional ovens.
+
+\mysubsection{}{Mechanical Efficiency}
+
+\begin{equation*}
+\boxed{
+\eta_{\mathrm{mech}}
+=
+\frac{E_{\mathrm{mech,out}}}
+{E_{\mathrm{mech,in}}}
+}
+\end{equation*}
+
+\begin{equation*}
+\eta_{\mathrm{mech}}
+=
+1-
+\frac{E_{\mathrm{mech,loss}}}
+{E_{\mathrm{mech,in}}}
+\end{equation*}
+
+Losses primarily arise from friction and other irreversibilities.
+
+\mysubsection{}{Pump Efficiency}
+
+\begin{equation*}
+\boxed{
+\eta_{\mathrm{pump}}
+=
+\frac{\Delta\dot E_{\mathrm{mech,fluid}}}
+{\dot W_{\mathrm{shaft,in}}}
+}
+\end{equation*}
+
+\begin{equation*}
+\eta_{\mathrm{pump}}
+=
+\frac{\dot W_{\mathrm{pump,u}}}
+{\dot W_{\mathrm{pump}}}
+\end{equation*}
+
+\mysubsection{}{Turbine Efficiency}
+
+\begin{equation*}
+\boxed{
+\eta_{\mathrm{turbine}}
+=
+\frac{\dot W_{\mathrm{shaft,out}}}
+{\left|\Delta\dot E_{\mathrm{mech,fluid}}\right|}
+}
+\end{equation*}
+
+Absolute value is required because fluid mechanical energy decreases through a turbine.
+
+\mysubsection{}{Motor and Generator Efficiency}
+
+Motor:
+\begin{equation*}
+\boxed{
+\eta_{\mathrm{motor}}
+=
+\frac{\dot W_{\mathrm{shaft,out}}}
+{\dot W_{\mathrm{elect,in}}}
+}
+\end{equation*}
+
+Generator:
+\begin{equation*}
+\boxed{
+\eta_{\mathrm{generator}}
+=
+\frac{\dot W_{\mathrm{elect,out}}}
+{\dot W_{\mathrm{shaft,in}}}
+}
+\end{equation*}
+
+\[
+\text{Motor: Electrical}\rightarrow\text{Mechanical}
+\]
+
+\[
+\text{Generator: Mechanical}\rightarrow\text{Electrical}
+\]
+
+\mysubsection{}{Combined Efficiencies}
+
+Pump--motor:
+\begin{equation*}
+\boxed{
+\eta_{\mathrm{pump-motor}}
+=
+\eta_{\mathrm{pump}}\eta_{\mathrm{motor}}
+}
+\end{equation*}
+
+\begin{equation*}
+\eta_{\mathrm{pump-motor}}
+=
+\frac{\dot W_{\mathrm{pump,u}}}
+{\dot W_{\mathrm{elect,in}}}
+=
+\frac{\Delta\dot E_{\mathrm{mech,fluid}}}
+{\dot W_{\mathrm{elect,in}}}
+\end{equation*}
+
+Turbine--generator:
+\begin{equation*}
+\boxed{
+\eta_{\mathrm{turbine-gen}}
+=
+\eta_{\mathrm{turbine}}\eta_{\mathrm{generator}}
+}
+\end{equation*}
+
+\begin{equation*}
+\eta_{\mathrm{turbine-gen}}
+=
+\frac{\dot W_{\mathrm{elect,out}}}
+{\dot W_{\mathrm{turbine,e}}}
+=
+\frac{\dot W_{\mathrm{elect,out}}}
+{\left|\Delta\dot E_{\mathrm{mech,fluid}}\right|}
+\end{equation*}
+
+% ============================================================
+\mysection{2.8}{ENERGY AND ENVIRONMENT}{2.8}
+
+\textbf{Major environmental effects of fossil-fuel combustion:}
+\begin{itemize}
+    \item Air pollution
+    \item Smog
+    \item Acid rain
+    \item Global warming
+    \item Climate change
+\end{itemize}
+
+\textbf{Major motor-vehicle pollutants:}
+\begin{itemize}
+    \item Hydrocarbons (HC)
+    \item Nitrogen oxides ($NO_x$)
+    \item Carbon monoxide (CO)
+    \item Particulate matter (PM)
+\end{itemize}
+
+\mysubsection{}{Ozone and Smog}
+
+Ground-level ozone is the primary component of urban smog.
+
+\begin{equation*}
+HC+NO_x
+\xrightarrow{\text{sunlight}}
+O_3+\text{other pollutants}
+\end{equation*}
+
+Hot, calm conditions favor smog formation; winds can transport pollutants over large distances.
+
+\mysubsection{}{Carbon Monoxide}
+
+CO is a colorless, odorless, poisonous gas produced mainly by motor vehicles.
+
+\begin{itemize}
+    \item Reduces blood's oxygen-carrying ability.
+    \item Low concentrations can impair reactions, reflexes and judgment.
+    \item High concentrations can be fatal.
+    \item Particularly dangerous in enclosed/poorly ventilated spaces.
+\end{itemize}
+
+\mysubsection{}{Particulate Matter}
+
+Suspended dust and soot can be emitted by vehicles, industrial facilities and combustion systems.
+
+Effects include irritation of eyes/lungs and transport of harmful substances such as acids and metals.
+
+\mysubsection{}{Acid Rain}
+
+Sulfur combustion:
+\begin{equation*}
+S+O_2\rightarrow SO_2
+\end{equation*}
+
+Atmospheric reactions:
+\begin{equation*}
+SO_x+H_2O\rightarrow\text{sulfuric acid}
+\end{equation*}
+
+\begin{equation*}
+NO_x+H_2O\rightarrow\text{nitric acid}
+\end{equation*}
+
+These acids reaching the earth through rain/snow produce \textbf{acid rain}.
+
+Reduction methods:
+\begin{itemize}
+    \item Sulfur-dioxide scrubbers
+    \item Low-sulfur coal
+    \item Coal desulfurization
+\end{itemize}
+
+\mysubsection{}{Greenhouse Effect and Climate Change}
+
+\textbf{Greenhouse effect:} Certain gases absorb outgoing infrared radiation and re-emit part of it toward earth.
+
+Major greenhouse gases:
+\begin{itemize}
+    \item $CO_2$
+    \item Water vapor
+    \item Methane
+    \item Nitrogen oxides
+\end{itemize}
+
+The natural greenhouse effect is necessary for life; excessive greenhouse-gas concentrations increase trapped energy and contribute to global warming.
+
+Major sources:
+\begin{itemize}
+    \item Power generation
+    \item Transportation
+    \item Buildings
+    \item Manufacturing
+    \item Fossil-fuel combustion
+\end{itemize}
+
+Photosynthesis:
+\begin{equation*}
+CO_2+\mathrm{H_2O}
+\rightarrow
+\text{organic matter}+O_2
+\end{equation*}
+
+Deforestation decreases carbon uptake while fossil-fuel use increases $CO_2$ emissions.
+
+\textbf{Consequences:}
+\begin{itemize}
+    \item Weather-pattern changes
+    \item Severe storms, heavy rainfall and flooding
+    \item Drought
+    \item Polar-ice melting and sea-level rise
+    \item Ecosystem disruption
+    \item Changes in water availability and disease distribution
+    \item Human-health and socioeconomic impacts
+\end{itemize}
+
+\textbf{International efforts:}
+\begin{itemize}
+    \item 1992 United Nations climate agreement
+    \item 1997 Kyoto Protocol
+    \item 2015 Paris Agreement
+\end{itemize}
+
+Paris Agreement: limit warming to less than $2^\circ\mathrm{C}$ above preindustrial levels while pursuing further limitation.
+
+\mysubsection{}{Carbon Dioxide Emissions}
+
+Fossil-fueled power plant:
+\begin{equation*}
+0.6\text{--}1.0\ \mathrm{kg}\ CO_2/\mathrm{kWh}
+\end{equation*}
+
+Gasoline:
+\begin{equation*}
+\approx2.5\ \mathrm{kg}\ CO_2/\mathrm{L}
+\end{equation*}
+
+\begin{equation*}
+\approx20\ \mathrm{lbm}\ CO_2/\mathrm{gal}
+\end{equation*}
+
+For a vehicle:
+\begin{equation*}
+\boxed{
+CO_2\text{ emission}
+=
+\text{Fuel consumed}
+\times
+\text{$CO_2$ emission per unit fuel}
+}
+\end{equation*}
+
+Therefore:
+\begin{equation*}
+\boxed{
+\text{Higher efficiency}
+\rightarrow
+\text{Lower fuel consumption}
+\rightarrow
+\text{Lower emissions}
+}
+\end{equation*}
+
+\mysubsection{}{Electric Vehicles}
+
+\begin{itemize}
+    \item No direct tailpipe emissions during operation.
+    \item Not necessarily zero total emissions because electricity generation may involve fossil fuels.
+    \item Environmental benefit depends on the electricity source.
+\end{itemize}
+
+\begin{equation*}
+\text{Electric vehicle}
+\neq
+\text{necessarily zero total emissions}
+\end{equation*}
+
+Emission-free electricity sources listed in the notes:
+\begin{itemize}
+    \item Hydroelectric
+    \item Solar
+    \item Wind
+    \item Geothermal
+\end{itemize}
+
+\mysubsection{}{Renewable Energy and Thermodynamics}
+
+Important renewable sources:
+\begin{itemize}
+    \item Hydroelectric
+    \item Solar
+    \item Wind
+    \item Geothermal
+\end{itemize}
+
+Thermodynamic improvement:
+\begin{equation*}
+\boxed{
+\text{Improved efficiency}
+\rightarrow
+\text{Less fuel consumption}
+\rightarrow
+\text{Reduced pollution}
+}
+\end{equation*}
+
+\textbf{Overall exam chain:}
+\[
+\boxed{
+\text{Energy conversion}
+\rightarrow
+\text{Efficiency}
+\rightarrow
+\text{Fuel consumption}
+\rightarrow
+\text{Environmental impact}
+}
+\]
+
+\end{document}

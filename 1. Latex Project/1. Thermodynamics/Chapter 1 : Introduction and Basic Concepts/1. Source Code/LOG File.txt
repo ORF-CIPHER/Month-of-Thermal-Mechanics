@@ -1,0 +1,10 @@
+Concepts that are not covered in long notes :
+    1. Knudsen Number
+    2. Adiabatic Boundary and Diathermal Boundary
+    3. pg 148
+    4. exact differential concept for properties
+    5. pg 161
+    6. ideal gas, formula , cp, cv, gamma , charactersitic and universal gas constant
+    7. gas mixtures 
+    8. homework question at pg 229
+    9. Van der Walls Equation of State 

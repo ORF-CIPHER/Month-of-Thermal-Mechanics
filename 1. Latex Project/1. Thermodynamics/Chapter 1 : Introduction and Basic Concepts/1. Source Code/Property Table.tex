@@ -1,0 +1,106 @@
+\documentclass[12pt]{article}
+
+\usepackage[a4paper, top=2cm, bottom=2cm, left=2.5cm, right=2.5cm]{geometry}
+
+\usepackage{amsmath, amssymb}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,fit,calc}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{siunitx}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{fontspec}
+\usetikzlibrary{decorations.pathmorphing}
+\usepackage{pdflscape}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage[table]{xcolor}
+\usepackage{hyperref}
+\usepackage{bookmark}
+\usepackage{pdfpages}
+
+% ---------------- FONTS ----------------
+% Body font
+\setmainfont[
+    UprightFont = Handlee-Regular.ttf,
+    AutoFakeBold = 2.5
+]{Handlee}
+
+% Heading font
+\newfontfamily\headingfont{PT.ttf}
+
+% verbatim font
+\setmonofont{DejaVu Sans Mono} % or Noto Sans Mono
+
+% ---------------- HANDWRITTEN MATH ----------------
+\usepackage{mathastext}
+\Mathastext
+\everymath{\displaystyle}
+
+% Optional spacing tweaks (more natural look)
+% \setlength{\thinmuskip}{2mu}
+% \setlength{\medmuskip}{2mu}
+
+% ---------------- GENERAL ----------------
+\setlength{\parindent}{0pt}
+\pagenumbering{gobble}
+\linespread{1.2}
+
+
+\newcommand{\mychapter}[2]{%
+    \phantomsection
+    \hypertarget{#2}{}%
+    \bookmark[level=0,dest=#2]{#1}%
+    \begin{center}
+        {\headingfont\Huge #1}
+        \par
+        \vspace{4pt}
+        \hrule
+    \end{center}
+}
+
+\newcommand{\mysection}[3]{%
+    \phantomsection
+    \hypertarget{#3}{}%
+    \bookmark[level=1,dest=#3]{#1\space #2}%
+    \noindent{\headingfont\Large #1\space #2\par}
+    \vspace{4pt}
+    \hrule
+    \vspace{15pt}
+}
+
+\newcommand{\mysubsection}[2]{%
+    \noindent{\headingfont\large #1\space #2\par}
+    \vspace{4pt}
+    \hrule
+    \vspace{15pt}
+}
+
+\begin{document}
+\begin{table}[h]
+\centering
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+\textbf{Gas} & \boldmath{$C_p$} \textbf{ (kJ/kg$\cdot$K)} & 
+\boldmath{$C_v$} \textbf{ (kJ/kg$\cdot$K)} & 
+\boldmath{$R$} \textbf{ (kJ/kg$\cdot$K)} & 
+\textbf{Molar Mass (kg/kmol)} \\
+\hline
+Air       & 1.005 & 0.718 & 0.287 & 28.97 \\
+Nitrogen ($N_2$) & 1.039 & 0.743 & 0.2968 & 28.013 \\
+Oxygen ($O_2$)   & 0.918 & 0.658 & 0.2598 & 31.999 \\
+Hydrogen ($H_2$) & 14.307 & 10.183 & 4.124 & 2.016 \\
+Helium ($He$)    & 5.193 & 3.115 & 2.078 & 4.003 \\
+Carbon Dioxide ($CO_2$) & 0.846 & 0.657 & 0.189 & 44.01 \\
+Carbon Monoxide ($CO$)  & 1.040 & 0.742 & 0.297 & 28.01 \\
+Methane ($CH_4$)         & 2.253 & 1.716 & 0.518 & 16.04 \\
+Water Vapour ($H_2O$)    & 1.864 & 1.403 & 0.4615 & 18.015 \\
+\hline
+\end{tabular}
+\caption{Thermodynamic properties of commonly encountered ideal gases}
+\end{table}
+\end{document}

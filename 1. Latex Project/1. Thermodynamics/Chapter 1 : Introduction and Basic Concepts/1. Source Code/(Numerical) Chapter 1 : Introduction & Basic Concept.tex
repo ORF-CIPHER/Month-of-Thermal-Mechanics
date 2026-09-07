@@ -1,0 +1,522 @@
+\documentclass[12pt]{article}
+
+\usepackage[a4paper, top=2cm, bottom=2cm, left=2.5cm, right=2.5cm]{geometry}
+
+\usepackage{amsmath, amssymb}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,fit,calc}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{siunitx}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{fontspec}
+\usetikzlibrary{decorations.pathmorphing}
+\usepackage{pdflscape}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage[table]{xcolor}
+\usepackage{hyperref}
+\usepackage{bookmark}
+\usepackage{pdfpages}
+
+
+% ---------------- FONTS ----------------
+% Body font
+\setmainfont[
+    UprightFont = Handlee-Regular.ttf,
+    AutoFakeBold = 2.5
+]{Handlee}
+
+% Heading font
+\newfontfamily\headingfont{PT.ttf}
+
+% verbatim font
+\setmonofont{DejaVu Sans Mono} % or Noto Sans Mono
+
+% ---------------- HANDWRITTEN MATH ----------------
+\usepackage{mathastext}
+\Mathastext
+\everymath{\displaystyle}
+
+% Optional spacing tweaks (more natural look)
+% \thinmuskip=2mu
+% \medmuskip=2mu
+
+% ---------------- GENERAL ----------------
+\setlength{\parindent}{0pt}
+\pagenumbering{gobble}
+\linespread{1.2}
+
+
+\newcommand{\mychapter}[2]{%
+    \phantomsection
+    \hypertarget{#2}{}%
+    \bookmark[level=0,dest=#2]{#1}%
+    \begin{center}
+        {\headingfont\Huge #1}
+        \par
+        \vspace{4pt}
+        \hrule
+    \end{center}
+}
+
+\newcommand{\myquestion}[3]{%
+    \phantomsection
+    \hypertarget{#3}{}%
+    \bookmark[level=1,dest=#3]{#1\space #2}%
+    \newpage
+    \noindent{\headingfont\Large #1\space #2\par}
+    \vspace{4pt}
+    \hrule
+    \vspace{15pt}
+}
+
+\newcommand{\myanswer}[2]{
+    \noindent{\headingfont\Large #1\space #2\par}
+    \vspace{4pt}
+    \hrule
+    \vspace{15pt}
+}
+
+\newcommand{\mysubsection}[2]{
+    \noindent{\headingfont\large #1\space #2\par}
+    \vspace{4pt}
+    \hrule
+    \vspace{15pt}
+}
+
+\begin{document}
+
+\myquestion{}{Question :}{A7K3M9Q2}
+
+A rigid tank is divided into two compartments by a partition. One compartment contains $3$ kmol of $\mathrm{N_2}$ at $600$ kPa and the other compartment contains $7$ kmol of $\mathrm{CO_2}$ at $200$ kPa. The partition is removed, and the two gases form a homogeneous mixture at $300$ kPa.
+
+The partial pressure of $\mathrm{N_2}$ in the mixture is
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Option} & \textbf{Partial Pressure of $\mathrm{N_2}$} \\
+\hline
+(A) & $75$ kPa \\
+\hline
+(B) & $90$ kPa \\
+\hline
+(C) & $150$ kPa \\
+\hline
+(D) & $3175$ kPa \\
+\hline
+\end{tabular}
+\end{center}
+
+\myanswer{}{Answer :}
+
+\textbf{\\ Mole Fraction of $\mathrm{N_2}$}
+
+The total number of moles in the mixture is
+
+\begin{equation*}
+n_{\mathrm{total}} = n_{\mathrm{N_2}} + n_{\mathrm{CO_2}}
+\end{equation*}
+
+\begin{equation*}
+n_{\mathrm{total}} = 3 + 7 = 10\ \mathrm{kmol}
+\end{equation*}
+
+Therefore, the mole fraction of $\mathrm{N_2}$ is
+
+\begin{equation*}
+y_{\mathrm{N_2}} = \frac{n_{\mathrm{N_2}}}{n_{\mathrm{total}}}
+\end{equation*}
+
+\begin{equation*}
+y_{\mathrm{N_2}} = \frac{3}{10} = 0.3
+\end{equation*}
+
+\textbf{\\ Partial Pressure}
+
+For an ideal gas mixture, the partial pressure is given by
+
+\begin{equation*}
+P_{\mathrm{N_2}} = y_{\mathrm{N_2}} P_{\mathrm{mixture}}
+\end{equation*}
+
+\begin{equation*}
+P_{\mathrm{N_2}} = 0.3 \times 300
+\end{equation*}
+
+\begin{equation*}
+\boxed{P_{\mathrm{N_2}} = 90\ \mathrm{kPa}}
+\end{equation*}
+
+Hence, the correct option is
+
+\begin{equation*}
+\boxed{\text{(B) }90\ \mathrm{kPa}}
+\end{equation*}
+
+\newpage
+\textbf{\\ Derivation of Partial Pressure Relation}
+
+For the entire ideal gas mixture,
+
+\begin{equation*}
+P_{\mathrm{mixture}}V=n_{\mathrm{total}}RT
+\end{equation*}
+
+For component $i$, its partial pressure is defined as the pressure exerted by component $i$ if it alone occupied the entire volume $V$ at the same temperature $T$.
+
+Therefore,
+
+\begin{equation*}
+P_iV=n_iRT
+\end{equation*}
+
+Dividing the above two equations,
+
+\begin{equation*}
+\frac{P_iV}{P_{\mathrm{mixture}}V}
+=
+\frac{n_iRT}{n_{\mathrm{total}}RT}
+\end{equation*}
+
+Canceling $V$, $R$, and $T$,
+
+\begin{equation*}
+\frac{P_i}{P_{\mathrm{mixture}}}
+=
+\frac{n_i}{n_{\mathrm{total}}}
+\end{equation*}
+
+The mole fraction of component $i$ is defined as
+
+\begin{equation*}
+y_i=\frac{n_i}{n_{\mathrm{total}}}
+\end{equation*}
+
+Hence,
+
+\begin{equation*}
+\boxed{P_i=y_iP_{\mathrm{mixture}}}
+\end{equation*}
+
+Therefore, for nitrogen,
+
+\begin{equation*}
+\boxed{P_{\mathrm{N_2}}=y_{\mathrm{N_2}}P_{\mathrm{mixture}}}
+\end{equation*}
+
+\myquestion{}{Question :}{K7M4P2X9}
+
+An $80$ L rigid tank contains an ideal-gas mixture of $5$ g of $\mathrm{N_2}$ and $5$ g of $\mathrm{CO_2}$ at a specified pressure and temperature. If $\mathrm{N_2}$ were separated from the mixture and stored at the mixture temperature and pressure, its volume would be
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Option} & \textbf{Volume} \\
+\hline
+(A) & $32$ L \\
+\hline
+(B) & $36$ L \\
+\hline
+(C) & $40$ L \\
+\hline
+(D) & $49$ L \\
+\hline
+\end{tabular}
+\end{center}
+
+\myanswer{}{Answer :}
+
+\textbf{\\ Number of moles of each gas}
+
+For $\mathrm{N_2}$,
+
+\begin{equation*}
+n_{\mathrm{N_2}}=\frac{m_{\mathrm{N_2}}}{M_{\mathrm{N_2}}}
+=\frac{5}{28}
+\end{equation*}
+
+For $\mathrm{CO_2}$,
+
+\begin{equation*}
+n_{\mathrm{CO_2}}=\frac{m_{\mathrm{CO_2}}}{M_{\mathrm{CO_2}}}
+=\frac{5}{44}
+\end{equation*}
+
+The total number of moles is
+
+\begin{equation*}
+n_{\mathrm{total}}
+=
+\frac{5}{28}+\frac{5}{44}
+\end{equation*}
+
+\textbf{\\ Mole Fraction of $\mathrm{N_2}$}
+
+The mole fraction of $\mathrm{N_2}$ is
+
+\begin{equation*}
+y_{\mathrm{N_2}}
+=
+\frac{n_{\mathrm{N_2}}}{n_{\mathrm{total}}}
+\end{equation*}
+
+\begin{equation*}
+y_{\mathrm{N_2}}
+=
+\frac{\frac{5}{28}}
+{\frac{5}{28}+\frac{5}{44}}
+=
+\frac{44}{72}
+=
+\frac{11}{18}
+\end{equation*}
+
+\textbf{\\ Volume of $\mathrm{N_2}$}
+
+At the same temperature and pressure, the volume occupied by a component is proportional to its number of moles. Therefore,
+
+\begin{equation*}
+\frac{V_{\mathrm{N_2}}}{V_{\mathrm{mixture}}}
+=
+\frac{n_{\mathrm{N_2}}}{n_{\mathrm{total}}}
+=
+y_{\mathrm{N_2}}
+\end{equation*}
+
+Hence,
+
+\begin{equation*}
+V_{\mathrm{N_2}}
+=
+y_{\mathrm{N_2}}V_{\mathrm{mixture}}
+\end{equation*}
+
+\begin{equation*}
+V_{\mathrm{N_2}}
+=
+\frac{11}{18}\times80
+\end{equation*}
+
+\begin{equation*}
+\boxed{V_{\mathrm{N_2}}=48.89\ \mathrm{L}\approx49\ \mathrm{L}}
+\end{equation*}
+
+Hence, the correct option is
+
+\begin{equation*}
+\boxed{\text{(D) }49\ \mathrm{L}}
+\end{equation*}
+
+
+
+
+
+
+\myquestion{}{Question :}{R6T2K8P4}
+
+An ideal-gas mixture consists of $3$ kg of Ar and $6$ kg of $\mathrm{CO_2}$ gases. The mixture is now heated at constant volume from $250$ K to $350$ K. The amount of heat transfer is
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Option} & \textbf{Heat Transfer} \\
+\hline
+(A) & $374$ kJ \\
+\hline
+(B) & $436$ kJ \\
+\hline
+(C) & $488$ kJ \\
+\hline
+(D) & $525$ kJ \\
+\hline
+\end{tabular}
+\end{center}
+
+\myanswer{}{Answer :}
+
+\textbf{\\ Heat Transfer at Constant Volume}
+
+For a closed system, the first law of thermodynamics is
+
+\begin{equation*}
+Q-W=\Delta U
+\end{equation*}
+
+Since the volume is constant, the boundary work is zero:
+
+\begin{equation*}
+W=\int P\,dV=0
+\end{equation*}
+
+Therefore,
+
+\begin{equation*}
+Q=\Delta U
+\end{equation*}
+
+For an ideal-gas mixture,
+
+\begin{equation*}
+\Delta U
+=
+m_{\mathrm{Ar}}C_{v,\mathrm{Ar}}\Delta T
++
+m_{\mathrm{CO_2}}C_{v,\mathrm{CO_2}}\Delta T
+\end{equation*}
+
+The temperature change is
+
+\begin{equation*}
+\Delta T=350-250=100\ \mathrm{K}
+\end{equation*}
+
+Using
+
+\begin{equation*}
+C_{v,\mathrm{Ar}}=0.312\ \mathrm{kJ/(kg\cdot K)}
+\end{equation*}
+
+and
+
+\begin{equation*}
+C_{v,\mathrm{CO_2}}=0.657\ \mathrm{kJ/(kg\cdot K)}
+\end{equation*}
+
+we get
+
+\begin{equation*}
+Q
+=
+(3)(0.312)(100)
++
+(6)(0.657)(100)
+\end{equation*}
+
+\begin{equation*}
+Q=93.6+394.2
+\end{equation*}
+
+\begin{equation*}
+\boxed{Q=487.8\ \mathrm{kJ}\approx488\ \mathrm{kJ}}
+\end{equation*}
+
+Hence, the correct option is
+
+\begin{equation*}
+\boxed{\text{(C) }488\ \mathrm{kJ}}
+\end{equation*}
+
+
+
+
+
+
+
+\myquestion{}{Question :}{H8Q3L6R1}
+
+An ideal-gas mixture consists of $30$ percent Helium and $70$ percent Argon gases by mass. The mixture is now expanded reversibly and adiabatically in a turbine from $400^\circ\mathrm{C}$ and $1.2$ MPa to a pressure of $200$ kPa. The mixture temperature at turbine exit is
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Option} & \textbf{Temperature} \\
+\hline
+(A) & $195^\circ\mathrm{C}$ \\
+\hline
+(B) & $56^\circ\mathrm{C}$ \\
+\hline
+(C) & $112^\circ\mathrm{C}$ \\
+\hline
+(D) & $130^\circ\mathrm{C}$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\myanswer{}{Answer :}
+
+\textbf{\\ Specific Heat Ratio of Mixture}
+
+Both Helium and Argon are monatomic gases. Therefore,
+
+\begin{equation*}
+\gamma_{\mathrm{He}}=\gamma_{\mathrm{Ar}}=\frac{5}{3}
+\end{equation*}
+
+Hence, the specific heat ratio of the mixture is also
+
+\begin{equation*}
+\gamma_{\mathrm{mix}}=\frac{5}{3}
+\end{equation*}
+
+\textbf{\\ Temperature-Pressure Relation}
+
+For a reversible adiabatic process involving an ideal gas,
+
+\begin{equation*}
+\frac{T_2}{T_1}
+=
+\left(\frac{P_2}{P_1}\right)^{\frac{\gamma-1}{\gamma}}
+\end{equation*}
+
+The initial temperature is
+
+\begin{equation*}
+T_1=400+273=673\ \mathrm{K}
+\end{equation*}
+
+The pressure ratio is
+
+\begin{equation*}
+\frac{P_2}{P_1}
+=
+\frac{200}{1200}
+=
+\frac{1}{6}
+\end{equation*}
+
+For $\gamma=\frac{5}{3}$,
+
+\begin{equation*}
+\frac{\gamma-1}{\gamma}
+=
+\frac{\frac{5}{3}-1}{\frac{5}{3}}
+=
+\frac{2}{5}
+=
+0.4
+\end{equation*}
+
+Therefore,
+
+\begin{equation*}
+T_2
+=
+673\left(\frac{1}{6}\right)^{0.4}
+\end{equation*}
+
+\begin{equation*}
+T_2\approx329\ \mathrm{K}
+\end{equation*}
+
+Converting to Celsius,
+
+\begin{equation*}
+T_2=329-273
+\end{equation*}
+
+\begin{equation*}
+\boxed{T_2\approx56^\circ\mathrm{C}}
+\end{equation*}
+
+Hence, the correct option is
+
+\begin{equation*}
+\boxed{\text{(B) }56^\circ\mathrm{C}}
+\end{equation*}
+
+\end{document}

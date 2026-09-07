@@ -1,0 +1,43 @@
+1. there is a numerical of page 285, solve it using pdv formula instead of the formula used by sir.
+2. homework at page 331,333, 334, 338, 339, 340, 353
+3. numerical at page 355 is interesting.
+4. create a property table similar to closed system for open system for different processes.
+5. make sure you include derivation of pg 419
+
+
+
+This is for chapter that contains second law of thermodynamics
+
+1. pay attention to the derivation at page 459
+2. proof of claussius inequality
+3. numerical on page 480
+4. derivation on page 501
+
+This is for chapter that contains entropy
+
+1. Tds derivations of page 544
+2. derivation of entropy change formulas.
+3. on page 575 why is entropy change negative for isothermal
+4. numerical on page 577 is good.
+5. numerical on page 584
+
+This is for chapter that contains exergy
+
+ : Revisit the entire chapter again
+
+This is for chapter that contains property of pure of substance
+
+1. Mollier chapter
+2. Throttling Calorimeter
+
+This is for chapter that contains thermodynamic relation
+
+
+
+This is for chapter 3 of linear algebra  
+
+pg 40 worked example, its not possible to multiply 4 column with three row , correct it
+
+there are two things to keep an eye on , number of vectors and their number of components , 
+    3 vectors with 3 components can span 3d space, provided they are independent.
+    but can 2 vectors with 4 components span a 3d space?
