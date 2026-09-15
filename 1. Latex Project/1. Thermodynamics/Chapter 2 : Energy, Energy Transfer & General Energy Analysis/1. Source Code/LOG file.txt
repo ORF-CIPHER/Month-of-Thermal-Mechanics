@@ -32,7 +32,9 @@ This is for chapter that contains property of pure of substance
 
 This is for chapter that contains thermodynamic relation
 
+This is for chapter 1 of heat transfer from lecture notes
 
+1. on page 135, i think k is assumed to be constant
 
 This is for chapter 3 of linear algebra  
 

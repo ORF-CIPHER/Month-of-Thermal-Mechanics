@@ -1,0 +1,1561 @@
+\documentclass[12pt]{article}
+
+\usepackage[a4paper, top=2cm, bottom=2cm, left=2.5cm, right=2.5cm]{geometry}
+
+\usepackage{amsmath, amssymb}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,fit,calc}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{siunitx}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{fontspec}
+\usetikzlibrary{decorations.pathmorphing}
+\usepackage{pdflscape}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage[table]{xcolor}
+\usepackage{hyperref}
+\usepackage{bookmark}
+\usepackage{pdfpages}
+
+% ---------------- FONTS ----------------
+\setmainfont[
+    UprightFont = Handlee-Regular.ttf,
+    AutoFakeBold = 2.5
+]{Handlee}
+
+\newfontfamily\headingfont{PT.ttf}
+\setmonofont{DejaVu Sans Mono}
+
+% ---------------- HANDWRITTEN MATH ----------------
+\usepackage{mathastext}
+\Mathastext
+\everymath{\displaystyle}
+
+% ---------------- GENERAL ----------------
+\setlength{\parindent}{0pt}
+\pagenumbering{gobble}
+\linespread{1.2}
+
+\newcommand{\mychapter}[2]{%
+    \phantomsection
+    \hypertarget{#2}{}%
+    \bookmark[level=0,dest=#2]{#1}%
+    \begin{center}
+        {\headingfont\Huge #1}
+        \par
+        \vspace{4pt}
+        \hrule
+    \end{center}
+}
+
+\newcommand{\mysection}[3]{%
+    \phantomsection
+    \hypertarget{#3}{}%
+    \bookmark[level=1,dest=#3]{#1\space #2}%
+    \newpage
+    \noindent{\headingfont\Large #1\space #2\par}
+    \vspace{4pt}
+    \hrule
+    \vspace{15pt}
+}
+
+\newcommand{\mysubsection}[2]{%
+    \vspace{5px}
+    \noindent{\headingfont\large #1\space #2\par}
+    \vspace{4pt}
+    \hrule
+    \vspace{15pt}
+}
+
+\newcommand{\insertfigure}[2]{%
+    \begin{figure}[H]
+        \centering
+        \fbox{\includegraphics[width=#1\textwidth]{../2. Figures/#2}}
+    \end{figure}
+}
+
+\begin{document}
+
+\mychapter{Chapter 5 : Mass and Energy Analysis of Control Volumes}{6f4y5kdh}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+
+\begin{tabularx}{0.9\textwidth}{
+|>{\centering\arraybackslash}p{0.14\textwidth}
+|>{\raggedright\arraybackslash}X|
+}
+\hline
+
+\textbf{Section} &
+\textbf{Core Revision Focus}
+\\
+\hline
+
+5.1 &
+Conservation of mass for control volumes; mass and volume flow rates, normal velocity, general mass balance, steady-flow mass balance, and the incompressible-flow continuity relation.
+\\
+\hline
+
+5.2 &
+Flow work and the energy carried by flowing fluid; \(w_{\mathrm{flow}}=Pv\), enthalpy \(h=u+Pv\), and total flowing-fluid energy \(h+\frac{V^2}{2}+gz\).
+\\
+\hline
+
+5.3 &
+Steady-flow energy analysis; mass and energy balances, the steady-flow energy equation, sign conventions, and identification of negligible kinetic, potential, heat-transfer, and work terms.
+\\
+\hline
+
+5.4 &
+Application of mass and energy balances to steady-flow engineering devices: nozzles, diffusers, turbines, compressors, pumps, fans, throttling valves, mixing chambers, heat exchangers, and pipe/duct flow.
+\\
+\hline
+
+5.5 &
+Unsteady-flow energy analysis; mass and energy accumulation, uniform-flow processes, distinction between flowing-fluid enthalpy and stored-fluid internal energy, and charging/discharging of tanks.
+\\
+\hline
+
+
+
+\end{tabularx}
+\end{center}
+
+% ============================================================
+\mysection{5.1}{Conservation of Mass}{5.1}
+
+\mysubsection{}{Mass and Volume Flow Rates}
+
+For flow through a control surface, only the velocity component normal to the area contributes.
+
+\[
+\delta \dot{m}=\rho V_n\,dA_c
+\]
+
+\[
+\dot{m}
+=
+\int_{A_c}\rho V_n\,dA_c
+\]
+
+\[
+V_{\mathrm{avg}}
+=
+\frac{1}{A_c}\int_{A_c}V_n\,dA_c
+\]
+
+For uniform/average velocity:
+
+\[
+\boxed{\dot{m}=\rho V_{\mathrm{avg}}A_c}
+\]
+
+\[
+\dot{V}
+=
+\int_{A_c}V_n\,dA_c
+=
+V_{\mathrm{avg}}A_c
+=
+VA_c
+\]
+
+\[
+\boxed{
+\dot{m}
+=
+\rho\dot{V}
+=
+\frac{\dot{V}}{v}
+}
+\qquad
+\boxed{
+m=\rho V=\frac{V}{v}
+}
+\]
+
+\[
+\rho=\frac{1}{v}
+\]
+
+\mysubsection{}{Conservation of Mass Principle}
+
+\[
+\boxed{
+\text{Mass entering}
+-
+\text{Mass leaving}
+=
+\text{Change in mass within CV}
+}
+\]
+
+\[
+m_{\mathrm{in}}-m_{\mathrm{out}}
+=
+\Delta m_{\mathrm{CV}}
+\]
+
+\[
+\Delta m_{\mathrm{CV}}
+=
+m_{\mathrm{final}}-m_{\mathrm{initial}}
+\]
+
+Rate form:
+
+\[
+\boxed{
+\dot{m}_{\mathrm{in}}
+-
+\dot{m}_{\mathrm{out}}
+=
+\frac{dm_{\mathrm{CV}}}{dt}
+}
+\]
+
+Mass contained in the control volume:
+
+\[
+dm=\rho\,dV
+\]
+
+\[
+m_{\mathrm{CV}}
+=
+\int_{\mathrm{CV}}\rho\,dV
+\]
+
+\[
+\frac{dm_{\mathrm{CV}}}{dt}
+=
+\frac{d}{dt}
+\int_{\mathrm{CV}}\rho\,dV
+\]
+
+For constant mass inside the CV:
+
+\[
+\boxed{\frac{dm_{\mathrm{CV}}}{dt}=0}
+\]
+
+\mysubsection{}{Normal Component of Velocity}
+
+\[
+V_n=V\cos\theta
+\]
+
+\[
+\boxed{
+V_n=\vec V\cdot\vec n
+}
+\]
+
+With outward unit normal:
+
+\[
+V_n>0
+\quad\text{outflow}
+\qquad
+V_n<0
+\quad\text{inflow}
+\]
+
+\[
+\delta\dot m
+=
+\rho V_n\,dA
+=
+\rho(\vec V\cdot\vec n)\,dA
+\]
+
+\[
+\boxed{
+\dot m_{\mathrm{net}}
+=
+\int_{\mathrm{CS}}
+\rho(\vec V\cdot\vec n)\,dA
+}
+\]
+
+\mysubsection{}{General Conservation of Mass Equation}
+
+\[
+\boxed{
+\frac{dm_{\mathrm{CV}}}{dt}
++
+\dot m_{\mathrm{out}}
+-
+\dot m_{\mathrm{in}}
+=
+0
+}
+\]
+
+Equivalent form:
+
+\[
+\boxed{
+\frac{dm_{\mathrm{CV}}}{dt}
+=
+\sum_{\mathrm{in}}\dot m
+-
+\sum_{\mathrm{out}}\dot m
+}
+\]
+
+Integral form:
+
+\[
+\boxed{
+\frac{d}{dt}\int_{\mathrm{CV}}\rho\,dV
+=
+\sum_{\mathrm{in}}\dot m
+-
+\sum_{\mathrm{out}}\dot m
+}
+\]
+
+If velocity is normal to the surface:
+
+\[
+\vec V\cdot\vec n=V
+\]
+
+\[
+\int_A\rho(\vec V\cdot\vec n)\,dA
+=
+\rho VA
+\]
+
+\mysubsection{}{Mass Balance for Steady-Flow Processes}
+
+Steady flow:
+
+\[
+m_{\mathrm{CV}}=\text{constant}
+\qquad\Longrightarrow\qquad
+\frac{dm_{\mathrm{CV}}}{dt}=0
+\]
+
+Hence,
+
+\[
+\boxed{
+\sum_{\mathrm{in}}\dot m
+=
+\sum_{\mathrm{out}}\dot m
+}
+\]
+
+For a single inlet and outlet:
+
+\[
+\boxed{\dot m_1=\dot m_2}
+\]
+
+\[
+\dot m=\rho VA
+\]
+
+\[
+\boxed{
+\rho_1V_1A_1
+=
+\rho_2V_2A_2
+}
+\]
+
+\mysubsection{}{Special Case: Incompressible Flow}
+
+For constant density:
+
+\[
+\boxed{
+\sum_{\mathrm{in}}\dot V
+=
+\sum_{\mathrm{out}}\dot V
+}
+\]
+
+For one inlet and one outlet:
+
+\[
+\boxed{
+\dot V_1=\dot V_2
+}
+\]
+
+\[
+\boxed{
+V_1A_1=V_2A_2
+}
+\]
+
+For incompressible steady flow:
+
+\[
+\boxed{
+\dot m_{\mathrm{in}}=\dot m_{\mathrm{out}}
+}
+\]
+
+but, in general,
+
+\[
+\boxed{
+\dot V_{\mathrm{in}}\neq\dot V_{\mathrm{out}}
+}
+\]
+
+when density changes.
+
+% ============================================================
+\mysection{5.2}{Flow Work and the Energy of a Flowing Fluid}{5.2}
+
+\mysubsection{}{Flow Work}
+
+Pressure force at an inlet/exit:
+
+\[
+F=PA
+\]
+
+Flow work:
+
+\[
+W_{\mathrm{flow}}
+=
+FL
+=
+PAL
+=
+PV
+\]
+
+Specific flow work:
+
+\[
+\boxed{
+w_{\mathrm{flow}}=Pv
+}
+\]
+
+Thus the pressure/flow energy carried with each unit mass is \(Pv\).
+
+\mysubsection{}{Total Energy of a Flowing Fluid}
+
+Specific total energy of a nonflowing fluid:
+
+\[
+e=u+ke+pe
+\]
+
+\[
+\boxed{
+e=u+\frac{V^2}{2}+gz
+}
+\]
+
+For flowing fluid, include flow work:
+
+\[
+\theta
+=
+Pv+e
+\]
+
+\[
+\theta
+=
+Pv+u+\frac{V^2}{2}+gz
+\]
+
+Define enthalpy:
+
+\[
+\boxed{
+h=u+Pv
+}
+\]
+
+Therefore,
+
+\[
+\boxed{
+\theta
+=
+h+\frac{V^2}{2}+gz
+}
+\]
+
+\[
+\boxed{
+\text{Flowing fluid: }h
+\qquad
+\text{Nonflowing fluid: }u
+}
+\]
+
+\mysubsection{}{Energy Transport by Mass}
+
+Energy transported with mass:
+
+\[
+\boxed{
+E_{\mathrm{mass}}=m\theta
+}
+\]
+
+\[
+E_{\mathrm{mass}}
+=
+m
+\left(
+h+\frac{V^2}{2}+gz
+\right)
+\]
+
+Rate of energy transport:
+
+\[
+\boxed{
+\dot E_{\mathrm{mass}}
+=
+\dot m\theta
+=
+\dot m
+\left(
+h+\frac{V^2}{2}+gz
+\right)
+}
+\]
+
+When kinetic and potential energies are negligible:
+
+\[
+\boxed{
+E_{\mathrm{mass}}\approx mh
+\qquad
+\dot E_{\mathrm{mass}}\approx\dot mh
+}
+\]
+
+\mysubsection{}{Energy Transport Through an Inlet or Exit}
+
+For an infinitesimal mass:
+
+\[
+\delta E_{\mathrm{mass}}
+=
+\theta\,\delta m
+\]
+
+\[
+E_{\mathrm{in,mass}}
+=
+\int_{m_i}\theta_i\,\delta m_i
+\]
+
+\[
+\boxed{
+E_{\mathrm{in,mass}}
+=
+\int_{m_i}
+\left(
+h_i+\frac{V_i^2}{2}+gz_i
+\right)
+\delta m_i
+}
+\]
+
+% ============================================================
+\mysection{5.3}{Energy Analysis of Steady-Flow Systems}{5.3}
+
+\mysubsection{}{Characteristics of a Steady-Flow Process}
+
+For a steady-flow control volume:
+
+\[
+\boxed{
+V_{\mathrm{CV}}=\text{constant}
+}
+\]
+
+\[
+\boxed{
+m_{\mathrm{CV}}=\text{constant}
+}
+\]
+
+\[
+\boxed{
+E_{\mathrm{CV}}=\text{constant}
+}
+\]
+
+Therefore, there is no accumulation of mass or energy within the CV.
+
+\mysubsection{}{Mass Balance for Steady-Flow Systems}
+
+\[
+\boxed{
+\sum_{\mathrm{in}}\dot m
+=
+\sum_{\mathrm{out}}\dot m
+}
+\]
+
+Single stream:
+
+\[
+\dot m_1=\dot m_2=\dot m
+\]
+
+\[
+\boxed{
+\dot m=\rho VA
+}
+\]
+
+\[
+\boxed{
+\rho_1V_1A_1
+=
+\rho_2V_2A_2
+}
+\]
+
+\mysubsection{}{Energy Balance for Steady-Flow Systems}
+
+Since \(E_{\mathrm{CV}}\) is constant,
+
+\[
+\Delta E_{\mathrm{CV}}=0
+\]
+
+Thus,
+
+\[
+\dot E_{\mathrm{in}}
+=
+\dot E_{\mathrm{out}}
+\]
+
+Using the sign convention of the chapter,
+
+\[
+\boxed{
+\dot Q_{\mathrm{in}}
++
+\dot W_{\mathrm{in}}
++
+\sum_{\mathrm{in}}\dot m\theta
+=
+\dot Q_{\mathrm{out}}
++
+\dot W_{\mathrm{out}}
++
+\sum_{\mathrm{out}}\dot m\theta
+}
+\]
+
+where
+
+\[
+\boxed{
+\theta=h+\frac{V^2}{2}+gz
+}
+\]
+
+Hence,
+
+\[
+\boxed{
+\dot Q-\dot W
+=
+\sum_{\mathrm{out}}
+\dot m
+\left(
+h+\frac{V^2}{2}+gz
+\right)
+-
+\sum_{\mathrm{in}}
+\dot m
+\left(
+h+\frac{V^2}{2}+gz
+\right)
+}
+\]
+
+Here,
+
+\[
+\dot Q=\dot Q_{\mathrm{net,in}}
+\]
+
+\[
+\dot W=\dot W_{\mathrm{net,out}}
+\]
+
+\mysubsection{}{Single-Stream Steady-Flow Energy Equation}
+
+For one inlet and one outlet:
+
+\[
+\dot m_1=\dot m_2=\dot m
+\]
+
+\[
+\boxed{
+\dot Q-\dot W
+=
+\dot m
+\left[
+h_2-h_1
++
+\frac{V_2^2-V_1^2}{2}
++
+g(z_2-z_1)
+\right]
+}
+\]
+
+Per unit mass:
+
+\[
+\boxed{
+q-w
+=
+h_2-h_1
++
+\frac{V_2^2-V_1^2}{2}
++
+g(z_2-z_1)
+}
+\]
+
+\[
+q=\frac{\dot Q}{\dot m}
+\qquad
+w=\frac{\dot W}{\dot m}
+\]
+
+\mysubsection{}{Negligible Kinetic and Potential Energy Changes}
+
+If
+
+\[
+\Delta ke\approx0
+\qquad
+\Delta pe\approx0
+\]
+
+then
+
+\[
+\boxed{
+q-w=h_2-h_1
+}
+\]
+
+\mysubsection{}{Heat Transfer}
+
+\[
+\dot Q>0
+\quad\text{heat enters CV}
+\]
+
+\[
+\dot Q<0
+\quad\text{heat leaves CV}
+\]
+
+\[
+\dot Q=0
+\quad\text{adiabatic}
+\]
+
+\mysubsection{}{Work Transfer}
+
+For no work interaction:
+
+\[
+\boxed{\dot W=0}
+\]
+
+\mysubsection{}{Enthalpy Change}
+
+\[
+\boxed{
+\Delta h=h_2-h_1
+}
+\]
+
+For an ideal-gas-like constant-\(c_p\) approximation:
+
+\[
+\boxed{
+\Delta h
+=
+c_{p,\mathrm{avg}}(T_2-T_1)
+}
+\]
+
+Unit relation:
+
+\[
+(\mathrm{kg/s})(\mathrm{kJ/kg})
+=
+\mathrm{kW}
+\]
+
+\mysubsection{}{Kinetic Energy Change}
+
+\[
+\boxed{
+\Delta ke
+=
+\frac{V_2^2-V_1^2}{2}
+}
+\]
+
+\[
+\mathrm{m^2/s^2}
+=
+\mathrm{J/kg}
+\]
+
+If \(V_1\approx V_2\):
+
+\[
+\boxed{
+\Delta ke\approx0
+}
+\]
+
+\mysubsection{}{Potential Energy Change}
+
+\[
+\boxed{
+\Delta pe=g(z_2-z_1)
+}
+\]
+
+\mysubsection{}{Steady-Flow Energy Equation: Summary}
+
+\[
+\boxed{
+\dot Q-\dot W
+=
+\sum_{\mathrm{out}}
+\dot m
+\left(
+h+\frac{V^2}{2}+gz
+\right)
+-
+\sum_{\mathrm{in}}
+\dot m
+\left(
+h+\frac{V^2}{2}+gz
+\right)
+}
+\]
+
+Single stream:
+
+\[
+\boxed{
+\dot Q-\dot W
+=
+\dot m
+\left[
+h_2-h_1
++
+\frac{V_2^2-V_1^2}{2}
++
+g(z_2-z_1)
+\right]
+}
+\]
+
+Per unit mass:
+
+\[
+\boxed{
+q-w
+=
+h_2-h_1
++
+\frac{V_2^2-V_1^2}{2}
++
+g(z_2-z_1)
+}
+\]
+
+If \(\Delta ke,\Delta pe\approx0\):
+
+\[
+\boxed{
+q-w=h_2-h_1
+}
+\]
+
+\mysection{5.4}{Some Steady-Flow Engineering Devices}{5.4}
+% ============================================================
+% Table 1: Nozzles, Diffusers, Turbines, Compressors, Pumps, Fans
+% ============================================================
+
+\renewcommand{\arraystretch}{1.5}
+
+\begin{center}
+\begin{tabularx}{\textwidth}{
+|>{\bfseries\raggedright\arraybackslash}p{0.15\textwidth}
+|>{\raggedright\arraybackslash}p{0.22\textwidth}
+|>{\raggedright\arraybackslash}p{0.35\textwidth}
+|>{\raggedright\arraybackslash}X|
+}
+\hline
+\textbf{Device Name} &
+\textbf{Function} &
+\textbf{Governing Equation} &
+\textbf{Assumption} \\
+\hline
+
+Nozzle &
+Converts enthalpy into kinetic energy; velocity increases. &
+$\displaystyle
+h_1+\frac{V_1^2}{2}
+=
+h_2+\frac{V_2^2}{2}$ &
+$\displaystyle
+\dot Q\approx0,\quad
+\dot W=0,\quad
+\Delta pe\approx0$ \\
+\hline
+
+Diffuser &
+Converts kinetic energy into enthalpy; velocity decreases. &
+$\displaystyle
+h_1+\frac{V_1^2}{2}
+=
+h_2+\frac{V_2^2}{2}$ &
+$\displaystyle
+\dot Q\approx0,\quad
+\dot W=0,\quad
+\Delta pe\approx0$ \\
+\hline
+
+Turbine &
+Produces shaft work from the flowing fluid. &
+$\displaystyle
+w_{\mathrm{out}}=h_1-h_2$ &
+$\displaystyle
+\dot Q\approx0,\quad
+\Delta ke\approx0,\quad
+\Delta pe\approx0$ \\
+\hline
+
+Compressor &
+Raises the pressure of a gas by consuming shaft work. &
+$\displaystyle
+w_{\mathrm{in}}=h_2-h_1-q
+$\newline
+Adiabatic:
+$\displaystyle
+w_{\mathrm{in}}=h_2-h_1$ &
+$\displaystyle
+\dot Q\approx0,\quad
+\Delta ke\approx0,\quad
+\Delta pe\approx0$ \\
+\hline
+
+Pump &
+Raises the pressure of a liquid by consuming shaft work. &
+$\displaystyle
+w_{\mathrm{in}}=h_2-h_1-q
+$\newline
+Adiabatic:
+$\displaystyle
+w_{\mathrm{in}}=h_2-h_1$ &
+$\displaystyle
+\dot Q\approx0,\quad
+\Delta ke\approx0,\quad
+\Delta pe\approx0$ \\
+\hline
+
+Fan &
+Produces a relatively small pressure increase in a gas. &
+$\displaystyle
+w_{\mathrm{in}}=h_2-h_1-q$ &
+$\displaystyle
+\dot Q\approx0,\quad
+\Delta ke\approx0,\quad
+\Delta pe\approx0$ \\
+\hline
+
+\end{tabularx}
+\end{center}
+
+
+% ============================================================
+% Table 2: Throttling Valve, Mixing Chamber, Heat Exchanger, Pipe/Duct
+% ============================================================
+
+\renewcommand{\arraystretch}{1.5}
+
+\begin{center}
+\begin{tabularx}{\textwidth}{
+|>{\bfseries\raggedright\arraybackslash}p{0.15\textwidth}
+|>{\raggedright\arraybackslash}p{0.22\textwidth}
+|>{\raggedright\arraybackslash}p{0.35\textwidth}
+|>{\raggedright\arraybackslash}X|
+}
+\hline
+\textbf{Device Name} &
+\textbf{Function} &
+\textbf{Governing Equation} &
+\textbf{Assumption} \\
+\hline
+
+Throttling Valve &
+Produces a large pressure drop with no useful work output; isenthalpic device. &
+$\displaystyle
+\boxed{h_2\approx h_1}
+$
+\newline
+$\displaystyle
+u_1+P_1v_1=u_2+P_2v_2
+$ &
+$\displaystyle
+q\approx0,\quad
+w=0,\quad
+\Delta ke\approx0,\quad
+\Delta pe\approx0$ \\
+\hline
+
+Mixing Chamber &
+Mixes two or more streams; mass and energy are conserved. &
+$\displaystyle
+\sum_{\mathrm{in}}\dot m
+=
+\sum_{\mathrm{out}}\dot m
+$
+\newline
+$\displaystyle
+\sum_{\mathrm{in}}\dot m h_{\mathrm{in}}
+=
+\sum_{\mathrm{out}}\dot m h_{\mathrm{out}}
+$ &
+$\displaystyle
+\dot Q\approx0,\quad
+\dot W=0,\quad
+\Delta ke\approx0,\quad
+\Delta pe\approx0$ \\
+\hline
+
+Heat Exchanger &
+Transfers heat between streams without mixing them. &
+$\displaystyle
+\sum_{\mathrm{in}}\dot m h
+=
+\sum_{\mathrm{out}}\dot m h
+$
+\newline
+$\displaystyle
+\dot Q_{\mathrm{gained}}
+=
+\dot Q_{\mathrm{lost}}
+$ &
+$\displaystyle
+\dot W=0,\quad
+\Delta ke\approx0,\quad
+\Delta pe\approx0,\quad
+\dot Q_{\mathrm{CV}}\approx0$ \\
+\hline
+
+Pipe / Duct &
+Transports fluid; heat transfer and work interactions may occur. &
+$\displaystyle
+\dot Q-\dot W
+=
+\dot m(h_2-h_1)
+$
+\newline
+$\displaystyle
+\dot Q-\dot W
+=
+\dot m c_p(T_2-T_1)
+$ &
+Steady flow,
+$\displaystyle
+\Delta ke\approx0,\quad
+\Delta pe\approx0$ \\
+\hline
+
+\end{tabularx}
+\end{center}
+
+% ============================================================
+\mysection{5.5}{Energy Analysis of Unsteady-Flow Processes}{5.5}
+
+\mysubsection{}{Characteristics of Unsteady-Flow Systems}
+
+\textbf{\ Steady flow:}
+
+\[
+\boxed{
+\frac{dm_{\mathrm{CV}}}{dt}=0,
+\qquad
+\frac{dE_{\mathrm{CV}}}{dt}=0
+}
+\]
+
+\textbf{\ Unsteady flow:}
+
+Mass and/or energy within the control volume may change with time.
+
+The CV is usually stationary, but its boundary may move; therefore boundary work can occur.
+
+\[
+\boxed{
+\text{Unsteady flow}\neq\text{steady flow}
+}
+\]
+
+\mysubsection{}{Mass Balance for an Unsteady-Flow Process}
+
+\[
+\boxed{
+m_{\mathrm{in}}-m_{\mathrm{out}}
+=
+\Delta m_{\mathrm{system}}
+}
+\]
+
+\[
+\Delta m_{\mathrm{system}}
+=
+m_{\mathrm{final}}-m_{\mathrm{initial}}
+\]
+
+Thus,
+
+\[
+\boxed{
+m_{\mathrm{in}}-m_{\mathrm{out}}
+=
+m_{\mathrm{final}}-m_{\mathrm{initial}}
+}
+\]
+
+For a control volume:
+
+\[
+\boxed{
+m_i-m_e
+=
+(m_2-m_1)_{\mathrm{CV}}
+}
+\]
+
+Useful special cases:
+
+\[
+m_i=0
+\quad\text{no inlet}
+\]
+
+\[
+m_e=0
+\quad\text{no exit}
+\]
+
+\[
+m_1=0
+\quad\text{initially evacuated CV}
+\]
+
+\mysubsection{}{Energy Changes in an Unsteady-Flow Process}
+
+\[
+\boxed{
+E_{\mathrm{in}}-E_{\mathrm{out}}
+=
+\Delta E_{\mathrm{system}}
+}
+\]
+
+\[
+\boxed{
+\text{Net energy entering}
+=
+\text{Change in energy stored}
+}
+\]
+
+Energy may cross the boundary through:
+
+\[
+\boxed{
+\text{heat}+\text{work}+\text{mass flow}
+}
+\]
+
+\mysubsection{}{Uniform-Flow Process}
+
+A uniform-flow process is an idealization used for practical unsteady-flow processes.
+
+The inlet/exit properties are treated as uniform and steady during the process, although the control volume itself may change state with time.
+
+\[
+\boxed{
+\text{Uniform flow}\neq\text{steady flow}
+}
+\]
+
+The state of the exiting mass at an instant is taken to correspond to the state of fluid within the CV at that instant.
+
+\mysubsection{}{Energy of Flowing and Nonflowing Fluid}
+
+For flowing fluid:
+
+\[
+\boxed{
+\theta
+=
+h+ke+pe
+}
+\]
+
+\[
+ke=\frac{V^2}{2}
+\qquad
+pe=gz
+\]
+
+Therefore,
+
+\[
+\boxed{
+\theta
+=
+h+\frac{V^2}{2}+gz
+}
+\]
+
+For nonflowing fluid within the CV:
+
+\[
+\boxed{
+e
+=
+u+ke+pe
+}
+\]
+
+\[
+\boxed{
+e
+=
+u+\frac{V^2}{2}+gz
+}
+\]
+
+Key distinction:
+
+\[
+\boxed{
+\text{Flowing fluid}\rightarrow h
+\qquad
+\text{Nonflowing fluid}\rightarrow u
+}
+\]
+
+\mysubsection{}{General Energy Equation for a Uniform-Flow Process}
+
+\[
+\boxed{
+\left(
+Q_{\mathrm{in}}
++
+W_{\mathrm{in}}
++
+\sum_{\mathrm{in}}m\theta
+\right)
+-
+\left(
+Q_{\mathrm{out}}
++
+W_{\mathrm{out}}
++
+\sum_{\mathrm{out}}m\theta
+\right)
+=
+(m_2e_2-m_1e_1)_{\mathrm{system}}
+}
+\]
+
+with
+
+\[
+\theta=h+\frac{V^2}{2}+gz
+\]
+
+\[
+e=u+\frac{V^2}{2}+gz
+\]
+
+\mysubsection{}{Negligible Kinetic and Potential Energy Changes}
+
+If
+
+\[
+\Delta ke\approx0,
+\qquad
+\Delta pe\approx0
+\]
+
+then
+
+\[
+\boxed{
+Q-W
+=
+\sum_{\mathrm{out}}mh
+-
+\sum_{\mathrm{in}}mh
++
+(m_2u_2-m_1u_1)_{\mathrm{system}}
+}
+\]
+
+where
+
+\[
+Q=Q_{\mathrm{net,in}}
+=
+Q_{\mathrm{in}}-Q_{\mathrm{out}}
+\]
+
+\[
+W=W_{\mathrm{net,out}}
+=
+W_{\mathrm{out}}-W_{\mathrm{in}}
+\]
+
+\mysubsection{}{Physical Meaning of the Simplified Energy Equation}
+
+\[
+\boxed{
+Q-W
+=
+\sum_{\mathrm{out}}mh
+-
+\sum_{\mathrm{in}}mh
++
+(m_2u_2-m_1u_1)_{\mathrm{system}}
+}
+\]
+
+Unlike a steady-flow device, an unsteady-flow CV can store or release energy as its internal state changes.
+
+\[
+\boxed{
+\text{Energy in}
+=
+\text{energy out}
++
+\text{energy accumulation}
+}
+\]
+
+
+\mysubsection{}{Charging of a Rigid Tank}
+
+For one inlet, no outlet:
+
+\[
+m_i=m_2-m_1
+\]
+
+Initially evacuated:
+
+\[
+m_1=0
+\qquad\Longrightarrow\qquad
+m_i=m_2
+\]
+
+For a rigid, insulated tank with no work and negligible kinetic/potential-energy changes:
+
+\[
+Q=0,
+\qquad
+W=0
+\]
+
+Energy balance:
+
+\[
+m_i h_i
+=
+m_2u_2-m_1u_1
+\]
+
+For an initially evacuated tank:
+
+\[
+m_i h_i=m_2u_2
+\]
+
+Using
+
+\[
+m_i=m_2
+\]
+
+gives
+
+\[
+\boxed{
+u_2=h_i
+}
+\]
+
+Since
+
+\[
+h=u+Pv
+\]
+
+the flow energy \(Pv\) entering with the fluid can become internal energy after the fluid comes to rest inside the tank.
+
+\mysubsection{}{Alternative Closed-System Interpretation of Tank Charging}
+
+Boundary work for the imaginary closed-system representation:
+
+\[
+\boxed{
+W_{b,\mathrm{in}}
+=
+-\int_1^2P_i\,dV
+}
+\]
+
+At constant pressure:
+
+\[
+\boxed{
+W_{b,\mathrm{in}}
+=
+-P_i(V_2-V_1)
+}
+\]
+
+The resulting energy relation is
+
+\[
+u_2=u_i+P_iv_i
+\]
+
+Since
+
+\[
+h_i=u_i+P_iv_i
+\]
+
+\[
+\boxed{
+u_2=h_i
+}
+\]
+
+Thus the closed-system and uniform-flow interpretations give the same result.
+
+\mysubsection{}{Discharging of a Tank}
+
+For one exit, no inlet:
+
+\[
+\boxed{
+m_e=m_1-m_2
+}
+\]
+
+For a rigid tank:
+
+\[
+W_b=0
+\]
+
+For an insulated tank:
+
+\[
+Q\approx0
+\]
+
+With negligible kinetic and potential-energy changes:
+
+\[
+\boxed{
+W_{\mathrm{in}}
+-
+m_eh_e
+=
+m_2u_2-m_1u_1
+}
+\]
+
+Electrical work supplied to the tank can compensate for the energy carried away by the discharged fluid.
+
+\mysubsection{}{Constant-Temperature Discharge}
+
+For constant temperature:
+
+\[
+T_2=T_1
+\]
+
+For a fluid for which \(u=u(T)\):
+
+\[
+\boxed{
+u_2=u_1
+}
+\]
+
+The process may have no accumulation at a particular state while mass and energy inside the CV still vary with time:
+
+\[
+\boxed{
+\text{No accumulation within CV}
+}
+\]
+
+\[
+\boxed{
+\text{Mass and energy within CV may change with time}
+}
+\]
+
+The essential unsteady-flow interactions are:
+
+\[
+\boxed{
+\text{Mass transfer}
++
+\text{Energy transfer}
++
+\text{Energy storage}
+}
+\]
+
+
+\end{document}

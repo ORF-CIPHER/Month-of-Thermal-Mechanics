@@ -1,0 +1,2805 @@
+\documentclass[12pt]{article}
+
+\usepackage[a4paper, top=2cm, bottom=2cm, left=2.5cm, right=2.5cm]{geometry}
+
+\usepackage{amsmath, amssymb}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,fit,calc}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{siunitx}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{fontspec}
+\usetikzlibrary{decorations.pathmorphing}
+\usepackage{pdflscape}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage[table]{xcolor}
+\usepackage{hyperref}
+\usepackage{bookmark}
+\usepackage{pdfpages}
+
+% ---------------- FONTS ----------------
+% Body font
+\setmainfont[
+    UprightFont = Handlee-Regular.ttf,
+    AutoFakeBold = 2.5
+]{Handlee}
+
+% Heading font
+\newfontfamily\headingfont{PT.ttf}
+
+% verbatim font
+\setmonofont{DejaVu Sans Mono} % or Noto Sans Mono
+
+% ---------------- HANDWRITTEN MATH ----------------
+\usepackage{mathastext}
+\Mathastext
+\everymath{\displaystyle}
+
+% Optional spacing tweaks (more natural look)
+% \setlength{\thinmuskip}{2mu}
+% \setlength{\medmuskip}{2mu}
+
+% ---------------- GENERAL ----------------
+\setlength{\parindent}{0pt}
+\pagenumbering{gobble}
+\linespread{1.2}
+
+
+\newcommand{\mychapter}[2]{%
+    \phantomsection
+    \hypertarget{#2}{}%
+    \bookmark[level=0,dest=#2]{#1}%
+    \begin{center}
+        {\headingfont\Huge #1}
+        \par
+        \vspace{4pt}
+        \hrule
+    \end{center}
+}
+
+\newcommand{\mysection}[3]{%
+    \phantomsection
+    \hypertarget{#3}{}%
+    \bookmark[level=1,dest=#3]{#1\space #2}%
+    \newpage
+    \noindent{\headingfont\Large #1\space #2\par}
+    \vspace{4pt}
+    \hrule
+    \vspace{15pt}
+}
+
+\newcommand{\mysubsection}[2]{%
+    \vspace{5px}
+    \noindent{\headingfont\large #1\space #2\par}
+    \vspace{4pt}
+    \hrule
+    \vspace{15pt}
+}
+
+\newcommand{\insertfigure}[2]{%
+    \begin{figure}[H]
+        \centering
+        \fbox{\includegraphics[width=#1\textwidth]{../2. Figures/#2}}
+    \end{figure}
+}
+
+\begin{document}
+\vspace*{\fill}
+
+\insertfigure{0.6}{cover.png}
+
+
+\vspace{1cm}
+
+\mychapter{Chapter 5 : Mass and Energy Analysis of Control Volumes}{6f4y5kdh}
+
+This chapter extends the energy analysis of closed systems to \textbf{control volumes}, where mass can cross the system boundaries. It develops the \textbf{conservation of mass principle} and applies it to steady-flow and unsteady-flow processes. The chapter also introduces \textbf{flow work} and the energy carried by a flowing fluid, including enthalpy, kinetic energy, and potential energy. These concepts are then used to formulate energy balances for common steady-flow devices such as nozzles, turbines, compressors, throttling valves, mixing chambers, and heat exchangers. Finally, the chapter applies energy and mass balances to \textbf{unsteady-flow processes}, including charging and discharging of vessels. 
+
+\newpage
+
+\begin{center}
+    {\headingfont\Huge Chapter Tree}
+    \par
+    \vspace{4pt}
+    \hrule
+\end{center}
+\begin{verbatim}
+│
+├── 5–1 Conservation of Mass
+│   │
+│   ├── Mass and Volume Flow Rates
+│   │
+│   ├── Conservation of Mass Principle
+│   │
+│   ├── Mass Balance for Steady-Flow Processes
+│   │
+│   └── Special Case: Incompressible Flow
+│
+├── 5–2 Flow Work and the Energy of a Flowing Fluid
+│   │
+│   ├── Total Energy of a Flowing Fluid
+│   │
+│   └── Energy Transport by Mass
+│
+├── 5–3 Energy Analysis of Steady-Flow Systems
+│
+├── 5–4 Some Steady-Flow Engineering Devices
+│   │
+│   ├── 1 Nozzles and Diffusers
+│   │
+│   ├── 2 Turbines and Compressors
+│   │
+│   ├── 3 Throttling Valves
+│   │
+│   ├── 4a Mixing Chambers
+│   │
+│   ├── 4b Heat Exchangers
+│   │
+│   └── 5 Pipe and Duct Flow
+│
+├── 5–5 Energy Analysis of Unsteady-Flow Processes
+│
+└── TOSI : General Energy Equation
+
+\end{verbatim}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\mysection{5.1}{Conservation of Mass}{5.1}
+
+The conservation of mass principle is one of the fundamental principles used in engineering analysis. In most engineering systems, mass is treated as a conserved quantity. Although mass and energy can technically be converted into each other according to Einstein's relation, the equivalent mass associated with ordinary energy interactions is extremely small compared with the total mass of the system. Therefore, mass is considered conserved in most engineering analyses.
+
+For a closed system, conservation of mass requires that the total mass of the system remain constant. For a control volume, however, mass may cross the control surface, so the mass entering and leaving the control volume must be accounted for.
+
+\mysubsection{}{Mass and Volume Flow Rates}
+
+\insertfigure{0.5}{Figure : 1.png}
+
+\textbf{\\ Mass Flow Rate}
+
+The amount of mass flowing through a cross section per unit time is called the \textbf{mass flow rate}, denoted by $\dot{m}$.
+
+For a differential area $dA_c$ of a flow cross section, the differential mass flow rate is
+
+\begin{equation*}
+\delta \dot{m} = \rho V_n dA_c
+\end{equation*}
+
+where $\rho$ is the fluid density and $V_n$ is the component of velocity normal to the cross-sectional area.
+
+The normal velocity is the component of the velocity perpendicular to the surface.
+
+For a complete cross section, the mass flow rate is obtained by integration:
+
+\begin{equation*}
+\dot{m} = \int_{A_c} \rho V_n \, dA_c
+\end{equation*}
+
+This relation is exact and is valid even when density and velocity vary across the cross section.
+
+\textbf{\\ Average Velocity}
+
+The velocity in a pipe is generally not uniform because of the no-slip condition at the wall. The velocity is zero at the wall and reaches a maximum near the centerline.
+
+The average velocity is defined as
+
+\begin{equation*}
+V_{\mathrm{avg}} =
+\frac{1}{A_c}
+\int_{A_c} V_n \, dA_c
+\end{equation*}
+
+where $A_c$ is the cross-sectional area normal to the flow direction.
+
+If the density is uniform across the cross section, the mass flow rate can be written in terms of the average velocity as
+
+\begin{equation*}
+\dot{m} = \rho V_{\mathrm{avg}} A_c
+\end{equation*}
+
+For simplicity, the subscript ``avg'' is normally dropped, so $V$ denotes the average velocity unless stated otherwise.
+
+\textbf{\\ Volume Flow Rate}
+
+The volume of fluid flowing through a cross section per unit time is called the \textbf{volume flow rate}, denoted by $\dot{V}$.
+
+It is given by
+
+\begin{equation*}
+\dot{V}
+=
+\int_{A_c} V_n \, dA_c
+=
+V_{\mathrm{avg}} A_c
+=
+V A_c
+\end{equation*}
+
+The SI unit of volume flow rate is $\mathrm{m^3/s}$.
+
+Some fluid mechanics texts use $Q$ instead of $\dot{V}$ for volume flow rate. The notation $\dot{V}$ is used here to avoid confusion with heat transfer.
+
+\textbf{\\ Relation Between Mass and Volume Flow Rates}
+
+The mass and volume flow rates are related by
+
+\begin{equation*}
+\dot{m} = \rho \dot{V} = \frac{\dot{V}}{v}
+\end{equation*}
+
+where $v$ is the specific volume.
+
+This relation is analogous to the relation between mass and volume of a fluid:
+
+\begin{equation*}
+m = \rho V = \frac{V}{v}
+\end{equation*}
+
+\mysubsection{}{Conservation of Mass Principle}
+
+The conservation of mass principle for a control volume states that the net mass transfer to or from the control volume during a time interval is equal to the net change in the total mass contained within the control volume.
+
+Thus,
+
+\begin{equation*}
+\text{Mass entering}
+-
+\text{Mass leaving}
+=
+\text{Change in mass within CV}
+\end{equation*}
+
+or
+
+\begin{equation*}
+m_{\mathrm{in}} - m_{\mathrm{out}}
+=
+\Delta m_{\mathrm{CV}}
+\end{equation*}
+
+where
+
+\begin{equation*}
+\Delta m_{\mathrm{CV}}
+=
+m_{\mathrm{final}}-m_{\mathrm{initial}}
+\end{equation*}
+
+In rate form,
+
+\begin{equation*}
+\dot{m}_{\mathrm{in}}
+-
+\dot{m}_{\mathrm{out}}
+=
+\frac{dm_{\mathrm{CV}}}{dt}
+\end{equation*}
+
+This equation is called the \textbf{mass balance} and is applicable to any control volume undergoing any type of process.
+
+\textbf{\\ Mass Within a Control Volume}
+
+For a differential volume $dV$ within a control volume,
+
+\begin{equation*}
+dm = \rho \, dV
+\end{equation*}
+
+Therefore, the total mass contained within the control volume is
+
+\begin{equation*}
+m_{\mathrm{CV}}
+=
+\int_{\mathrm{CV}} \rho \, dV
+\end{equation*}
+
+The rate of change of mass within the control volume is
+
+\begin{equation*}
+\frac{dm_{\mathrm{CV}}}{dt}
+=
+\frac{d}{dt}
+\int_{\mathrm{CV}} \rho \, dV
+\end{equation*}
+
+For a control volume through which no mass crosses the control surface, the system behaves as a closed system and
+
+\begin{equation*}
+\frac{dm_{\mathrm{CV}}}{dt}=0
+\end{equation*}
+
+This result is valid whether the control volume is fixed, moving, or deforming.
+
+\mysubsection{}{Normal Component of Velocity}
+
+Consider mass flow through a differential area $dA$ on the control surface. Let $\vec{n}$ be the outward unit normal vector to the surface and $\vec{V}$ be the fluid velocity.
+
+If the velocity makes an angle $\theta$ with the outward normal, its normal component is
+
+\begin{equation*}
+V_n = V\cos\theta
+\end{equation*}
+
+Using the vector dot product,
+
+\begin{equation*}
+V_n = \vec{V}\cdot\vec{n}
+\end{equation*}
+
+The sign of $V_n$ automatically indicates the direction of flow:
+
+\begin{equation*}
+V_n > 0
+\qquad \text{for outflow}
+\end{equation*}
+
+\begin{equation*}
+V_n < 0
+\qquad \text{for inflow}
+\end{equation*}
+
+For $\theta=0^\circ$, the flow is normal to the surface and the outflow is maximum.
+
+For $\theta=90^\circ$, the flow is tangent to the surface and no mass crosses the surface.
+
+For $\theta=180^\circ$, the flow is normal to the surface but directed inward.
+
+\textbf{\\ Differential Mass Flow Rate}
+
+The differential mass flow rate through an area $dA$ is
+
+\begin{equation*}
+\delta\dot{m}
+=
+\rho V_n dA
+\end{equation*}
+
+Using the vector form,
+
+\begin{equation*}
+\delta\dot{m}
+=
+\rho(\vec{V}\cdot\vec{n})dA
+\end{equation*}
+
+\textbf{\\ Net Mass Flow Rate}
+
+The net mass flow rate through the entire control surface is
+
+\begin{equation*}
+\dot{m}_{\mathrm{net}}
+=
+\int_{\mathrm{CS}}
+\rho V_n \, dA
+\end{equation*}
+
+or
+
+\begin{equation*}
+\dot{m}_{\mathrm{net}}
+=
+\int_{\mathrm{CS}}
+\rho(\vec{V}\cdot\vec{n})\,dA
+\end{equation*}
+
+A positive value of $\dot{m}_{\mathrm{net}}$ represents a net outflow of mass, while a negative value represents a net inflow.
+
+\mysubsection{}{General Conservation of Mass Equation}
+
+Starting from the mass balance,
+
+\begin{equation*}
+\frac{dm_{\mathrm{CV}}}{dt}
++
+\dot{m}_{\mathrm{out}}
+-
+\dot{m}_{\mathrm{in}}
+=
+0
+\end{equation*}
+
+For a fixed control volume, the general conservation of mass equation is
+
+\[
+\boxed{
+\frac{d}{dt}
+\int_{\mathrm{CV}} \rho \, dV
++
+\int_{\mathrm{CS}}
+\rho(\vec{V}\cdot\vec{n})\,dA
+=
+0
+}
+\]
+
+This equation states that
+
+\begin{equation*}
+\text{Rate of change of mass inside CV}
++
+\text{Net mass flow through CS}
+=
+0
+\end{equation*}
+
+The surface integral can also be separated into outgoing and incoming streams:
+
+\begin{equation*}
+\frac{d}{dt}
+\int_{\mathrm{CV}}\rho\,dV
++
+\sum_{\mathrm{out}}\rho |V_n|A
+-
+\sum_{\mathrm{in}}\rho |V_n|A
+=
+0
+\end{equation*}
+
+Using the definition of mass flow rate,
+
+\begin{equation*}
+\frac{d}{dt}
+\int_{\mathrm{CV}}\rho\,dV
+=
+\sum_{\mathrm{in}}\dot{m}
+-
+\sum_{\mathrm{out}}\dot{m}
+\end{equation*}
+
+or
+
+\begin{equation*}
+\frac{dm_{\mathrm{CV}}}{dt}
+=
+\sum_{\mathrm{in}}\dot{m}
+-
+\sum_{\mathrm{out}}\dot{m}
+\end{equation*}
+
+\textbf{\\ Control Volume Selection}
+
+A control volume should be selected so that it does not introduce unnecessary complications.
+
+Whenever possible, the control surface should be selected \textbf{normal to the flow} at locations where the fluid crosses the control surface.
+
+For a control surface normal to the flow,
+
+\begin{equation*}
+\vec{V}\cdot\vec{n}=V
+\end{equation*}
+
+and therefore,
+
+\begin{equation*}
+\int_A \rho(\vec{V}\cdot\vec{n})\,dA
+=
+\rho V A
+\end{equation*}
+
+This makes the mass-flow calculation considerably simpler.
+
+For moving or deforming control volumes, the same conservation equations can be used by replacing the absolute velocity $\vec{V}$ with the fluid velocity relative to the control surface, $\vec{V}_r$.
+
+\mysubsection{}{Mass Balance for Steady-Flow Processes}
+
+For a steady-flow process, the total amount of mass contained within the control volume does not change with time.
+
+Therefore,
+
+\begin{equation*}
+m_{\mathrm{CV}}=\text{constant}
+\end{equation*}
+
+and
+
+\begin{equation*}
+\frac{dm_{\mathrm{CV}}}{dt}=0
+\end{equation*}
+
+The conservation of mass equation then requires the total mass flow rate entering the control volume to equal the total mass flow rate leaving it.
+
+\begin{equation*}
+\sum_{\mathrm{in}}\dot{m}
+=
+\sum_{\mathrm{out}}\dot{m}
+\end{equation*}
+
+For a single-stream steady-flow device having one inlet and one outlet,
+
+\begin{equation*}
+\dot{m}_1=\dot{m}_2
+\end{equation*}
+
+Since
+
+\begin{equation*}
+\dot{m}=\rho V A
+\end{equation*}
+
+the single-stream relation becomes
+
+\begin{equation*}
+\rho_1 V_1 A_1
+=
+\rho_2 V_2 A_2
+\end{equation*}
+
+This relation applies to devices such as nozzles, diffusers, turbines, compressors, and pumps when they involve one inlet and one outlet.
+
+\mysubsection{}{Special Case: Incompressible Flow}
+
+For an incompressible fluid, density is essentially constant.
+
+The general steady-flow mass balance is
+
+\begin{equation*}
+\sum_{\mathrm{in}}\dot{m}
+=
+\sum_{\mathrm{out}}\dot{m}
+\end{equation*}
+
+Since $\dot{m}=\rho\dot{V}$ and $\rho$ is constant, density can be canceled:
+
+\begin{equation*}
+\sum_{\mathrm{in}}\dot{V}
+=
+\sum_{\mathrm{out}}\dot{V}
+\end{equation*}
+
+For a single-stream steady-flow system,
+
+\begin{equation*}
+\dot{V}_1=\dot{V}_2
+\end{equation*}
+
+Since $\dot{V}=VA$,
+
+\begin{equation*}
+V_1A_1=V_2A_2
+\end{equation*}
+
+This is the familiar continuity relation for steady, incompressible, single-stream flow.
+
+\textbf{\\ Important: Volume Flow Rate Is Not Generally Conserved}
+
+There is no general ``conservation of volume'' principle.
+
+For a steady-flow device,
+
+\begin{equation*}
+\dot{m}_{\mathrm{in}}
+=
+\dot{m}_{\mathrm{out}}
+\end{equation*}
+
+but, in general,
+
+\begin{equation*}
+\dot{V}_{\mathrm{in}}
+\neq
+\dot{V}_{\mathrm{out}}
+\end{equation*}
+
+For example, in an air compressor, the mass flow rate may remain constant while the volume flow rate decreases at the outlet because the air density increases.
+
+For liquids, which are approximately incompressible, the volume flow rates at the inlet and outlet of a steady-flow device remain nearly constant.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\mysection{5.2}{Flow Work and the Energy of a Flowing Fluid}{5.2}
+
+Unlike closed systems, control volumes involve mass crossing their boundaries. Work is therefore required to push fluid into or out of a control volume. This work is called \textbf{flow work} or \textbf{flow energy}, and it is necessary for maintaining continuous flow through a control volume.
+
+\mysubsection{}{Flow Work}
+
+\insertfigure{0.8}{Figure : 2.png}
+
+Consider a small fluid element of volume $V$ entering a control volume. The fluid immediately upstream exerts a force on the fluid element and pushes it across the control surface. The fluid element can therefore be viewed as being pushed by an imaginary piston.
+
+If the fluid pressure is $P$ and the cross-sectional area of the fluid element is $A$, the force exerted on the fluid element is
+
+\begin{equation*}
+F=PA
+\end{equation*}
+
+If the force acts through a distance $L$, the work required to push the fluid element across the boundary is
+
+\begin{equation*}
+W_{\mathrm{flow}}=FL=PAL=PV
+\end{equation*}
+
+Thus, the flow work is proportional to the pressure and the volume of the fluid being transported.
+
+\textbf{\\ Flow Work per Unit Mass}
+
+Dividing the flow work by the mass of the fluid element gives the flow work per unit mass:
+
+\begin{equation*}
+w_{\mathrm{flow}}=Pv
+\end{equation*}
+
+where $v$ is the specific volume.
+
+The same flow-work relation applies whether the fluid is being pushed into or out of the control volume.
+
+\textbf{\\ Flow Work as a Property-Based Quantity}
+
+Flow work differs from most other forms of work because it can be expressed entirely in terms of properties of the fluid:
+
+\begin{equation*}
+w_{\mathrm{flow}}=Pv
+\end{equation*}
+
+Because it is the product of two thermodynamic properties, $P$ and $v$, it is sometimes called \textbf{flow energy}, \textbf{convected energy}, or \textbf{transport energy}.
+
+There is a distinction between flow work and other forms of work. The quantity $Pv$ represents energy associated with a flowing fluid and does not represent a form of energy for a nonflowing closed system.
+
+For the energy analysis of control volumes, the flow energy is incorporated into the energy of the flowing fluid through the property of enthalpy. This avoids the need to treat flow work separately in subsequent energy balances.
+
+\mysubsection{}{Total Energy of a Flowing Fluid}
+
+For a simple compressible system, the total energy consists of three forms:
+
+\begin{itemize}
+    \item internal energy,
+    \item kinetic energy,
+    \item potential energy.
+\end{itemize}
+
+On a unit-mass basis, the total energy is
+
+\begin{equation*}
+e=u+\mathrm{ke}+\mathrm{pe}
+\end{equation*}
+
+or
+
+\begin{equation*}
+e=u+\frac{V^2}{2}+gz
+\end{equation*}
+
+where $u$ is the internal energy per unit mass, $V$ is the velocity, and $z$ is the elevation relative to a selected reference point.
+
+A flowing fluid possesses an additional energy contribution because mass must be pushed into or out of the control volume. This is the flow energy $Pv$.
+
+Therefore, the total energy of a flowing fluid per unit mass, denoted by $\theta$, is
+
+\begin{equation*}
+\theta=Pv+e
+\end{equation*}
+
+Substituting the expression for $e$ gives
+
+\begin{equation*}
+\theta
+=
+Pv+u+\frac{V^2}{2}+gz
+\end{equation*}
+
+\textbf{\\ Enthalpy and Flow Energy}
+
+The combination of internal energy and flow energy is defined as the specific enthalpy:
+
+\begin{equation*}
+h=u+Pv
+\end{equation*}
+
+Therefore, the total energy of a flowing fluid can be written as
+
+\begin{equation*}
+\theta
+=
+h+\frac{V^2}{2}+gz
+\end{equation*}
+
+Thus, the total energy per unit mass of a flowing fluid consists of
+
+\begin{itemize}
+    \item enthalpy $h$,
+    \item kinetic energy $\dfrac{V^2}{2}$,
+    \item potential energy $gz$.
+\end{itemize}
+
+The use of enthalpy automatically accounts for the energy required to push fluid into or out of a control volume. Consequently, flow work does not need to be treated separately when performing energy analysis of flowing fluids.
+
+\textbf{\\ Energy Components: Flowing and Nonflowing Fluids}
+
+For a nonflowing fluid, the total energy per unit mass is
+
+\begin{equation*}
+e=u+\frac{V^2}{2}+gz
+\end{equation*}
+
+For a flowing fluid, the corresponding total energy per unit mass is
+
+\begin{equation*}
+\theta
+=
+h+\frac{V^2}{2}+gz
+\end{equation*}
+
+Therefore, a nonflowing fluid is described in terms of internal, kinetic, and potential energies, whereas a flowing fluid includes the flow-energy contribution, which is incorporated into enthalpy.
+
+\mysubsection{}{Energy Transport by Mass}
+
+The total energy per unit mass of a flowing fluid is
+
+\begin{equation*}
+\theta=h+\frac{V^2}{2}+gz
+\end{equation*}
+
+Therefore, the total energy transported by a flowing mass $m$, provided the properties of the mass are uniform, is
+
+\begin{equation*}
+E_{\mathrm{mass}}
+=
+m\theta
+\end{equation*}
+
+Substituting the expression for $\theta$,
+
+\begin{equation*}
+E_{\mathrm{mass}}
+=
+m
+\left(
+h+\frac{V^2}{2}+gz
+\right)
+\end{equation*}
+
+\textbf{\\ Rate of Energy Transport by Mass}
+
+If a fluid stream flows with a mass flow rate $\dot{m}$ and has uniform properties, the rate at which energy is transported by the flowing mass is
+
+\begin{equation*}
+\dot{E}_{\mathrm{mass}}
+=
+\dot{m}\theta
+\end{equation*}
+
+Thus,
+
+\begin{equation*}
+\dot{E}_{\mathrm{mass}}
+=
+\dot{m}
+\left(
+h+\frac{V^2}{2}+gz
+\right)
+\end{equation*}
+
+The units of $\dot{E}_{\mathrm{mass}}$ are units of energy per unit time.
+
+\textbf{\\ Negligible Kinetic and Potential Energies}
+
+In many engineering applications, the kinetic and potential energy contributions of a fluid stream are negligible compared with its enthalpy.
+
+When both contributions are neglected,
+
+\begin{equation*}
+E_{\mathrm{mass}}=mh
+\end{equation*}
+
+and
+
+\begin{equation*}
+\dot{E}_{\mathrm{mass}}=\dot{m}h
+\end{equation*}
+
+These simplified relations are frequently useful in engineering energy analyses.
+
+\mysubsection{}{Energy Transport Through an Inlet or Exit}
+
+In general, the properties of a fluid entering or leaving a control volume may vary with time and across the cross section of the opening.
+
+For such a situation, the energy transport cannot necessarily be represented by a single value of $\theta$. Instead, the flow can be divided into sufficiently small differential masses $\delta m$ for which the properties can be considered uniform.
+
+The energy associated with a differential flowing mass is
+
+\begin{equation*}
+\delta E_{\mathrm{mass}}
+=
+\theta\,\delta m
+\end{equation*}
+
+At an inlet, the total energy transported by mass can therefore be expressed as
+
+\begin{equation*}
+E_{\mathrm{in,mass}}
+=
+\int_{m_i}
+\theta_i\,\delta m_i
+\end{equation*}
+
+Using the total energy per unit mass,
+
+\begin{equation*}
+E_{\mathrm{in,mass}}
+=
+\int_{m_i}
+\left(
+h_i+\frac{V_i^2}{2}+gz_i
+\right)
+\delta m_i
+\end{equation*}
+
+A corresponding expression can be written for an exit.
+
+For most practical engineering flows, the flow can be approximated as steady and one-dimensional. Under this approximation, the simpler relations involving $\dot{m}\theta$ are generally sufficient to represent the energy transported by a fluid stream.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\mysection{5.3}{Energy Analysis of Steady-Flow Systems}{5.3}
+
+Many engineering devices operate for long periods under essentially constant operating conditions after the transient start-up period. Such devices are classified as \textbf{steady-flow devices}. Examples include turbines, compressors, pumps, nozzles, diffusers, and heat exchangers.
+
+A steady-flow process is a process in which a fluid flows through a control volume steadily. The fluid properties may vary from one location to another within the control volume, but at any fixed location they do not change with time. Thus, \textbf{steady means no change with time}.
+
+\mysubsection{}{Characteristics of a Steady-Flow Process}
+
+\insertfigure{0.4}{Figure : 4.png}
+
+During a steady-flow process, the properties of the control volume remain constant with time. Therefore,
+
+\begin{equation*}
+V_{\mathrm{CV}}=\mathrm{constant}
+\end{equation*}
+
+\begin{equation*}
+m_{\mathrm{CV}}=\mathrm{constant}
+\end{equation*}
+
+\begin{equation*}
+E_{\mathrm{CV}}=\mathrm{constant}
+\end{equation*}
+
+Consequently, there is no accumulation of mass or energy within the control volume.
+
+Since the control-volume volume remains constant, boundary work associated with a changing control-volume boundary is zero for a steady-flow system.
+
+The total mass and total energy entering the control volume must therefore equal the corresponding amounts leaving it.
+
+\textbf{\\ Properties at Inlets and Exits}
+
+At any fixed inlet or exit during steady operation, the fluid properties remain constant with time. However, properties at different inlets and exits may be different.
+
+The properties may also vary over the cross section of an inlet or exit. For engineering analysis, they are commonly represented by suitable average values over the opening.
+
+The mass flow rate at each opening remains constant during steady flow.
+
+Similarly, the heat-transfer rate and work-transfer rate between the control volume and its surroundings remain constant with time.
+
+\mysubsection{}{Mass Balance for Steady-Flow Systems}
+
+The conservation of mass principle for a general steady-flow system is
+
+\begin{equation*}
+\sum_{\mathrm{in}}\dot{m}
+=
+\sum_{\mathrm{out}}\dot{m}
+\end{equation*}
+
+Thus, the total mass flow rate entering the control volume must equal the total mass flow rate leaving it.
+
+For a single-stream steady-flow system with one inlet and one outlet,
+
+\begin{equation*}
+\dot{m}_1=\dot{m}_2
+\end{equation*}
+
+Using
+
+\begin{equation*}
+\dot{m}=\rho VA
+\end{equation*}
+
+the single-stream mass balance becomes
+
+\begin{equation*}
+\rho_1V_1A_1
+=
+\rho_2V_2A_2
+\end{equation*}
+
+where the subscripts $1$ and $2$ represent the inlet and exit states, respectively.
+
+Here,
+
+\begin{itemize}
+    \item $\rho$ is the fluid density,
+    \item $V$ is the average flow velocity,
+    \item $A$ is the cross-sectional area normal to the flow direction.
+\end{itemize}
+
+\mysubsection{}{Energy Balance for Steady-Flow Systems}
+
+During steady flow, the total energy contained within the control volume remains constant:
+
+\begin{equation*}
+E_{\mathrm{CV}}=\mathrm{constant}
+\end{equation*}
+
+Therefore,
+
+\begin{equation*}
+\Delta E_{\mathrm{CV}}=0
+\end{equation*}
+
+The rate of net energy transfer into the control volume must consequently equal the rate of net energy transfer out of the control volume.
+
+Energy can cross the control surface in three ways:
+
+\begin{itemize}
+    \item by heat transfer,
+    \item by work transfer,
+    \item by mass flow.
+\end{itemize}
+
+Thus, the general steady-flow energy balance is
+
+\begin{equation*}
+\dot{E}_{\mathrm{in}}
+=
+\dot{E}_{\mathrm{out}}
+\end{equation*}
+
+or
+
+\begin{equation*}
+\dot{Q}_{\mathrm{in}}
++
+\dot{W}_{\mathrm{in}}
++
+\sum_{\mathrm{in}}\dot{m}\theta
+=
+\dot{Q}_{\mathrm{out}}
++
+\dot{W}_{\mathrm{out}}
++
+\sum_{\mathrm{out}}\dot{m}\theta
+\end{equation*}
+
+where $\theta$ is the total energy per unit mass of a flowing fluid.
+
+From Section 5.2,
+
+\begin{equation*}
+\theta
+=
+h+\frac{V^2}{2}+gz
+\end{equation*}
+
+Therefore, the general steady-flow energy equation becomes
+
+\begin{equation*}
+\dot{Q}_{\mathrm{in}}
++
+\dot{W}_{\mathrm{in}}
++
+\sum_{\mathrm{in}}
+\dot{m}
+\left(
+h+\frac{V^2}{2}+gz
+\right)
+=
+\dot{Q}_{\mathrm{out}}
++
+\dot{W}_{\mathrm{out}}
++
+\sum_{\mathrm{out}}
+\dot{m}
+\left(
+h+\frac{V^2}{2}+gz
+\right)
+\end{equation*}
+
+This is the general energy balance for a steady-flow system.
+
+\mysubsection{}{First-Law Form of the Steady-Flow Energy Equation}
+
+For general analytical work, it is convenient to assume that heat is transferred into the control volume and work is produced by the control volume.
+
+Let
+
+\begin{itemize}
+    \item $\dot{Q}$ denote heat transfer into the system,
+    \item $\dot{W}$ denote work produced by the system.
+\end{itemize}
+
+With this convention, the steady-flow energy equation becomes
+
+\begin{equation*}
+\dot{Q}-\dot{W}
+=
+\sum_{\mathrm{out}}
+\dot{m}
+\left(
+h+\frac{V^2}{2}+gz
+\right)
+-
+\sum_{\mathrm{in}}
+\dot{m}
+\left(
+h+\frac{V^2}{2}+gz
+\right)
+\end{equation*}
+
+If the calculated value of $\dot{Q}$ or $\dot{W}$ is negative, it indicates that the actual direction of that interaction is opposite to the assumed direction.
+
+\mysubsection{}{Single-Stream Steady-Flow Energy Equation}
+
+For a device with one inlet and one outlet, the mass flow rates are equal:
+
+\begin{equation*}
+\dot{m}_1=\dot{m}_2=\dot{m}
+\end{equation*}
+
+The steady-flow energy equation then reduces to
+
+\begin{equation*}
+\dot{Q}-\dot{W}
+=
+\dot{m}
+\left[
+h_2-h_1
++
+\frac{V_2^2-V_1^2}{2}
++
+g(z_2-z_1)
+\right]
+\end{equation*}
+
+Dividing by the mass flow rate gives the energy balance on a unit-mass basis:
+
+\begin{equation*}
+q-w
+=
+h_2-h_1
++
+\frac{V_2^2-V_1^2}{2}
++
+g(z_2-z_1)
+\end{equation*}
+
+where
+
+\begin{equation*}
+q=\frac{\dot{Q}}{\dot{m}}
+\end{equation*}
+
+and
+
+\begin{equation*}
+w=\frac{\dot{W}}{\dot{m}}
+\end{equation*}
+
+Here, $q$ is the heat transfer per unit mass and $w$ is the work done per unit mass of the flowing fluid.
+
+\mysubsection{}{Negligible Kinetic and Potential Energy Changes}
+
+In many engineering devices, the changes in kinetic and potential energies are negligible:
+
+\begin{equation*}
+\Delta ke\approx0
+\end{equation*}
+
+\begin{equation*}
+\Delta pe\approx0
+\end{equation*}
+
+Under these conditions, the single-stream energy balance simplifies to
+
+\begin{equation*}
+q-w=h_2-h_1
+\end{equation*}
+
+This form is particularly useful when the main energy change of the fluid is associated with enthalpy.
+
+\mysubsection{}{Heat Transfer}
+
+The quantity $\dot{Q}$ represents the rate of heat transfer between the control volume and its surroundings.
+
+Using the convention that heat transfer into the control volume is positive,
+
+\begin{equation*}
+\dot{Q}>0
+\end{equation*}
+
+represents heat input, while
+
+\begin{equation*}
+\dot{Q}<0
+\end{equation*}
+
+represents heat loss from the control volume.
+
+For an adiabatic control volume,
+
+\begin{equation*}
+\dot{Q}=0
+\end{equation*}
+
+Thus, no heat crosses the control surface.
+
+\mysubsection{}{Work Transfer}
+
+The quantity $\dot{W}$ represents power, or the rate of work transfer.
+
+For steady-flow devices, the control volume is constant, so there is no boundary work associated with expansion or contraction of the control volume.
+
+The flow work required to push fluid into and out of the control volume is already accounted for through the use of enthalpy.
+
+Therefore, $\dot{W}$ represents the remaining forms of work transfer.
+
+Common forms include:
+
+\begin{itemize}
+    \item shaft work,
+    \item electrical work.
+\end{itemize}
+
+For devices such as turbines, compressors, and pumps, work is commonly transmitted through a shaft. In such cases, $\dot{W}$ represents shaft power.
+
+For devices such as electric heaters, work may be supplied through electrical wires. In this case, $\dot{W}$ represents the rate of electrical work transfer.
+
+If no work interaction other than flow work occurs, the remaining work rate is
+
+\begin{equation*}
+\dot{W}=0
+\end{equation*}
+
+\mysubsection{}{Enthalpy Change}
+
+The enthalpy change between the inlet and exit states is
+
+\begin{equation*}
+\Delta h=h_2-h_1
+\end{equation*}
+
+For many substances, enthalpy values can be obtained from appropriate thermodynamic property tables.
+
+For an ideal gas, the enthalpy change can be approximated by
+
+\begin{equation*}
+\Delta h
+=
+c_{p,\mathrm{avg}}(T_2-T_1)
+\end{equation*}
+
+where $c_{p,\mathrm{avg}}$ is the average specific heat at constant pressure over the relevant temperature range.
+
+The product of mass flow rate and specific enthalpy has units of power:
+
+\begin{equation*}
+(\mathrm{kg/s})(\mathrm{kJ/kg})
+=
+\mathrm{kW}
+\end{equation*}
+
+\mysubsection{}{Kinetic Energy Change}
+
+The change in kinetic energy per unit mass is
+
+\begin{equation*}
+\Delta ke
+=
+\frac{V_2^2-V_1^2}{2}
+\end{equation*}
+
+The SI units of kinetic energy per unit mass are
+
+\begin{equation*}
+\mathrm{m^2/s^2}
+=
+\mathrm{J/kg}
+\end{equation*}
+
+Since enthalpy is commonly expressed in $\mathrm{kJ/kg}$, kinetic energy per unit mass must be converted to $\mathrm{kJ/kg}$ before it is combined with enthalpy.
+
+At relatively low velocities, the kinetic-energy term is often small compared with the enthalpy term and may be neglected.
+
+If the inlet and exit velocities are approximately equal,
+
+\begin{equation*}
+V_1\approx V_2
+\end{equation*}
+
+then
+
+\begin{equation*}
+\Delta ke\approx0
+\end{equation*}
+
+regardless of the absolute magnitude of the velocity.
+
+However, special care is required at high velocities because even relatively small changes in velocity can produce significant changes in kinetic energy.
+
+\mysubsection{}{Potential Energy Change}
+
+The change in potential energy per unit mass is
+
+\begin{equation*}
+\Delta pe
+=
+g(z_2-z_1)
+\end{equation*}
+
+For most industrial devices, such as turbines and compressors, the elevation difference between the inlet and exit is relatively small. Consequently, the potential-energy term is usually neglected.
+
+The potential-energy term becomes important when the process involves moving or pumping a fluid through a significant elevation difference.
+\newpage
+
+\mysubsection{}{Steady-Flow Energy Equation: Summary}
+
+\insertfigure{0.8}{Figure : 3.png}
+
+For a general steady-flow system,
+
+\begin{equation*}
+\dot{Q}-\dot{W}
+=
+\sum_{\mathrm{out}}
+\dot{m}
+\left(
+h+\frac{V^2}{2}+gz
+\right)
+-
+\sum_{\mathrm{in}}
+\dot{m}
+\left(
+h+\frac{V^2}{2}+gz
+\right)
+\end{equation*}
+
+For a single-stream steady-flow system,
+
+\begin{equation*}
+\dot{Q}-\dot{W}
+=
+\dot{m}
+\left[
+h_2-h_1
++
+\frac{V_2^2-V_1^2}{2}
++
+g(z_2-z_1)
+\right]
+\end{equation*}
+
+On a unit-mass basis,
+
+\begin{equation*}
+q-w
+=
+h_2-h_1
++
+\frac{V_2^2-V_1^2}{2}
++
+g(z_2-z_1)
+\end{equation*}
+
+If changes in kinetic and potential energies are negligible,
+
+\begin{equation*}
+q-w=h_2-h_1
+\end{equation*}
+
+
+\insertfigure{0.8}{Figure : 5.png}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\mysection{5.4}{Some Steady-Flow Engineering Devices}{5.4}
+
+
+\mysubsection{}{Nozzles and Diffusers}
+
+\insertfigure{0.8}{Figure : 6.png}
+
+A \textbf{nozzle} is a device that increases the velocity of a fluid at the expense of pressure.
+
+A \textbf{diffuser} is a device that increases the pressure of a fluid by slowing it down.
+
+Thus, nozzles and diffusers perform essentially opposite functions.
+
+\textbf{\\ Nozzle}
+
+For a nozzle,
+
+\begin{equation*}
+V_2 > V_1
+\end{equation*}
+
+The increase in velocity is accompanied by a decrease in pressure.
+
+For subsonic flow, the cross-sectional area of a nozzle generally decreases in the flow direction. For supersonic flow, the cross-sectional area increases in the flow direction.
+
+\textbf{\\ Diffuser}
+
+For a diffuser,
+
+\begin{equation*}
+V_2 < V_1
+\end{equation*}
+
+The decrease in velocity is accompanied by an increase in pressure.
+
+The area variation is opposite to that of a nozzle:
+
+\begin{itemize}
+    \item for subsonic flow, the diffuser area generally increases in the flow direction,
+    \item for supersonic flow, the diffuser area generally decreases in the flow direction.
+\end{itemize}
+
+\textbf{\\ Energy Characteristics}
+
+Nozzles and diffusers usually have the following characteristics:
+
+\begin{equation*}
+\dot{Q}\approx0
+\end{equation*}
+
+\begin{equation*}
+\dot{W}=0
+\end{equation*}
+
+\begin{equation*}
+\Delta pe\approx0
+\end{equation*}
+
+However, the kinetic-energy change is generally important:
+
+\begin{equation*}
+\Delta ke\neq0
+\end{equation*}
+
+The reason is that nozzles and diffusers are designed specifically to produce large changes in fluid velocity.
+
+For a single-stream nozzle or diffuser,
+
+\begin{equation*}
+\dot{Q}-\dot{W}
+=
+\dot{m}
+\left[
+h_2-h_1
++
+\frac{V_2^2-V_1^2}{2}
++
+g(z_2-z_1)
+\right]
+\end{equation*}
+
+With the usual nozzle or diffuser assumptions,
+
+\begin{equation*}
+h_1+\frac{V_1^2}{2}
+=
+h_2+\frac{V_2^2}{2}
+\end{equation*}
+
+when heat transfer, work, and potential-energy changes are negligible.
+
+Thus, a nozzle primarily converts enthalpy into kinetic energy, while a diffuser primarily converts kinetic energy into enthalpy.
+
+\mysubsection{}{Turbines, Compressors, Pumps, and Fans}
+
+\textbf{\\ Turbines}
+
+A turbine is a device in which a flowing fluid produces work by acting on blades attached to a rotating shaft.
+
+As the fluid passes through the turbine, energy is transferred from the fluid to the shaft.
+
+Therefore, a turbine produces power output:
+
+\begin{equation*}
+\dot{W}_{\mathrm{out}}>0
+\end{equation*}
+
+Turbines are commonly used in steam, gas, and hydroelectric power plants to drive electric generators.
+
+\textbf{\\ Compressors}
+
+A compressor is a device used to increase the pressure of a gas.
+
+Work is supplied to the compressor through a rotating shaft:
+
+\begin{equation*}
+\dot{W}_{\mathrm{in}}>0
+\end{equation*}
+
+The supplied mechanical energy causes an increase in the energy of the flowing gas.
+
+\textbf{\\ Pumps}
+
+A pump performs a function similar to a compressor, but it handles liquids rather than gases.
+
+A pump requires work input to increase the pressure of a liquid.
+
+\textbf{\\ Fans}
+
+A fan also increases the pressure of a gas, but the pressure increase is relatively small. Its primary purpose is to mobilize or move the gas.
+
+Thus,
+
+\begin{itemize}
+    \item turbines produce power output,
+    \item compressors require power input,
+    \item pumps require power input,
+    \item fans require power input.
+\end{itemize}
+
+\textbf{\\ Common Energy Assumptions}
+
+For turbines, compressors, pumps, and fans, the potential-energy change is generally negligible:
+
+\begin{equation*}
+\Delta pe\approx0
+\end{equation*}
+
+Heat transfer from turbines is usually negligible because turbines are commonly well insulated:
+
+\begin{equation*}
+\dot{Q}\approx0
+\end{equation*}
+
+Heat transfer in compressors is also usually negligible unless intentional cooling is provided.
+
+For compressors, pumps, and fans, the velocity is generally low enough that the kinetic-energy change can often be neglected:
+
+\begin{equation*}
+\Delta ke\approx0
+\end{equation*}
+
+Turbines can involve relatively high velocities and therefore may have significant kinetic-energy changes. However, the kinetic-energy change is often small compared with the enthalpy change and may consequently be neglected when appropriate.
+
+\textbf{\\ Simplified Turbine Equation}
+
+For an adiabatic turbine with negligible kinetic and potential-energy changes,
+
+\begin{equation*}
+w_{\mathrm{out}}
+=
+h_1-h_2
+\end{equation*}
+
+More generally,
+
+\begin{equation*}
+w_{\mathrm{out}}
+=
+-\left[
+(h_2-h_1)
++
+\frac{V_2^2-V_1^2}{2}
++
+g(z_2-z_1)
+\right]
+\end{equation*}
+
+\textbf{\\ Simplified Compressor Equation}
+
+For a compressor with negligible kinetic and potential-energy changes,
+
+\begin{equation*}
+w_{\mathrm{in}}
+=
+h_2-h_1-q
+\end{equation*}
+
+where $q$ is positive when heat is transferred into the system.
+
+For an adiabatic compressor,
+
+\begin{equation*}
+w_{\mathrm{in}}
+=
+h_2-h_1
+\end{equation*}
+
+Thus, the mechanical energy supplied to the compressor appears primarily as an increase in the enthalpy of the flowing fluid when heat transfer is negligible.
+
+\mysubsection{}{Throttling Valves}
+
+\insertfigure{0.8}{Figure : 7.png}
+
+A \textbf{throttling valve} is a flow-restricting device that causes a significant pressure drop in a fluid.
+
+Common throttling devices include:
+
+\begin{itemize}
+    \item adjustable valves,
+    \item porous plugs,
+    \item capillary tubes.
+\end{itemize}
+
+Throttling valves differ from turbines because they produce a pressure drop without producing work.
+
+They are widely used in refrigeration and air-conditioning systems.
+
+\textbf{\\ Characteristics of Throttling Flow}
+
+A typical throttling process has the following assumptions:
+
+\begin{equation*}
+q\approx0
+\end{equation*}
+
+\begin{equation*}
+w=0
+\end{equation*}
+
+\begin{equation*}
+\Delta pe\approx0
+\end{equation*}
+
+and, in many cases,
+
+\begin{equation*}
+\Delta ke\approx0
+\end{equation*}
+
+The steady-flow energy equation therefore reduces to
+
+\begin{equation*}
+h_2\approx h_1
+\end{equation*}
+
+Thus, the enthalpy remains essentially constant during throttling.
+
+A throttling valve is consequently called an \textbf{isenthalpic device}.
+
+\textbf{\\ Internal Energy and Flow Energy During Throttling}
+
+Since
+
+\begin{equation*}
+h=u+Pv
+\end{equation*}
+
+the throttling condition can also be written as
+
+\begin{equation*}
+u_1+P_1v_1
+=
+u_2+P_2v_2
+\end{equation*}
+
+or
+
+\begin{equation*}
+\text{Internal energy}+\text{Flow energy}
+=
+\text{constant}
+\end{equation*}
+
+Although enthalpy remains constant, internal energy and flow energy can be converted into each other.
+
+If the flow energy increases,
+
+\begin{equation*}
+P_2v_2>P_1v_1
+\end{equation*}
+
+the increase in flow energy occurs at the expense of internal energy. The internal energy may therefore decrease, often accompanied by a decrease in temperature.
+
+If the flow-energy term decreases, internal energy may increase, potentially producing a temperature rise.
+
+\textbf{\\ Ideal Gas Throttling}
+
+For an ideal gas,
+
+\begin{equation*}
+h=h(T)
+\end{equation*}
+
+Since throttling is isenthalpic,
+
+\begin{equation*}
+h_2=h_1
+\end{equation*}
+
+and therefore
+
+\begin{equation*}
+T_2=T_1
+\end{equation*}
+
+Thus, the temperature of an ideal gas remains constant during throttling.
+
+For real fluids, however, the temperature may decrease or increase during throttling. This behavior is associated with the Joule--Thomson effect.
+
+\textbf{\\ Important Caution}
+
+The assumption of negligible heat transfer is usually appropriate for small throttling devices. However, throttling devices with large exposed surface areas, such as some capillary tubes, may experience significant heat transfer.
+
+\mysubsection{}{Mixing Chambers}
+
+\insertfigure{0.5}{Figure : 8.png}
+
+A \textbf{mixing chamber} is a device in which two or more fluid streams mix together.
+
+The mixing region does not necessarily have to be a separate physical chamber. A T-elbow or Y-elbow can also function as a mixing chamber.
+
+A common application is the mixing of hot and cold water.
+
+\textbf{\\ Mass Balance}
+
+For a steady-flow mixing chamber,
+
+\begin{equation*}
+\sum_{\mathrm{in}}\dot{m}
+=
+\sum_{\mathrm{out}}\dot{m}
+\end{equation*}
+
+For two inlet streams and one outlet,
+
+\begin{equation*}
+\dot{m}_1+\dot{m}_2=\dot{m}_3
+\end{equation*}
+
+\textbf{\\ Energy Balance}
+
+Mixing chambers are usually well insulated:
+
+\begin{equation*}
+\dot{Q}\approx0
+\end{equation*}
+
+They generally have no work interaction:
+
+\begin{equation*}
+\dot{W}=0
+\end{equation*}
+    
+The kinetic and potential energies are also usually negligible:
+
+\begin{equation*}
+\Delta ke\approx0
+\end{equation*}
+
+\begin{equation*}
+\Delta pe\approx0
+\end{equation*}
+
+Therefore, the energy balance reduces to the balance of enthalpy carried by the incoming and outgoing streams.
+
+For two inlet streams and one outlet,
+
+\begin{equation*}
+\dot{m}_1h_1+\dot{m}_2h_2
+=
+\dot{m}_3h_3
+\end{equation*}
+
+Using the mass balance,
+
+\begin{equation*}
+\dot{m}_1h_1+\dot{m}_2h_2
+=
+(\dot{m}_1+\dot{m}_2)h_3
+\end{equation*}
+
+Thus, the outgoing mixture enthalpy is determined by the incoming streams and their mass flow rates.
+
+\mysubsection{}{Heat Exchangers}
+
+\insertfigure{0.7}{Figure : 9.png}
+
+A \textbf{heat exchanger} is a device in which two moving fluid streams exchange heat without mixing.
+
+Heat exchangers are widely used in engineering applications and are available in many configurations.
+
+\textbf{\\ Double-Tube Heat Exchanger}
+
+A simple heat exchanger consists of two concentric pipes.
+
+One fluid flows through the inner pipe while the other flows through the annular space between the two pipes.
+
+Heat is transferred through the wall separating the two fluids.
+
+Increasing the heat-transfer area can increase the rate of heat transfer.
+
+Mixing chambers can also be regarded as direct-contact heat exchangers.
+
+\textbf{\\ Mass Balance}
+
+Under steady operation, the mass flow rate of each fluid stream remains constant.
+
+For each individual fluid stream,
+
+\begin{equation*}
+\dot{m}_{\mathrm{in}}
+=
+\dot{m}_{\mathrm{out}}
+\end{equation*}
+
+Since the two fluids do not mix, the mass balance must be applied separately to each stream.
+
+\textbf{\\ Energy Characteristics}
+
+Heat exchangers typically have no work interaction:
+
+\begin{equation*}
+\dot{W}=0
+\end{equation*}
+
+The kinetic and potential energy changes are usually negligible:
+
+\begin{equation*}
+\Delta ke\approx0
+\end{equation*}
+
+\begin{equation*}
+\Delta pe\approx0
+\end{equation*}
+    
+The treatment of heat transfer depends on the choice of control volume.
+
+\textbf{\\ Entire Heat Exchanger as the Control Volume}
+
+If the entire heat exchanger is selected as the control volume and its outer shell is well insulated, little or no heat crosses the outer boundary:
+
+\begin{equation*}
+\dot{Q}_{\mathrm{CV}}\approx0
+\end{equation*}
+
+The energy transferred from the hot fluid is therefore received by the cold fluid.
+
+For negligible kinetic and potential-energy changes,
+
+\begin{equation*}
+\sum_{\mathrm{in}}\dot{m}h
+=
+\sum_{\mathrm{out}}\dot{m}h
+\end{equation*}
+
+For two streams,
+
+\begin{equation*}
+\dot{m}_1h_1+\dot{m}_3h_3
+=
+\dot{m}_2h_2+\dot{m}_4h_4
+\end{equation*}
+
+\textbf{\\ One Fluid as the Control Volume}
+
+If only one of the fluids is selected as the control volume, heat crosses the control surface.
+
+In this case,
+
+\begin{equation*}
+\dot{Q}\neq0
+\end{equation*}
+
+and $\dot{Q}$ represents the rate of heat transfer between the two fluids.
+
+The heat gained by one fluid is equal to the heat lost by the other fluid:
+
+\begin{equation*}
+\dot{Q}_{\mathrm{gained}}
+=
+\dot{Q}_{\mathrm{lost}}
+\end{equation*}
+
+Thus, the calculated heat transfer is independent of which fluid is selected as the control volume, provided the sign convention is handled consistently.
+
+\mysubsection{}{Pipe and Duct Flow}
+
+The transport of liquids and gases through pipes and ducts is important in many engineering applications.
+
+Pipe and duct flow normally satisfies steady-flow conditions during normal operation, excluding transient start-up and shut-down periods.
+
+The control volume can be selected to coincide with the interior of the portion of pipe or duct being analyzed.
+
+\textbf{\\ Heat Transfer in Pipe and Duct Flow}
+
+Heat transfer may be significant in pipe and duct flow, particularly when the pipe or duct is long.
+
+In some applications, heat transfer is desirable and may be the primary purpose of the flow.
+
+Examples include:
+
+\begin{itemize}
+    \item fluid flowing through furnace tubes,
+    \item refrigerant flowing through a freezer,
+    \item fluid flowing through heat exchangers.
+\end{itemize}
+
+In other applications, heat transfer is undesirable. Pipes and ducts are then insulated to minimize heat gain or heat loss.
+
+\textbf{\\ Work Interactions}
+
+Pipe or duct flow may involve work interactions when the control volume contains devices such as:
+
+\begin{itemize}
+    \item electrical heating elements,
+    \item fans,
+    \item pumps.
+\end{itemize}
+
+Electrical work can be supplied to the fluid through resistance heaters.
+
+Shaft work can be supplied through pumps or fans.
+
+Fan work is often relatively small and may be neglected when appropriate.
+
+\textbf{\\ Kinetic Energy}
+
+The velocities in ordinary pipe and duct flows are generally relatively low. Therefore, kinetic-energy changes are usually insignificant:
+
+\begin{equation*}
+\Delta ke\approx0
+\end{equation*}
+
+This is particularly true when the pipe or duct has a constant diameter and the heating effects are not associated with substantial velocity changes.
+
+However, kinetic-energy changes may become important for gas flow through ducts with variable cross-sectional areas, particularly when compressibility effects are significant.
+
+\textbf{\\ Potential Energy}
+
+The potential-energy term may become significant when the fluid undergoes a considerable elevation change while flowing through a pipe or duct.
+
+The general steady-flow energy equation remains
+
+\begin{equation*}
+\dot{Q}-\dot{W}
+=
+\dot{m}
+\left[
+h_2-h_1
++
+\frac{V_2^2-V_1^2}{2}
++
+g(z_2-z_1)
+\right]
+\end{equation*}
+
+When kinetic and potential energy changes are negligible,
+
+\begin{equation*}
+\dot{Q}-\dot{W}
+=
+\dot{m}(h_2-h_1)
+\end{equation*}
+
+For an ideal gas over a suitable temperature range,
+
+\begin{equation*}
+h_2-h_1
+\approx
+c_p(T_2-T_1)
+\end{equation*}
+
+Thus,
+
+\begin{equation*}
+\dot{Q}-\dot{W}
+=
+\dot{m}c_p(T_2-T_1)
+\end{equation*}
+
+when the kinetic and potential energy changes can be neglected.
+
+\newpage
+\textbf{\\ Device Analysis Strategy}
+
+For any steady-flow engineering device, the analysis should proceed by:
+
+\begin{enumerate}
+    \item Select the appropriate control volume.
+    \item Identify all inlets and exits.
+    \item Apply the steady-flow mass balance.
+    \item Identify heat and work interactions.
+    \item Determine whether kinetic-energy changes are significant.
+    \item Determine whether potential-energy changes are significant.
+    \item Apply the steady-flow energy equation.
+    \item Use appropriate thermodynamic property relations or tables to evaluate the required properties.
+\end{enumerate}
+
+The governing principle for all of these devices is conservation of mass and conservation of energy, with the specific form of the energy equation simplified according to the physical characteristics of each device.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\mysection{5.5}{Energy Analysis of Unsteady-Flow Processes}{5.5}
+
+\insertfigure{0.4}{Figure : 10.png}
+
+During a steady-flow process, the conditions within the control volume do not change with time. Therefore, the mass and energy contents of the control volume remain constant.
+
+In many engineering processes, however, the conditions within the control volume change with time. Such processes are called \textbf{unsteady-flow processes} or \textbf{transient-flow processes}.
+
+The steady-flow relations developed earlier cannot be directly applied to these processes. In an unsteady-flow analysis, it is necessary to keep track of:
+
+\begin{itemize}
+    \item the mass contained within the control volume,
+    \item the energy contained within the control volume,
+    \item the energy transferred across the control boundary by heat,
+    \item the energy transferred across the control boundary by work,
+    \item the energy carried into the control volume by mass flow,
+    \item the energy carried out of the control volume by mass flow.
+\end{itemize}
+
+\textbf{\\ Examples of Unsteady-Flow Processes}
+
+Common examples of unsteady-flow processes include:
+
+\begin{itemize}
+    \item charging a vessel from a supply line,
+    \item discharging a fluid from a pressurized vessel,
+    \item operating a gas turbine using pressurized gas stored in a vessel,
+    \item inflating tires or balloons,
+    \item operation of a pressure cooker.
+\end{itemize}
+
+Unlike steady-flow processes, unsteady-flow processes begin and end over a finite time interval.
+
+Therefore, the analysis is concerned with changes occurring over a time interval $\Delta t$, rather than only with rates of change.
+
+An unsteady-flow system is similar to a closed system in one important respect: the state of the system can change with time.
+
+However, unlike a closed system, the mass contained within the control volume generally does not remain constant.
+
+\mysubsection{}{Characteristics of Unsteady-Flow Systems}
+
+The principal differences between steady-flow and unsteady-flow systems are:
+
+\begin{center}
+    \begin{tabular}{|p{0.28\textwidth}|p{0.28\textwidth}|p{0.28\textwidth}|}
+        \hline
+        \textbf{Characteristic} &
+        \textbf{Steady Flow} &
+        \textbf{Unsteady Flow} \\
+        \hline
+        Conditions within CV &
+        Do not change with time &
+        Change with time \\
+        \hline
+        Mass within CV &
+        Remains constant &
+        May change with time \\
+        \hline
+        Energy within CV &
+        Remains constant &
+        May change with time \\
+        \hline
+        Process duration &
+        Continues under steady operating conditions &
+        Begins and ends over a finite time interval \\
+        \hline
+        Boundary &
+        Fixed in space, size, and shape &
+        May change in size and shape \\
+        \hline
+    \end{tabular}
+\end{center}
+
+Unsteady-flow control volumes are usually stationary in space, but their boundaries may move. Therefore, boundary work can occur in an unsteady-flow process.
+
+\mysubsection{}{Mass Balance for an Unsteady-Flow Process}
+
+The general mass balance for any system is
+
+\begin{equation}
+m_{\mathrm{in}}-m_{\mathrm{out}}
+=
+\Delta m_{\mathrm{system}}
+\end{equation}
+
+where
+
+\begin{equation}
+\Delta m_{\mathrm{system}}
+=
+m_{\mathrm{final}}-m_{\mathrm{initial}}
+\end{equation}
+
+Thus,
+
+\begin{equation}
+m_{\mathrm{in}}-m_{\mathrm{out}}
+=
+m_{\mathrm{final}}-m_{\mathrm{initial}}
+\end{equation}
+
+For a control volume, the mass balance can be written as
+
+\begin{equation}
+m_i-m_e
+=
+(m_2-m_1)_{\mathrm{CV}}
+\end{equation}
+
+where:
+
+\begin{itemize}
+    \item $i$ denotes inlet,
+    \item $e$ denotes exit,
+    \item $1$ denotes the initial state,
+    \item $2$ denotes the final state.
+\end{itemize}
+
+This equation states that the net mass entering the control volume is equal to the change in the mass contained within the control volume.
+
+\textbf{\\ Special Cases}
+
+Several terms in the mass balance may become zero depending on the process.
+
+If no mass enters the control volume,
+
+\begin{equation}
+m_i=0
+\end{equation}
+
+If no mass leaves the control volume,
+
+\begin{equation}
+m_e=0
+\end{equation}
+
+If the control volume is initially evacuated,
+
+\begin{equation}
+m_1=0
+\end{equation}
+
+These simplifications are particularly useful for charging and discharging processes.
+
+\mysubsection{}{Energy Changes in an Unsteady-Flow Process}
+
+The energy content of a control volume changes with time during an unsteady-flow process.
+
+The change in energy depends on:
+
+\begin{itemize}
+    \item heat transfer across the control boundary,
+    \item work transfer across the control boundary,
+    \item energy transported into the control volume by incoming mass,
+    \item energy transported out of the control volume by exiting mass.
+\end{itemize}
+
+Therefore, an unsteady-flow analysis must account for both the energy crossing the control boundary and the energy stored within the control volume.
+
+The general energy balance is
+
+\begin{equation}
+E_{\mathrm{in}}-E_{\mathrm{out}}
+=
+\Delta E_{\mathrm{system}}
+\end{equation}
+
+or,
+
+\begin{equation}
+\boxed{
+\text{Net energy entering}
+=
+\text{Change in energy stored}
+}
+\end{equation}
+
+The energy transferred across the boundary may occur through heat, work, and mass flow.
+
+\mysubsection{}{Uniform-Flow Process}
+
+A general unsteady-flow process can be difficult to analyze because the properties of the fluid entering and leaving the control volume may vary with time.
+
+Most practical unsteady-flow processes can be approximated as a \textbf{uniform-flow process}.
+
+The uniform-flow process is an idealization in which the fluid properties at each inlet and exit are assumed to be uniform and steady.
+
+Thus, the fluid properties:
+
+\begin{itemize}
+    \item do not change with time at an inlet or exit,
+    \item do not vary across the cross section of an inlet or exit.
+\end{itemize}
+
+If the properties are not perfectly uniform, they may be averaged and treated as constant for the entire process.
+
+\textbf{\\ Important Distinction}
+
+In a uniform-flow process, the control volume itself may change state with time even though the properties of the streams entering and leaving it are treated as constant.
+
+Therefore,
+
+\begin{equation*}
+\text{Uniform flow}
+\neq
+\text{Steady flow}
+\end{equation*}
+
+A uniform-flow process is still an \textbf{unsteady-flow process} because the conditions within the control volume may change with time.
+
+\textbf{\\ State of the Exit Fluid}
+
+At any instant, the state of the mass leaving the control volume is taken to be the same as the state of the mass within the control volume at that instant.
+
+The initial and final states of the control volume can therefore be determined from the initial and final thermodynamic properties.
+
+For a simple compressible system, the state at equilibrium is specified by two independent intensive properties.
+
+\mysubsection{}{Energy of Flowing and Nonflowing Fluid}
+
+A useful distinction must be made between fluid flowing across the control boundary and fluid stored within the control volume.
+
+The energy of a flowing fluid stream per unit mass is represented by
+
+\begin{equation}
+\theta
+=
+h+ke+pe
+\end{equation}
+
+where
+
+\begin{equation}
+ke=\frac{V^2}{2}
+\end{equation}
+
+and
+
+\begin{equation}
+pe=gz
+\end{equation}
+
+Therefore,
+
+\begin{equation}
+\boxed{
+\theta
+=
+h+\frac{V^2}{2}+gz
+}
+\end{equation}
+
+For the nonflowing fluid contained within the control volume, the energy per unit mass is
+
+\begin{equation}
+e
+=
+u+ke+pe
+\end{equation}
+
+or,
+
+\begin{equation}
+\boxed{
+e
+=
+u+\frac{V^2}{2}+gz
+}
+\end{equation}
+
+The important distinction is that:
+
+\begin{equation*}
+\boxed{
+\text{Flowing fluid: } h
+}
+\end{equation*}
+
+whereas
+
+\begin{equation*}
+\boxed{
+\text{Nonflowing fluid: } u
+}
+\end{equation*}
+
+The enthalpy $h$ includes the flow energy associated with pushing fluid across the control boundary.
+
+\mysubsection{}{General Energy Equation for a Uniform-Flow Process}
+
+The energy balance for a uniform-flow process is
+
+\begin{equation}
+\left(
+Q_{\mathrm{in}}
++
+W_{\mathrm{in}}
++
+\sum_{\mathrm{in}}m\theta
+\right)
+-
+\left(
+Q_{\mathrm{out}}
++
+W_{\mathrm{out}}
++
+\sum_{\mathrm{out}}m\theta
+\right)
+=
+(m_2e_2-m_1e_1)_{\mathrm{system}}
+\end{equation}
+
+where
+
+\begin{equation}
+\theta=h+ke+pe
+\end{equation}
+
+and
+
+\begin{equation}
+e=u+ke+pe
+\end{equation}
+
+This equation accounts for:
+
+\begin{itemize}
+    \item heat entering the control volume,
+    \item work entering the control volume,
+    \item energy carried in by mass,
+    \item heat leaving the control volume,
+    \item work leaving the control volume,
+    \item energy carried out by mass,
+    \item change in energy stored within the control volume.
+\end{itemize}
+
+\mysubsection{}{Negligible Kinetic and Potential Energy Changes}
+
+In many unsteady-flow processes, the kinetic and potential energy changes associated with the control volume and the fluid streams are negligible.
+
+Thus,
+
+\begin{equation}
+\Delta ke\approx0
+\end{equation}
+
+and
+
+\begin{equation}
+\Delta pe\approx0
+\end{equation}
+
+Under these conditions,
+
+\begin{equation}
+\boxed{
+Q-W
+=
+\sum_{\mathrm{out}}mh
+-
+\sum_{\mathrm{in}}mh
++
+(m_2u_2-m_1u_1)_{\mathrm{system}}
+}
+\end{equation}
+
+where
+
+\begin{equation}
+Q=Q_{\mathrm{net,in}}
+=
+Q_{\mathrm{in}}-Q_{\mathrm{out}}
+\end{equation}
+
+and
+
+\begin{equation}
+W=W_{\mathrm{net,out}}
+=
+W_{\mathrm{out}}-W_{\mathrm{in}}
+\end{equation}
+
+This is the most useful form of the uniform-flow energy equation when kinetic and potential energy changes are negligible.
+
+\mysubsection{}{Physical Meaning of the Simplified Energy Equation}
+
+The simplified equation
+
+\begin{equation}
+Q-W
+=
+\sum_{\mathrm{out}}mh
+-
+\sum_{\mathrm{in}}mh
++
+(m_2u_2-m_1u_1)_{\mathrm{system}}
+\end{equation}
+
+can be interpreted as follows:
+
+\begin{center}
+\boxed{
+\begin{array}{c}
+\text{Net heat input}\\
+-\text{Net work output}
+\end{array}
+=
+\begin{array}{c}
+\text{Energy carried out}\\
+-\text{Energy carried in}
+\end{array}
++
+\begin{array}{c}
+\text{Change in energy}\\
+\text{stored in CV}
+\end{array}
+}
+\end{center}
+
+Therefore, unlike a steady-flow device, an unsteady-flow control volume can store or release energy as its internal state changes.
+
+\mysubsection{}{Reduction to the Closed-System Energy Equation}
+
+Consider an unsteady-flow control volume in which all inlet and exit openings are closed.
+
+Then,
+
+\begin{equation}
+m_i=m_e=0
+\end{equation}
+
+and the mass within the control volume remains constant:
+
+\begin{equation}
+m_1=m_2=m
+\end{equation}
+
+The uniform-flow energy equation therefore reduces to the closed-system energy equation.
+
+When kinetic and potential energy changes are negligible,
+
+\begin{equation}
+Q-W
+=
+U_2-U_1
+\end{equation}
+
+or,
+
+\begin{equation}
+\boxed{
+Q-W=\Delta U
+}
+\end{equation}
+
+Thus, the uniform-flow formulation contains the closed-system energy equation as a special case.
+
+\mysubsection{}{Work Interactions in Unsteady-Flow Processes}
+
+An unsteady-flow system may involve several forms of work simultaneously.
+
+Possible work interactions include:
+
+\begin{itemize}
+    \item boundary work,
+    \item electrical work,
+    \item shaft work.
+\end{itemize}
+
+\textbf{\\ Boundary Work}
+
+If the control volume has a moving boundary, boundary work may occur.
+
+The boundary work is associated with the movement of the boundary under pressure.
+
+For a closed-system representation,
+
+\begin{equation}
+W_b
+=
+\int P\,dV
+\end{equation}
+
+with the sign determined according to the selected work convention.
+
+\textbf{\\ Electrical Work}
+
+Electrical energy may be supplied to or removed from the control volume through electrical devices such as resistance heaters.
+
+\textbf{\\ Shaft Work}
+
+Shaft work may occur when a rotating device such as an agitator or other shaft-driven mechanism interacts with the control volume.
+
+Therefore, an unsteady-flow process should not automatically be assumed to have only one type of work interaction.
+
+\mysubsection{}{Charging of a Rigid Tank}
+
+Charging a tank from a supply line is a typical unsteady-flow process.
+
+During charging:
+
+\begin{itemize}
+    \item mass enters the control volume,
+    \item the mass contained within the tank increases,
+    \item the energy stored in the tank changes,
+    \item the properties inside the tank may change with time.
+\end{itemize}
+
+For a tank with one inlet and no exits,
+
+\begin{equation}
+m_i=m_2-m_1
+\end{equation}
+
+If the tank is initially evacuated,
+
+\begin{equation}
+m_1=0
+\end{equation}
+
+and therefore,
+
+\begin{equation}
+m_i=m_2
+\end{equation}
+
+For a rigid, insulated tank with negligible kinetic and potential energy changes and no work interactions,
+
+\begin{equation}
+Q=0
+\end{equation}
+
+\begin{equation}
+W=0
+\end{equation}
+
+The energy balance becomes
+
+\begin{equation}
+m_i h_i
+=
+m_2u_2-m_1u_1
+\end{equation}
+
+For an initially evacuated tank,
+
+\begin{equation}
+m_i h_i
+=
+m_2u_2
+\end{equation}
+
+Using the mass balance,
+
+\begin{equation}
+m_i=m_2
+\end{equation}
+
+therefore,
+
+\begin{equation}
+\boxed{
+u_2=h_i
+}
+\end{equation}
+
+This result illustrates an important physical concept: the enthalpy carried into the tank by the flowing fluid can become internal energy after the fluid comes to rest inside the control volume.
+
+\textbf{\\ Flow Energy During Tank Charging}
+
+The relation
+
+\begin{equation}
+h=u+Pv
+\end{equation}
+
+shows that enthalpy consists of internal energy and flow energy.
+
+Thus,
+
+\begin{equation}
+h=u+Pv
+\end{equation}
+
+When the fluid enters a tank and ceases to flow, the flow-energy contribution can be converted into internal energy.
+
+Therefore, the temperature and internal energy of the fluid inside the tank can increase even when the tank is insulated and no work is supplied.
+
+\mysubsection{}{Alternative Closed-System Interpretation of Tank Charging}
+
+The charging process can also be analyzed by imagining a closed system consisting of:
+
+\begin{itemize}
+    \item the fluid already inside the tank,
+    \item the fluid destined to enter the tank,
+    \item an imaginary moving boundary in the supply line.
+\end{itemize}
+
+In this interpretation, no mass crosses the boundary of the closed system.
+
+The fluid upstream of the tank pushes the fluid into the tank through boundary work.
+
+The boundary work can be expressed as
+
+\begin{equation}
+W_{b,\mathrm{in}}
+=
+-\int_1^2 P_i\,dV
+\end{equation}
+
+For constant pressure at the imaginary moving boundary,
+
+\begin{equation}
+W_{b,\mathrm{in}}
+=
+-P_i(V_2-V_1)
+\end{equation}
+
+The resulting energy balance leads to
+
+\begin{equation}
+u_2
+=
+u_i+P_iv_i
+\end{equation}
+
+Since
+
+\begin{equation}
+h_i=u_i+P_iv_i
+\end{equation}
+
+we obtain
+
+\begin{equation}
+\boxed{
+u_2=h_i
+}
+\end{equation}
+
+Thus, the closed-system and uniform-flow approaches produce the same result.
+
+The physical interpretation is also the same: \textbf{flow energy is converted into internal energy when the fluid enters the tank and becomes nonflowing fluid}.
+
+\mysubsection{}{Discharging of a Tank}
+
+Discharging a tank is another important unsteady-flow process.
+
+During discharge:
+
+\begin{itemize}
+    \item mass leaves the control volume,
+    \item the mass remaining inside decreases,
+    \item the energy stored inside the control volume changes,
+    \item the state of the fluid inside the tank may change with time.
+\end{itemize}
+
+For a tank with no inlet and one exit,
+
+\begin{equation}
+m_e=m_1-m_2
+\end{equation}
+
+where $m_e$ is the mass discharged.
+
+For a rigid tank,
+
+\begin{equation}
+W_b=0
+\end{equation}
+
+because the tank volume does not change.
+
+If the tank is insulated,
+
+\begin{equation}
+Q\approx0
+\end{equation}
+
+When kinetic and potential energy changes are negligible, the energy balance takes the form
+
+\begin{equation}
+W_{\mathrm{in}}-m_eh_e
+=
+m_2u_2-m_1u_1
+\end{equation}
+
+For an electrical heater supplying work to the tank,
+
+\begin{equation}
+W_{e,\mathrm{in}}-m_eh_e
+=
+m_2u_2-m_1u_1
+\end{equation}
+
+This equation shows that electrical energy supplied to the tank can compensate for the energy carried away by the discharged fluid.
+
+\mysubsection{}{Constant-Temperature Discharge}
+
+If the fluid remaining in the tank is maintained at constant temperature,
+
+\begin{equation}
+T_2=T_1
+\end{equation}
+
+For an ideal gas, internal energy depends only on temperature:
+
+\begin{equation}
+u=u(T)
+\end{equation}
+
+Therefore, constant temperature implies
+
+\begin{equation}
+u_2=u_1
+\end{equation}
+
+The energy required to maintain the temperature is then determined from the uniform-flow energy balance.
+
+This type of process can be approximated as a uniform-flow process when the exit conditions remain constant even though the conditions within the tank are changing.
+
+\newpage
+\textbf{\\ Analysis Procedure for Unsteady-Flow Problems}
+
+For an unsteady-flow process, use the following systematic procedure:
+
+\begin{enumerate}
+    \item Identify the control volume.
+    
+    \item Determine whether the process is charging, discharging, or involves multiple inlets and exits.
+    
+    \item Write the mass balance:
+    \[
+    m_i-m_e=m_2-m_1
+    \]
+    
+    \item Identify all heat and work interactions.
+    
+    \item Determine whether kinetic and potential energy changes are negligible.
+    
+    \item Write the general uniform-flow energy equation.
+    
+    \item Apply the appropriate simplifications.
+    
+    \item Distinguish between the enthalpy of flowing streams and the internal energy of fluid stored inside the control volume.
+    
+    \item Use the initial and final states of the control volume to determine the required thermodynamic properties.
+    
+    \item Check whether the final equation is physically consistent with the direction of mass and energy transfer.
+\end{enumerate}
+
+\textbf{\\ Central Idea of Section 5.5}
+
+The fundamental difference between steady-flow and unsteady-flow analysis is the presence of \textbf{energy and mass accumulation within the control volume}.
+
+For steady flow,
+
+\begin{equation*}
+\boxed{
+\text{No accumulation within CV}
+}
+\end{equation*}
+
+whereas for unsteady flow,
+
+\begin{equation*}
+\boxed{
+\text{Mass and energy within CV may change with time}
+}
+\end{equation*}
+
+Therefore, an unsteady-flow analysis must simultaneously account for:
+
+\begin{equation*}
+\boxed{
+\text{Mass transfer}
++
+\text{Energy transfer}
++
+\text{Energy storage}
+}
+\end{equation*}
+
+This is the foundation for analyzing charging tanks, discharging tanks, filling and emptying vessels, and other transient-flow processes.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\mysection{TOSI : }{General Energy Equation}{5.6}
+
+
+\begin{center}
+    \huge{This topic will be discussed in Fluid Mechanics}
+\end{center}
+
+\end{document}

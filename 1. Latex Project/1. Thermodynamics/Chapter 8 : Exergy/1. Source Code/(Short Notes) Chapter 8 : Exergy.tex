@@ -1,0 +1,841 @@
+\documentclass[12pt]{article}
+
+\usepackage[a4paper, top=2cm, bottom=2cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,fit,calc}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{siunitx}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{fontspec}
+\usetikzlibrary{decorations.pathmorphing}
+\usepackage{pdflscape}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage[table]{xcolor}
+\usepackage{hyperref}
+\usepackage{bookmark}
+\usepackage{pdfpages}
+
+% ---------------- FONTS ----------------
+\setmainfont[
+    UprightFont = Handlee-Regular.ttf,
+    AutoFakeBold = 2.5
+]{Handlee}
+
+\newfontfamily\headingfont{PT.ttf}
+\setmonofont{DejaVu Sans Mono}
+
+% ---------------- HANDWRITTEN MATH ----------------
+\usepackage{mathastext}
+\Mathastext
+\everymath{\displaystyle}
+
+% ---------------- GENERAL ----------------
+\setlength{\parindent}{0pt}
+\pagenumbering{gobble}
+\linespread{1.2}
+
+\newcommand{\mychapter}[2]{%
+    \phantomsection
+    \hypertarget{#2}{}%
+    \bookmark[level=0,dest=#2]{#1}%
+    \begin{center}
+        {\headingfont\Huge #1}
+        \par
+        \vspace{4pt}
+        \hrule
+    \end{center}
+}
+
+\newcommand{\mysection}[3]{%
+    \phantomsection
+    \hypertarget{#3}{}%
+    \bookmark[level=1,dest=#3]{#1\space #2}%
+    \newpage
+    \noindent{\headingfont\Large #1\space #2\par}
+    \vspace{4pt}
+    \hrule
+    \vspace{15pt}
+}
+
+\newcommand{\mysubsection}[2]{%
+    \vspace{5px}
+    \noindent{\headingfont\large #1\space #2\par}
+    \vspace{4pt}
+    \hrule
+    \vspace{15pt}
+}
+
+\begin{document}
+
+\mychapter{Chapter 4 : Energy Analysis of Closed System}{6f4y5kdh}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.25}
+\setlength{\tabcolsep}{8pt}
+
+\begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}p{2.0cm}|X|}
+\hline
+\textbf{Section} & \textbf{Core Revision Focus} \\
+\hline
+
+4.1 & Examines how energy is transferred through the expansion and compression of system boundaries. \\
+\hline
+
+4.2 & Establishes how conservation of energy governs processes in closed thermodynamic systems. \\
+\hline
+
+4.3 & Introduces specific heats as measures of how thermodynamic energy properties vary with temperature. \\
+\hline
+
+4.4 & Develops the temperature-based energy-property relations used to analyze ideal gases. \\
+\hline
+
+4.5 & Applies energy-property relations to substances whose volume changes are negligible. \\
+\hline
+
+
+\end{tabularx}
+\end{center}
+
+\mysection{4.1}{Moving Boundary Work}{4.1}
+
+\mysubsection{}{Core Relations}
+
+\textbf{Quasi-equilibrium process:} system remains nearly in equilibrium at every instant; a continuous state path and well-defined $P$--$V$ relation exist.
+
+For a piston--cylinder:
+\begin{equation*}
+\delta W_b=F\,ds=P A\,ds=P\,dV
+\end{equation*}
+
+\begin{equation*}
+W_b=\int_1^2P\,dV
+\end{equation*}
+
+\begin{itemize}
+    \item $P$ = absolute pressure.
+    \item Expansion: $dV>0\Rightarrow W_b>0$ \; (work by system).
+    \item Compression: $dV<0\Rightarrow W_b<0$ \; (work on system).
+    \item Boundary work is a \textbf{path function}.
+\end{itemize}
+
+For nonquasi-equilibrium motion:
+\begin{equation*}
+W_b=\int_1^2P_i\,dV
+\end{equation*}
+where $P_i$ is the pressure acting on the inner face of the piston.
+
+\mysubsection{}{Graphical Interpretation}
+
+For a quasi-equilibrium process:
+\begin{equation*}
+dA=P\,dV
+\end{equation*}
+
+\begin{equation*}
+A=\int_1^2P\,dV=W_b
+\end{equation*}
+
+\begin{itemize}
+    \item Area under a $P$--$V$ process curve $\rightarrow$ magnitude of boundary work.
+    \item Area on a $P$--$v$ diagram $\rightarrow$ boundary work per unit mass.
+    \item For a cycle, enclosed $P$--$V$ area $\rightarrow$ magnitude of net work.
+\end{itemize}
+
+\begin{equation*}
+W_{\mathrm{net}}
+=
+W_{\mathrm{expansion}}-W_{\mathrm{compression}}
+\end{equation*}
+
+\mysubsection{}{Experimental and Constant-Volume Cases}
+
+If $P=f(V)$ is unavailable analytically but experimental $P$--$V$ data are known:
+\begin{enumerate}
+    \item plot the data,
+    \item construct the process curve,
+    \item determine the area graphically.
+\end{enumerate}
+
+Constant volume:
+\begin{equation*}
+dV=0
+\end{equation*}
+\begin{equation*}
+W_b=0
+\end{equation*}
+
+\mysubsection{}{Constant-Pressure Process}
+
+\begin{equation*}
+W_b=P_0(V_2-V_1)
+\end{equation*}
+
+Using $V=mv$:
+\begin{equation*}
+W_b=mP_0(v_2-v_1)
+\end{equation*}
+
+\mysubsection{}{Isothermal Ideal-Gas Process}
+
+For constant $T$:
+\begin{equation*}
+PV=mRT_0=C
+\end{equation*}
+
+\begin{equation*}
+P=\frac{C}{V}
+\end{equation*}
+
+Hence,
+\begin{equation*}
+W_b=C\ln\left(\frac{V_2}{V_1}\right)
+\end{equation*}
+
+\begin{equation*}
+W_b=P_1V_1\ln\left(\frac{V_2}{V_1}\right)
+\end{equation*}
+
+For an ideal gas:
+\begin{equation*}
+P_1V_1=P_2V_2=mRT_0
+\end{equation*}
+
+\begin{equation*}
+\frac{V_2}{V_1}=\frac{P_1}{P_2}
+\end{equation*}
+
+Compression $\Rightarrow V_2<V_1\Rightarrow W_b<0$.
+
+\mysubsection{}{Polytropic Process}
+
+\begin{equation*}
+PV^n=C
+\end{equation*}
+
+For $n\neq1$:
+\begin{equation*}
+W_b=
+\frac{P_2V_2-P_1V_1}{1-n}
+\end{equation*}
+
+For an ideal gas:
+\begin{equation*}
+W_b=
+\frac{mR(T_2-T_1)}{1-n}
+\end{equation*}
+
+\mysubsection{}{Expansion Against a Linear Spring}
+
+Spring force:
+\begin{equation*}
+F=kx
+\end{equation*}
+
+Spring pressure:
+\begin{equation*}
+P_{\mathrm{spring}}=\frac{F}{A}
+\end{equation*}
+
+Since spring force varies linearly with displacement, the $P$--$V$ path is a straight line.
+
+Spring work:
+\begin{equation*}
+W_{\mathrm{spring}}
+=
+\frac{1}{2}k(x_2^2-x_1^2)
+\end{equation*}
+
+Total work:
+\begin{equation*}
+W_{\mathrm{total}}
+=
+P_1(V_2-V_1)
++
+\frac{1}{2}k(x_2^2-x_1^2)
+\end{equation*}
+
+\mysubsection{}{Energy Destination of Boundary Work}
+
+Boundary work transfers energy to other mechanisms, e.g.
+\begin{equation*}
+W_b=
+W_{\mathrm{friction}}
++
+W_{\mathrm{atm}}
++
+W_{\mathrm{crank}}
+\end{equation*}
+
+\mysection{4.2}{Energy Balance for Closed Systems}{4.2}
+
+\mysubsection{}{General Energy Balance}
+
+Conservation of energy:
+\begin{equation*}
+E_{\mathrm{in}}-E_{\mathrm{out}}
+=
+\Delta E_{\mathrm{system}}
+\end{equation*}
+
+Total system energy may include internal, kinetic, potential, and other forms.
+
+Rate form:
+\begin{equation*}
+\dot E_{\mathrm{in}}-\dot E_{\mathrm{out}}
+=
+\frac{dE_{\mathrm{system}}}{dt}
+\end{equation*}
+
+For constant rates:
+\begin{equation*}
+Q=\dot Q\,\Delta t,
+\qquad
+W=\dot W\,\Delta t,
+\qquad
+\Delta E=
+\frac{dE}{dt}\Delta t
+\end{equation*}
+
+Per unit mass:
+\begin{equation*}
+e_{\mathrm{in}}-e_{\mathrm{out}}
+=
+\Delta e_{\mathrm{system}}
+\end{equation*}
+
+\mysubsection{}{Cycle and First-Law Forms}
+
+For a cycle:
+\begin{equation*}
+\Delta E_{\mathrm{system}}=0
+\end{equation*}
+
+\begin{equation*}
+E_{\mathrm{in}}=E_{\mathrm{out}}
+\end{equation*}
+
+For a closed-system cycle:
+\begin{equation*}
+W_{\mathrm{net,out}}
+=
+Q_{\mathrm{net,in}}
+\end{equation*}
+
+\begin{equation*}
+\dot W_{\mathrm{net,out}}
+=
+\dot Q_{\mathrm{net,in}}
+\end{equation*}
+
+\textbf{Classical sign convention:}
+\begin{itemize}
+    \item $Q>0$: heat transfer into system.
+    \item $W>0$: work done by system.
+\end{itemize}
+
+Thus:
+\begin{equation*}
+Q-W=\Delta E
+\end{equation*}
+
+where
+\begin{equation*}
+Q=Q_{\mathrm{in}}-Q_{\mathrm{out}}
+\end{equation*}
+and
+\begin{equation*}
+W=W_{\mathrm{out}}-W_{\mathrm{in}}
+\end{equation*}
+
+Negative $Q$ or $W$ means the actual direction is opposite to the assumed positive direction.
+
+\mysubsection{}{Stationary Closed System}
+
+If kinetic and potential energy changes are negligible:
+\begin{equation*}
+Q-W=\Delta U
+\end{equation*}
+
+Per unit mass:
+\begin{equation*}
+q-w=\Delta e
+\end{equation*}
+
+Differential form:
+\begin{equation*}
+\delta q-\delta w=de
+\end{equation*}
+
+Heat and work are both \textbf{energy-transfer mechanisms}, not properties of the system.
+
+\mysubsection{}{Unrestrained Expansion}
+
+Expansion into a vacuum:
+\begin{equation*}
+P_{\mathrm{ext}}=0
+\end{equation*}
+
+Therefore:
+\begin{equation*}
+W_b=\int_1^2P_{\mathrm{ext}}\,dV=0
+\end{equation*}
+
+If no other work is present:
+\begin{equation*}
+W=0
+\end{equation*}
+
+For a stationary closed system:
+\begin{equation*}
+Q=\Delta U
+\end{equation*}
+
+\textbf{Important:} work depends on the chosen system boundary; including the evacuated space can make the boundary fixed.
+
+\mysection{4.3}{Specific Heats}{4.3}
+
+\mysubsection{}{Definitions}
+
+Specific heat = energy required to raise the temperature of unit mass by one degree under a specified condition.
+
+\begin{equation*}
+c_v=
+\left(\frac{\partial u}{\partial T}\right)_v
+\end{equation*}
+
+\begin{equation*}
+c_p=
+\left(\frac{\partial h}{\partial T}\right)_p
+\end{equation*}
+
+Hence:
+\begin{itemize}
+    \item $c_v$ describes the variation of internal energy with $T$ at constant $v$.
+    \item $c_p$ describes the variation of enthalpy with $T$ at constant $P$.
+    \item Generally, $c_p>c_v$.
+\end{itemize}
+
+These are \textbf{property relations}; they are not restricted to processes actually occurring at constant $v$ or constant $P$.
+
+\mysubsection{}{State Dependence and Units}
+
+In general, specific heats depend on the state of the substance.
+
+Common units:
+\begin{equation*}
+\mathrm{\frac{kJ}{kg\cdot{}^\circ C}}
+\qquad\text{or}\qquad
+\mathrm{\frac{kJ}{kg\cdot K}}
+\end{equation*}
+
+Since temperature intervals have equal magnitude:
+\begin{equation*}
+\Delta T(^\circ\mathrm C)=\Delta T(\mathrm K)
+\end{equation*}
+
+Molar specific heats:
+\begin{equation*}
+\bar c_v,\qquad \bar c_p
+\end{equation*}
+
+\mysection{4.4}{Internal Energy, Enthalpy, and Specific Heats of Ideal Gases}{4.4}
+
+\mysubsection{}{Ideal-Gas Relations}
+
+\begin{equation*}
+Pv=RT
+\end{equation*}
+
+For an ideal gas:
+\begin{equation*}
+u=u(T)
+\end{equation*}
+
+Enthalpy definition:
+\begin{equation*}
+h=u+Pv
+\end{equation*}
+
+Since $Pv=RT$:
+\begin{equation*}
+h=u+RT
+\end{equation*}
+
+Therefore:
+\begin{equation*}
+h=h(T)
+\end{equation*}
+
+\textbf{Key result:} for an ideal gas, $u$, $h$, $c_v$, and $c_p$ depend only on temperature.
+
+\mysubsection{}{Ideal-Gas Specific Heats}
+
+\begin{equation*}
+c_v=c_v(T)
+\end{equation*}
+
+\begin{equation*}
+c_p=c_p(T)
+\end{equation*}
+
+Differential relations:
+\begin{equation*}
+du=c_v(T)\,dT
+\end{equation*}
+
+\begin{equation*}
+dh=c_p(T)\,dT
+\end{equation*}
+
+Changes between states:
+\begin{equation*}
+\Delta u=
+\int_{T_1}^{T_2}c_v(T)\,dT
+\end{equation*}
+
+\begin{equation*}
+\Delta h=
+\int_{T_1}^{T_2}c_p(T)\,dT
+\end{equation*}
+
+Thus, $\Delta u$ and $\Delta h$ depend only on $T_1,T_2$, not on the process path.
+
+\mysubsection{}{Average Specific Heat}
+
+For moderate/small temperature ranges:
+\begin{equation*}
+\Delta u
+\approx
+c_{v,\mathrm{avg}}(T_2-T_1)
+\end{equation*}
+
+\begin{equation*}
+\Delta h
+\approx
+c_{p,\mathrm{avg}}(T_2-T_1)
+\end{equation*}
+
+Useful temperature estimate:
+\begin{equation*}
+T_{\mathrm{avg}}
+=
+\frac{T_1+T_2}{2}
+\end{equation*}
+
+or
+\begin{equation*}
+c_{\mathrm{avg}}
+=
+\frac{c_1+c_2}{2}
+\end{equation*}
+
+\textbf{Important:}
+\begin{equation*}
+\Delta u=c_{v,\mathrm{avg}}\Delta T
+\end{equation*}
+and
+\begin{equation*}
+\Delta h=c_{p,\mathrm{avg}}\Delta T
+\end{equation*}
+are applicable to \textbf{any ideal-gas process}; the subscripts do not specify the process path.
+
+\mysubsection{}{Monatomic Ideal Gases}
+
+Specific heats are essentially constant over a wide range:
+\begin{equation*}
+\Delta u=c_v(T_2-T_1)
+\end{equation*}
+
+\begin{equation*}
+\Delta h=c_p(T_2-T_1)
+\end{equation*}
+
+\mysubsection{}{Methods for Determining $\Delta u$ and $\Delta h$}
+
+\begin{enumerate}
+    \item \textbf{Property tables}
+    \begin{equation*}
+    \Delta u=u_2-u_1,
+    \qquad
+    \Delta h=h_2-h_1
+    \end{equation*}
+
+    \item \textbf{Temperature-dependent specific heats}
+    \begin{equation*}
+    \Delta u=\int_{T_1}^{T_2}c_v(T)\,dT,
+    \qquad
+    \Delta h=\int_{T_1}^{T_2}c_p(T)\,dT
+    \end{equation*}
+
+    \item \textbf{Average specific heats}
+    \begin{equation*}
+    \Delta u\approx c_{v,\mathrm{avg}}\Delta T,
+    \qquad
+    \Delta h\approx c_{p,\mathrm{avg}}\Delta T
+    \end{equation*}
+\end{enumerate}
+
+\mysubsection{}{Reference State}
+
+Reference values of $u$ and $h$ are arbitrary; only differences matter:
+\begin{equation*}
+\Delta u=u_2-u_1
+\end{equation*}
+
+\begin{equation*}
+\Delta h=h_2-h_1
+\end{equation*}
+
+\mysubsection{}{Specific-Heat Relations}
+
+From
+\begin{equation*}
+h=u+RT
+\end{equation*}
+
+\begin{equation*}
+dh=du+R\,dT
+\end{equation*}
+
+Therefore:
+\begin{equation*}
+c_p=c_v+R
+\end{equation*}
+
+\begin{equation*}
+c_v=c_p-R
+\end{equation*}
+
+On a molar basis:
+\begin{equation*}
+\bar c_p=\bar c_v+R_u
+\end{equation*}
+
+Specific heat ratio:
+\begin{equation*}
+k=\frac{c_p}{c_v}
+\end{equation*}
+
+$k$ varies mildly with temperature and may often be treated as constant over a limited temperature range.
+
+\mysection{4.5}{Internal Energy, Enthalpy, and Specific Heats of Solids and Liquids}{4.5}
+
+\mysubsection{}{Incompressible Substances}
+
+For an incompressible substance:
+\begin{equation*}
+v=\text{constant}
+\end{equation*}
+
+or
+\begin{equation*}
+\rho=\text{constant}
+\end{equation*}
+
+Solids and liquids are commonly approximated as incompressible.
+
+\mysubsection{}{Specific Heat and Internal Energy}
+
+For incompressible substances:
+\begin{equation*}
+c_p=c_v=c
+\end{equation*}
+
+and
+\begin{equation*}
+c=c(T)
+\end{equation*}
+
+Internal-energy change:
+\begin{equation*}
+du=c(T)\,dT
+\end{equation*}
+
+\begin{equation*}
+\Delta u=
+\int_{T_1}^{T_2}c(T)\,dT
+\end{equation*}
+
+For approximately constant $c$:
+\begin{equation*}
+\Delta u
+\approx
+c_{\mathrm{avg}}(T_2-T_1)
+\end{equation*}
+
+\mysubsection{}{Enthalpy of Incompressible Substances}
+
+\begin{equation*}
+h=u+Pv
+\end{equation*}
+
+Since
+\begin{equation*}
+dv=0
+\end{equation*}
+
+then
+\begin{equation*}
+dh=du+v\,dP
+\end{equation*}
+
+Using $du=c(T)\,dT$:
+\begin{equation*}
+dh=c(T)\,dT+v\,dP
+\end{equation*}
+
+Thus:
+\begin{equation*}
+\Delta h=\Delta u+v\Delta P
+\end{equation*}
+
+Average-$c$ form:
+\begin{equation*}
+\Delta h
+\approx
+c_{\mathrm{avg}}\Delta T+v\Delta P
+\end{equation*}
+
+\begin{equation*}
+\Delta h
+\approx
+c_{\mathrm{avg}}(T_2-T_1)+v(P_2-P_1)
+\end{equation*}
+
+\mysubsection{}{Special Cases}
+
+\textbf{Solids:}
+\begin{equation*}
+v\Delta P\approx0
+\end{equation*}
+
+Therefore:
+\begin{equation*}
+\Delta h\approx\Delta u
+\end{equation*}
+
+\begin{equation*}
+\Delta h
+\approx
+c_{\mathrm{avg}}(T_2-T_1)
+\end{equation*}
+
+\textbf{Liquid at constant pressure:}
+\begin{equation*}
+\Delta P=0
+\end{equation*}
+
+\begin{equation*}
+\Delta h=\Delta u
+\end{equation*}
+
+\begin{equation*}
+\Delta h
+\approx
+c_{\mathrm{avg}}(T_2-T_1)
+\end{equation*}
+
+\textbf{Liquid at constant temperature:}
+\begin{equation*}
+\Delta T=0
+\end{equation*}
+
+\begin{equation*}
+\Delta u=0
+\end{equation*}
+
+\begin{equation*}
+\Delta h=v\Delta P
+\end{equation*}
+
+\mysubsection{}{Compressed Liquid Enthalpy}
+
+Approximation from saturated-liquid properties at the same temperature:
+\begin{equation*}
+h_{P,T}
+\approx
+h_f(T)
++
+v_f(T)
+\left[P-P_{\mathrm{sat}}(T)\right]
+\end{equation*}
+
+Simpler approximation:
+\begin{equation*}
+h_{P,T}\approx h_f(T)
+\end{equation*}
+
+The pressure correction may be neglected when sufficiently small; at high $T$ and $P$, the simpler approximation can sometimes be preferable.
+
+\mysubsection{}{Energy Balance for Multiple Incompressible Substances}
+
+For several substances:
+\begin{equation*}
+\Delta U_{\mathrm{sys}}
+=
+\sum_i\Delta U_i
+\end{equation*}
+
+For an isolated system:
+\begin{equation*}
+\Delta U_{\mathrm{sys}}=0
+\end{equation*}
+
+For each substance:
+\begin{equation*}
+\Delta U_i=m_i\Delta u_i
+\end{equation*}
+
+With constant specific heats:
+\begin{equation*}
+\Delta U_i
+\approx
+m_i c_i(T_2-T_{1,i})
+\end{equation*}
+
+Hence:
+\begin{equation*}
+\boxed{
+\sum_i m_i c_i(T_2-T_{1,i})=0
+}
+\end{equation*}
+
+For thermal equilibrium:
+\begin{equation*}
+T_1=T_2=\cdots=T_{\mathrm{eq}}
+\end{equation*}
+
+Energy lost by hotter substances = energy gained by colder substances.
+
+\mysubsection{}{Heat Transfer for Incompressible Substances}
+
+For constant $c$:
+\begin{equation*}
+\Delta U=mc(T_2-T_1)
+\end{equation*}
+
+Cooling:
+\begin{equation*}
+Q_{\mathrm{out}}
+=
+mc(T_1-T_2)
+\qquad (T_1>T_2)
+\end{equation*}
+
+Heating:
+\begin{equation*}
+Q_{\mathrm{in}}
+=
+mc(T_2-T_1)
+\qquad (T_2>T_1)
+\end{equation*}
+
+
+\end{document}

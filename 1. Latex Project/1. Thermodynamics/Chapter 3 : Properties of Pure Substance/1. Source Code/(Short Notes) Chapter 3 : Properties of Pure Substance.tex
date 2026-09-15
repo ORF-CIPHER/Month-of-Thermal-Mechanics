@@ -1,0 +1,1610 @@
+\documentclass[12pt]{article}
+
+\usepackage[a4paper, top=2cm, bottom=2cm, left=2.5cm, right=2.5cm]{geometry}
+
+\usepackage{amsmath, amssymb}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,fit,calc}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{siunitx}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{fontspec}
+\usetikzlibrary{decorations.pathmorphing}
+\usepackage{pdflscape}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage[table]{xcolor}
+\usepackage{hyperref}
+\usepackage{bookmark}
+\usepackage{pdfpages}
+
+% ---------------- FONTS ----------------
+\setmainfont[
+    UprightFont = Handlee-Regular.ttf,
+    AutoFakeBold = 2.5
+]{Handlee}
+
+\newfontfamily\headingfont{PT.ttf}
+\setmonofont{DejaVu Sans Mono}
+
+% ---------------- HANDWRITTEN MATH ----------------
+\usepackage{mathastext}
+\Mathastext
+\everymath{\displaystyle}
+
+% ---------------- GENERAL ----------------
+\setlength{\parindent}{0pt}
+\pagenumbering{gobble}
+\linespread{1.2}
+
+\newcommand{\mychapter}[2]{%
+    \phantomsection
+    \hypertarget{#2}{}%
+    \bookmark[level=0,dest=#2]{#1}%
+    \begin{center}
+        {\headingfont\Huge #1}
+        \par
+        \vspace{4pt}
+        \hrule
+    \end{center}
+}
+
+\newcommand{\mysection}[3]{%
+    \phantomsection
+    \hypertarget{#3}{}%
+    \bookmark[level=1,dest=#3]{#1\space #2}%
+    \newpage
+    \noindent{\headingfont\Large #1\space #2\par}
+    \vspace{4pt}
+    \hrule
+    \vspace{15pt}
+}
+
+\newcommand{\mysubsection}[2]{%
+    \vspace{5px}
+    \noindent{\headingfont\large #1\space #2\par}
+    \vspace{4pt}
+    \hrule
+    \vspace{15pt}
+}
+
+\begin{document}
+
+\mychapter{Chapter 3 : Properties of Pure Substance}{5f4y5fdh}
+\begin{center}
+\begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}p{2.0cm}|X|}
+\hline
+\textbf{Section} & \textbf{Core Revision Focus} \\
+\hline
+
+3.1 &
+Pure substance definition, fixed chemical composition, purity criterion, single/multiple components and phases
+\\
+\hline
+
+3.2 &
+Solid/liquid/gas phases, molecular arrangement and motion, intermolecular forces, phase characteristics
+\\
+\hline
+
+3.3 &
+Phase-change processes, compressed/saturated/superheated states, saturation temperature/pressure, latent heat, phase-change sequence
+\\
+\hline
+
+3.4 &
+$T$-$v$, $P$-$v$, $P$-$T$ diagrams, saturation dome, critical point, triple point, sublimation, phase regions, $P$-$v$-$T$ surface
+\\
+\hline
+
+3.5 &
+Property tables, saturated-liquid/vapor properties, quality, mixture-property relations, superheated vapor, compressed liquid, state identification
+\\
+\hline
+
+3.6 &
+Ideal-gas equation $Pv=RT$, specific gas constant, molar form, two-state relation, constant-$P/V/T$ cases, density/specific volume, ideal-gas applicability
+\\
+\hline
+
+3.7 &
+Compressibility factor $Z$, deviation from ideal-gas behavior, reduced properties, principle of corresponding states, generalized compressibility chart
+\\
+\hline
+
+3.8 &
+van der Waals, Beattie--Bridgeman, Benedict--Webb--Rubin, Strobridge and virial equations, real-gas modeling, applicability and accuracy
+\\
+\hline
+
+\end{tabularx}
+\end{center}
+% ============================================================
+\mysection{3.1}{Pure Substance}{3.1}
+
+\textbf{\\ Definition}
+
+A \textbf{pure substance} has a \textbf{fixed chemical composition throughout}.
+
+\begin{equation*}
+\boxed{\text{Uniform chemical composition throughout}}
+\end{equation*}
+
+\textbf{\\ Key Criterion}
+
+A substance may contain one component, several components, or multiple phases and still be pure provided the composition is uniform.
+
+\begin{equation*}
+\boxed{
+\text{Same composition in all regions/phases}
+\Rightarrow
+\text{Pure substance}
+}
+\end{equation*}
+
+\begin{equation*}
+\boxed{
+\text{Different composition in different regions/phases}
+\Rightarrow
+\text{Not a pure substance}
+}
+\end{equation*}
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Mixture} & \textbf{Pure Substance?} \\
+\hline
+Ice + liquid water & Yes \\
+\hline
+Liquid air + gaseous air & No \\
+\hline
+Oil + water & No \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{\\ Exam Point}
+
+\begin{itemize}[leftmargin=*]
+    \item Number of components or phases alone does \textbf{not} determine purity.
+    \item Multiple phases are permissible if all phases have the same chemical composition.
+\end{itemize}
+
+% ============================================================
+\mysection{3.2}{Phases of a Pure Substance}{3.2}
+
+\textbf{\\ Principal Phases}
+
+\[
+\boxed{\text{Solid,\quad Liquid,\quad Gas}}
+\]
+
+\textbf{\\ Definition of a Phase}
+
+A phase has:
+\begin{itemize}[leftmargin=*]
+    \item a distinct molecular arrangement,
+    \item a homogeneous structure, and
+    \item identifiable boundaries separating it from other phases.
+\end{itemize}
+
+\textbf{\\ Molecular Comparison}
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Property} & \textbf{Solid} & \textbf{Liquid} & \textbf{Gas} \\
+\hline
+Molecular arrangement & Ordered lattice & Less ordered & No order \\
+\hline
+Position & Relatively fixed & Not fixed & Widely separated \\
+\hline
+Motion & Oscillation & Rotation + translation & Random \\
+\hline
+Intermolecular force & Strongest & Intermediate & Weakest \\
+\hline
+Molecular energy & Lowest & Intermediate & Highest \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{\\ Phase Transformation}
+
+\begin{equation*}
+\boxed{
+T\uparrow
+\Rightarrow
+\text{Molecular velocity}\uparrow
+\Rightarrow
+\text{Intermolecular forces can be overcome}
+}
+\end{equation*}
+
+\textbf{\\ Multiple Phases}
+
+The same substance may possess different phases within one principal phase because of different molecular structures.
+
+Examples from the notes: graphite/diamond, multiple liquid phases of helium, multiple solid phases of iron, and multiple high-pressure ice phases.
+
+% ============================================================
+\mysection{3.3}{Phase-Change Processes of Pure Substances}{3.3}
+
+\textbf{\\ Phase-Change Sequence}
+
+For constant-pressure heating of a pure substance:
+
+\begin{equation*}
+\boxed{
+\text{Compressed liquid}
+\rightarrow
+\text{Saturated liquid}
+\rightarrow
+\text{Saturated mixture}
+\rightarrow
+\text{Saturated vapor}
+\rightarrow
+\text{Superheated vapor}
+}
+\end{equation*}
+
+\textbf{\\ Compressed Liquid / Subcooled Liquid}
+
+Liquid \textbf{not about to vaporize}.
+
+\textbf{Saturated Liquid}: liquid \textbf{about to vaporize}.
+
+\[
+\boxed{
+\text{Compressed liquid}
+\rightarrow
+\text{Saturated liquid}
+\rightarrow
+\text{Vaporization}
+}
+\]
+
+\textbf{\\ Saturated Liquid--Vapor Mixture}
+
+During boiling:
+\begin{itemize}[leftmargin=*]
+    \item liquid and vapor coexist in equilibrium,
+    \item heat transfer continues,
+    \item temperature remains constant at constant pressure,
+    \item liquid decreases while vapor increases,
+    \item specific volume increases substantially.
+\end{itemize}
+
+\[
+\boxed{
+\text{Saturated liquid}
+\rightarrow
+\text{Saturated mixture}
+\rightarrow
+\text{Saturated vapor}
+}
+\]
+
+\textbf{\\ Saturated Vapor}
+
+Vapor \textbf{about to condense}; any heat loss causes condensation.
+
+\textbf{\\ Superheated Vapor}
+
+Vapor \textbf{not about to condense}.
+
+At a specified pressure:
+\[
+\boxed{T>T_{\mathrm{sat}}\Rightarrow\text{superheated vapor}}
+\]
+
+\textbf{\\ Constant-Pressure Phase Change}
+
+During vaporization from saturated liquid to saturated vapor:
+
+\begin{equation*}
+\boxed{P=\text{constant},\qquad T=\text{constant}}
+\end{equation*}
+
+For water at $1~\mathrm{atm}$:
+\[
+\boxed{T_{\mathrm{sat}}\approx100^\circ\mathrm{C}}
+\]
+
+\textbf{\\ Water and Steam}
+
+Both refer to the same substance:
+
+\[
+\boxed{\mathrm{H_2O}}
+\]
+
+\textbf{\\ Saturation Temperature and Pressure}
+
+\begin{equation*}
+\boxed{
+T_{\mathrm{sat}}
+=
+\text{temperature at which phase change occurs at a specified pressure}
+}
+\end{equation*}
+
+\begin{equation*}
+\boxed{
+P_{\mathrm{sat}}
+=
+\text{pressure at which phase change occurs at a specified temperature}
+}
+\end{equation*}
+
+\[
+\boxed{P_{\mathrm{sat}}=f(T_{\mathrm{sat}})}
+\]
+
+\[
+\boxed{
+P_{\mathrm{sat}}\uparrow
+\Rightarrow
+T_{\mathrm{sat}}\uparrow
+}
+\]
+
+For water:
+\[
+P_{\mathrm{sat}}=101.325~\mathrm{kPa}
+\Longleftrightarrow
+T_{\mathrm{sat}}=99.97^\circ\mathrm{C}
+\]
+
+\textbf{\\ Latent Heat}
+
+Energy absorbed or released during phase change.
+
+\textbf{Latent heat of fusion}
+\[
+\boxed{h_{\mathrm{fusion}}=333.7~\mathrm{kJ/kg}}
+\]
+for water at $1~\mathrm{atm}$.
+
+\[
+\boxed{\text{Melting: energy absorbed}}
+\]
+\[
+\boxed{\text{Freezing: energy released}}
+\]
+
+\textbf{Latent heat of vaporization}
+\[
+\boxed{h_{\mathrm{vap}}=2256.5~\mathrm{kJ/kg}}
+\]
+for water at $1~\mathrm{atm}$.
+
+\[
+\boxed{\text{Vaporization: energy absorbed}}
+\]
+\[
+\boxed{\text{Condensation: energy released}}
+\]
+
+\textbf{\\ Practical Consequences}
+
+\begin{itemize}[leftmargin=*]
+    \item Pressure increase $\Rightarrow$ boiling temperature increases.
+    \item Elevation increase $\Rightarrow$ atmospheric pressure decreases $\Rightarrow$ boiling temperature decreases.
+    \item Higher heat-transfer rate $\Rightarrow$ higher vaporization rate.
+    \item Vacuum cooling uses evaporation and latent heat removal to lower product temperature.
+    \item Vacuum freezing occurs when
+    \[
+    P<0.61~\mathrm{kPa}
+    \]
+    for water at $0^\circ\mathrm{C}$.
+\end{itemize}
+
+
+% ============================================================
+\mysection{3.4}{Property Diagrams for Phase-Change Processes}{3.4}
+
+\textbf{\\ Important Diagrams}
+
+\[
+\boxed{T-v,\qquad P-v,\qquad P-T}
+\]
+
+The complete three-dimensional representation is the \textbf{$P$-$v$-$T$ surface}.
+
+% ------------------------------------------------------------
+\textbf{\\ $T$-$v$ Diagram}
+
+As pressure increases:
+\begin{itemize}[leftmargin=*]
+    \item $T_{\mathrm{sat}}$ increases,
+    \item $v_f$ increases,
+    \item $v_g$ decreases,
+    \item distance between saturated-liquid and saturated-vapor states decreases.
+\end{itemize}
+
+\textbf{Critical Point}
+
+At the critical point, saturated liquid and saturated vapor become identical.
+
+Critical properties:
+\[
+\boxed{T_{\mathrm{cr}},\quad P_{\mathrm{cr}},\quad v_{\mathrm{cr}}}
+\]
+
+\[
+\boxed{
+\text{Saturated liquid line}
++
+\text{Saturated vapor line}
+\rightarrow
+\text{Saturation dome}
+}
+\]
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Region} & \textbf{Phase} \\
+\hline
+Left of saturated-liquid line & Compressed liquid \\
+\hline
+Under saturation dome & Saturated liquid--vapor mixture \\
+\hline
+Right of saturated-vapor line & Superheated vapor \\
+\hline
+\end{tabular}
+\end{center}
+
+The left and right regions are \textbf{single-phase regions}; the region under the dome is a \textbf{two-phase equilibrium region} or \textbf{wet region}.
+
+\textbf{Supercritical Region}
+
+\[
+\boxed{P>P_{\mathrm{cr}}}
+\]
+
+No distinct liquid--vapor phase change occurs; properties vary continuously.
+
+% ------------------------------------------------------------
+\textbf{\\ $P$-$v$ Diagram}
+
+The basic regions are the same as in the $T$-$v$ diagram.
+
+During vaporization:
+\[
+\boxed{
+P=\text{constant},\qquad T=\text{constant},\qquad v\uparrow
+}
+\]
+
+Constant-temperature lines have a \textbf{downward trend}.
+
+% ------------------------------------------------------------
+\textbf{\\ Solid Phase and Freezing}
+
+Most substances:
+\[
+\boxed{\text{contract during freezing}}
+\]
+
+Water:
+\[
+\boxed{\text{expands during freezing}}
+\]
+
+On a $P$-$T$ diagram:
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Behavior} & \textbf{Melting-Line Slope} \\
+\hline
+Contracts on freezing & Positive \\
+\hline
+Expands on freezing & Negative \\
+\hline
+\end{tabular}
+\end{center}
+
+% ------------------------------------------------------------
+\textbf{\\ Triple-Phase Equilibrium}
+
+\[
+\boxed{\text{Solid}+\text{Liquid}+\text{Vapor}}
+\]
+
+On $P$-$v$ and $T$-$v$ diagrams: \textbf{triple line}.
+
+On $P$-$T$ diagram: \textbf{triple point}.
+
+For water:
+\[
+\boxed{T_{\mathrm{tp}}=0.01^\circ\mathrm{C}}
+\]
+\[
+\boxed{P_{\mathrm{tp}}=0.6117~\mathrm{kPa}}
+\]
+
+Thus:
+\[
+\boxed{
+T=0.01^\circ\mathrm{C},
+\qquad
+P=0.6117~\mathrm{kPa}
+}
+\]
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+$P-v$ / $T-v$ & Triple line \\
+\hline
+$P-T$ & Triple point \\
+\hline
+\end{tabular}
+\end{center}
+
+% ------------------------------------------------------------
+\textbf{\\ Sublimation}
+
+Direct:
+\[
+\boxed{\text{Solid}\rightarrow\text{Vapor}}
+\]
+
+Without passing through the liquid phase.
+
+Common example: \textbf{dry ice} ($CO_2$).
+
+Sublimation occurs at pressures below the triple-point pressure.
+
+% ------------------------------------------------------------
+\textbf{\\ $P$-$T$ Diagram / Phase Diagram}
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Line} & \textbf{Phases Separated}  \\
+\hline
+Sublimation line & Solid--Vapor  \\
+\hline
+Melting line & Solid--Liquid  \\
+\hline
+Vaporization line & Liquid--Vapor  \\
+\hline
+\end{tabular}
+\end{center}
+
+\[
+\boxed{
+\text{Sublimation line}
+\cap
+\text{Melting line}
+\cap
+\text{Vaporization line}
+=
+\text{Triple point}
+}
+\]
+
+\[
+\boxed{\text{Vaporization line ends at the critical point}}
+\]
+
+Beyond the critical point there is no distinct liquid--vapor boundary.
+
+% ------------------------------------------------------------
+\textbf{\\ $P$-$v$-$T$ Surface}
+
+\[
+\boxed{z=f(x,y)}
+\]
+
+For a simple compressible substance, \textbf{any two independent intensive properties} fix the state.
+
+For the $P$-$v$-$T$ surface:
+\begin{itemize}[leftmargin=*]
+    \item $T$ and $v$ may be independent,
+    \item $P$ is then dependent.
+\end{itemize}
+
+Every point on the surface represents an \textbf{equilibrium state}; a quasi-equilibrium process traces a sequence of such states.
+
+\textbf{\\ Diagram Relationships}
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Diagram} & \textbf{Relation to $P$-$v$-$T$ Surface} \\
+\hline
+$P-v$ & Projection on $P-v$ plane \\
+\hline
+$T-v$ & Bird's-eye view \\
+\hline
+$P-T$ & Projection on $P-T$ plane \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{\\ Critical Point vs Triple Point}
+
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+& \textbf{Critical Point} & \textbf{Triple Point} \\
+\hline
+Phases & Liquid + vapor become identical & Solid + liquid + vapor coexist \\
+\hline
+Location & End of vaporization line & Intersection of 3 phase lines \\
+\hline
+$P-T$ & Point & Point \\
+\hline
+$T-v$ & Point & Line \\
+\hline
+$P-v$ & Point & Line \\
+\hline
+\end{tabular}
+\end{center}
+
+% ============================================================
+\mysection{3.5}{Property Tables}{3.5}
+
+\textbf{\\ Purpose}
+
+Property tables are used because relationships among thermodynamic properties are often too complex for simple equations.
+
+Typical regions:
+\begin{itemize}[leftmargin=*]
+    \item saturated liquid / saturated vapor,
+    \item saturated liquid--vapor mixture,
+    \item superheated vapor,
+    \item compressed liquid.
+\end{itemize}
+
+% ------------------------------------------------------------
+\textbf{\\ Enthalpy}
+
+\[
+\boxed{h=u+Pv}
+\]
+
+\[
+\boxed{H=U+PV}
+\]
+
+Therefore:
+\[
+\boxed{u=h-Pv}
+\]
+
+% ------------------------------------------------------------
+\textbf{\\ Saturation-Table Notation}
+
+\begin{itemize}[leftmargin=*]
+    \item $f$ $\rightarrow$ saturated liquid.
+    \item $g$ $\rightarrow$ saturated vapor.
+    \item $fg$ $\rightarrow$ vapor minus liquid.
+\end{itemize}
+
+\[
+\boxed{v_{fg}=v_g-v_f}
+\]
+
+\[
+\boxed{u_{fg}=u_g-u_f}
+\]
+
+\[
+\boxed{h_{fg}=h_g-h_f}
+\]
+
+$h_{fg}$ is the \textbf{enthalpy of vaporization} and decreases with increasing temperature/pressure, becoming zero at the critical point.
+
+% ------------------------------------------------------------
+\textbf{\\ Quality}
+
+Quality $x$ is the vapor mass fraction of a \textbf{saturated liquid--vapor mixture}:
+
+\[
+\boxed{x=\frac{m_g}{m_t}}
+\]
+
+\[
+m_t=m_f+m_g
+\]
+
+\[
+\boxed{0\leq x\leq1}
+\]
+
+\[
+x=0\Rightarrow\text{saturated liquid}
+\]
+
+\[
+x=1\Rightarrow\text{saturated vapor}
+\]
+
+\[
+\boxed{\text{Quality has meaning only for saturated liquid--vapor mixtures}}
+\]
+
+\textbf{\\ Mixture Property Relations}
+
+\[
+v=(1-x)v_f+xv_g
+\]
+
+\[
+\boxed{v=v_f+xv_{fg}}
+\]
+
+\[
+\boxed{x=\frac{v-v_f}{v_{fg}}}
+\]
+
+\[
+\boxed{u=u_f+xu_{fg}}
+\]
+
+\[
+\boxed{h=h_f+xh_{fg}}
+\]
+
+General form:
+\[
+\boxed{y=y_f+xy_{fg}}
+\qquad
+y=v,u,h
+\]
+
+Hence:
+\[
+\boxed{y_f\leq y\leq y_g}
+\]
+
+On $P-v$ or $T-v$ diagrams, quality is the distance ratio:
+
+\[
+\boxed{
+x=
+\frac{\text{distance from saturated liquid to actual state}}
+{\text{distance from saturated liquid to saturated vapor}}
+}
+\]
+
+Low $x$ $\rightarrow$ near saturated liquid; high $x$ $\rightarrow$ near saturated vapor.
+
+% ------------------------------------------------------------
+\textbf{\\ Superheated Vapor}
+
+Single-phase vapor region.
+
+\[
+\boxed{P<P_{\mathrm{sat}}\quad\text{at a given }T}
+\]
+
+\[
+\boxed{T>T_{\mathrm{sat}}\quad\text{at a given }P}
+\]
+
+\[
+\boxed{v>v_g,\qquad u>u_g,\qquad h>h_g}
+\]
+
+Quality is \textbf{not defined}.
+
+% ------------------------------------------------------------
+\textbf{\\ Compressed Liquid}
+
+When compressed-liquid data are unavailable, use the saturated-liquid approximation at the same temperature:
+
+\[
+\boxed{v\approx v_f@T}
+\]
+
+\[
+\boxed{u\approx u_f@T}
+\]
+
+\[
+\boxed{h\approx h_f@T}
+\]
+
+The approximation is generally good for $v$ and $u$; $h$ is more pressure-sensitive.
+
+Improved enthalpy approximation:
+
+\[
+\boxed{
+h\approx h_f@T+
+v_f@T
+\left(P-P_{\mathrm{sat}}@T\right)
+}
+\]
+
+Characteristics:
+\[
+\boxed{P>P_{\mathrm{sat}}\quad\text{at a given }T}
+\]
+
+\[
+\boxed{T<T_{\mathrm{sat}}\quad\text{at a given }P}
+\]
+
+\[
+\boxed{v<v_f,\qquad u<u_f,\qquad h<h_f}
+\]
+
+Quality is \textbf{not defined}.
+
+% ------------------------------------------------------------
+\textbf{\\ State Identification}
+
+Given $P,T$:
+
+\[
+\boxed{
+T<T_{\mathrm{sat}}@P
+\Rightarrow
+\text{compressed liquid}
+}
+\]
+
+\[
+\boxed{
+T=T_{\mathrm{sat}}@P
+\Rightarrow
+\text{saturated state}
+}
+\]
+
+\[
+\boxed{
+T>T_{\mathrm{sat}}@P
+\Rightarrow
+\text{superheated vapor}
+}
+\]
+
+Alternatively, given $T,P_{\mathrm{sat}}$:
+
+\[
+\boxed{
+P>P_{\mathrm{sat}}@T
+\Rightarrow
+\text{compressed liquid}
+}
+\]
+
+\[
+\boxed{
+P=P_{\mathrm{sat}}@T
+\Rightarrow
+\text{saturated state}
+}
+\]
+
+\[
+\boxed{
+P<P_{\mathrm{sat}}@T
+\Rightarrow
+\text{superheated vapor}
+}
+\]
+
+Using a property $y=v,u,h$:
+
+\[
+\boxed{
+y<y_f\Rightarrow\text{compressed liquid}
+}
+\]
+
+\[
+\boxed{
+y_f\leq y\leq y_g
+\Rightarrow
+\text{saturated liquid--vapor mixture}
+}
+\]
+
+\[
+\boxed{
+y>y_g\Rightarrow\text{superheated vapor}
+}
+\]
+
+% ------------------------------------------------------------
+\textbf{\\ Reference State}
+
+Absolute values of $u,h,s$ depend on the selected reference state; thermodynamic calculations generally use \textbf{property changes}.
+
+\[
+\boxed{
+\text{Use one consistent set of tables or charts}
+}
+\]
+
+Different table sets may have different absolute property values but give consistent property changes.
+
+% ------------------------------------------------------------
+\textbf{\\ Table Selection}
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Known Information / Region} & \textbf{Table} \\
+\hline
+Saturated state, $T$ given & $T$-based saturation table \\
+\hline
+Saturated state, $P$ given & $P$-based saturation table \\
+\hline
+Superheated vapor & Superheated-vapor table \\
+\hline
+Compressed liquid & Compressed-liquid table \\
+\hline
+Saturated solid--vapor mixture & Saturated solid--vapor table \\
+\hline
+\end{tabular}
+\end{center}
+
+% ============================================================
+\mysection{3.6}{The Ideal-Gas Equation of State}{3.6}
+
+\textbf{\\ Equation of State}
+
+An equation of state relates thermodynamic properties at equilibrium states; the basic form used here relates $P$, $T$, and $v$.
+
+\textbf{\\ Experimental Basis}
+
+Boyle's law:
+\[
+\boxed{P\propto\frac{1}{V}}
+\qquad
+(T=\text{constant})
+\]
+
+Charles/Gay-Lussac:
+\[
+\boxed{V\propto T}
+\qquad
+(P=\text{constant})
+\]
+
+% ------------------------------------------------------------
+\textbf{\\ Ideal-Gas Equation}
+
+\[
+\boxed{Pv=RT}
+\]
+
+where:
+\begin{itemize}[leftmargin=*]
+    \item $P$ = absolute pressure,
+    \item $T$ = absolute temperature,
+    \item $v$ = specific volume,
+    \item $R$ = specific gas constant.
+\end{itemize}
+
+\[
+\boxed{R=\frac{R_u}{M}}
+\]
+
+\[
+\boxed{m=MN}
+\]
+
+$R_u$ = universal gas constant; $M$ = molar mass; $N$ = number of moles.
+
+% ------------------------------------------------------------
+\textbf{\\ Alternative Forms}
+
+\[
+\boxed{PV=mRT}
+\]
+
+\[
+\boxed{PV=NR_uT}
+\]
+
+Molar specific volume:
+\[
+\boxed{\bar v=\frac{V}{N}}
+\]
+
+\[
+\boxed{P\bar v=R_uT}
+\]
+
+Use bars for molar properties; unbarred quantities denote mass-based properties.
+
+% ------------------------------------------------------------
+\textbf{\\ Two-State Relation}
+
+For fixed mass of ideal gas:
+
+\[
+\boxed{
+\frac{P_1V_1}{T_1}
+=
+\frac{P_2V_2}{T_2}
+}
+\]
+
+% ------------------------------------------------------------
+\textbf{\\ Special Cases}
+
+\textbf{Constant volume}
+\[
+V=\text{constant}
+\]
+
+\[
+\boxed{\frac{P}{T}=\text{constant}}
+\]
+
+\[
+\boxed{\frac{P_1}{T_1}=\frac{P_2}{T_2}}
+\]
+
+\textbf{Constant pressure}
+\[
+P=\text{constant}
+\]
+
+\[
+\boxed{\frac{V}{T}=\text{constant}}
+\]
+
+\[
+\boxed{\frac{V_1}{T_1}=\frac{V_2}{T_2}}
+\]
+
+\textbf{Constant temperature}
+\[
+T=\text{constant}
+\]
+
+\[
+\boxed{PV=\text{constant}}
+\]
+
+\[
+\boxed{P_1V_1=P_2V_2}
+\]
+
+% ------------------------------------------------------------
+\textbf{\\ Ideal-Gas Applicability}
+
+Ideal gas = imaginary substance obeying:
+\[
+\boxed{Pv=RT}
+\]
+
+Real gases approach ideal behavior at \textbf{low density}, generally corresponding to:
+\begin{itemize}[leftmargin=*]
+    \item low pressure,
+    \item high temperature.
+\end{itemize}
+
+Ideal-gas model is most appropriate at relatively low pressure and high temperature.
+
+Dense gases, steam, and refrigerant vapor may require property tables.
+
+% ------------------------------------------------------------
+\textbf{\\ Unit Requirements}
+
+\textbf{Absolute pressure}
+\[
+\boxed{
+P_{\mathrm{abs}}
+=
+P_{\mathrm{gage}}+P_{\mathrm{atm}}
+}
+\]
+
+\textbf{Absolute temperature}
+\[
+\boxed{
+T(\mathrm{K})
+=
+T(^\circ\mathrm{C})+273.15
+}
+\]
+
+% ------------------------------------------------------------
+\textbf{\\ Density and Specific Volume}
+
+Since:
+\[
+\boxed{v=\frac{1}{\rho}}
+\]
+
+\[
+\boxed{P=\rho RT}
+\]
+
+\[
+\boxed{\rho=\frac{P}{RT}}
+\]
+
+\[
+\boxed{v=\frac{RT}{P}}
+\]
+
+Therefore, for fixed $R$:
+\[
+\boxed{
+\rho\uparrow\text{ with }P,
+\qquad
+\rho\downarrow\text{ with }T
+}
+\]
+
+\[
+\boxed{
+v\uparrow\text{ with }T,
+\qquad
+v\downarrow\text{ with }P
+}
+\]
+
+% ============================================================
+\mysection{3.7}{Compressibility Factor---A Measure of Deviation from Ideal-Gas Behavior}{3.7}
+
+\textbf{\\ Compressibility Factor}
+
+\[
+\boxed{Z=\frac{Pv}{RT}}
+\]
+
+Thus:
+\[
+\boxed{Pv=ZRT}
+\]
+
+For an ideal gas:
+\[
+\boxed{Z=1}
+\]
+
+Physical interpretation:
+\[
+\boxed{
+Z=\frac{v_{\mathrm{actual}}}{v_{\mathrm{ideal}}}
+}
+\]
+
+where:
+\[
+\boxed{
+v_{\mathrm{ideal}}=\frac{RT}{P}
+}
+\]
+
+Therefore:
+\[
+\boxed{Z=1\Rightarrow\text{ideal-gas behavior}}
+\]
+
+\[
+\boxed{Z>1\Rightarrow v_{\mathrm{actual}}>v_{\mathrm{ideal}}}
+\]
+
+\[
+\boxed{Z<1\Rightarrow v_{\mathrm{actual}}<v_{\mathrm{ideal}}}
+\]
+
+The farther $Z$ is from unity, the larger the deviation from ideal behavior.
+
+% ------------------------------------------------------------
+\textbf{\\ Reduced Properties}
+
+\[
+\boxed{
+P_R=\frac{P}{P_{\mathrm{cr}}}
+}
+\]
+
+\[
+\boxed{
+T_R=\frac{T}{T_{\mathrm{cr}}}
+}
+\]
+
+Reduced properties are dimensionless.
+
+\textbf{Principle of corresponding states}:
+
+\[
+\boxed{
+Z=f(P_R,T_R)
+}
+\]
+
+Different gases have approximately the same $Z$ at the same $P_R$ and $T_R$.
+
+% ------------------------------------------------------------
+\textbf{\\ Generalized Compressibility Chart}
+
+The chart gives $Z$ from $P_R$ and $T_R$.
+
+Once $Z$ is known:
+
+\[
+\boxed{
+v=Z\frac{RT}{P}
+}
+\]
+
+or
+
+\[
+\boxed{v=Zv_{\mathrm{ideal}}}
+\]
+
+% ------------------------------------------------------------
+\textbf{\\ Important Trends}
+
+At very low reduced pressure:
+\[
+\boxed{P_R\ll1}
+\]
+
+\[
+\boxed{Z\rightarrow1}
+\]
+
+Hence:
+\[
+\boxed{
+P\rightarrow0
+\Rightarrow
+\text{real-gas behavior}\rightarrow\text{ideal-gas behavior}
+}
+\]
+
+At sufficiently high reduced temperature:
+\[
+\boxed{T_R>2}
+\]
+
+ideal-gas behavior is generally a good approximation except at very high reduced pressures.
+
+Near the critical point:
+\[
+\boxed{|Z-1|\ \text{can become large}}
+\]
+
+Thus real-gas deviation is especially important near the critical state.
+
+% ------------------------------------------------------------
+\textbf{\\ Pseudo-Reduced Specific Volume}
+
+\[
+\boxed{
+v_R=
+\frac{v_{\mathrm{actual}}}
+{RT_{\mathrm{cr}}/P_{\mathrm{cr}}}
+}
+\]
+
+or
+
+\[
+\boxed{
+v_R=
+\frac{vP_{\mathrm{cr}}}{RT_{\mathrm{cr}}}
+}
+\]
+
+Used when $P,v$ or $T,v$ are known.
+
+% ------------------------------------------------------------
+\textbf{\\ Determining $v$ from $P,T$}
+
+\begin{enumerate}[leftmargin=*]
+    \item Obtain $P_{\mathrm{cr}},T_{\mathrm{cr}}$.
+    \item Calculate
+    \[
+    P_R=\frac{P}{P_{\mathrm{cr}}},
+    \qquad
+    T_R=\frac{T}{T_{\mathrm{cr}}}.
+    \]
+    \item Obtain $Z$ from the generalized compressibility chart.
+    \item Calculate
+    \[
+    \boxed{v=Z\frac{RT}{P}}.
+    \]
+\end{enumerate}
+
+\textbf{\\ Determining $P$ from $T,v$}
+
+\[
+v_R=\frac{vP_{\mathrm{cr}}}{RT_{\mathrm{cr}}}
+\]
+
+\[
+T_R=\frac{T}{T_{\mathrm{cr}}}
+\]
+
+Use $v_R,T_R$ on the generalized chart to obtain $P_R$, then:
+
+\[
+\boxed{
+P=P_RP_{\mathrm{cr}}
+}
+\]
+
+\textbf{\\ Accuracy}
+
+The generalized chart is approximate; accuracy depends on chart resolution, reading precision, and the extent to which the substance obeys the principle of corresponding states.
+
+% ============================================================
+\mysection{3.8}{Other Equations of State}{3.8}
+
+\textbf{\\ General Point}
+
+These equations provide improved real-gas representation over a wider region than the ideal-gas equation.
+
+\[
+\boxed{
+\text{Applicable to gas phase}
+}
+\]
+
+They should \textbf{not} be used for liquids or liquid--vapor mixtures.
+
+% ------------------------------------------------------------
+\textbf{\\ 1. van der Waals Equation}
+
+\[
+\boxed{
+\left(P+\frac{a}{v^2}\right)(v-b)=RT
+}
+\]
+
+Meaning:
+\begin{itemize}[leftmargin=*]
+    \item $\dfrac{a}{v^2}$ accounts for \textbf{intermolecular attraction}.
+    \item $b$ accounts for \textbf{molecular volume}.
+\end{itemize}
+
+Critical-point conditions:
+
+\[
+\boxed{
+\left(\frac{\partial P}{\partial v}\right)_{T=T_{\mathrm{cr}}}=0
+}
+\]
+
+\[
+\boxed{
+\left(\frac{\partial^2P}{\partial v^2}\right)_{T=T_{\mathrm{cr}}}=0
+}
+\]
+
+Constants:
+
+\[
+\boxed{
+a=\frac{27R^2T_{\mathrm{cr}}^2}{64P_{\mathrm{cr}}}
+}
+\]
+
+\[
+\boxed{
+b=\frac{RT_{\mathrm{cr}}}{8P_{\mathrm{cr}}}
+}
+\]
+
+For molar form, use $\bar v$ and $R_u$.
+
+\textbf{Limitation}: conceptually useful and simple, but accuracy is often inadequate compared with more sophisticated equations.
+
+% ------------------------------------------------------------
+\textbf{\\ 2. Beattie--Bridgeman Equation}
+
+\[
+\boxed{
+P=
+\frac{R_uT}{\bar v^{\,2}}
+\left(1-\frac{c}{\bar v T^3}\right)
+(\bar v+B)
+-\frac{A}{\bar v^{\,2}}
+}
+\]
+
+where:
+
+\[
+\boxed{
+A=A_0\left(1-\frac{a}{\bar v}\right)
+}
+\]
+
+\[
+\boxed{
+B=B_0\left(1-\frac{b}{\bar v}\right)
+}
+\]
+
+Constants are experimentally determined and tabulated.
+
+Applicability:
+
+\[
+\boxed{
+\rho\leq0.8\rho_{\mathrm{cr}}
+}
+\]
+
+More accurate than van der Waals over its useful density range.
+
+% ------------------------------------------------------------
+\textbf{\\ 3. Benedict--Webb--Rubin Equation}
+
+\[
+\boxed{
+\begin{aligned}
+P={}&
+\frac{R_uT}{\bar v}
++
+\left(
+B_0R_uT-A_0-\frac{C_0}{T^2}
+\right)\frac{1}{\bar v^{\,2}}
+\\
+&+
+\frac{bR_uT-a}{\bar v^{\,3}}
++
+\frac{a\alpha}{\bar v^{\,6}}
++
+\frac{c}{\bar v^{\,3}T^2}
+\left(
+1+\frac{\gamma}{\bar v^{\,2}}
+\right)
+e^{-\gamma/\bar v^{\,2}}
+\end{aligned}
+}
+\]
+
+Constants:
+\[
+\boxed{
+A_0,\ B_0,\ C_0,\ a,\ b,\ c,\ \alpha,\ \gamma
+}
+\]
+
+determined experimentally.
+
+Applicability:
+
+\[
+\boxed{
+\rho\leq2.5\rho_{\mathrm{cr}}
+}
+\]
+
+Handles substantially higher gas densities than Beattie--Bridgeman.
+
+% ------------------------------------------------------------
+\textbf{\\ Strobridge Extension}
+
+Extension of Benedict--Webb--Rubin with more constants and greater flexibility.
+
+Main use:
+\[
+\boxed{\text{digital computer calculations}}
+\]
+
+% ------------------------------------------------------------
+\textbf{\\ 4. Virial Equation}
+
+\[
+\boxed{
+P=
+\frac{RT}{v}
++
+\frac{a(T)}{v^2}
++
+\frac{b(T)}{v^3}
++
+\frac{c(T)}{v^4}
++
+\frac{d(T)}{v^5}
++\cdots
+}
+\]
+
+Coefficients:
+\[
+\boxed{
+a(T),\ b(T),\ c(T),\ d(T),\ldots
+}
+\]
+
+are \textbf{virial coefficients}, functions of temperature alone.
+
+They may be obtained experimentally or through statistical mechanics.
+
+More terms $\Rightarrow$ potentially greater accuracy.
+
+At low pressure:
+
+\[
+\boxed{P\rightarrow0}
+\]
+
+\[
+\boxed{Pv\rightarrow RT}
+\]
+
+\[
+\boxed{Z\rightarrow1}
+\]
+
+Thus the virial equation is consistent with the ideal-gas limit.
+
+% ------------------------------------------------------------
+\textbf{\\ Comparison}
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Equation} & \textbf{Constants} & \textbf{Accuracy} & \textbf{Use} \\
+\hline
+van der Waals & Few & Limited & Simple real-gas modeling \\
+\hline
+Beattie--Bridgeman & Several & Reasonable & Wider gas-density range \\
+\hline
+Benedict--Webb--Rubin & More & High & Accurate real-gas calculations \\
+\hline
+Strobridge & Many & High & Computer-oriented calculations \\
+\hline
+Virial & Variable & Depends on terms & Series-based representation \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{\\ Complexity vs Accuracy}
+
+\[
+\boxed{
+\text{Greater complexity}
+\quad\Longleftrightarrow\quad
+\text{generally greater accuracy and wider applicability}
+}
+\]
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{van der Waals}: simplest; two constants; limited accuracy.
+    \item \textbf{Beattie--Bridgeman}: more complex; experimentally determined constants.
+    \item \textbf{Benedict--Webb--Rubin}: more constants; higher accuracy; wider density range.
+    \item \textbf{Virial}: series form; accuracy increases with retained terms.
+\end{itemize}
+
+\textbf{\\ Calculation Consideration}
+
+These equations are generally \textbf{implicit in specific volume}; therefore solving for $v$ may require \textbf{trial-and-error}.
+
+Complex equations are particularly suitable for \textbf{digital computers}, while property tables or simpler equations are often more convenient for hand calculations.
+
+\textbf{\\ Important Limitation}
+
+\[
+\boxed{\text{Do not use these gas-phase equations for liquids}}
+\]
+
+\[
+\boxed{\text{Do not use these gas-phase equations for liquid--vapor mixtures}}
+\]
+
+Use property tables or other appropriate relations for those regions.
+
+\end{document}

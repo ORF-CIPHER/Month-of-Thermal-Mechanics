@@ -1,0 +1,2082 @@
+\documentclass[12pt]{article}
+
+\usepackage[a4paper, top=2cm, bottom=2cm, left=2.5cm, right=2.5cm]{geometry}
+
+\usepackage{amsmath, amssymb}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,fit,calc}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{siunitx}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{fontspec}
+\usetikzlibrary{decorations.pathmorphing}
+\usepackage{pdflscape}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage[table]{xcolor}
+\usepackage{hyperref}
+\usepackage{bookmark}
+\usepackage{pdfpages}
+
+% ---------------- FONTS ----------------
+% Body font
+\setmainfont[
+    UprightFont = Handlee-Regular.ttf,
+    AutoFakeBold = 2.5
+]{Handlee}
+
+% Heading font
+\newfontfamily\headingfont{PT.ttf}
+
+% verbatim font
+\setmonofont{DejaVu Sans Mono} % or Noto Sans Mono
+
+% ---------------- HANDWRITTEN MATH ----------------
+\usepackage{mathastext}
+\Mathastext
+\everymath{\displaystyle}
+
+% Optional spacing tweaks (more natural look)
+% \setlength{\thinmuskip}{2mu}
+% \setlength{\medmuskip}{2mu}
+
+% ---------------- GENERAL ----------------
+\setlength{\parindent}{0pt}
+\pagenumbering{gobble}
+\linespread{1.2}
+
+
+\newcommand{\mychapter}[2]{%
+    \phantomsection
+    \hypertarget{#2}{}%
+    \bookmark[level=0,dest=#2]{#1}%
+    \begin{center}
+        {\headingfont\Huge #1}
+        \par
+        \vspace{4pt}
+        \hrule
+    \end{center}
+}
+
+\newcommand{\mysection}[3]{%
+    \phantomsection
+    \hypertarget{#3}{}%
+    \bookmark[level=1,dest=#3]{#1\space #2}%
+    \newpage
+    \noindent{\headingfont\Large #1\space #2\par}
+    \vspace{4pt}
+    \hrule
+    \vspace{15pt}
+}
+
+\newcommand{\mysubsection}[2]{%
+    \vspace{5px}
+    \noindent{\headingfont\large #1\space #2\par}
+    \vspace{4pt}
+    \hrule
+    \vspace{15pt}
+}
+
+\newcommand{\insertfigure}[2]{%
+    \begin{figure}[H]
+        \centering
+        \fbox{\includegraphics[width=#1\textwidth]{../2. Figures/#2}}
+    \end{figure}
+}
+
+\begin{document}
+\vspace*{\fill}
+
+\insertfigure{0.6}{cover.png}
+
+
+\vspace{1cm}
+
+\mychapter{Chapter 4 : Energy Analysis of Closed System}{6f4y5kdh}
+
+This chapter presents the energy analysis of closed systems, where no mass crosses the system boundary.  
+It begins with moving boundary work and its evaluation for various expansion and compression processes.  
+The chapter then develops the first-law energy balance and introduces specific heats for thermodynamic analysis.  
+Finally, energy balances are applied to pure substances, ideal gases, and incompressible solids and liquids.
+
+\vspace*{\fill}
+
+\newpage
+
+\begin{center}
+    {\headingfont\Huge Chapter Tree}
+    \par
+    \vspace{4pt}
+    \hrule
+\end{center}
+\begin{verbatim}
+
+├── 4–1 MOVING BOUNDARY WORK
+│       Work associated with expansion and compression of boundaries.
+│
+├── 4–2 ENERGY BALANCE FOR CLOSED SYSTEMS
+│       Applies conservation of energy to fixed-mass thermodynamic systems.
+│
+├── 4–3 SPECIFIC HEATS
+│       Defines specific heats and relates them to energy changes.
+│
+├── 4–4 INTERNAL ENERGY, ENTHALPY, AND SPECIFIC HEATS OF IDEAL GASES
+│       Relates ideal-gas energy properties and specific heats to 
+│       temperature.
+│
+├── 4–5 INTERNAL ENERGY, ENTHALPY, AND SPECIFIC HEATS OF SOLIDS & LIQUIDS
+│       Develops energy-property relations for incompressible substances.
+│
+└── TOSI : Thermodynamic Aspects of Biological Systems
+           Explores thermodynamic energy transfers and transformations
+           in biological systems.
+
+\end{verbatim}
+
+
+
+
+
+
+
+
+
+
+
+\mysection{4.1}{Moving Boundary Work}{4.1}
+
+\mysubsection{}{Introduction to Moving Boundary Work}
+
+Moving boundary work is the mechanical work associated with the expansion or compression of a gas in a piston--cylinder device. It is also called \textbf{boundary work} or \textbf{$P\,dV$ work}. It is an important form of work in devices such as automobile engines, compressors, and other reciprocating machines.
+
+The moving boundary is the portion of the system boundary that changes position during the process. In a piston--cylinder device, the inner face of the piston acts as the moving boundary.
+
+For real engines and compressors, the piston may move at very high speeds, preventing the gas from maintaining equilibrium throughout the process. Since work is a path function, its exact value cannot then be determined from thermodynamic analysis alone. In such cases, boundary work is generally determined experimentally.
+
+\mysubsection{}{Quasi-Equilibrium Process}
+
+A \textbf{quasi-equilibrium process}, also called a quasi-static process, is a process during which the system remains nearly in equilibrium at every instant.
+
+For a quasi-equilibrium process:
+
+\begin{itemize}
+    \item The state of the system can be specified continuously throughout the process.
+    \item A well-defined process path can be represented on a $P$--$V$ diagram.
+    \item The pressure of the gas is essentially uniform throughout the cylinder at each instant.
+    \item The work can be determined analytically from the process path.
+\end{itemize}
+
+Under otherwise identical conditions, quasi-equilibrium processes produce the maximum work output in engines and require the minimum work input in compressors compared with corresponding nonquasi-equilibrium processes.
+
+\mysubsection{}{Differential Boundary Work}
+
+\insertfigure{0.35}{Figure : 1.png}
+
+Consider a gas enclosed in a piston--cylinder device. If the piston moves through a small distance $ds$ during a quasi-equilibrium process, the differential work is
+
+\begin{equation*}
+\delta W_b = F\,ds = PA\,ds = P\,dV
+\end{equation*}
+
+where $P$ is the absolute pressure, $A$ is the piston cross-sectional area, and $dV$ is the differential change in system volume.
+
+Thus, the differential boundary work is
+
+\begin{equation*}
+\delta W_b = P\,dV
+\end{equation*}
+
+This relation is the reason boundary work is also called \textbf{$P\,dV$ work}.
+
+\mysubsection{}{Sign Convention for Boundary Work}
+
+The pressure $P$ in the boundary-work relation is the absolute pressure and is always positive.
+
+The sign of boundary work depends on the direction of the volume change:
+
+\begin{itemize}
+    \item During \textbf{expansion}, $dV>0$, so $\delta W_b>0$. The work is done \textbf{by the system}.
+    \item During \textbf{compression}, $dV<0$, so $\delta W_b<0$. The work is done \textbf{on the system}.
+\end{itemize}
+
+Therefore, a negative value of $W_b$ indicates boundary work input to the system.
+
+\mysubsection{}{Total Boundary Work}
+
+The total boundary work during a process from state 1 to state 2 is obtained by integrating the differential work:
+
+\begin{equation*}
+W_b=\int_1^2 P\,dV
+\end{equation*}
+
+The integral can be evaluated only when the functional relationship between pressure and volume during the process is known:
+
+\begin{equation*}
+P=f(V)
+\end{equation*}
+
+
+\mysubsection{}{Boundary Work on a $P$--$V$ Diagram}
+
+\insertfigure{0.4}{Figure : 2.png}
+
+For a quasi-equilibrium process, the differential area under the process curve is
+
+\begin{equation*}
+dA=P\,dV
+\end{equation*}
+
+Therefore, the total area under the process curve between states 1 and 2 is
+
+\begin{equation*}
+A=\int_1^2 P\,dV
+\end{equation*}
+
+Comparing this expression with the boundary-work relation gives
+
+\begin{equation*}
+A=W_b
+\end{equation*}
+
+Hence, the \textbf{area under the process curve on a $P$--$V$ diagram represents the magnitude of the boundary work} for a quasi-equilibrium expansion or compression process.
+
+On a $P$--$v$ diagram, the corresponding area represents boundary work per unit mass.
+
+\mysubsection{}{Boundary Work as a Path Function}
+
+\insertfigure{0.4}{Figure : 3.png}
+
+
+Work is a \textbf{path function}. Therefore, the boundary work depends not only on the initial and final states but also on the path followed between those states.
+
+Different process paths connecting the same two states generally have different areas under their curves on a $P$--$V$ diagram. Consequently, they produce different amounts of boundary work.
+
+\mysubsection{}{Net Work in a Cycle}
+
+\insertfigure{0.4}{Figure : 4.png}
+
+
+For a cyclic process, the net work corresponds to the area enclosed by the cycle on the $P$--$V$ diagram.
+
+If the work produced during expansion is greater than the work required during compression, the cycle produces a net work output.
+
+Thus,
+
+\begin{equation*}
+W_{\mathrm{net}}=W_{\mathrm{expansion}}-W_{\mathrm{compression}}
+\end{equation*}
+
+The enclosed area on the $P$--$V$ diagram represents the magnitude of the net work for the cycle.
+
+\mysubsection{}{Boundary Work from Experimental Data}
+
+If the pressure--volume relationship is available only as experimental data rather than as an analytical function, the boundary work cannot generally be evaluated analytically.
+
+In such cases:
+
+\begin{enumerate}
+    \item Plot the experimental pressure--volume data on a $P$--$V$ diagram.
+    \item Construct the process curve from the data points.
+    \item Determine the area under the process curve graphically.
+\end{enumerate}
+
+The resulting area gives the magnitude of the boundary work.
+
+\mysubsection{}{Boundary Work for Nonquasi-Equilibrium Processes}
+
+Strictly speaking, the pressure used in the boundary-work relation is the pressure acting at the \textbf{inner surface of the piston}.
+
+For a quasi-equilibrium process, this pressure is equal to the pressure of the gas because the gas remains essentially in equilibrium.
+
+For a nonquasi-equilibrium process, the pressure of the system cannot be defined at every instant because thermodynamic properties are defined for equilibrium states. However, the boundary-work relation can still be used if the pressure at the inner face of the piston is used:
+
+\begin{equation*}
+W_b=\int_1^2 P_i\,dV
+\end{equation*}
+
+where $P_i$ is the pressure at the inner face of the piston.
+
+\mysubsection{}{Energy Destination of Boundary Work}
+
+Work is a mechanism of energy transfer between a system and its surroundings. Therefore, energy transferred from the system as boundary work must appear elsewhere.
+
+For example, in an automobile engine, the work associated with expanding combustion gases can be used to:
+
+\begin{itemize}
+    \item overcome friction between the piston and cylinder,
+    \item push atmospheric air out of the way,
+    \item rotate the crankshaft.
+\end{itemize}
+
+Thus, the boundary work can be viewed as the combined work associated with these energy-transfer mechanisms:
+
+\begin{equation*}
+W_b=W_{\mathrm{friction}}+W_{\mathrm{atm}}+W_{\mathrm{crank}}
+\end{equation*}
+
+The energy used to overcome friction appears as frictional heat, while energy transmitted through the crankshaft is delivered to other components to perform useful functions.
+
+\mysubsection{}{Constant-Volume Process}
+
+For a constant-volume process,
+
+\begin{equation*}
+dV=0
+\end{equation*}
+
+Therefore,
+
+\begin{equation*}
+W_b=\int_1^2 P\,dV=0
+\end{equation*}
+
+Hence, \textbf{the boundary work for a constant-volume process is always zero}.
+
+On a $P$--$V$ diagram, a constant-volume process is represented by a vertical line, so there is no area under the process path in the volume direction.
+
+\mysubsection{}{Constant-Pressure Process}
+
+For a constant-pressure process, the pressure can be taken outside the integral:
+
+\begin{equation*}
+W_b=P_0\int_1^2dV
+\end{equation*}
+
+Therefore,
+
+\begin{equation*}
+W_b=P_0(V_2-V_1)
+\end{equation*}
+
+Using $V=mv$, the boundary work can also be expressed on a per-unit-mass basis as
+
+\begin{equation*}
+W_b=mP_0(v_2-v_1)
+\end{equation*}
+
+On a $P$--$V$ diagram, the boundary work for a constant-pressure process is the rectangular area under the process path.
+
+\mysubsection{}{Isothermal Process of an Ideal Gas}
+
+For an ideal gas undergoing an isothermal process, the temperature remains constant. The ideal-gas relation gives
+
+\begin{equation*}
+PV=mRT_0=C
+\end{equation*}
+
+where $C$ is a constant.
+
+Thus,
+
+\begin{equation*}
+P=\frac{C}{V}
+\end{equation*}
+
+Substituting this relation into the boundary-work equation gives
+
+\begin{equation*}
+W_b=\int_1^2\frac{C}{V}\,dV
+\end{equation*}
+
+Hence,
+
+\begin{equation*}
+W_b=C\ln\left(\frac{V_2}{V_1}\right)
+\end{equation*}
+
+or
+
+\begin{equation*}
+W_b=P_1V_1\ln\left(\frac{V_2}{V_1}\right)
+\end{equation*}
+
+For an ideal gas, $P_1V_1$ may also be replaced by $P_2V_2$ or $mRT_0$.
+
+Since an isothermal ideal-gas process satisfies $P_1V_1=P_2V_2$, the volume ratio may also be replaced by the corresponding pressure ratio:
+
+\begin{equation*}
+\frac{V_2}{V_1}=\frac{P_1}{P_2}
+\end{equation*}
+
+For an isothermal compression, $V_2<V_1$, so the logarithmic term is negative and the boundary work is negative, indicating work input to the system.
+
+\mysubsection{}{Polytropic Process}
+
+A \textbf{polytropic process} is a process in which pressure and volume are related by
+
+\begin{equation*}
+PV^n=C
+\end{equation*}
+
+where $n$ and $C$ are constants.
+
+The pressure can therefore be expressed as
+
+\begin{equation*}
+P=CV^{-n}
+\end{equation*}
+
+The boundary work is
+
+\begin{equation*}
+W_b=\int_1^2P\,dV
+\end{equation*}
+
+For $n\neq1$,
+
+\begin{equation*}
+W_b=\frac{P_2V_2-P_1V_1}{1-n}
+\end{equation*}
+
+For an ideal gas, since $PV=mRT$,
+
+\begin{equation*}
+W_b=\frac{mR(T_2-T_1)}{1-n}
+\end{equation*}
+
+
+\mysubsection{}{Expansion Against a Linear Spring}
+
+\insertfigure{0.4}{Figure : 5.png}
+
+When a piston is connected to a linear spring, expansion of the gas causes the spring to compress. The spring force varies linearly with displacement according to
+
+\begin{equation*}
+F=kx
+\end{equation*}
+
+where $k$ is the spring constant and $x$ is the spring displacement.
+
+The pressure contribution due to the spring is
+
+\begin{equation*}
+P_{\mathrm{spring}}=\frac{F}{A}
+\end{equation*}
+
+As the piston rises and compresses the spring, the spring force and its corresponding pressure increase linearly with displacement.
+
+Consequently, the pressure of the gas increases linearly with volume during the expansion. The process path on the $P$--$V$ diagram is therefore a straight line.
+
+The total boundary work is equal to the area under this straight-line process curve. This area can be regarded as the sum of:
+
+\begin{itemize}
+    \item the work done against the piston and atmosphere, and
+    \item the work done in compressing the spring.
+\end{itemize}
+
+The work stored in a linear spring is
+
+\begin{equation*}
+W_{\mathrm{spring}}=\frac{1}{2}k(x_2^2-x_1^2)
+\end{equation*}
+
+\begin{equation*}
+W_{\mathrm{total}}
+=
+P_1(V_2-V_1)
++
+\frac{1}{2}k\left(x_2^2-x_1^2\right)
+\end{equation*}
+
+Thus, the $P$--$V$ diagram provides a direct graphical interpretation of how the boundary work is distributed among the different resisting forces.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\mysection{4.2}{Energy Balance for Closed Systems}{4.2}
+
+\mysubsection{}{General Energy Balance}
+
+The energy balance is an expression of the conservation of energy principle. For any system undergoing any kind of process, the net energy transfer to the system is equal to the change in the total energy of the system.
+
+For a closed system,
+
+\begin{equation*}
+E_{\mathrm{in}}-E_{\mathrm{out}}=\Delta E_{\mathrm{system}}
+\end{equation*}
+
+where $E_{\mathrm{in}}$ and $E_{\mathrm{out}}$ represent the energy transferred into and out of the system by heat and work, and $\Delta E_{\mathrm{system}}$ represents the change in the total energy of the system.
+
+The total energy of a system may include internal, kinetic, potential, and other forms of energy.
+
+\mysubsection{}{Rate Form of the Energy Balance}
+
+The energy balance can also be expressed in rate form:
+
+\begin{equation*}
+\dot{E}_{\mathrm{in}}-\dot{E}_{\mathrm{out}}
+=
+\frac{dE_{\mathrm{system}}}{dt}
+\end{equation*}
+
+The rate form is useful when energy interactions are considered per unit time.
+
+For constant rates over a time interval $\Delta t$,
+
+\begin{equation*}
+Q=\dot{Q}\Delta t
+\end{equation*}
+
+\begin{equation*}
+W=\dot{W}\Delta t
+\end{equation*}
+
+\begin{equation*}
+\Delta E=\frac{dE}{dt}\Delta t
+\end{equation*}
+
+\mysubsection{}{Energy Balance on a Per Unit Mass Basis}
+
+Dividing the energy balance by the mass of the system gives the energy balance on a per unit mass basis:
+
+\begin{equation*}
+e_{\mathrm{in}}-e_{\mathrm{out}}
+=
+\Delta e_{\mathrm{system}}
+\end{equation*}
+
+where the specific energy quantities are expressed per unit mass.
+
+The differential form of the energy balance is
+
+\begin{equation*}
+\delta E_{\mathrm{in}}-\delta E_{\mathrm{out}}
+=
+dE_{\mathrm{system}}
+\end{equation*}
+
+or, on a per unit mass basis,
+
+\begin{equation*}
+\delta e_{\mathrm{in}}-\delta e_{\mathrm{out}}
+=
+de_{\mathrm{system}}
+\end{equation*}
+
+\mysubsection{}{Energy Balance for a Closed-System Cycle}
+
+For a closed system undergoing a cycle, the system returns to its initial state. Therefore, there is no net change in the energy of the system:
+
+\begin{equation*}
+\Delta E_{\mathrm{system}}=0
+\end{equation*}
+
+Hence, the energy balance becomes
+
+\begin{equation*}
+E_{\mathrm{in}}-E_{\mathrm{out}}=0
+\end{equation*}
+
+or
+
+\begin{equation*}
+E_{\mathrm{in}}=E_{\mathrm{out}}
+\end{equation*}
+
+Since a closed system does not involve mass flow across its boundaries, the energy interactions for a cycle can be expressed in terms of heat and work.
+
+Thus,
+
+\begin{equation*}
+W_{\mathrm{net,out}}=Q_{\mathrm{net,in}}
+\end{equation*}
+
+or, in rate form,
+
+\begin{equation*}
+\dot{W}_{\mathrm{net,out}}
+=
+\dot{Q}_{\mathrm{net,in}}
+\end{equation*}
+
+Therefore, \textbf{the net work output of a closed-system cycle is equal to the net heat input}.
+
+On a $P$--$V$ diagram, the net work of a cycle is represented by the area enclosed by the cycle.
+
+\mysubsection{}{Classical Sign Convention}
+
+When the directions of heat and work interactions are unknown, it is convenient to assume their directions before performing the analysis.
+
+The classical thermodynamics sign convention assumes:
+
+\begin{itemize}
+    \item Heat transfer is into the system and is denoted by $Q$.
+    \item Work is done by the system and is denoted by $W$.
+\end{itemize}
+
+With these assumptions, the energy balance for a closed system becomes
+
+\begin{equation*}
+Q-W=\Delta E
+\end{equation*}
+
+Here,
+
+\begin{equation*}
+Q=Q_{\mathrm{in}}-Q_{\mathrm{out}}
+\end{equation*}
+
+is the net heat input, and
+
+\begin{equation*}
+W=W_{\mathrm{out}}-W_{\mathrm{in}}
+\end{equation*}
+
+is the net work output.
+
+A negative value obtained for $Q$ or $W$ indicates that the actual direction of that interaction is opposite to the assumed direction.
+
+\mysubsection{}{Forms of the First-Law Relation}
+
+The general first-law relation for a closed system is
+
+\begin{equation*}
+Q-W=\Delta E
+\end{equation*}
+
+For a stationary closed system, the kinetic and potential energy changes are zero. Therefore, the total energy change reduces to the change in internal energy:
+
+\begin{equation*}
+Q-W=\Delta U
+\end{equation*}
+
+On a per unit mass basis,
+
+\begin{equation*}
+q-w=\Delta e
+\end{equation*}
+
+In differential form,
+
+\begin{equation*}
+\delta q-\delta w=de
+\end{equation*}
+
+\mysubsection{}{First Law of Thermodynamics}
+
+The first law of thermodynamics is a fundamental physical law based on the conservation of energy principle. It cannot be proven mathematically from other physical principles.
+
+No process in nature is known to violate the first law. It therefore provides the fundamental basis for performing energy balances on thermodynamic systems.
+
+\mysubsection{}{Heat and Work in the First Law}
+
+From the first-law point of view, heat and work are both mechanisms of energy transfer across the system boundary. The change in the energy content of a system depends on the net energy transferred across its boundary, regardless of whether that energy crosses as heat or work.
+
+Thus, in an energy balance, heat and work can be treated as energy interactions.
+
+However, heat and work are physically different forms of energy transfer. Their distinction becomes particularly important when considering the second law of thermodynamics.
+
+\mysubsection{}{Unrestrained Expansion}
+
+An unrestrained expansion occurs when a system expands into an evacuated space or vacuum.
+
+For expansion against a vacuum,
+
+\begin{equation*}
+P_{\mathrm{ext}}=0
+\end{equation*}
+
+Therefore, no boundary work is done:
+
+\begin{equation*}
+W_b=\int_1^2P_{\mathrm{ext}}\,dV=0
+\end{equation*}
+
+If no other form of work is involved, then
+
+\begin{equation*}
+W=0
+\end{equation*}
+
+For a stationary closed system with no other work interactions, the energy balance reduces to
+
+\begin{equation*}
+Q=\Delta U
+\end{equation*}
+
+Thus, although the substance may undergo a large change in volume during an unrestrained expansion, the expansion itself does not result in boundary work when it occurs against a vacuum.
+
+\mysubsection{}{Choice of System Boundary in Unrestrained Expansion}
+
+The work associated with an expansion depends on the system boundary selected.
+
+If the system boundary is chosen to include both the substance and the evacuated space, the boundary remains fixed during the process. Consequently, there is no moving-boundary work.
+
+This illustrates the importance of defining the system carefully before applying the energy balance.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\mysection{4.3}{Specific Heats}{4.3}
+
+\mysubsection{}{Definition of Specific Heat}
+
+Different substances require different amounts of energy to raise the temperature of a given mass through the same temperature change. Therefore, a property is needed to compare the energy storage capabilities of different substances.
+
+This property is called \textbf{specific heat}.
+
+Specific heat is defined as the energy required to raise the temperature of a unit mass of a substance by one degree in a specified manner.
+
+In general, the energy required for a given temperature rise depends on how the process is carried out. Therefore, thermodynamics considers two specific heats:
+
+\begin{itemize}
+    \item specific heat at constant volume, $c_v$,
+    \item specific heat at constant pressure, $c_p$.
+\end{itemize}
+
+\insertfigure{0.5}{Figure : 6.png}
+
+\mysubsection{}{Specific Heat at Constant Volume}
+
+The \textbf{specific heat at constant volume}, $c_v$, is the energy required to raise the temperature of a unit mass of a substance by one degree while the volume is maintained constant.
+
+For a fixed mass in a stationary closed system undergoing a constant-volume process, there is no expansion or compression work.
+
+The energy balance for this process can be expressed in differential form as
+
+\begin{equation*}
+\delta e_{\mathrm{in}}-\delta e_{\mathrm{out}}=du
+\end{equation*}
+
+From the definition of $c_v$, the net energy transferred to the system during this process is related to the temperature change by
+
+\begin{equation*}
+du=c_v\,dT
+\end{equation*}
+
+Therefore, the formal definition of specific heat at constant volume is
+
+\begin{equation*}
+c_v=\left(\frac{\partial u}{\partial T}\right)_v
+\end{equation*}
+
+Thus, $c_v$ represents the change in internal energy with temperature at constant volume.
+
+\mysubsection{}{Specific Heat at Constant Pressure}
+
+The \textbf{specific heat at constant pressure}, $c_p$, is the energy required to raise the temperature of a unit mass of a substance by one degree while the pressure is maintained constant.
+
+The formal definition of specific heat at constant pressure is
+
+\begin{equation*}
+c_p=\left(\frac{\partial h}{\partial T}\right)_p
+\end{equation*}
+
+Thus, $c_p$ represents the change in enthalpy with temperature at constant pressure.
+
+At constant pressure, the system is generally allowed to expand. Consequently, energy must also be supplied to account for the expansion work.
+
+Therefore,
+
+\begin{equation*}
+c_p>c_v
+\end{equation*}
+
+The difference between $c_p$ and $c_v$ is associated with the additional energy required during a constant-pressure process to accommodate the expansion of the system.
+
+\mysubsection{}{Relationship of Specific Heats with Thermodynamic Properties}
+
+The formal definitions show that specific heats are themselves thermodynamic properties.
+
+For specific heat at constant volume,
+
+\begin{equation*}
+c_v=\left(\frac{\partial u}{\partial T}\right)_v
+\end{equation*}
+
+Hence, $c_v$ is related to the variation of \textbf{internal energy} with temperature.
+
+For specific heat at constant pressure,
+
+\begin{equation*}
+c_p=\left(\frac{\partial h}{\partial T}\right)_p
+\end{equation*}
+
+Hence, $c_p$ is related to the variation of \textbf{enthalpy} with temperature.
+
+Therefore:
+
+\begin{itemize}
+    \item $c_v$ measures how internal energy varies with temperature at constant volume.
+    \item $c_p$ measures how enthalpy varies with temperature at constant pressure.
+\end{itemize}
+
+It is more precise to interpret $c_v$ and $c_p$ in terms of changes in internal energy and enthalpy rather than simply regarding them as quantities of heat transfer.
+
+\mysubsection{}{Specific Heats as Property Relations}
+
+The equations defining $c_v$ and $c_p$ are property relations. Consequently, they are independent of the particular process being followed.
+
+The relation
+
+\begin{equation*}
+c_v=\left(\frac{\partial u}{\partial T}\right)_v
+\end{equation*}
+
+is valid for any substance undergoing any process.
+
+Similarly,
+
+\begin{equation*}
+c_p=\left(\frac{\partial h}{\partial T}\right)_p
+\end{equation*}
+
+is valid for any substance undergoing any process.
+
+The terms ``constant volume'' and ``constant pressure'' in $c_v$ and $c_p$ describe the conditions under which their values can be determined and interpreted physically. They do not restrict the applicability of the property relations to only constant-volume or constant-pressure processes.
+
+\mysubsection{}{Dependence of Specific Heats on State}
+
+Since $c_v$ and $c_p$ are thermodynamic properties, their values depend on the state of the substance.
+
+In general, the state of a simple compressible substance is specified by two independent intensive properties. Therefore, the specific heats can depend on temperature and pressure or other appropriate independent state variables.
+
+The energy required to raise the temperature of a substance by a given amount is generally different at different temperatures and pressures.
+
+However, for many substances, the variation of specific heat over a moderate range of conditions may be relatively small.
+
+\mysubsection{}{Specific Energy Versus Specific Heat}
+
+Internal energy and enthalpy can be changed by energy transfer in any form, with heat being only one possible mode of energy transfer.
+
+Therefore, the term \textbf{specific energy} can be more appropriate than the term ``specific heat'' when interpreting $c_v$ and $c_p$ as measures of changes in thermodynamic properties.
+
+The term ``specific heat'' is retained because of its historical origin and its established use in thermodynamics.
+
+\mysubsection{}{Units of Specific Heat}
+
+A common unit for specific heats is
+
+\begin{equation*}
+\mathrm{\frac{kJ}{kg\cdot{}^{\circ}C}}
+\end{equation*}
+
+or
+
+\begin{equation*}
+\mathrm{\frac{kJ}{kg\cdot K}}
+\end{equation*}
+
+These units are equivalent because a temperature interval of one degree Celsius has the same magnitude as a temperature interval of one kelvin:
+
+\begin{equation*}
+\Delta T(^{\circ}\mathrm{C})=\Delta T(\mathrm{K})
+\end{equation*}
+
+Specific heats may also be expressed on a molar basis. In that case, they are denoted by $\bar{c}_v$ and $\bar{c}_p$ and have units such as
+
+\begin{equation*}
+\mathrm{\frac{kJ}{kmol\cdot{}^{\circ}C}}
+\end{equation*}
+
+or
+
+\begin{equation*}
+\mathrm{\frac{kJ}{kmol\cdot K}}
+\end{equation*}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\mysection{4.4}{Internal Energy, Enthalpy, and Specific Heats of Ideal Gases}{4.4}
+
+\mysubsection{}{Ideal-Gas Equation of State}
+
+An ideal gas is a gas whose pressure, specific volume, and temperature are related by
+
+\begin{equation*}
+Pv=RT
+\end{equation*}
+
+where $P$ is the absolute pressure, $v$ is the specific volume, $R$ is the gas constant, and $T$ is the absolute temperature.
+
+For an ideal gas, the internal energy is a function of temperature only:
+
+\begin{equation*}
+u=u(T)
+\end{equation*}
+
+This means that the specific internal energy of an ideal gas is independent of pressure and specific volume when the temperature is specified.
+
+\mysubsection{}{Joule's Experiment}
+
+\insertfigure{0.5}{Figure : 7.png}
+
+The conclusion that the internal energy of an ideal gas depends only on temperature is supported by Joule's classical experiment.
+
+In the experiment, air initially contained in one vessel at high pressure was allowed to expand into an evacuated vessel. The vessels were immersed in a water bath.
+
+The important observations were:
+
+\begin{itemize}
+    \item No heat transfer occurred between the air and the surroundings.
+    \item No work was done by the air during the expansion.
+    \item The temperature of the water bath did not change.
+    \item The internal energy of the air did not change even though its pressure and volume changed.
+\end{itemize}
+
+This led to the conclusion that, for an ideal gas,
+
+\begin{equation*}
+u=u(T)
+\end{equation*}
+
+Real gases that deviate significantly from ideal-gas behavior do not necessarily have internal energy that depends on temperature alone.
+
+\mysubsection{}{Enthalpy of an Ideal Gas}
+
+Enthalpy is defined as
+
+\begin{equation*}
+h=u+Pv
+\end{equation*}
+
+For an ideal gas,
+
+\begin{equation*}
+Pv=RT
+\end{equation*}
+
+Therefore,
+
+\begin{equation*}
+h=u+RT
+\end{equation*}
+
+Since $R$ is constant and $u$ depends only on temperature, enthalpy also depends only on temperature:
+
+\begin{equation*}
+h=h(T)
+\end{equation*}
+
+Thus, for an ideal gas, both internal energy and enthalpy are functions of temperature only.
+
+\mysubsection{}{Specific Heats of Ideal Gases}
+
+Since $u$ and $h$ depend only on temperature for an ideal gas, the specific heats $c_v$ and $c_p$ also depend, at most, on temperature only.
+
+Therefore,
+
+\begin{equation*}
+c_v=c_v(T)
+\end{equation*}
+
+and
+
+\begin{equation*}
+c_p=c_p(T)
+\end{equation*}
+
+At a specified temperature, the values of $u$, $h$, $c_v$, and $c_p$ are fixed regardless of the pressure or specific volume of the ideal gas.
+
+For ideal gases, the differential relations for internal energy and enthalpy become
+
+\begin{equation*}
+du=c_v(T)\,dT
+\end{equation*}
+
+and
+
+\begin{equation*}
+dh=c_p(T)\,dT
+\end{equation*}
+
+\mysubsection{}{Changes in Internal Energy}
+
+The change in specific internal energy of an ideal gas between states 1 and 2 is obtained by integrating
+
+\begin{equation*}
+\Delta u=u_2-u_1
+=
+\int_{T_1}^{T_2}c_v(T)\,dT
+\end{equation*}
+
+Therefore, $\Delta u$ depends only on the initial and final temperatures.
+
+It does not depend on the type of process connecting the two states.
+
+Thus, the same relation for $\Delta u$ applies to an ideal gas regardless of whether the process is carried out at constant volume, constant pressure, or under some other process condition.
+
+\mysubsection{}{Changes in Enthalpy}
+
+The change in specific enthalpy of an ideal gas between states 1 and 2 is
+
+\begin{equation*}
+\Delta h=h_2-h_1
+=
+\int_{T_1}^{T_2}c_p(T)\,dT
+\end{equation*}
+
+Therefore, $\Delta h$ also depends only on the initial and final temperatures.
+
+Like the internal-energy relation, this equation is valid for any process undergone by an ideal gas.
+
+\mysubsection{}{Ideal-Gas Specific Heats at Low Pressure}
+
+At low pressures, real gases approach ideal-gas behavior. Consequently, the specific heats of real gases at low pressure depend primarily on temperature.
+
+These are called \textbf{ideal-gas specific heats} or \textbf{zero-pressure specific heats}.
+
+They are commonly denoted by
+
+\begin{equation*}
+c_p^0
+\end{equation*}
+
+and
+
+\begin{equation*}
+c_v^0
+\end{equation*}
+
+Accurate analytical expressions for ideal-gas specific heats are available for many gases. These relations are commonly expressed as functions of temperature.
+
+Ideal-gas specific-heat data are primarily applicable at low pressures, but they can also provide reasonable accuracy at moderately high pressures when the gas does not deviate significantly from ideal-gas behavior.
+
+\mysubsection{}{Temperature Dependence of Specific Heats}
+
+The specific heats of gases generally vary with temperature.
+
+Gases with more complex molecular structures tend to have higher specific heats, and their specific heats generally increase with temperature.
+
+Over relatively small temperature intervals, the variation of specific heat with temperature can often be approximated as linear.
+
+Therefore, instead of using the complete temperature-dependent functions, an average specific heat may be used.
+
+\mysubsection{}{Average Specific Heat Method}
+
+\insertfigure{0.5}{Figure : 8.png}
+
+When the specific heat does not vary significantly over the temperature range, the change in internal energy can be approximated using an average constant-volume specific heat:
+
+\begin{equation*}
+\Delta u
+=
+c_{v,\mathrm{avg}}(T_2-T_1)
+\end{equation*}
+
+Similarly, the change in enthalpy can be approximated using an average constant-pressure specific heat:
+
+\begin{equation*}
+\Delta h
+=
+c_{p,\mathrm{avg}}(T_2-T_1)
+\end{equation*}
+
+The average specific heats may be evaluated at the average temperature
+
+\begin{equation*}
+T_{\mathrm{avg}}
+=
+\frac{T_1+T_2}{2}
+\end{equation*}
+
+For a sufficiently small temperature interval, the specific-heat variation can be approximated satisfactorily using this average value.
+
+Another approach is to evaluate the specific heat at the initial and final temperatures and take their arithmetic average:
+
+\begin{equation*}
+c_{\mathrm{avg}}
+=
+\frac{c_1+c_2}{2}
+\end{equation*}
+
+Both approaches generally provide reasonable results when the temperature interval is not very large.
+
+\mysubsection{}{Monatomic Ideal Gases}
+
+The ideal-gas specific heats of monatomic gases such as helium, neon, and argon remain essentially constant over a wide temperature range.
+
+Therefore, for monatomic gases, the changes in internal energy and enthalpy can conveniently be determined using constant specific heats:
+
+\begin{equation*}
+\Delta u
+=
+c_v(T_2-T_1)
+\end{equation*}
+
+\begin{equation*}
+\Delta h
+=
+c_p(T_2-T_1)
+\end{equation*}
+
+\mysubsection{}{Three Methods for Determining $\Delta u$ and $\Delta h$}
+
+There are three principal methods for determining the changes in internal energy and enthalpy of ideal gases.
+
+\begin{enumerate}
+    \item \textbf{Using tabulated $u$ and $h$ data}
+
+    The property tables provide values of internal energy and enthalpy as functions of temperature. The change is obtained directly from the difference between the values at the two temperatures:
+
+    \begin{equation*}
+    \Delta u=u_2-u_1
+    \end{equation*}
+
+    \begin{equation*}
+    \Delta h=h_2-h_1
+    \end{equation*}
+
+    This is generally the easiest and most accurate method when appropriate tables are available.
+
+    \item \textbf{Using temperature-dependent specific-heat relations}
+
+    The specific heat can be expressed as a function of temperature and integrated:
+
+    \begin{equation*}
+    \Delta u
+    =
+    \int_{T_1}^{T_2}c_v(T)\,dT
+    \end{equation*}
+
+    \begin{equation*}
+    \Delta h
+    =
+    \int_{T_1}^{T_2}c_p(T)\,dT
+    \end{equation*}
+
+    This method provides highly accurate results and is particularly convenient for computerized calculations.
+
+    \item \textbf{Using average specific heats}
+
+    When property tables or detailed specific-heat functions are not available, average specific heats can be used:
+
+    \begin{equation*}
+    \Delta u
+    \approx
+    c_{v,\mathrm{avg}}(T_2-T_1)
+    \end{equation*}
+
+    \begin{equation*}
+    \Delta h
+    \approx
+    c_{p,\mathrm{avg}}(T_2-T_1)
+    \end{equation*}
+
+    This method is simple and convenient, with reasonable accuracy when the temperature interval is not very large.
+\end{enumerate}
+
+\mysubsection{}{Important Process Independence of $\Delta u$ and $\Delta h$}
+
+The relations
+
+\begin{equation*}
+\Delta u
+=
+c_{v,\mathrm{avg}}\Delta T
+\end{equation*}
+
+and
+
+\begin{equation*}
+\Delta h
+=
+c_{p,\mathrm{avg}}\Delta T
+\end{equation*}
+
+are \textbf{not restricted to constant-volume and constant-pressure processes}, respectively.
+
+For an ideal gas, internal energy and enthalpy depend only on temperature. Therefore, these relations can be used for any process as long as the appropriate initial and final temperatures are known.
+
+\textbf{
+The appearance of $c_v$ in the expression for $\Delta u$ does not mean that the process itself must occur at constant volume.
+}
+
+\textbf{
+Similarly, the appearance of $c_p$ in the expression for $\Delta h$ does not mean that the process itself must occur at constant pressure.
+}
+
+
+\mysubsection{}{Reference State for Ideal-Gas Tables}
+
+Ideal-gas property tables are constructed by selecting an arbitrary reference state and assigning reference values to the properties.
+
+For the ideal-gas tables discussed in this section, zero kelvin is selected as the reference temperature, and both internal energy and enthalpy are assigned zero values at that state.
+
+The choice of reference state does not affect property differences:
+
+\begin{equation*}
+\Delta u=u_2-u_1
+\end{equation*}
+
+\begin{equation*}
+\Delta h=h_2-h_1
+\end{equation*}
+
+Only differences in internal energy and enthalpy are required in thermodynamic energy balances, so the absolute reference values do not affect the results.
+
+\mysubsection{}{Specific Heat Relations of Ideal Gases}
+
+For an ideal gas,
+
+\begin{equation*}
+h=u+RT
+\end{equation*}
+
+Differentiating gives
+
+\begin{equation*}
+dh=du+R\,dT
+\end{equation*}
+
+Using
+
+\begin{equation*}
+dh=c_p\,dT
+\end{equation*}
+
+and
+
+\begin{equation*}
+du=c_v\,dT
+\end{equation*}
+
+gives
+
+\begin{equation*}
+c_p\,dT
+=
+c_v\,dT+R\,dT
+\end{equation*}
+
+Therefore,
+
+\begin{equation*}
+c_p=c_v+R
+\end{equation*}
+
+This is an important relationship for ideal gases.
+
+It can be rearranged to obtain
+
+\begin{equation*}
+c_v=c_p-R
+\end{equation*}
+
+When specific heats are expressed on a molar basis, the universal gas constant must be used:
+
+\begin{equation*}
+\bar{c}_p=\bar{c}_v+R_u
+\end{equation*}
+
+\mysubsection{}{Specific Heat Ratio}
+
+Another important ideal-gas property is the \textbf{specific heat ratio}, denoted by $k$.
+
+It is defined as
+
+\begin{equation*}
+k=\frac{c_p}{c_v}
+\end{equation*}
+
+The specific heat ratio also varies with temperature, although its variation is generally mild.
+
+For many applications, $k$ can be treated as approximately constant over a limited temperature range.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\mysection{4.5}{Internal Energy, Enthalpy, and Specific Heats of Solids and Liquids}{4.5}
+
+\mysubsection{}{Incompressible Substances}
+
+A substance whose specific volume or density remains essentially constant during a process is called an \textbf{incompressible substance}.
+
+Solids and liquids can generally be approximated as incompressible substances because their specific volumes remain nearly constant during most processes.
+
+Thus,
+
+\begin{equation*}
+v=\text{constant}
+\end{equation*}
+
+or, equivalently,
+
+\begin{equation*}
+\rho=\text{constant}
+\end{equation*}
+
+where $v$ is the specific volume and $\rho$ is the density.
+
+The incompressible-substance approximation implies that the energy associated with volume change is negligible compared with other forms of energy.
+
+This approximation is highly useful for thermodynamic analysis of solids and liquids, although volume changes due to temperature must be considered when studying phenomena such as thermal stresses or liquid-in-glass thermometers.
+
+\mysubsection{}{Specific Heats of Incompressible Substances}
+
+For an incompressible substance, the constant-volume and constant-pressure specific heats are identical.
+
+Therefore,
+
+\begin{equation*}
+c_p=c_v=c
+\end{equation*}
+
+The subscripts $p$ and $v$ can consequently be omitted, and a single symbol $c$ is used to represent the specific heat.
+
+The specific heat of an incompressible substance depends on temperature only:
+
+\begin{equation*}
+c=c(T)
+\end{equation*}
+
+Thus, the specific heat of a solid or liquid can generally be treated as a function of temperature.
+
+\mysubsection{}{Internal Energy Changes}
+
+For an incompressible substance, the differential change in specific internal energy is
+
+\begin{equation*}
+du=c_v\,dT
+\end{equation*}
+
+Since
+
+\begin{equation*}
+c_v=c
+\end{equation*}
+
+the relation becomes
+
+\begin{equation*}
+du=c(T)\,dT
+\end{equation*}
+
+The change in specific internal energy between states 1 and 2 is therefore
+
+\begin{equation*}
+\Delta u
+=
+u_2-u_1
+=
+\int_{T_1}^{T_2}c(T)\,dT
+\end{equation*}
+
+Hence, the internal-energy change of an incompressible substance depends primarily on its temperature change.
+
+\mysubsection{}{Average Specific Heat Approximation}
+
+When the temperature interval is relatively small, the variation of specific heat with temperature can be neglected.
+
+The specific heat can then be evaluated at an appropriate average temperature and treated as constant.
+
+The internal-energy change becomes
+
+\begin{equation*}
+\Delta u
+\approx
+c_{\mathrm{avg}}(T_2-T_1)
+\end{equation*}
+
+where $c_{\mathrm{avg}}$ is the average specific heat over the temperature range.
+
+For small temperature intervals, this approximation provides a convenient way of evaluating changes in internal energy.
+
+\mysubsection{}{Enthalpy Changes}
+
+Enthalpy is defined as
+
+\begin{equation*}
+h=u+Pv
+\end{equation*}
+
+For an incompressible substance,
+
+\begin{equation*}
+dv=0
+\end{equation*}
+
+Differentiating the enthalpy relation gives
+
+\begin{equation*}
+dh=du+v\,dP+P\,dv
+\end{equation*}
+
+Since
+
+\begin{equation*}
+dv=0
+\end{equation*}
+
+we obtain
+
+\begin{equation*}
+dh=du+v\,dP
+\end{equation*}
+
+Using
+
+\begin{equation*}
+du=c(T)\,dT
+\end{equation*}
+
+gives
+
+\begin{equation*}
+dh=c(T)\,dT+v\,dP
+\end{equation*}
+
+Integrating between states 1 and 2,
+
+\begin{equation*}
+\Delta h
+=
+\Delta u+v\Delta P
+\end{equation*}
+
+For an average specific heat approximation,
+
+\begin{equation*}
+\Delta h
+\approx
+c_{\mathrm{avg}}\Delta T+v\Delta P
+\end{equation*}
+
+or
+
+\begin{equation*}
+\Delta h
+\approx
+c_{\mathrm{avg}}(T_2-T_1)+v(P_2-P_1)
+\end{equation*}
+
+\mysubsection{}{Enthalpy Change of Solids}
+
+For solids, the pressure-volume contribution
+
+\begin{equation*}
+v\Delta P
+\end{equation*}
+
+is generally insignificant.
+
+Therefore,
+
+\begin{equation*}
+\Delta h
+\approx
+\Delta u
+\end{equation*}
+
+and hence,
+
+\begin{equation*}
+\Delta h
+\approx
+c_{\mathrm{avg}}(T_2-T_1)
+\end{equation*}
+
+Thus, for most solid substances, the changes in enthalpy and internal energy can be considered approximately equal.
+
+\mysubsection{}{Special Cases for Liquids}
+
+Two important cases are commonly encountered for liquids.
+
+\textbf{Constant-pressure process}
+
+For a constant-pressure process,
+
+\begin{equation*}
+\Delta P=0
+\end{equation*}
+
+Therefore,
+
+\begin{equation*}
+\Delta h=\Delta u
+\end{equation*}
+
+and
+
+\begin{equation*}
+\Delta h
+\approx
+c_{\mathrm{avg}}(T_2-T_1)
+\end{equation*}
+
+This situation is commonly encountered in heating processes such as heaters.
+
+\textbf{Constant-temperature process}
+
+For a constant-temperature process,
+
+\begin{equation*}
+\Delta T=0
+\end{equation*}
+
+Therefore,
+
+\begin{equation*}
+\Delta u=0
+\end{equation*}
+
+and
+
+\begin{equation*}
+\Delta h=v\Delta P
+\end{equation*}
+
+or,
+
+\begin{equation*}
+h_2-h_1=v(P_2-P_1)
+\end{equation*}
+
+This situation is commonly encountered in pumping processes involving liquids.
+
+\mysubsection{}{Compressed Liquid Enthalpy}
+
+The enthalpy of a compressed liquid can be approximated by relating its state to the saturated-liquid state at the same temperature.
+
+For a compressed liquid at temperature $T$ and pressure $P$,
+
+\begin{equation*}
+h_{P,T}
+\approx
+h_f(T)
++
+v_f(T)
+\left[
+P-P_{\mathrm{sat}}(T)
+\right]
+\end{equation*}
+
+where
+
+\begin{itemize}
+    \item $h_{P,T}$ is the enthalpy of the compressed liquid,
+    \item $h_f(T)$ is the saturated-liquid enthalpy at temperature $T$,
+    \item $v_f(T)$ is the saturated-liquid specific volume at temperature $T$,
+    \item $P_{\mathrm{sat}}(T)$ is the saturation pressure at temperature $T$.
+\end{itemize}
+
+This correction improves upon the simpler approximation
+
+\begin{equation*}
+h_{P,T}\approx h_f(T)
+\end{equation*}
+
+The pressure-correction term is often small and may be neglected when its effect on the required accuracy is insignificant.
+
+At sufficiently high temperatures and pressures, however, the correction may overcorrect the enthalpy. Therefore, the simpler saturated-liquid approximation can sometimes provide a better result.
+
+\mysubsection{}{Energy Analysis of Incompressible Substances}
+
+For an insulated closed system containing different incompressible substances, the total internal energy remains constant when there is no heat transfer or work interaction.
+
+For a system consisting of multiple substances,
+
+\begin{equation*}
+\Delta U_{\mathrm{sys}}
+=
+\sum_i \Delta U_i
+\end{equation*}
+
+If the system is isolated,
+
+\begin{equation*}
+\Delta U_{\mathrm{sys}}=0
+\end{equation*}
+
+For each incompressible substance,
+
+\begin{equation*}
+\Delta U_i
+=
+m_i\Delta u_i
+\end{equation*}
+
+Using the constant-specific-heat approximation,
+
+\begin{equation*}
+\Delta U_i
+\approx
+m_i c_i(T_2-T_{1,i})
+\end{equation*}
+
+Therefore, the energy balance for an insulated system containing multiple incompressible substances can be written as
+
+\begin{equation*}
+\sum_i m_i c_i(T_2-T_{1,i})=0
+\end{equation*}
+
+This relation is useful for determining the final equilibrium temperature when substances initially at different temperatures are brought into thermal contact inside an insulated system.
+
+\mysubsection{}{Thermal Equilibrium}
+
+When two or more substances are placed in thermal contact within an insulated system, energy is transferred internally from the hotter substance to the colder substance.
+
+The process continues until thermal equilibrium is reached.
+
+At thermal equilibrium,
+
+\begin{equation*}
+T_1=T_2=\cdots=T_{\mathrm{eq}}
+\end{equation*}
+
+For an insulated system with no work interaction,
+
+\begin{equation*}
+\Delta U_{\mathrm{sys}}=0
+\end{equation*}
+
+Thus, the energy lost by the hotter substances is equal to the energy gained by the colder substances.
+
+\mysubsection{}{Heat Transfer for Incompressible Substances}
+
+When the specific heat can be treated as constant, the energy associated with a temperature change is expressed as
+
+\begin{equation*}
+\Delta U
+=
+mc(T_2-T_1)
+\end{equation*}
+
+For a substance that cools from $T_1$ to $T_2$, where $T_1>T_2$, the heat transferred from the substance can be expressed in magnitude as
+
+\begin{equation*}
+Q_{\mathrm{out}}
+=
+mc(T_1-T_2)
+\end{equation*}
+
+For a substance that is heated from $T_1$ to $T_2$, where $T_2>T_1$, the energy gained is
+
+\begin{equation*}
+Q_{\mathrm{in}}
+=
+mc(T_2-T_1)
+\end{equation*}
+
+These relations follow from the internal-energy change of an incompressible substance when kinetic and potential energy changes are negligible.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\mysection{}{Thermodynamic Aspects of Biological Systems}{tosi4}
+
+\mysubsection{}{Biological Systems and Thermodynamics}
+
+Biological systems are important applications of thermodynamics because they involve complex processes of energy transfer and energy transformation.
+
+Biological systems are generally not in thermodynamic equilibrium, which makes their analysis more complicated than that of many conventional engineering systems.
+
+Despite their complexity, biological systems are composed primarily of relatively simple chemical elements and involve continuous processes of energy conversion.
+
+\mysubsection{}{Cells as Thermodynamic Systems}
+
+The basic building blocks of living organisms are \textbf{cells}. A cell can be regarded as a small system in which numerous physical and chemical processes occur.
+
+The cell membrane acts as a \textbf{semipermeable boundary}. It allows certain substances to pass through while restricting the passage of others.
+
+Within a typical cell, numerous chemical reactions occur continuously. During these reactions:
+
+\begin{itemize}
+    \item some molecules are broken down,
+    \item chemical energy is released,
+    \item new molecules are formed, and
+    \item part of the released chemical energy is converted into thermal energy.
+\end{itemize}
+
+The overall chemical activity associated with maintaining the body's functions is called \textbf{metabolism}.
+
+\mysubsection{}{Metabolism}
+
+\textbf{Metabolism} refers to the chemical processes through which food substances such as carbohydrates, fats, and proteins are broken down and their chemical energy is released.
+
+The released chemical energy is used to support essential bodily functions and to perform mechanical work.
+
+The rate of metabolism in the resting state is called the \textbf{basal metabolic rate (BMR)}.
+
+The basal metabolic rate represents the rate of energy consumption required to maintain essential functions such as:
+
+\begin{itemize}
+    \item breathing,
+    \item blood circulation, and
+    \item other necessary bodily functions
+\end{itemize}
+
+at essentially zero external activity.
+
+The metabolic rate increases as the level of physical activity increases.
+
+\mysubsection{}{Energy Conversion in the Human Body}
+
+Biological reactions in cells occur essentially at constant temperature, pressure, and volume.
+
+When chemical energy is converted into heat inside cells, the resulting thermal energy is rapidly transferred to the circulatory system. The circulatory system transports this energy toward the outer parts of the body, where it is eventually transferred to the surroundings through the skin.
+
+Muscle cells function in a manner similar to an engine. They convert chemical energy into mechanical energy, or work.
+
+When mechanical work is performed by the body, part of the chemical energy released during metabolism is converted into useful mechanical work.
+
+When the body performs no net work on its surroundings, the chemical energy released during metabolism is ultimately transferred to the surroundings as heat.
+
+Thus, the human body continuously converts chemical energy into other forms of energy while obeying the \textbf{conservation of energy principle}.
+
+\mysubsection{}{Energy Balance of the Human Body}
+
+The human body can be analyzed using the conservation of energy principle.
+
+When the total energy content of a system remains constant, the energy entering the system must equal the energy leaving the system.
+
+Conceptually,
+
+\begin{equation*}
+\text{Energy input}
+=
+\text{Energy output}
+\end{equation*}
+
+The chemical energy supplied by food constitutes an important energy input to the body.
+
+This energy is ultimately distributed among:
+
+\begin{itemize}
+    \item mechanical work,
+    \item sensible heat transferred to the surroundings, and
+    \item latent heat associated with perspiration.
+\end{itemize}
+
+During physical activity, the metabolic rate increases and the rate at which energy is supplied to the surroundings also increases.
+
+\mysubsection{}{Sensible and Latent Heat Transfer}
+
+The energy rejected by the human body is transferred to the surroundings through different mechanisms.
+
+A portion is transferred as \textbf{sensible heat}, which directly contributes to heating the surroundings.
+
+Another portion is rejected through \textbf{perspiration} as latent heat associated with the evaporation of water.
+
+The relative contribution of sensible and latent heat depends on the level of physical activity.
+
+\mysubsection{}{Food as an Energy Source}
+
+The energy requirements of the human body are supplied primarily by the food consumed.
+
+The three major nutritional groups considered from an energy standpoint are:
+
+\begin{enumerate}
+    \item carbohydrates,
+    \item proteins,
+    \item fats.
+\end{enumerate}
+
+\textbf{Carbohydrates} consist primarily of carbon, hydrogen, and oxygen. They range from simple molecules, such as sugars, to complex molecules, such as starch.
+
+\textbf{Proteins} are large molecules containing carbon, hydrogen, oxygen, and nitrogen. They are essential for building and repairing body tissues. Proteins are composed of smaller units called \textbf{amino acids}.
+
+Proteins containing all the amino acids needed to build body tissues are called \textbf{complete proteins}, whereas proteins lacking one or more required amino acids are called \textbf{incomplete proteins}.
+
+\textbf{Fats} are molecules consisting primarily of carbon, hydrogen, and oxygen. Vegetable oils and animal fats are important sources of dietary fats.
+
+Most foods contain all three major nutritional groups in varying proportions.
+
+\mysubsection{}{Food Energy and the Bomb Calorimeter}
+
+\insertfigure{0.5}{Figure : 9.png}
+
+The energy content of a food can be determined experimentally using a \textbf{bomb calorimeter}.
+
+A bomb calorimeter consists essentially of a well-insulated rigid tank containing:
+
+\begin{itemize}
+    \item a combustion chamber,
+    \item a food sample,
+    \item surrounding water,
+    \item a thermometer, and
+    \item a mixing system.
+\end{itemize}
+
+The food sample is burned in the combustion chamber in the presence of excess oxygen.
+
+The energy released during combustion is transferred to the surrounding water.
+
+The energy content of the food is then determined using the \textbf{conservation of energy principle} by measuring the resulting temperature change of the water.
+
+During combustion:
+
+\begin{equation*}
+\text{Carbon in food}\rightarrow \mathrm{CO_2}
+\end{equation*}
+
+and
+
+\begin{equation*}
+\text{Hydrogen in food}\rightarrow \mathrm{H_2O}
+\end{equation*}
+
+The chemical reactions occurring during combustion in the calorimeter are representative of the energy-releasing reactions occurring during metabolism.
+
+\mysubsection{}{Metabolizable Energy}
+
+The total energy released by burning food is not necessarily equal to the energy that can actually be utilized by the human body.
+
+Only a fraction of the food's chemical energy is metabolized by the body.
+
+The energy that is actually available to the body is referred to as \textbf{metabolizable energy}.
+
+The metabolizable energy content depends on the type of nutrient and the extent to which it can be metabolized by the body.
+
+Food containing significant amounts of water has a lower energy content per unit mass because water adds mass and bulk but does not provide metabolizable energy.
+
+\mysubsection{}{Calorie as a Unit of Food Energy}
+
+The energy content of food is commonly expressed in terms of the \textbf{Calorie} used in nutrition.
+
+In nutrition,
+
+\begin{equation*}
+1\,\mathrm{Calorie}
+=
+1\,\mathrm{kcal}
+\end{equation*}
+
+and
+
+\begin{equation*}
+1\,\mathrm{Calorie}
+=
+4.1868\,\mathrm{kJ}
+\end{equation*}
+
+The capitalization of ``Calorie'' distinguishes the nutritional unit from the scientific calorie.
+
+In discussions of food and fitness, the term ``calorie'' generally refers to the kilocalorie.
+
+\mysubsection{}{Energy Consumption During Activities}
+
+The rate of energy consumption depends on the level of physical activity.
+
+Activities requiring greater physical effort generally result in higher metabolic rates.
+
+The energy consumption of a person also depends on body size. For a given activity, the metabolism rate can be related proportionally to body size.
+
+Thus, energy-consumption data reported for a reference body size can be adjusted for a different body size using an appropriate proportional relationship.
+
+\mysubsection{}{Thermodynamic Modeling of the Human Body}
+
+A rigorous thermodynamic analysis of the human body is complicated because the body involves both \textbf{mass transfer} and \textbf{energy transfer}.
+
+Mass crosses the boundary of the body during processes such as:
+
+\begin{itemize}
+    \item breathing,
+    \item perspiration, and
+    \item eating.
+\end{itemize}
+
+Therefore, the human body can fundamentally be treated as an \textbf{open system}.
+
+However, the energy transported with mass is difficult to quantify precisely. For simplified thermodynamic analysis, the human body is therefore often modeled as a \textbf{closed system} by treating the energy transported with mass as an energy transfer.
+
+For example, eating can be modeled as an energy transfer into the body equal to the metabolizable energy content of the food consumed.
+
+\mysubsection{}{Dieting and Conservation of Energy}
+
+Dieting is commonly associated with the principle of conservation of energy.
+
+In a simplified energy-balance model:
+
+\begin{equation*}
+\text{Energy intake}>\text{Energy expenditure}
+\end{equation*}
+
+tends to result in an increase in body mass, whereas
+
+\begin{equation*}
+\text{Energy intake}<\text{Energy expenditure}
+\end{equation*}
+
+tends to result in a decrease in body mass.
+
+The terms ``weight gain'' and ``weight loss'' are commonly used in nutrition, although the physically correct quantities are \textbf{mass gain} and \textbf{mass loss}.
+
+\mysubsection{}{Effect of Calorie Restriction}
+
+When food intake is substantially reduced, the body can interpret the condition as starvation and respond by using its energy reserves more conservatively.
+
+A prolonged low-calorie diet without adequate exercise may cause loss of muscle tissue along with body fat.
+
+Since muscle tissue consumes energy at a higher rate than fat tissue, loss of muscle can reduce the metabolic rate.
+
+Consequently, the body may regain fat after restrictive dieting when normal eating is resumed.
+
+\mysubsection{}{Role of Exercise}
+
+Regular moderate exercise is an important component of a healthy dieting program.
+
+Exercise helps to:
+
+\begin{itemize}
+    \item build or preserve muscle tissue,
+    \item increase energy expenditure, and
+    \item maintain a higher metabolic rate.
+\end{itemize}
+
+Aerobic exercise can continue to increase energy consumption for some time after the exercise has ended.
+
+Therefore, physical activity affects energy balance not only during the activity itself but also through its effect on metabolic rate.
+
+\mysubsection{}{Body-Fat Set Point}
+
+The body tends to regulate its body-fat level around a characteristic level called the \textbf{set point}.
+
+The set point differs from person to person.
+
+According to the discussion in the text, the body can respond to changes in body-fat level by modifying its metabolic rate:
+
+\begin{itemize}
+    \item when body fat tends to increase, metabolism may speed up and energy expenditure may increase;
+    \item when body fat tends to decrease, metabolism may slow down and energy expenditure may decrease.
+\end{itemize}
+
+This behavior can make maintaining a newly reduced body mass more difficult.
+
+A person who has recently become leaner may have a lower energy expenditure than a person of similar size who has always remained lean.
+
+\mysubsection{}{Factors Affecting Body Mass}
+
+The text identifies several factors that can influence body mass and metabolic behavior, including:
+
+\begin{itemize}
+    \item body size,
+    \item age,
+    \item activity level,
+    \item eating habits,
+    \item genetics,
+    \item the number of fat cells,
+    \item metabolic rate, and
+    \item hormone balance.
+\end{itemize}
+
+Genetic factors may influence the normal range of body mass and the way the body stores and utilizes energy.
+
+The text also discusses the possibility that differences in the number of fat cells developed during childhood or adolescence may affect the tendency to gain body fat.
+
+\mysubsection{}{Body Mass Index}
+
+The \textbf{body mass index (BMI)} is introduced as a criterion for assessing the healthy-weight range of adults.
+
+In SI units,
+
+\begin{equation*}
+\mathrm{BMI}
+=
+\frac{W}{H^2}
+\end{equation*}
+
+where
+
+\begin{itemize}
+    \item $W$ is the body mass in kilograms,
+    \item $H$ is the height in metres.
+\end{itemize}
+
+According to the classification given in the text,
+
+\begin{equation*}
+\mathrm{BMI}<19
+\qquad\text{underweight}
+\end{equation*}
+
+\begin{equation*}
+19\leq\mathrm{BMI}\leq25
+\qquad\text{healthy weight}
+\end{equation*}
+
+\begin{equation*}
+\mathrm{BMI}>25
+\qquad\text{overweight}
+\end{equation*}
+
+The text emphasizes that BMI provides a general criterion rather than an absolute definition of physical fitness.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

@@ -1,0 +1,2705 @@
+\documentclass[12pt]{article}
+
+\usepackage[a4paper, top=2cm, bottom=2cm, left=2.5cm, right=2.5cm]{geometry}
+
+\usepackage{amsmath, amssymb}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,fit,calc}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{siunitx}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{fontspec}
+\usetikzlibrary{decorations.pathmorphing}
+\usepackage{pdflscape}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage[table]{xcolor}
+\usepackage{hyperref}
+\usepackage{bookmark}
+\usepackage{pdfpages}
+
+% ---------------- FONTS ----------------
+% Body font
+\setmainfont[
+    UprightFont = Handlee-Regular.ttf,
+    AutoFakeBold = 2.5
+]{Handlee}
+
+% Heading font
+\newfontfamily\headingfont{PT.ttf}
+
+% verbatim font
+\setmonofont{DejaVu Sans Mono} % or Noto Sans Mono
+
+% ---------------- HANDWRITTEN MATH ----------------
+\usepackage{mathastext}
+\Mathastext
+\everymath{\displaystyle}
+
+% Optional spacing tweaks (more natural look)
+% \setlength{\thinmuskip}{2mu}
+% \setlength{\medmuskip}{2mu}
+
+% ---------------- GENERAL ----------------
+\setlength{\parindent}{0pt}
+\pagenumbering{gobble}
+\linespread{1.2}
+
+
+\newcommand{\mychapter}[2]{%
+    \phantomsection
+    \hypertarget{#2}{}%
+    \bookmark[level=0,dest=#2]{#1}%
+    \begin{center}
+        {\headingfont\Huge #1}
+        \par
+        \vspace{4pt}
+        \hrule
+    \end{center}
+}
+
+\newcommand{\mysection}[3]{%
+    \phantomsection
+    \hypertarget{#3}{}%
+    \bookmark[level=1,dest=#3]{#1\space #2}%
+    \newpage
+    \noindent{\headingfont\Large #1\space #2\par}
+    \vspace{4pt}
+    \hrule
+    \vspace{15pt}
+}
+
+\newcommand{\mysubsection}[2]{%
+    \vspace{5px}
+    \noindent{\headingfont\large #1\space #2\par}
+    \vspace{4pt}
+    \hrule
+    \vspace{15pt}
+}
+
+\newcommand{\insertfigure}[2]{%
+    \begin{figure}[H]
+        \centering
+        \fbox{\includegraphics[width=#1\textwidth]{../2. Figures/#2}}
+    \end{figure}
+}
+
+\begin{document}
+\vspace*{\fill}
+
+\insertfigure{0.6}{cover.png}
+
+
+\vspace{1cm}
+
+\mychapter{Chapter 6 : Second Law of Thermodynamics}{6f4y5kdh}
+
+The second law of thermodynamics establishes the direction in which thermodynamic processes can occur and shows that energy has both quantity and quality. It complements the first law by identifying processes that are physically possible and by accounting for the limitations on energy conversion. This chapter introduces thermal energy reservoirs, heat engines, refrigerators, heat pumps, and the Kelvin--Planck and Clausius statements of the second law. It also develops the Carnot cycle and the theoretical limits of performance for reversible thermodynamic devices.
+
+\vspace*{\fill}
+
+\newpage
+
+\begin{center}
+    {\headingfont\Huge Chapter Tree}
+    \par
+    \vspace{4pt}
+    \hrule
+\end{center}
+\begin{verbatim}
+│
+├── 6–1 INTRODUCTION TO THE SECOND LAW
+│
+├── 6–2 THERMAL ENERGY RESERVOIRS
+│
+├── 6–3 HEAT ENGINES
+│
+├── 6–4 REFRIGERATORS AND HEAT PUMPS
+│
+├── 6–5 PERPETUAL-MOTION MACHINES
+│
+├── 6–6 REVERSIBLE AND IRREVERSIBLE PROCESSES
+│
+├── 6–7 THE CARNOT CYCLE
+│
+├── 6–8 THE CARNOT PRINCIPLES
+│
+├── 6–9 THE THERMODYNAMIC TEMPERATURE SCALE
+│
+├── 6–10 THE CARNOT HEAT ENGINE
+│
+└── 6–11 THE CARNOT REFRIGERATOR AND HEAT PUMP
+
+\end{verbatim}
+
+
+\mysection{6.1}{Introduction to the Second Law}{6.1}
+
+The first law of thermodynamics is based on the conservation of energy. It states that energy cannot be created or destroyed, and every actual process must satisfy this conservation principle. However, satisfying the first law alone does not guarantee that a process can actually occur.
+
+\mysubsection{}{Limitations of the First Law}
+
+The first law provides information about the \textbf{quantity of energy} and the transformation of energy from one form to another. It does not impose any restriction on the \textbf{direction} in which a process can occur.
+
+Several naturally occurring processes illustrate this limitation:
+
+\textbf{\\ Cooling of Hot Coffee}
+
+A cup of hot coffee placed in a cooler room naturally loses heat to the surroundings and its temperature decreases. The reverse process, in which the coffee becomes hotter by receiving heat from the cooler surroundings, does not occur naturally.
+
+Both processes could satisfy energy conservation, but only one occurs spontaneously.
+
+\textbf{\\ Conversion of Electrical Energy into Heat}
+
+When electric current passes through a resistor, electrical energy is converted into thermal energy and transferred to the surroundings. The reverse process, in which heat is supplied to the resistor and an equivalent amount of electrical energy is generated, does not occur naturally.
+
+\textbf{\\ Direction of a Process}
+
+Processes in nature proceed in a certain direction and do not spontaneously proceed in the reverse direction.
+
+The first law places no restriction on the direction of a process. Therefore, another general principle is required to determine whether a process is physically possible.
+
+\textbf{\\ Second Law of Thermodynamics}
+
+The \textbf{second law of thermodynamics} provides the criterion needed to determine the direction of natural processes.
+
+A process can occur only if it satisfies both the first law and the second law of thermodynamics.
+
+The second law therefore complements the first law:
+
+
+\textbf{\\ Entropy}
+
+The second-law violation of an impossible reverse process can be detected using a thermodynamic property called \textbf{entropy}. Entropy is introduced and developed in greater detail later in the study of thermodynamics.
+
+\textbf{\\ Energy Quality}
+
+The second law is concerned not only with the quantity of energy but also with its \textbf{quality}.
+
+The first law treats energy primarily as a conserved quantity and accounts for transformations between different forms of energy without considering whether the energy is more or less useful.
+
+The second law provides a means of evaluating the quality of energy and the degree to which energy becomes degraded during a process.
+
+\textbf{\\ High-Temperature and Low-Temperature Energy}
+
+Energy at a higher temperature has a greater potential for conversion into useful work than the same amount of energy available at a lower temperature.
+
+Therefore, energy of the same quantity can have different levels of usefulness or quality depending on its thermodynamic state.
+
+\textbf{\\ Energy Degradation}
+
+During real processes, energy can undergo degradation in quality. Although the total quantity of energy is conserved according to the first law, its ability to produce useful work can decrease.
+
+The second law provides the principles required to assess this degradation and to determine how effectively energy can be utilized.
+
+\textbf{\\ Engineering Applications}
+
+The second law has applications beyond determining the direction of processes. It is used to establish the \textbf{theoretical limits} for the performance of engineering systems.
+
+Important applications include:
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Application} & \textbf{Purpose} \\
+\hline
+Heat engines & Determine theoretical performance limits \\
+\hline
+Refrigerators & Determine theoretical performance limits \\
+\hline
+Chemical reactions & Predict the degree of completion of reactions \\
+\hline
+Thermodynamic processes & Evaluate the level of perfection \\
+\hline
+Energy systems & Identify and reduce imperfections \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{\\ Concept of Perfection}
+
+The second law is closely associated with the concept of \textbf{perfection} in thermodynamic processes.
+
+It provides a basis for:
+
+\begin{itemize}
+    \item determining the theoretical limits of process performance,
+    \item quantifying the level of perfection of a process,
+    \item identifying imperfections in real processes, and
+    \item determining directions for effectively reducing those imperfections.
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\mysection{6.2}{Thermal Energy Reservoirs}{6.2}
+
+In the development of the second law of thermodynamics, it is convenient to consider a hypothetical body that has a relatively large thermal energy capacity and can supply or absorb finite amounts of heat without undergoing an appreciable change in temperature. Such a body is called a \textbf{thermal energy reservoir}, or simply a \textbf{reservoir}. 
+
+\mysubsection{}{Definition of a Thermal Energy Reservoir}
+
+A thermal energy reservoir is a body that can supply or absorb a finite amount of heat while maintaining essentially a constant temperature.
+
+The ability of a body to behave as a reservoir depends on its thermal energy capacity relative to the amount of energy transferred to or from it.
+
+\textbf{\\ Thermal Energy Capacity}
+
+The thermal energy capacity of a body depends on its mass and specific heat. A body with a sufficiently large thermal energy capacity can exchange significant amounts of heat without experiencing a noticeable temperature change.
+
+\begin{equation*}
+\text{Thermal energy capacity} = m c
+\end{equation*}
+
+where $m$ is the mass of the body and $c$ is its specific heat.
+
+\textbf{\\ Practical Thermal Energy Reservoirs}
+
+Large bodies of water and atmospheric air can often be modeled as thermal energy reservoirs because of their large thermal masses and thermal energy storage capabilities.
+
+Examples include:
+
+\begin{itemize}
+    \item oceans,
+    \item lakes,
+    \item rivers, and
+    \item atmospheric air.
+\end{itemize}
+
+The large thermal masses of these bodies allow them to absorb or release heat without producing a significant change in their temperatures.
+
+\textbf{\\ Two-Phase Systems as Reservoirs}
+
+A two-phase system can also be modeled as a thermal energy reservoir. It can absorb or release large quantities of heat while remaining at essentially constant temperature.
+
+This behavior makes two-phase systems useful as idealized thermal reservoirs in thermodynamic analysis.
+
+\textbf{\\ Industrial Furnace as a Reservoir}
+
+An industrial furnace can be modeled as a thermal energy reservoir when its temperature is carefully controlled.
+
+A furnace can supply large quantities of thermal energy as heat while maintaining an essentially constant temperature. Therefore, its heat transfer can be treated as occurring in an essentially isothermal manner.
+
+\textbf{\\ Size Requirement of a Reservoir}
+
+A body does not necessarily have to be physically very large to be considered a thermal energy reservoir.
+
+The important requirement is that its thermal energy capacity be large relative to the amount of energy it supplies or absorbs. If the heat transfer has a negligible effect on the body's temperature, the body can be modeled as a reservoir.
+
+For example, the air in a room can be treated as a reservoir when analyzing heat dissipation from a device because the heat transferred to the room air may be insufficient to produce a noticeable change in its temperature.
+
+\mysubsection{}{Source and Sink}
+
+Thermal energy reservoirs are classified according to whether they supply or absorb energy in the form of heat.
+
+\textbf{\\ Source}
+
+A reservoir that \textbf{supplies energy in the form of heat} is called a \textbf{source}.
+
+\begin{equation*}
+\text{Source} \longrightarrow \text{Heat}
+\end{equation*}
+
+A source acts as the provider of thermal energy to another system or device.
+
+\textbf{\\ Sink}
+
+A reservoir that \textbf{absorbs energy in the form of heat} is called a \textbf{sink}.
+
+\begin{equation*}
+\text{Heat} \longrightarrow \text{Sink}
+\end{equation*}
+
+A sink acts as an absorber of thermal energy rejected by another system or device.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\mysection{6.3}{Heat Engines}{6.3}
+
+Work can be converted into other forms of energy directly and completely, but the reverse process of converting heat into work cannot occur directly and completely. The conversion of heat into work requires special devices called \textbf{heat engines}.
+
+\mysubsection{}{Heat Engine}
+
+\insertfigure{0.4}{Figure : 1.png}
+
+A \textbf{heat engine} is a device that operates in a cycle and converts part of the heat supplied to it into useful work.
+
+Although heat engines differ in their construction and operation, they have certain fundamental characteristics.
+
+\textbf{\\ Basic Characteristics of Heat Engines}
+
+A heat engine:
+
+\begin{itemize}
+    \item receives heat from a high-temperature source,
+    \item converts part of the received heat into work,
+    \item rejects the remaining heat to a low-temperature sink, and
+    \item operates on a cycle.
+\end{itemize}
+
+The general energy interaction of a heat engine can be represented as
+
+\begin{equation*}
+Q_H \longrightarrow \text{Heat Engine}
+\end{equation*}
+
+with part of the supplied heat converted into net work and the remainder rejected to the low-temperature reservoir:
+
+\begin{equation*}
+Q_H = W_{\mathrm{net,out}} + Q_L
+\end{equation*}
+
+where $Q_H$ is the heat supplied from the high-temperature reservoir, $Q_L$ is the heat rejected to the low-temperature reservoir, and $W_{\mathrm{net,out}}$ is the net work output.
+
+\mysubsection{}{Working Fluid}
+
+Heat engines and other cyclic devices generally involve a fluid to and from which heat is transferred while the fluid undergoes a cycle.
+
+This fluid is called the \textbf{working fluid}.
+
+The working fluid receives energy from the high-temperature source, undergoes the processes associated with the engine, produces work, and eventually rejects heat to the low-temperature sink.
+
+\mysubsection{}{Heat Engine Reservoirs}
+
+A heat engine operates between two thermal reservoirs:
+
+\begin{itemize}
+    \item a \textbf{high-temperature reservoir} or source, and
+    \item a \textbf{low-temperature reservoir} or sink.
+\end{itemize}
+
+The high-temperature reservoir supplies heat to the engine, while the low-temperature reservoir receives the waste heat rejected by the engine.
+
+\textbf{\\ Heat Input}
+
+The magnitude of heat transferred from the high-temperature reservoir to the heat engine is denoted by $Q_H$.
+
+\begin{equation*}
+Q_H = \text{magnitude of heat transfer from the high-temperature reservoir}
+\end{equation*}
+
+\textbf{\\ Heat Rejection}
+
+The magnitude of heat transferred from the heat engine to the low-temperature reservoir is denoted by $Q_L$.
+
+\begin{equation*}
+Q_L = \text{magnitude of heat transfer to the low-temperature reservoir}
+\end{equation*}
+
+Both $Q_H$ and $Q_L$ are defined as positive quantities because they represent magnitudes. Their directions are determined from the physical arrangement of the heat engine.
+
+\newpage
+\mysubsection{}{Thermal Efficiency}
+
+The purpose of a heat engine is to convert heat into useful work. The performance of a heat engine is measured by its \textbf{thermal efficiency}.
+
+Thermal efficiency is defined as the fraction of the total heat supplied to the working fluid that is converted into net work output.
+
+\begin{equation*}
+\eta_{\mathrm{th}} =
+\frac{W_{\mathrm{net,out}}}{Q_H}
+\end{equation*}
+
+Using the cyclic energy relation,
+
+\begin{equation*}
+W_{\mathrm{net,out}} = Q_H - Q_L
+\end{equation*}
+
+the thermal efficiency can also be written as
+
+\begin{equation*}
+\eta_{\mathrm{th}} =
+1-\frac{Q_L}{Q_H}
+\end{equation*}
+
+Thus, thermal efficiency depends on how much of the supplied heat is converted into useful work and how much is rejected as waste heat.
+
+\textbf{\\ Significance of Thermal Efficiency}
+
+A higher thermal efficiency means that a greater fraction of the supplied heat is converted into useful work.
+
+Improving the thermal efficiency of a heat engine is desirable because it generally results in:
+
+\begin{itemize}
+    \item lower fuel consumption,
+    \item reduced fuel costs, and
+    \item lower environmental pollution.
+\end{itemize}
+
+The thermal efficiency of a heat engine is always less than unity because some heat must be rejected to the low-temperature reservoir.
+
+\mysubsection{}{Heat Engine Operating Between Two Reservoirs}
+
+For uniform treatment of heat engines, refrigerators, and heat pumps, the heat transfers are described using the temperatures of the reservoirs.
+
+Let
+
+\begin{equation*}
+T_H = \text{temperature of the high-temperature reservoir}
+\end{equation*}
+
+and
+
+\begin{equation*}
+T_L = \text{temperature of the low-temperature reservoir}
+\end{equation*}
+
+The corresponding heat transfers are
+
+\begin{equation*}
+Q_H = \text{magnitude of heat transfer between the device and the high-temperature reservoir}
+\end{equation*}
+
+\begin{equation*}
+Q_L = \text{magnitude of heat transfer between the device and the low-temperature reservoir}
+\end{equation*}
+
+For a heat engine,
+
+\begin{equation*}
+T_H > T_L
+\end{equation*}
+
+
+\mysubsection{}{Why Waste Heat Must Be Rejected}
+
+A heat engine cannot continuously operate by receiving heat from a high-temperature source and converting all of that heat into work.
+
+Some heat must be rejected to a low-temperature reservoir in order to complete the thermodynamic cycle.
+
+In a steam power plant, the condenser performs this heat-rejection function. Removing the condenser would prevent the cycle from being completed, so continuous operation of the plant would not be possible.
+
+Therefore, the rejected heat is not merely an avoidable loss associated with friction or other imperfections. Heat rejection is a fundamental requirement for the operation of a cyclic heat engine.
+
+\textbf{\\ Waste Energy}
+
+The heat rejected to the low-temperature reservoir is commonly referred to as \textbf{waste energy} because it cannot be recycled by simply transferring it back to the high-temperature reservoir.
+
+Heat naturally transfers from a high-temperature medium to a low-temperature medium. The reverse transfer cannot occur spontaneously.
+
+Consequently, every heat engine must reject some heat to a low-temperature reservoir in order to complete its cycle.
+
+\newpage
+
+\mysubsection{}{Kelvin--Planck Statement of the Second Law}
+
+The requirement that a heat engine reject heat to a low-temperature reservoir forms the basis of the \textbf{Kelvin--Planck statement} of the second law of thermodynamics.
+
+\textbf{\\ Kelvin--Planck Statement}
+
+\textbf{It is impossible for any device that operates on a cycle to receive heat from a single reservoir and produce a net amount of work.}
+
+Therefore, a heat engine must exchange heat with both:
+
+\begin{itemize}
+    \item a high-temperature source, and
+    \item a low-temperature sink.
+\end{itemize}
+
+The Kelvin--Planck statement can also be expressed by stating that no heat engine can have a thermal efficiency of unity.
+
+\begin{equation*}
+\eta_{\mathrm{th}} < 1
+\end{equation*}
+
+This limitation applies to both idealized and actual heat engines. It is not caused merely by friction, heat losses, or other dissipative effects.
+
+\textbf{\\ Physical Meaning}
+
+The Kelvin--Planck statement establishes that complete conversion of heat received from a single thermal reservoir into net work is impossible for a cyclic device.
+
+Thus, the operation of a heat engine necessarily involves:
+
+\begin{equation*}
+\text{High-temperature source}
+\longrightarrow
+\text{Heat Engine}
+\longrightarrow
+\text{Low-temperature sink}
+\end{equation*}
+
+with a portion of the supplied energy converted into useful work.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\mysection{6.4}{Refrigerators and Heat Pumps}{6.4}
+
+Heat naturally transfers from a high-temperature medium to a low-temperature medium. The reverse process, in which heat is transferred from a low-temperature medium to a high-temperature medium, cannot occur by itself. Special cyclic devices are required to accomplish this reverse heat transfer. These devices are called \textbf{refrigerators} and \textbf{heat pumps}. :contentReference[oaicite:0]{index=0}
+
+\insertfigure{0.6}{Figure : 2.png}
+
+\mysubsection{}{Refrigerators}
+
+A \textbf{refrigerator} is a cyclic device whose objective is to remove heat from a low-temperature space and reject it to a higher-temperature environment.
+
+The heat transfer process occurs in the direction opposite to the natural direction of heat transfer, and therefore requires work input.
+
+\textbf{\\ Basic Energy Interactions}
+
+A refrigerator operates between two thermal reservoirs:
+
+\begin{itemize}
+    \item a low-temperature refrigerated space at temperature $T_L$,
+    \item a high-temperature environment at temperature $T_H$.
+\end{itemize}
+
+The refrigerator removes heat $Q_L$ from the refrigerated space, receives net work input $W_{\mathrm{net,in}}$, and rejects heat $Q_H$ to the warm environment.
+
+For a cyclic refrigerator, the energy balance is
+
+\begin{equation*}
+W_{\mathrm{net,in}} = Q_H-Q_L
+\end{equation*}
+
+where $Q_L$ and $Q_H$ are defined as the magnitudes of the heat transfers and are therefore positive quantities. :contentReference[oaicite:1]{index=1}
+
+\mysubsection{}{Coefficient of Performance of a Refrigerator}
+
+The performance of a refrigerator is measured using the \textbf{coefficient of performance}, denoted by $\mathrm{COP}_R$.
+
+The desired output of a refrigerator is the heat removed from the refrigerated space, $Q_L$, while the required input is the net work supplied to the refrigerator.
+
+\begin{equation*}
+\mathrm{COP}_R =
+\frac{\text{Desired output}}{\text{Required input}}
+\end{equation*}
+
+Therefore,
+
+\begin{equation*}
+\mathrm{COP}_R =
+\frac{Q_L}{W_{\mathrm{net,in}}}
+\end{equation*}
+
+Using the cyclic energy balance,
+
+\begin{equation*}
+W_{\mathrm{net,in}}=Q_H-Q_L
+\end{equation*}
+
+the coefficient of performance can also be expressed as
+
+\begin{equation*}
+\mathrm{COP}_R =
+\frac{Q_L}{Q_H-Q_L}
+\end{equation*}
+
+or
+
+\begin{equation*}
+\mathrm{COP}_R =
+\frac{1}{Q_H/Q_L-1}
+\end{equation*}
+
+The COP of a refrigerator can be greater than unity. This is not a violation of the second law because COP is not a thermal efficiency. The heat removed from the refrigerated space can be greater than the work input supplied to the refrigerator. :contentReference[oaicite:5]{index=5}
+
+\mysubsection{}{Heat Pumps}
+
+A \textbf{heat pump} is another cyclic device that transfers heat from a low-temperature medium to a high-temperature medium.
+
+Refrigerators and heat pumps operate on the same basic cycle, but their objectives are different.
+
+\textbf{\\ Objective of a Refrigerator}
+
+The objective of a refrigerator is to maintain a refrigerated space at a low temperature by removing heat from it.
+
+The heat rejected to the warmer environment is a necessary part of its operation but is not its primary purpose.
+
+\textbf{\\ Objective of a Heat Pump}
+
+The objective of a heat pump is to maintain a heated space at a high temperature.
+
+A heat pump absorbs heat from a low-temperature source and supplies this heat to a high-temperature space.
+
+Possible low-temperature sources include:
+
+\begin{itemize}
+    \item cold outdoor air, and
+    \item well water.
+\end{itemize}
+
+The supplied heat is delivered to a heated space such as a house. :contentReference[oaicite:6]{index=6}
+
+\textbf{\\ Reversible Operation of Air-Conditioning Systems}
+
+An ordinary refrigerator can function as a heat pump when its operating arrangement is appropriately changed.
+
+Similarly, an air-conditioning system can operate as a refrigerator in cooling mode and as a heat pump in heating mode.
+
+In cooling mode, the system absorbs heat from the indoor space and rejects it outside.
+
+In heating mode, the system absorbs heat from the outside environment and delivers it indoors.
+
+Air-conditioning systems equipped with appropriate controls and a reversing valve can perform both functions. :contentReference[oaicite:7]{index=7}
+
+\mysubsection{}{Coefficient of Performance of a Heat Pump}
+
+The performance of a heat pump is measured using the \textbf{coefficient of performance}, denoted by $\mathrm{COP}_{HP}$.
+
+For a heat pump, the desired output is the heat supplied to the heated space, $Q_H$.
+
+\begin{equation*}
+\mathrm{COP}_{HP} =
+\frac{\text{Desired output}}{\text{Required input}}
+\end{equation*}
+
+Therefore,
+
+\begin{equation*}
+\mathrm{COP}_{HP} =
+\frac{Q_H}{W_{\mathrm{net,in}}}
+\end{equation*}
+
+Using
+
+\begin{equation*}
+W_{\mathrm{net,in}}=Q_H-Q_L
+\end{equation*}
+
+gives
+
+\begin{equation*}
+\mathrm{COP}_{HP} =
+\frac{Q_H}{Q_H-Q_L}
+\end{equation*}
+
+or
+
+\begin{equation*}
+\mathrm{COP}_{HP} =
+\frac{1}{1-Q_L/Q_H}
+\end{equation*}
+
+The COP of a heat pump is related to the COP of a refrigerator by
+
+\begin{equation*}
+\mathrm{COP}_{HP}=\mathrm{COP}_R+1
+\end{equation*}
+
+Thus, for the same operating conditions, the heat-pump COP is greater than the refrigerator COP. :contentReference[oaicite:8]{index=8}
+
+\mysubsection{}{Energy Efficiency Ratio and Seasonal Energy Efficiency Ratio}
+
+The performance of air conditioners and heat pumps is often expressed using the \textbf{energy efficiency ratio (EER)} or the \textbf{seasonal energy efficiency ratio (SEER)}.
+
+\textbf{\\ Energy Efficiency Ratio}
+
+The EER is a measure of the instantaneous energy efficiency of cooling equipment under steady operating conditions.
+
+It is defined as the ratio of the rate of heat removal from the cooled space to the rate of electrical energy consumption.
+
+\begin{equation*}
+\mathrm{EER} =
+\frac{\text{rate of heat removal}}
+{\text{rate of electricity consumption}}
+\end{equation*}
+
+EER is expressed in $\mathrm{Btu/Wh}$.
+
+\textbf{\\ Seasonal Energy Efficiency Ratio}
+
+The SEER is a measure of seasonal performance.
+
+It is defined as the ratio of the total amount of heat removed by an air conditioner or heat pump during a normal cooling season to the total amount of electricity consumed during that period.
+
+\begin{equation*}
+\mathrm{SEER} =
+\frac{\text{total heat removed during the cooling season}}
+{\text{total electricity consumed during the cooling season}}
+\end{equation*}
+
+SEER is also expressed in $\mathrm{Btu/Wh}$.
+
+\textbf{\\ Relation Between EER and COP}
+
+The EER and refrigeration COP are related by
+
+\begin{equation*}
+\mathrm{EER}=3.412\,\mathrm{COP}_R
+\end{equation*}
+
+The same conversion relationship applies between SEER and the corresponding seasonal COP measure. :contentReference[oaicite:12]{index=12}
+
+\mysubsection{}{The Second Law of Thermodynamics: Clausius Statement}
+
+The \textbf{Clausius statement} is one of the two classic statements of the second law of thermodynamics. It is associated with refrigerators and heat pumps. :contentReference[oaicite:13]{index=13}
+
+\textbf{\\ Clausius Statement}
+
+\textbf{It is impossible to construct a device that operates in a cycle and produces no effect other than the transfer of heat from a lower-temperature body to a higher-temperature body.}
+
+The Clausius statement does not mean that transferring heat from a cold body to a warm body is impossible.
+
+A refrigerator performs exactly this function. However, it requires an external power source to drive its compressor.
+
+Therefore, the net effect of a refrigerator on its surroundings includes both:
+
+\begin{itemize}
+    \item transfer of heat from a low-temperature body to a high-temperature body, and
+    \item consumption of work.
+\end{itemize}
+
+The external work input prevents the refrigerator from violating the Clausius statement. :contentReference[oaicite:14]{index=14}
+
+\mysubsection{}{Experimental Basis of the Second Law}
+
+Both the Kelvin--Planck and Clausius statements are negative statements. A negative statement cannot be directly proved in the mathematical sense.
+
+The second law is instead based on experimental observations. No experiment has been conducted that contradicts the second law, which provides experimental support for its validity. :contentReference[oaicite:15]{index=15}
+
+\mysubsection{}{Equivalence of the Kelvin--Planck and Clausius Statements}
+
+The Kelvin--Planck and Clausius statements are \textbf{equivalent in their consequences}. Either statement can therefore be used as an expression of the second law of thermodynamics.
+
+A violation of one statement necessarily leads to a violation of the other.
+
+\textbf{\\ Kelvin--Planck Violation Leading to Clausius Violation}
+
+Consider a hypothetical heat engine that violates the Kelvin--Planck statement by converting all the heat received from a high-temperature reservoir into work.
+
+The work produced by this hypothetical engine can be supplied to a refrigerator.
+
+The refrigerator then transfers heat from the low-temperature reservoir to the high-temperature reservoir without requiring any external work input to the combined system.
+
+The combined device would therefore produce a net effect consisting only of transferring heat from a colder body to a warmer body without external energy input.
+
+This violates the Clausius statement. Therefore,
+
+\begin{equation*}
+\text{Violation of Kelvin--Planck statement}
+\Longrightarrow
+\text{Violation of Clausius statement}
+\end{equation*}
+
+Similarly, a violation of the Clausius statement can be shown to result in a violation of the Kelvin--Planck statement. Hence, the two statements are equivalent. :contentReference[oaicite:16]{index=16}
+
+\mysubsection{}{Comparison of Refrigerator and Heat Pump}
+
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Feature} & \textbf{Refrigerator} & \textbf{Heat Pump} \\
+\hline
+\textbf{Purpose} & Cool a space & Heat a space \\
+\hline
+\textbf{Desired output} & Heat removed, $Q_L$ & Heat supplied, $Q_H$ \\
+\hline
+\textbf{Required input} & $W_{\mathrm{net,in}}$ & $W_{\mathrm{net,in}}$ \\
+\hline
+\textbf{Performance measure} & $\mathrm{COP}_R$ & $\mathrm{COP}_{HP}$ \\
+\hline
+\textbf{Operating cycle} & Vapor-compression cycle & Same basic refrigeration cycle \\
+\hline
+\end{tabular}
+\end{center}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\mysection{6.5}{Perpetual-Motion Machines}{6.5}
+
+A thermodynamic process can occur only if it satisfies both the first and second laws of thermodynamics. Any device that violates either of these laws is called a \textbf{perpetual-motion machine}. Despite numerous attempts to construct such devices, no perpetual-motion machine has been shown to operate successfully. :contentReference[oaicite:0]{index=0}
+
+\mysubsection{}{Types of Perpetual-Motion Machines}
+
+\insertfigure{0.8}{Figure : 3.png}
+
+Perpetual-motion machines are classified according to the thermodynamic law they violate.
+
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Machine} & \textbf{Law Violated} & \textbf{Basic Violation} \\
+\hline
+PMM1 & First law & Creates energy \\
+\hline
+PMM2 & Second law & Violates the direction or limitations of energy conversion \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{\\ Perpetual-Motion Machine of the First Kind}
+
+A \textbf{perpetual-motion machine of the first kind (PMM1)} is a device that violates the first law of thermodynamics by creating energy.
+
+Such a device would continuously supply energy to its surroundings without receiving an equivalent energy input.
+
+This violates the principle of conservation of energy. :contentReference[oaicite:1]{index=1}
+
+
+\textbf{\\ Perpetual-Motion Machine of the Second Kind}
+
+A \textbf{perpetual-motion machine of the second kind (PMM2)} is a device that violates the second law of thermodynamics. :contentReference[oaicite:3]{index=3}
+
+Unlike a PMM1, a PMM2 does not necessarily create energy. Instead, it attempts to accomplish a process that is prohibited by the second law.
+
+
+\textbf{\\ PMM2 and the Second Law}
+
+The second law requires restrictions on the conversion of heat into work.
+
+A cyclic device cannot receive heat from a single thermal reservoir and convert all of that heat into net work.
+
+Thus, a proposed device that:
+
+\begin{itemize}
+    \item operates on a cycle,
+    \item receives heat from a single reservoir, and
+    \item produces a net amount of work
+\end{itemize}
+
+would violate the second law and therefore constitute a PMM2.
+
+\mysubsection{}{Comparison of PMM1 and PMM2}
+
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Feature} & \textbf{PMM1} & \textbf{PMM2} \\
+\hline
+\textbf{Law violated} & First law & Second law \\
+\hline
+\textbf{Basic violation} & Creates energy & Violates second-law restrictions \\
+\hline
+\textbf{Energy conservation} & Violated & Satisfied \\
+\hline
+\textbf{Heat-to-work limitation} & Not the primary issue & Violated \\
+\hline
+\textbf{Possibility} & Impossible & Impossible \\
+\hline
+\end{tabular}
+\end{center}
+
+\mysubsection{}{Relationship with the Laws of Thermodynamics}
+
+The existence of PMM1 and PMM2 illustrates why both laws of thermodynamics are necessary.
+
+\begin{equation*}
+\text{First Law}
+\longrightarrow
+\text{Conservation of Energy}
+\end{equation*}
+
+\begin{equation*}
+\text{Second Law}
+\longrightarrow
+\text{Direction and Limitations of Processes}
+\end{equation*}
+
+A process must satisfy both requirements:
+
+\begin{equation*}
+\text{Feasible Process}
+\Longrightarrow
+\text{First Law Satisfied}
++
+\text{Second Law Satisfied}
+\end{equation*}
+
+Satisfying only the first law is insufficient because a process may conserve energy while still violating the second law.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\mysection{6.6}{Reversible and Irreversible Processes}{6.6}
+
+The second law of thermodynamics establishes that no heat engine can have an efficiency of 100 percent. To determine the highest possible performance of a heat engine, an idealized process called a \textbf{reversible process} is introduced. :contentReference[oaicite:0]{index=0}
+
+\mysubsection{}{Reversible Process}
+
+A \textbf{reversible process} is a process that can be reversed without leaving any trace on the surroundings.
+
+For a process to be reversible, both the system and the surroundings must be restored to their initial states at the end of the reverse process.
+
+For the combined original and reverse processes,
+
+\begin{equation*}
+Q_{\mathrm{net}}=0
+\end{equation*}
+
+and
+
+\begin{equation*}
+W_{\mathrm{net}}=0
+\end{equation*}
+
+Thus, a reversible process is an ideal process in which both the system and its surroundings can be completely restored to their original states.
+
+\textbf{\\ Important Condition}
+
+Restoring only the system to its initial state does not necessarily make a process reversible.
+
+The surroundings must also be restored to their original state without producing any net change.
+
+\mysubsection{}{Irreversible Process}
+
+A process that cannot be reversed without leaving a net change in the system or surroundings is called an \textbf{irreversible process}.
+
+In an irreversible process, restoring the system to its initial state generally requires some change in the surroundings.
+
+For example, when hot coffee cools, it does not spontaneously absorb the heat lost to the surroundings and return to its original temperature. If both the coffee and surroundings could be restored to their original states without any net effect, the process would be reversible. :contentReference[oaicite:1]{index=1}
+
+\mysubsection{}{Natural Processes and Reversibility}
+
+All processes occurring in nature are irreversible.
+
+Reversible processes are idealizations of actual processes. They can be approximated by real devices but can never be achieved perfectly.
+
+Reversible processes are useful because:
+
+\begin{itemize}
+    \item they are easier to analyze,
+    \item the system passes through a series of equilibrium states, and
+    \item they provide idealized models against which actual processes can be compared.
+\end{itemize}
+
+Therefore, reversibility represents an ideal limiting condition rather than an exactly realizable physical process. :contentReference[oaicite:2]{index=2}
+
+\mysubsection{}{Examples of Reversible Processes}
+
+Two familiar processes that can be modeled as reversible are:
+
+\begin{itemize}
+    \item motion of a frictionless pendulum,
+    \item quasi-equilibrium expansion and compression of a gas.
+\end{itemize}
+
+These processes are idealized because real systems inevitably contain some source of irreversibility.
+
+\mysubsection{}{Importance of Reversible Processes in Engineering}
+
+Engineers are interested in reversible processes because they establish theoretical limits for the performance of thermodynamic devices.
+
+For work-producing devices such as engines and turbines, reversible operation gives the \textbf{maximum possible work output}.
+
+For work-consuming devices such as compressors, fans, and pumps, reversible operation gives the \textbf{minimum possible work input}. :contentReference[oaicite:3]{index=3}
+
+Therefore,
+
+\begin{equation*}
+\text{Reversible process}
+\longrightarrow
+\text{Maximum work output}
+\end{equation*}
+
+for work-producing devices, while
+
+\begin{equation*}
+\text{Reversible process}
+\longrightarrow
+\text{Minimum work input}
+\end{equation*}
+
+for work-consuming devices.
+
+\mysubsection{}{Second-Law Efficiency}
+
+The concept of a reversible process leads to the definition of \textbf{second-law efficiency}.
+
+Second-law efficiency indicates the degree to which an actual process approaches its corresponding reversible process.
+
+A better-designed device has:
+
+\begin{itemize}
+    \item fewer irreversibilities,
+    \item a closer approximation to reversible operation, and
+    \item a higher second-law efficiency.
+\end{itemize}
+
+Thus, reversible processes provide a standard for comparing the performance of actual devices performing the same task. :contentReference[oaicite:4]{index=4}
+
+\mysubsection{}{Irreversibilities}
+
+The factors that cause a process to be irreversible are called \textbf{irreversibilities}.
+
+Common sources of irreversibility include:
+
+\begin{itemize}
+    \item friction,
+    \item unrestrained expansion,
+    \item mixing of different fluids,
+    \item heat transfer through a finite temperature difference,
+    \item electrical resistance,
+    \item inelastic deformation of solids, and
+    \item chemical reactions.
+\end{itemize}
+
+A reversible process contains none of these irreversibilities. :contentReference[oaicite:5]{index=5}
+
+\mysubsection{}{Internally Reversible Process}
+
+A process is called \textbf{internally reversible} if no irreversibilities occur within the boundaries of the system during the process.
+
+During an internally reversible process:
+
+\begin{itemize}
+    \item the system passes through a series of equilibrium states,
+    \item the process can be reversed through the same equilibrium states, and
+    \item the forward and reverse process paths coincide.
+\end{itemize}
+
+A \textbf{quasi-equilibrium process} is an example of an internally reversible process. :contentReference[oaicite:11]{index=11}
+
+\textbf{\\ Characteristics}
+
+For an internally reversible process,
+
+\begin{equation*}
+\text{Forward path}
+=
+\text{Reverse path}
+\end{equation*}
+
+The absence of internal irreversibilities does not necessarily mean that the process is completely reversible, because irreversibilities may still exist outside the system boundary.
+
+\mysubsection{}{Externally Reversible Process}
+
+A process is called \textbf{externally reversible} if no irreversibilities occur outside the system boundaries during the process.
+
+For heat transfer between a thermal reservoir and a system to be externally reversible, the outer surface of the system must be at the same temperature as the reservoir.
+
+Thus, the heat transfer must occur without a finite temperature difference at the boundary. :contentReference[oaicite:12]{index=12}
+
+\mysubsection{}{Totally Reversible Process}
+
+A process is called \textbf{totally reversible}, or simply \textbf{reversible}, when there are no irreversibilities either inside the system or in its surroundings.
+
+A totally reversible process involves:
+
+\begin{itemize}
+    \item no heat transfer through a finite temperature difference,
+    \item no non-quasi-equilibrium changes,
+    \item no friction, and
+    \item no other dissipative effects.
+\end{itemize}
+
+Therefore,
+
+\begin{equation*}
+\text{Totally reversible}
+=
+\text{Internally reversible}
++
+\text{Externally reversible}
+\end{equation*}
+
+:contentReference[oaicite:13]{index=13}
+
+
+\mysubsection{}{Types of Reversibility}
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Type} & \textbf{Condition} \\
+\hline
+\textbf{Internally reversible} & No irreversibilities within the system boundary \\
+\hline
+\textbf{Externally reversible} & No irreversibilities outside the system boundary \\
+\hline
+\textbf{Totally reversible} & No internal or external irreversibilities \\
+\hline
+\end{tabular}
+\end{center}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\mysection{6.7}{The Carnot Cycle}{6.7}
+
+The performance of a heat-engine cycle depends strongly on how the individual processes of the cycle are executed. Since reversible processes require the least work in work-consuming devices and deliver the most work in work-producing devices, a cycle composed entirely of reversible processes provides the highest possible performance.
+
+A \textbf{reversible cycle} therefore represents an ideal limiting cycle against which actual thermodynamic cycles can be compared. Although reversible cycles cannot be achieved in practice because irreversibilities cannot be completely eliminated, they provide theoretical upper limits for the performance of real heat engines and refrigerators. :contentReference[oaicite:0]{index=0}
+
+\mysubsection{}{Carnot Cycle}
+
+The \textbf{Carnot cycle} is the best-known reversible thermodynamic cycle. It was first proposed in 1824 by the French engineer \textbf{Sadi Carnot}.
+
+A theoretical heat engine operating on the Carnot cycle is called a \textbf{Carnot heat engine}.
+
+The Carnot cycle consists of four reversible processes:
+
+\begin{itemize}
+    \item two reversible isothermal processes, and
+    \item two reversible adiabatic processes.
+\end{itemize}
+
+The cycle can be executed in either a closed system or a steady-flow system. :contentReference[oaicite:1]{index=1}
+
+\mysubsection{}{Carnot Heat Engine}
+
+Consider a closed system consisting of a gas contained in an adiabatic piston--cylinder device. The cylinder head can be brought into contact with thermal energy reservoirs to allow heat transfer, or it can be insulated to make the system adiabatic.
+
+The gas acts as the working fluid of the Carnot heat engine.
+
+The engine operates between:
+
+\begin{equation*}
+T_H = \text{temperature of the high-temperature reservoir}
+\end{equation*}
+
+and
+
+\begin{equation*}
+T_L = \text{temperature of the low-temperature reservoir}
+\end{equation*}
+
+with
+
+\begin{equation*}
+T_H > T_L
+\end{equation*}
+
+The four reversible processes of the Carnot cycle are described below.
+
+\mysubsection{}{Process 1--2: Reversible Isothermal Expansion}
+
+The first process is a \textbf{reversible isothermal expansion} at the high temperature $T_H$.
+
+Initially, the working fluid is at temperature $T_H$ and is in contact with the high-temperature reservoir.
+
+The gas is allowed to expand slowly and performs work on the surroundings.
+
+As the gas expands, its temperature tends to decrease. To maintain the temperature at $T_H$, heat is transferred from the high-temperature reservoir to the gas whenever an infinitesimal temperature difference develops.
+
+Thus,
+
+\begin{equation*}
+T=T_H=\text{constant}
+\end{equation*}
+
+The heat supplied to the gas during this process is denoted by $Q_H$.
+
+Because the heat transfer occurs through an infinitesimal temperature difference, the heat transfer is reversible.
+
+The process continues until the gas reaches state 2. :contentReference[oaicite:2]{index=2}
+
+\textbf{\\ Characteristics}
+
+\begin{itemize}
+    \item Process type: isothermal expansion.
+    \item Temperature remains constant at $T_H$.
+    \item Heat is supplied to the working fluid.
+    \item The working fluid expands and does work on the surroundings.
+    \item Heat transfer occurs reversibly.
+\end{itemize}
+
+\mysubsection{}{Process 2--3: Reversible Adiabatic Expansion}
+
+At state 2, the high-temperature reservoir is removed and the cylinder head is insulated.
+
+The gas continues to expand slowly while performing work on the surroundings.
+
+Since the system is insulated,
+
+\begin{equation*}
+Q=0
+\end{equation*}
+
+Therefore, this process is \textbf{adiabatic}.
+
+As the gas expands and performs work, its temperature decreases from $T_H$ to $T_L$.
+
+The process is also quasi-equilibrium and the piston is assumed to be frictionless. Therefore, the process is both adiabatic and reversible.
+
+The gas reaches state 3 at temperature $T_L$. :contentReference[oaicite:3]{index=3}
+
+\textbf{\\ Characteristics}
+
+\begin{itemize}
+    \item Process type: adiabatic expansion.
+    \item No heat transfer occurs.
+    \item The gas performs work on the surroundings.
+    \item Temperature decreases from $T_H$ to $T_L$.
+    \item The process is quasi-equilibrium and reversible.
+\end{itemize}
+
+\mysubsection{}{Process 3--4: Reversible Isothermal Compression}
+
+At state 3, the insulation is removed and the cylinder is brought into contact with the low-temperature reservoir at $T_L$.
+
+An external force compresses the gas, doing work on the working fluid.
+
+As the gas is compressed, its temperature tends to increase. Heat is therefore transferred from the gas to the low-temperature reservoir so that the gas temperature remains constant.
+
+Thus,
+
+\begin{equation*}
+T=T_L=\text{constant}
+\end{equation*}
+
+The heat rejected by the gas during this process is denoted by $Q_L$.
+
+Because the temperature difference between the gas and the low-temperature reservoir is only infinitesimal, the heat transfer is reversible.
+
+The process continues until the gas reaches state 4. :contentReference[oaicite:4]{index=4}
+
+\textbf{\\ Characteristics}
+
+\begin{itemize}
+    \item Process type: isothermal compression.
+    \item Temperature remains constant at $T_L$.
+    \item Heat is rejected from the working fluid.
+    \item Work is done on the working fluid.
+    \item Heat transfer occurs reversibly.
+\end{itemize}
+
+\mysubsection{}{Process 4--1: Reversible Adiabatic Compression}
+
+At state 4, the low-temperature reservoir is removed and insulation is placed back on the cylinder head.
+
+The gas is then compressed reversibly.
+
+Since the system is insulated,
+
+\begin{equation*}
+Q=0
+\end{equation*}
+
+Therefore, the process is adiabatic.
+
+Work is done on the gas during compression, causing its temperature to rise from $T_L$ to $T_H$.
+
+The gas eventually returns to its original state 1, thereby completing the cycle. :contentReference[oaicite:5]{index=5}
+
+\textbf{\\ Characteristics}
+
+\begin{itemize}
+    \item Process type: adiabatic compression.
+    \item No heat transfer occurs.
+    \item Work is done on the working fluid.
+    \item Temperature increases from $T_L$ to $T_H$.
+    \item The working fluid returns to its initial state.
+\end{itemize}
+
+\mysubsection{}{Four Processes of the Carnot Cycle}
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Process} & \textbf{Type} & \textbf{Heat Transfer} & \textbf{Temperature} \\
+\hline
+1--2 & Reversible isothermal expansion & Heat supplied & $T_H=\text{constant}$ \\
+\hline
+2--3 & Reversible adiabatic expansion & $Q=0$ & $T_H\rightarrow T_L$ \\
+\hline
+3--4 & Reversible isothermal compression & Heat rejected & $T_L=\text{constant}$ \\
+\hline
+4--1 & Reversible adiabatic compression & $Q=0$ & $T_L\rightarrow T_H$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\mysubsection{}{P--V Diagram of the Carnot Cycle}
+
+\insertfigure{0.5}{Figure : 4.png}
+
+The Carnot cycle can be represented on a pressure--volume ($P$--$V$) diagram.
+
+The two isothermal processes are represented by the constant-temperature curves:
+
+\begin{equation*}
+T_H=\text{constant}
+\end{equation*}
+
+and
+
+\begin{equation*}
+T_L=\text{constant}
+\end{equation*}
+
+The adiabatic expansion and compression processes connect these two isotherms.
+
+The four processes form a closed cycle:
+
+\begin{equation*}
+1\rightarrow2\rightarrow3\rightarrow4\rightarrow1
+\end{equation*}
+
+For quasi-equilibrium processes, the area under a process curve represents the boundary work.
+
+Therefore:
+
+\begin{itemize}
+    \item the area under the expansion processes represents the work done by the gas,
+    \item the area under the compression processes represents the work done on the gas, and
+    \item the area enclosed by the complete cycle represents the net work delivered by the heat engine.
+\end{itemize}
+
+Thus,
+
+\begin{equation*}
+W_{\mathrm{net,out}}
+=
+W_{\mathrm{expansion}}
+-
+W_{\mathrm{compression}}
+\end{equation*}
+
+The enclosed area on the $P$--$V$ diagram therefore represents the net work of the Carnot heat engine. :contentReference[oaicite:6]{index=6}
+
+\mysubsection{}{Heat and Work Interactions}
+
+During the Carnot heat-engine cycle:
+
+\begin{equation*}
+Q_H
+=
+\text{heat supplied from the high-temperature reservoir}
+\end{equation*}
+
+\begin{equation*}
+Q_L
+=
+\text{heat rejected to the low-temperature reservoir}
+\end{equation*}
+
+The net work output of the cycle is
+
+\begin{equation*}
+W_{\mathrm{net,out}}=Q_H-Q_L
+\end{equation*}
+
+The heat engine must exchange heat with two reservoirs at different temperatures in order to operate in a cycle and produce net work.
+
+Attempting to eliminate the heat rejection process would prevent the engine from producing net work while completing the cycle. :contentReference[oaicite:7]{index=7}
+
+\mysubsection{}{Maximum Efficiency of the Carnot Cycle}
+
+The Carnot cycle is a completely reversible cycle.
+
+Since reversible processes deliver the maximum work from work-producing devices, the Carnot cycle represents the \textbf{maximum possible efficiency} for a heat engine operating between two specified temperature limits.
+
+Thus, no actual heat engine operating between the same temperature limits can be more efficient than a Carnot heat engine.
+
+The Carnot cycle cannot be achieved in practice because real processes always contain irreversibilities. However, actual heat-engine cycles can be improved by attempting to approximate the Carnot cycle more closely. :contentReference[oaicite:8]{index=8}
+
+\mysubsection{}{Reversed Carnot Cycle}
+
+Because every process in the Carnot cycle is reversible, the entire cycle can be reversed.
+
+When the Carnot heat-engine cycle is reversed, it becomes the \textbf{Carnot refrigeration cycle}.
+
+The directions of all heat and work interactions are reversed.
+
+For the reversed cycle:
+
+\begin{itemize}
+    \item heat $Q_L$ is absorbed from the low-temperature reservoir,
+    \item heat $Q_H$ is rejected to the high-temperature reservoir, and
+    \item net work $W_{\mathrm{net,in}}$ is supplied to the device.
+\end{itemize}
+
+Thus, the reversed Carnot cycle operates as a refrigerator or heat pump.
+
+\begin{equation*}
+\text{Carnot Heat Engine}
+\xrightarrow{\text{reverse all processes}}
+\text{Carnot Refrigerator}
+\end{equation*}
+
+The $P$--$V$ diagram of the reversed Carnot cycle is the same as that of the Carnot cycle, except that the direction of traversal is reversed. :contentReference[oaicite:9]{index=9}
+
+\insertfigure{0.5}{Figure : 5.png}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\mysection{6.8}{The Carnot Principles}{6.8}
+
+The second law of thermodynamics places fundamental limits on the operation of cyclic devices. In particular, the Kelvin--Planck and Clausius statements establish that a heat engine cannot operate by exchanging heat with only a single reservoir, and a refrigerator cannot operate without a net energy input from an external source. :contentReference[oaicite:0]{index=0}
+
+These limitations lead to two important conclusions concerning the thermal efficiencies of reversible and irreversible heat engines. These conclusions are known as the \textbf{Carnot principles}.
+
+\mysubsection{}{First Carnot Principle}
+
+The first Carnot principle states:
+
+\textbf{\\ The efficiency of an irreversible heat engine is always less than the efficiency of a reversible heat engine operating between the same two reservoirs.}
+
+Therefore,
+
+\begin{equation*}
+\eta_{\mathrm{th,irrev}} < \eta_{\mathrm{th,rev}}
+\end{equation*}
+
+when both engines operate between the same high-temperature and low-temperature reservoirs.
+
+This principle establishes that a reversible heat engine represents the upper performance limit for a heat engine operating between specified reservoirs. :contentReference[oaicite:1]{index=1}
+
+\textbf{\\ Physical Meaning}
+
+Irreversibilities reduce the performance of a heat engine.
+
+A reversible heat engine has no irreversibilities and therefore produces more useful work from the available heat transfer than an irreversible heat engine operating between the same reservoirs.
+
+Thus,
+
+\begin{equation*}
+\text{Irreversibilities}
+\longrightarrow
+\text{Lower thermal efficiency}
+\end{equation*}
+
+while
+
+\begin{equation*}
+\text{Reversible operation}
+\longrightarrow
+\text{Maximum thermal efficiency}
+\end{equation*}
+
+
+\newpage
+\mysubsection{}{Proof of the First Carnot Principle}
+
+\insertfigure{0.8}{Figure : 6.png}
+
+Consider two heat engines operating between the same high-temperature and low-temperature reservoirs:
+
+\begin{itemize}
+    \item one heat engine is reversible,
+    \item the other heat engine is irreversible.
+\end{itemize}
+
+Suppose, contrary to the first Carnot principle, that the irreversible heat engine is more efficient than the reversible heat engine.
+
+The reversible heat engine is then reversed and operated as a refrigerator.
+
+The reversible refrigerator requires work input and rejects heat to the high-temperature reservoir. The irreversible heat engine receives the same amount of heat from that reservoir.
+
+The heat interactions with the high-temperature reservoir cancel when the refrigerator and irreversible heat engine are considered together. The high-temperature reservoir can therefore be eliminated from the combined system.
+
+The combined device would then produce a net amount of work while exchanging heat with only a single reservoir.
+
+This violates the \textbf{Kelvin--Planck statement of the second law}.
+
+Therefore, the original assumption that the irreversible heat engine could be more efficient than the reversible heat engine must be false.
+
+Hence,
+
+\begin{equation*}
+\eta_{\mathrm{th,irrev}} < \eta_{\mathrm{th,rev}}
+\end{equation*}
+
+for heat engines operating between the same two reservoirs. :contentReference[oaicite:2]{index=2}
+
+\mysubsection{}{Second Carnot Principle}
+
+The second Carnot principle states:
+
+\textbf{\\ The efficiencies of all reversible heat engines operating between the same two reservoirs are the same.}
+
+Therefore, if several reversible heat engines operate between the same high-temperature and low-temperature reservoirs,
+
+\begin{equation*}
+\eta_{\mathrm{th,1}}
+=
+\eta_{\mathrm{th,2}}
+=
+\eta_{\mathrm{th,3}}
+\end{equation*}
+
+provided all of them operate reversibly between the same reservoirs.
+
+This result is independent of:
+
+\begin{itemize}
+    \item the particular design of the heat engine,
+    \item the manner in which the cycle is completed, and
+    \item the type of working fluid used.
+\end{itemize}
+
+Thus, the efficiency of a reversible heat engine depends only on the two temperature limits between which it operates. :contentReference[oaicite:3]{index=3}
+
+\mysubsection{}{Proof of the Second Carnot Principle}
+
+Suppose two reversible heat engines operate between the same two reservoirs.
+
+Assume, contrary to the second Carnot principle, that one reversible heat engine is more efficient than the other.
+
+The more efficient reversible engine is assumed to produce more work while receiving the same heat input.
+
+The less efficient reversible engine is then reversed and operated as a refrigerator.
+
+When the two devices are combined appropriately, the heat interactions with one of the reservoirs can be canceled.
+
+The resulting combined device would produce a net amount of work while exchanging heat with only a single reservoir.
+
+This would violate the \textbf{Kelvin--Planck statement of the second law}.
+
+Therefore, one reversible heat engine cannot be more efficient than another reversible heat engine operating between the same two reservoirs.
+
+Hence,
+
+\begin{equation*}
+\eta_{\mathrm{th,rev,1}}
+=
+\eta_{\mathrm{th,rev,2}}
+\end{equation*}
+
+for all reversible heat engines operating between the same reservoirs. :contentReference[oaicite:4]{index=4}
+
+\mysubsection{}{Combined Interpretation}
+
+\insertfigure{0.35}{Figure : 7.png}
+
+The two Carnot principles can be summarized as
+
+\begin{equation*}
+\eta_{\mathrm{irrev}}
+<
+\eta_{\mathrm{rev}}
+\end{equation*}
+
+and
+
+\begin{equation*}
+\eta_{\mathrm{rev,1}}
+=
+\eta_{\mathrm{rev,2}}
+=
+\eta_{\mathrm{rev,3}}
+\end{equation*}
+
+when all engines being compared operate between the same two reservoirs.
+
+Thus, the efficiency of a reversible heat engine establishes the upper limit, while irreversible heat engines always operate below this limit.
+
+\mysubsection{}{Connection with the Second Law}
+
+The Carnot principles follow directly from the second law of thermodynamics.
+
+If either principle were violated, it would be possible to construct a combined device that produces a net amount of work while exchanging heat with only a single reservoir.
+
+Such a device would violate the Kelvin--Planck statement of the second law.
+
+Therefore, the Carnot principles are consequences of the fundamental restrictions imposed by the second law. :contentReference[oaicite:5]{index=5}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\mysection{6.9}{The Thermodynamic Temperature Scale}{6.9}
+
+A temperature scale that is independent of the properties of the substances used to measure temperature is called a \textbf{thermodynamic temperature scale}.
+
+Such a temperature scale is particularly useful in thermodynamic calculations because it does not depend on the physical properties of a particular temperature-measuring substance.
+
+The thermodynamic temperature scale can be developed using reversible heat engines and the second Carnot principle.
+
+\mysubsection{}{Thermal Efficiency of Reversible Heat Engines}
+
+The second Carnot principle states that all reversible heat engines operating between the same two thermal reservoirs have the same thermal efficiency.
+
+Therefore, the efficiency of a reversible heat engine is independent of:
+
+\begin{itemize}
+    \item the working fluid used,
+    \item the properties of the working fluid,
+    \item the manner in which the cycle is executed, and
+    \item the particular type of reversible heat engine.
+\end{itemize}
+
+Since thermal reservoirs are characterized by their temperatures, the thermal efficiency of a reversible heat engine depends only on the temperatures of the two reservoirs.
+
+Thus,
+
+\begin{equation*}
+\eta_{\mathrm{th,rev}}=g(T_H,T_L)
+\end{equation*}
+
+where $T_H$ and $T_L$ are the temperatures of the high-temperature and low-temperature reservoirs, respectively.
+
+Since
+
+\begin{equation*}
+\eta_{\mathrm{th}}
+=
+1-\frac{Q_L}{Q_H}
+\end{equation*}
+
+the ratio of heat transfers for a reversible heat engine can be expressed as
+
+\begin{equation*}
+\left(\frac{Q_H}{Q_L}\right)_{\mathrm{rev}}
+=
+f(T_H,T_L)
+\end{equation*}
+
+Thus, for reversible heat engines, the ratio of heat transfers is a function only of the reservoir temperatures.
+
+\newpage
+\mysubsection{}{Three Reversible Heat Engines}
+
+\insertfigure{0.4}{Figure : 8.png}
+
+The functional relationship between heat transfer and temperature can be developed by considering three reversible heat engines operating between three thermal reservoirs.
+
+Let the reservoir temperatures be $T_1$, $T_2$, and $T_3$.
+
+The three reversible heat engines are arranged such that:
+
+\begin{itemize}
+    \item Engine A receives heat $Q_1$ from the reservoir at $T_1$ and rejects heat $Q_2$ to the reservoir at $T_2$.
+    \item Engine B receives the heat $Q_2$ rejected by Engine A and rejects heat $Q_3$ to the reservoir at $T_3$.
+    \item Engine C receives heat $Q_1$ from the reservoir at $T_1$ and rejects heat $Q_3$ to the reservoir at $T_3$.
+\end{itemize}
+
+Engines A and B can be combined to form a single reversible heat engine operating between the reservoirs at $T_1$ and $T_3$.
+
+Because Engine C is also a reversible heat engine operating between the same reservoirs, the second Carnot principle requires the combined engine and Engine C to have the same efficiency.
+
+Consequently, the heat rejected by Engine B and Engine C must be the same.
+
+\mysubsection{}{Heat Transfer Ratios}
+
+Applying the general relationship for reversible heat engines to the three engines gives
+
+\begin{equation*}
+\frac{Q_1}{Q_2}=f(T_1,T_2)
+\end{equation*}
+
+\begin{equation*}
+\frac{Q_2}{Q_3}=f(T_2,T_3)
+\end{equation*}
+
+and
+
+\begin{equation*}
+\frac{Q_1}{Q_3}=f(T_1,T_3)
+\end{equation*}
+
+The heat-transfer ratios satisfy the identity
+
+\begin{equation*}
+\frac{Q_1}{Q_3}
+=
+\frac{Q_1}{Q_2}
+\frac{Q_2}{Q_3}
+\end{equation*}
+
+Therefore,
+
+\begin{equation*}
+f(T_1,T_3)
+=
+f(T_1,T_2)f(T_2,T_3)
+\end{equation*}
+
+The left-hand side depends only on $T_1$ and $T_3$. Therefore, the right-hand side must also be independent of the intermediate temperature $T_2$.
+
+This requirement is satisfied if the function $f$ has the form
+
+\begin{equation*}
+f(T_1,T_2)
+=
+\frac{\phi(T_1)}{\phi(T_2)}
+\end{equation*}
+
+and
+
+\begin{equation*}
+f(T_2,T_3)
+=
+\frac{\phi(T_2)}{\phi(T_3)}
+\end{equation*}
+
+where $\phi(T)$ is an arbitrary function of temperature.
+
+Multiplying these expressions gives
+
+\begin{equation*}
+f(T_1,T_2)f(T_2,T_3)
+=
+\frac{\phi(T_1)}{\phi(T_3)}
+\end{equation*}
+
+because $\phi(T_2)$ cancels.
+
+Hence,
+
+\begin{equation*}
+\frac{Q_1}{Q_3}
+=
+f(T_1,T_3)
+=
+\frac{\phi(T_1)}{\phi(T_3)}
+\end{equation*}
+
+\mysubsection{}{Heat Transfer Ratio for a Reversible Heat Engine}
+
+For a reversible heat engine operating between a high-temperature reservoir at $T_H$ and a low-temperature reservoir at $T_L$,
+
+\begin{equation*}
+\frac{Q_H}{Q_L}
+=
+\frac{\phi(T_H)}{\phi(T_L)}
+\end{equation*}
+
+This relation is the fundamental requirement imposed by the second law on the ratio of heat transfers for reversible heat engines.
+
+Several choices of the function $\phi(T)$ can satisfy this relationship.
+
+The choice of $\phi(T)$ is therefore arbitrary until a specific thermodynamic temperature scale is defined.
+
+\mysubsection{}{Kelvin Temperature Scale}
+
+Lord Kelvin proposed choosing the function
+
+\begin{equation*}
+\phi(T)=T
+\end{equation*}
+
+With this choice, the heat-transfer ratio for a reversible heat engine becomes
+
+\begin{equation*}
+\left(\frac{Q_H}{Q_L}\right)_{\mathrm{rev}}
+=
+\frac{T_H}{T_L}
+\end{equation*}
+
+This relationship provides the basis for the \textbf{Kelvin temperature scale}.
+
+The temperatures measured on this scale are called \textbf{absolute temperatures}.
+
+\mysubsection{}{Absolute Temperature}
+
+On the Kelvin scale, ratios of absolute temperatures are equal to corresponding ratios of heat transfer for a reversible heat engine.
+
+Thus,
+
+\begin{equation*}
+\frac{T_H}{T_L}
+=
+\frac{Q_H}{Q_L}
+\end{equation*}
+
+for a reversible heat engine.
+
+This relationship is important because the temperature ratio is independent of the physical properties of the substance used to measure temperature.
+
+Therefore, the Kelvin scale provides a thermodynamic temperature scale that is independent of the properties of a particular temperature-measuring substance.
+
+\mysubsection{}{Characteristics of the Kelvin Scale}
+
+The Kelvin scale has the following characteristics:
+
+\begin{itemize}
+    \item It is an absolute temperature scale.
+    \item It is independent of the properties of any particular substance.
+    \item Temperature ratios are related directly to heat-transfer ratios for reversible heat engines.
+    \item Temperatures on the scale extend from absolute zero toward infinity.
+    \item It provides a convenient temperature scale for thermodynamic calculations.
+\end{itemize}
+
+\mysubsection{}{Need for a Fixed Temperature Reference}
+
+The relationship
+
+\begin{equation*}
+\frac{T_H}{T_L}
+=
+\frac{Q_H}{Q_L}
+\end{equation*}
+
+provides only a ratio of absolute temperatures.
+
+A complete temperature scale also requires a reference point that establishes the magnitude of the temperature unit.
+
+The triple point of water is used as the fixed reference point for defining the magnitude of the kelvin.
+
+\textbf{\\ Triple Point of Water}
+
+The \textbf{triple point of water} is the thermodynamic state at which the solid, liquid, and vapor phases of water coexist in equilibrium.
+
+The triple point of water is assigned a fixed temperature on the Kelvin scale.
+
+The magnitude of one kelvin is defined from the temperature interval between absolute zero and the triple-point temperature of water.
+
+\mysubsection{}{Kelvin and Celsius Scales}
+
+The Kelvin and Celsius temperature scales have identical temperature-unit magnitudes.
+
+Therefore,
+
+\begin{equation*}
+1\,\mathrm{K}\equiv1\,^{\circ}\mathrm{C}
+\end{equation*}
+
+The two scales differ only by a constant temperature offset.
+
+The conversion from Kelvin temperature to Celsius temperature is
+
+\begin{equation*}
+T(^{\circ}\mathrm{C})
+=
+T(\mathrm{K})-273.15
+\end{equation*}
+
+Thus, a temperature difference has the same numerical magnitude whether expressed in kelvins or degrees Celsius.
+
+\mysubsection{}{Absolute Zero}
+
+The Kelvin scale has an absolute lower limit called \textbf{absolute zero}.
+
+Absolute zero represents the lower limit of thermodynamic temperature.
+
+On the absolute temperature scale,
+
+\begin{equation*}
+T\geq0
+\end{equation*}
+
+The Kelvin scale therefore avoids the negative temperatures encountered on the Celsius scale for ordinary thermodynamic states.
+
+\mysubsection{}{Experimental Determination of Thermodynamic Temperature}
+
+Although the thermodynamic temperature scale is defined using reversible heat engines, it is neither practical nor necessary to operate an actual reversible heat engine to determine absolute temperatures.
+
+Absolute temperatures can be measured accurately using other methods.
+
+One important method uses a \textbf{constant-volume ideal-gas thermometer}.
+
+The thermodynamic temperature scale therefore provides the theoretical foundation, while practical temperature measurements can be performed using suitable thermometric devices.
+
+\mysubsection{}{Importance of the Thermodynamic Temperature Scale}
+
+The thermodynamic temperature scale is fundamental to thermodynamics because it establishes temperature independently of the properties of a particular measuring substance.
+
+For a reversible heat engine,
+
+\begin{equation*}
+\frac{Q_H}{Q_L}
+=
+\frac{T_H}{T_L}
+\end{equation*}
+
+This relation makes it possible to connect measurable heat-transfer ratios with absolute temperature ratios.
+
+The Kelvin scale therefore provides a natural temperature scale for the analysis of reversible cycles and thermodynamic processes.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\mysection{6.10}{The Carnot Heat Engine}{6.10}
+
+The hypothetical heat engine that operates on the reversible Carnot cycle is called a \textbf{Carnot heat engine}. Since the Carnot cycle is completely reversible, the Carnot heat engine represents the highest possible efficiency for a heat engine operating between two specified temperature limits.
+
+For any heat engine, the thermal efficiency is defined as
+
+\begin{equation*}
+\eta_{\mathrm{th}}
+=
+1-\frac{Q_L}{Q_H}
+\end{equation*}
+
+where $Q_H$ is the heat transferred to the heat engine from the high-temperature reservoir at $T_H$, and $Q_L$ is the heat rejected to the low-temperature reservoir at $T_L$.
+
+\mysubsection{}{Carnot Efficiency}
+
+For a reversible heat engine, the ratio of heat transfers can be replaced by the ratio of the absolute temperatures of the two reservoirs.
+
+Therefore, the thermal efficiency of a Carnot heat engine is
+
+\begin{equation*}
+\eta_{\mathrm{th,rev}}
+=
+1-\frac{T_L}{T_H}
+\end{equation*}
+
+This relation is called the \textbf{Carnot efficiency}.
+
+The Carnot efficiency represents the highest efficiency that any heat engine operating between the temperature limits $T_H$ and $T_L$ can achieve.
+
+\textbf{\\ Important Condition}
+
+The temperatures $T_H$ and $T_L$ in the Carnot-efficiency relation must be \textbf{absolute temperatures}.
+
+They must be expressed on an absolute temperature scale such as the Kelvin scale.
+
+Using Celsius or Fahrenheit temperatures directly in the Carnot-efficiency relation gives an incorrect result.
+
+\mysubsection{}{Maximum Efficiency of a Heat Engine}
+
+The Carnot heat engine is the most efficient of all heat engines operating between the same high- and low-temperature reservoirs.
+
+For a heat engine operating between the same temperature limits,
+
+\begin{equation*}
+\eta_{\mathrm{th,irrev}}
+<
+\eta_{\mathrm{th,rev}}
+\end{equation*}
+
+for an irreversible heat engine,
+
+\begin{equation*}
+\eta_{\mathrm{th}}
+=
+\eta_{\mathrm{th,rev}}
+\end{equation*}
+
+for a reversible heat engine, and
+
+\begin{equation*}
+\eta_{\mathrm{th}}
+>
+\eta_{\mathrm{th,rev}}
+\end{equation*}
+
+would describe an impossible heat engine.
+
+Thus,
+
+\begin{equation*}
+\eta_{\mathrm{th}}
+\leq
+\eta_{\mathrm{th,rev}}
+\end{equation*}
+
+for any physically possible heat engine operating between the same two reservoirs.
+
+\mysubsection{}{Actual Heat Engines}
+
+Actual heat engines cannot achieve Carnot efficiency because real thermodynamic cycles contain irreversibilities.
+
+Sources of irreversibility include:
+
+\begin{itemize}
+    \item friction,
+    \item heat transfer through finite temperature differences,
+    \item non-quasi-equilibrium processes, and
+    \item other dissipative effects.
+\end{itemize}
+
+Therefore, the efficiency of an actual heat engine is always lower than the efficiency of a reversible heat engine operating between the same temperature limits.
+
+\begin{equation*}
+\eta_{\mathrm{th,actual}}
+<
+\eta_{\mathrm{th,Carnot}}
+\end{equation*}
+
+The Carnot efficiency should therefore be regarded as a theoretical upper limit rather than a performance value that an actual engine can attain.
+
+\mysubsection{}{Meaning of the Efficiency Limit}
+
+The efficiency of an actual heat engine should not simply be compared with $100\%$.
+
+The meaningful comparison is with the Carnot efficiency corresponding to the same high- and low-temperature limits.
+
+The Carnot efficiency is the true theoretical upper limit imposed by the second law of thermodynamics.
+
+Therefore, an actual engine with an efficiency substantially below $100\%$ may still represent good performance if it operates reasonably close to its Carnot limit.
+
+\mysubsection{}{Effect of High-Temperature Reservoir}
+
+From the Carnot-efficiency relation,
+
+\begin{equation*}
+\eta_{\mathrm{th,rev}}
+=
+1-\frac{T_L}{T_H}
+\end{equation*}
+
+the efficiency increases as the high-reservoir temperature $T_H$ increases, provided $T_L$ remains fixed.
+
+Thus,
+
+\begin{equation*}
+T_H \uparrow
+\quad\Longrightarrow\quad
+\eta_{\mathrm{th,rev}} \uparrow
+\end{equation*}
+
+A higher source temperature allows a larger fraction of the supplied heat to be converted into useful work.
+
+In actual heat engines, however, the maximum temperature is limited by the strength and thermal resistance of the materials used in the engine.
+
+Therefore, increasing the source temperature indefinitely is not practically possible.
+
+\mysubsection{}{Effect of Low-Temperature Reservoir}
+
+The Carnot efficiency also increases as the low-reservoir temperature $T_L$ decreases, provided $T_H$ remains fixed.
+
+Thus,
+
+\begin{equation*}
+T_L \downarrow
+\quad\Longrightarrow\quad
+\eta_{\mathrm{th,rev}} \uparrow
+\end{equation*}
+
+As the low-reservoir temperature decreases, the amount of heat that must be rejected decreases.
+
+In the limiting case as the low-reservoir temperature approaches absolute zero, the Carnot efficiency approaches unity.
+
+However, actual heat engines cannot generally achieve such conditions.
+
+The minimum temperature to which heat can be rejected is limited by the temperature of the available cooling medium, such as:
+
+\begin{itemize}
+    \item rivers,
+    \item lakes, and
+    \item atmospheric air.
+\end{itemize}
+
+\mysubsection{}{Methods of Increasing Heat-Engine Efficiency}
+
+The Carnot relation indicates two fundamental approaches for increasing the theoretical efficiency of a heat engine:
+
+\begin{itemize}
+    \item supply heat at the highest possible temperature, and
+    \item reject heat at the lowest possible temperature.
+\end{itemize}
+
+Therefore,
+
+\begin{equation*}
+\text{Higher }T_H
+\quad\text{and}\quad
+\text{Lower }T_L
+\quad\Longrightarrow\quad
+\text{Higher Carnot efficiency}
+\end{equation*}
+
+In practical systems, these improvements are restricted by material limitations and the temperature of the available cooling medium.
+
+\mysubsection{}{Carnot Efficiency and Temperature Limits}
+
+The Carnot efficiency depends only on the two reservoir temperatures.
+
+It does not depend on:
+
+\begin{itemize}
+    \item the type of working fluid,
+    \item the particular design of the reversible engine,
+    \item the details of the reversible cycle, or
+    \item the method used to execute the reversible processes.
+\end{itemize}
+
+Thus, any reversible heat engine operating between the same two temperature limits has the same thermal efficiency.
+
+\mysubsection{}{Quality of Energy}
+
+The Carnot heat engine also demonstrates that energy has both \textbf{quantity} and \textbf{quality}.
+
+The quantity of energy is conserved according to the first law of thermodynamics. However, the fraction of thermal energy that can be converted into useful work depends on the temperature at which the energy is available.
+
+For a fixed low-temperature reservoir,
+
+\begin{equation*}
+T_H \uparrow
+\quad\Longrightarrow\quad
+\text{Fraction of heat convertible to work} \uparrow
+\end{equation*}
+
+Therefore, high-temperature thermal energy has a higher quality than low-temperature thermal energy.
+
+\mysubsection{}{High-Temperature Thermal Energy}
+
+A greater fraction of high-temperature thermal energy can be converted into useful work.
+
+Consequently,
+
+\begin{equation*}
+\text{Higher temperature}
+\quad\Longrightarrow\quad
+\text{Higher energy quality}
+\end{equation*}
+
+This principle is important when evaluating energy resources and thermodynamic systems.
+
+For example, thermal energy stored at relatively low temperatures may be available in very large quantities but may have relatively low work-producing potential.
+
+
+\mysubsection{}{Work versus Heat}
+
+Work is a more valuable form of energy than heat from the viewpoint of work-producing potential.
+
+All work can be converted completely into heat, whereas only a fraction of heat can be converted into work.
+
+Therefore,
+
+\begin{equation*}
+\text{Work}
+\longrightarrow
+\text{Heat}
+\end{equation*}
+
+can occur with complete conversion, while
+
+\begin{equation*}
+\text{Heat}
+\longrightarrow
+\text{Work}
+\end{equation*}
+
+is subject to the limitations imposed by the second law of thermodynamics.
+
+\mysubsection{}{Energy Degradation}
+
+When heat is transferred from a high-temperature body to a lower-temperature body, the total quantity of energy remains unchanged, but its \textbf{work potential decreases}.
+
+Therefore, heat transfer from a high temperature to a low temperature represents degradation in energy quality.
+
+The energy is not destroyed. Instead, its ability to produce useful work is reduced.
+
+Thus,
+
+\begin{equation*}
+\text{Energy degradation}
+=
+\text{Reduction in work-producing potential}
+\end{equation*}
+
+This distinction between energy quantity and energy quality is one of the important consequences of the second law of thermodynamics.
+
+\mysubsection{}{Quantity versus Quality of Energy}
+
+The first law focuses on the \textbf{quantity} of energy because it establishes that energy is conserved.
+
+The second law introduces the additional concept of \textbf{quality} or \textbf{work potential}.
+
+Therefore, a complete assessment of an energy system requires both viewpoints:
+
+\begin{equation*}
+\text{Energy assessment}
+=
+\text{First-law analysis}
++
+\text{Second-law analysis}
+\end{equation*}
+
+An energy source containing a large quantity of energy is not necessarily more useful than a smaller quantity of energy available at a much higher temperature.
+
+Thus, quantity alone is not sufficient for evaluating the usefulness of energy.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\mysection{6.11}{The Carnot Refrigerator and Heat Pump}{6.11}
+
+A refrigerator or heat pump that operates on the reversed Carnot cycle is called a \textbf{Carnot refrigerator} or a \textbf{Carnot heat pump}. Since the reversed Carnot cycle is completely reversible, it provides the maximum possible coefficient of performance for a refrigerator or heat pump operating between specified temperature limits.
+
+\mysubsection{}{Carnot Refrigerator}
+
+A \textbf{Carnot refrigerator} is a refrigerator that operates on the reversed Carnot cycle.
+
+The refrigerator absorbs heat from a low-temperature medium, requires work input, and rejects heat to a high-temperature medium.
+
+The heat interactions are represented by
+
+\begin{equation*}
+Q_L
+=
+\text{heat absorbed from the low-temperature medium}
+\end{equation*}
+
+and
+
+\begin{equation*}
+Q_H
+=
+\text{heat rejected to the high-temperature medium}
+\end{equation*}
+
+The net work input required by the refrigerator is
+
+\begin{equation*}
+W_{\mathrm{net,in}}
+=
+Q_H-Q_L
+\end{equation*}
+
+The objective of the refrigerator is to remove heat from the low-temperature space.
+
+\mysubsection{}{Coefficient of Performance of a Refrigerator}
+
+The coefficient of performance of a refrigerator is defined as the ratio of the desired refrigeration effect to the required work input.
+
+For any refrigerator,
+
+\begin{equation*}
+\mathrm{COP}_R
+=
+\frac{Q_L}{W_{\mathrm{net,in}}}
+\end{equation*}
+
+Using the cyclic energy balance,
+
+\begin{equation*}
+W_{\mathrm{net,in}}
+=
+Q_H-Q_L
+\end{equation*}
+
+the coefficient of performance becomes
+
+\begin{equation*}
+\mathrm{COP}_R
+=
+\frac{Q_L}{Q_H-Q_L}
+\end{equation*}
+
+or
+
+\begin{equation*}
+\mathrm{COP}_R
+=
+\frac{1}{Q_H/Q_L-1}
+\end{equation*}
+
+\mysubsection{}{Coefficient of Performance of a Carnot Refrigerator}
+
+For a reversible refrigerator, the heat-transfer ratio can be replaced by the ratio of the absolute temperatures of the two thermal reservoirs.
+
+Therefore, the coefficient of performance of a Carnot refrigerator is
+
+\begin{equation*}
+\mathrm{COP}_{R,\mathrm{rev}}
+=
+\frac{1}{T_H/T_L-1}
+\end{equation*}
+
+where
+
+\begin{equation*}
+T_H
+=
+\text{absolute temperature of the high-temperature reservoir}
+\end{equation*}
+
+and
+
+\begin{equation*}
+T_L
+=
+\text{absolute temperature of the low-temperature reservoir}
+\end{equation*}
+
+The temperatures must be expressed on an absolute temperature scale.
+
+
+\mysubsection{}{Carnot Heat Pump}
+
+A \textbf{Carnot heat pump} is a heat pump that operates on the reversed Carnot cycle.
+
+The heat pump absorbs heat from a low-temperature medium and rejects heat to a high-temperature medium while requiring work input.
+
+Its objective is to supply heat to the high-temperature space.
+
+The energy interactions are
+
+\begin{equation*}
+Q_L
+=
+\text{heat absorbed from the low-temperature medium}
+\end{equation*}
+
+\begin{equation*}
+Q_H
+=
+\text{heat rejected to the high-temperature medium}
+\end{equation*}
+
+and
+
+\begin{equation*}
+W_{\mathrm{net,in}}
+=
+\text{net work supplied to the heat pump}
+\end{equation*}
+
+For a cyclic heat pump,
+
+\begin{equation*}
+W_{\mathrm{net,in}}
+=
+Q_H-Q_L
+\end{equation*}
+
+\mysubsection{}{Coefficient of Performance of a Heat Pump}
+
+The coefficient of performance of a heat pump is defined as the ratio of the desired heating effect to the required work input.
+
+For any heat pump,
+
+\begin{equation*}
+\mathrm{COP}_{HP}
+=
+\frac{Q_H}{W_{\mathrm{net,in}}}
+\end{equation*}
+
+Using
+
+\begin{equation*}
+W_{\mathrm{net,in}}
+=
+Q_H-Q_L
+\end{equation*}
+
+gives
+
+\begin{equation*}
+\mathrm{COP}_{HP}
+=
+\frac{Q_H}{Q_H-Q_L}
+\end{equation*}
+
+or
+
+\begin{equation*}
+\mathrm{COP}_{HP}
+=
+\frac{1}{1-Q_L/Q_H}
+\end{equation*}
+
+\mysubsection{}{Coefficient of Performance of a Carnot Heat Pump}
+
+For a reversible heat pump, the heat-transfer ratio can be replaced by the ratio of the absolute temperatures of the reservoirs.
+
+Therefore, the coefficient of performance of a Carnot heat pump is
+
+\begin{equation*}
+\mathrm{COP}_{HP,\mathrm{rev}}
+=
+\frac{1}{1-T_L/T_H}
+\end{equation*}
+
+The temperatures $T_H$ and $T_L$ are absolute temperatures of the high- and low-temperature reservoirs.
+
+
+\mysubsection{}{Effect of Temperature Limits on Refrigerator COP}
+
+The coefficient of performance of a reversible refrigerator is
+
+\begin{equation*}
+\mathrm{COP}_{R,\mathrm{rev}}
+=
+\frac{1}{T_H/T_L-1}
+\end{equation*}
+
+This relation shows that the COP decreases as the low-temperature temperature $T_L$ decreases, when $T_H$ is held constant.
+
+Therefore,
+
+\begin{equation*}
+T_L\downarrow
+\quad\Longrightarrow\quad
+\mathrm{COP}_{R,\mathrm{rev}}\downarrow
+\end{equation*}
+
+This means that removing heat from an increasingly colder space requires progressively more work for a given refrigeration effect.
+
+As the refrigerated-space temperature approaches absolute zero, the work required to produce a finite refrigeration effect approaches infinity and
+
+\begin{equation*}
+\mathrm{COP}_{R}\rightarrow0
+\end{equation*}
+
+Thus, refrigeration becomes increasingly difficult as the required refrigeration temperature approaches absolute zero.
+
+\mysubsection{}{Effect of Temperature Limits on Heat Pump COP}
+
+The coefficient of performance of a reversible heat pump is
+
+\begin{equation*}
+\mathrm{COP}_{HP,\mathrm{rev}}
+=
+\frac{1}{1-T_L/T_H}
+\end{equation*}
+
+This relation shows that the heat-pump COP is also strongly dependent on the temperature difference between the low- and high-temperature reservoirs.
+
+A larger temperature lift requires more work input and therefore reduces the coefficient of performance.
+
+Thus, the performance of a heat pump improves when the temperature difference across which heat must be transferred is reduced.
+
+\mysubsection{}{Relationship Between Refrigerator and Heat Pump COP}
+
+A refrigerator and a heat pump operating on the same reversed Carnot cycle have the same energy interactions but different desired effects.
+
+For the refrigerator, the desired effect is $Q_L$.
+
+For the heat pump, the desired effect is $Q_H$.
+
+Since
+
+\begin{equation*}
+Q_H
+=
+Q_L+W_{\mathrm{net,in}}
+\end{equation*}
+
+the COPs are related by
+
+\begin{equation*}
+\mathrm{COP}_{HP}
+=
+\mathrm{COP}_{R}+1
+\end{equation*}
+
+For reversible operation,
+
+\begin{equation*}
+\mathrm{COP}_{HP,\mathrm{rev}}
+=
+\mathrm{COP}_{R,\mathrm{rev}}+1
+\end{equation*}
+
+Thus, the numerical value of the heat-pump COP is always greater than that of the refrigerator COP operating under the same conditions.
+
+\mysubsection{}{Reversible versus Irreversible Refrigerators}
+
+The performance of actual refrigerators can be compared with that of a reversible refrigerator operating between the same temperature limits.
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Type of Refrigerator} & \textbf{Coefficient of Performance} \\
+\hline
+Irreversible refrigerator & $\mathrm{COP}_R<\mathrm{COP}_{R,\mathrm{rev}}$ \\
+\hline
+Reversible refrigerator & $\mathrm{COP}_R=\mathrm{COP}_{R,\mathrm{rev}}$ \\
+\hline
+Impossible refrigerator & $\mathrm{COP}_R>\mathrm{COP}_{R,\mathrm{rev}}$ \\
+\hline
+\end{tabular}
+\end{center}
+
+The impossible case is prohibited by the second law of thermodynamics.
+
+\mysubsection{}{Reversible versus Irreversible Heat Pumps}
+
+A similar comparison applies to heat pumps operating between the same temperature limits.
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Type of Heat Pump} & \textbf{Coefficient of Performance} \\
+\hline
+Irreversible heat pump & $\mathrm{COP}_{HP}<\mathrm{COP}_{HP,\mathrm{rev}}$ \\
+\hline
+Reversible heat pump & $\mathrm{COP}_{HP}=\mathrm{COP}_{HP,\mathrm{rev}}$ \\
+\hline
+Impossible heat pump & $\mathrm{COP}_{HP}>\mathrm{COP}_{HP,\mathrm{rev}}$ \\
+\hline
+\end{tabular}
+\end{center}
+
+An actual heat pump can approach the reversible COP as its design is improved, but it can never reach or exceed the reversible limit in a real system.
+
+\mysubsection{}{Importance of the Carnot Refrigerator and Heat Pump}
+
+The Carnot refrigerator and heat pump provide ideal reference models for refrigeration and heat-pump systems.
+
+They establish:
+
+\begin{itemize}
+    \item the maximum possible COP of a refrigerator,
+    \item the maximum possible COP of a heat pump,
+    \item the effect of reservoir temperatures on device performance,
+    \item the performance limit imposed by the second law, and
+    \item a standard against which actual refrigeration and heat-pump systems can be evaluated.
+\end{itemize}
+
+The Carnot models are idealized because real devices contain irreversibilities. Nevertheless, they provide the theoretical upper limit for performance.
+
+
+\end{document}
